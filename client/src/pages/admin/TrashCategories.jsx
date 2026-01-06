@@ -187,7 +187,7 @@ const TrashCategories = () => {
                           <div className="flex space-x-2">
                             <button
                               onClick={() => restoreCategory(category._id)}
-                              className="inline-flex items-center px-3 py-1 border border-transparent text-sm leading-4 font-medium rounded-md text-green-700 bg-green-100 hover:bg-green-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                              className="inline-flex items-center px-3 py-1 border border-transparent text-sm leading-4 font-medium rounded-md text-green-700 bg-green-100 hover:bg-green-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#d9a82e]"
                             >
                               <RotateCcw size={14} className="mr-1" />
                               Restore

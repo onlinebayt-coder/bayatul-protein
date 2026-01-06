@@ -1532,7 +1532,7 @@ const ProductForm = ({ product, onSubmit, onCancel }) => {
           </div>
 
           {/* Self Variation Text Input */}
-          <div className="mb-6 p-4 bg-green-50 rounded-lg border border-green-200">
+          <div className="mb-6 p-4 bg-green-50 rounded-lg border border-[#2377c1]">
             <label className="block text-sm font-semibold text-gray-800 mb-2">
               This Product's Variation Label
             </label>
@@ -1541,7 +1541,7 @@ const ProductForm = ({ product, onSubmit, onCancel }) => {
               placeholder="e.g., 16GB RAM, 512GB SSD, Black Color"
               value={selfVariationText}
               onChange={(e) => setSelfVariationText(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 text-sm font-medium"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d9a82e] text-sm font-medium"
             />
             <p className="text-xs text-gray-600 mt-2">
               <strong>Important:</strong> This label will appear as a selectable option when customers view any linked product. 

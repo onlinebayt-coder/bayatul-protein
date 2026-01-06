@@ -48,11 +48,11 @@ const AdminLogin = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-lime-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-lime-500 rounded-2xl mb-4 shadow-lg">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-[#2377c1] rounded-2xl mb-4 shadow-lg">
             <Shield className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-3xl font-bold text-slate-900 mb-2">Admin Portal</h1>
@@ -80,7 +80,7 @@ const AdminLogin = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-lime-500 focus:border-lime-500 transition-all duration-200 text-slate-900"
+                  className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#d9a82e] focus:border-[#d9a82e] transition-all duration-200 text-slate-900"
                   placeholder="Enter your email"
                   required
                 />
@@ -99,7 +99,7 @@ const AdminLogin = () => {
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
-                  className="w-full pl-10 pr-12 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-lime-500 focus:border-lime-500 transition-all duration-200 text-slate-900"
+                  className="w-full pl-10 pr-12 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#d9a82e] focus:border-[#d9a82e] transition-all duration-200 text-slate-900"
                   placeholder="Enter your password"
                   required
                 />
@@ -117,7 +117,7 @@ const AdminLogin = () => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-lime-500 hover:bg-lime-600 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+              className="w-full bg-[#d9a82e] hover:bg-[#c89829] text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
             >
               {loading ? (
                 <div className="flex items-center justify-center">

@@ -216,7 +216,7 @@ const AdminSizes = () => {
             <h1 className="text-2xl font-bold text-gray-900">Sizes</h1>
             <button
               onClick={() => setShowForm(true)}
-              className="bg-lime-400 text-black font-medium py-2 px-4 rounded-md flex items-center"
+              className="bg-[#d9a82e] text-black font-medium py-2 px-4 rounded-md flex items-center"
             >
               <Plus size={18} className="mr-1" />
               Add New Size

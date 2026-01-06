@@ -103,7 +103,7 @@ const AdminBulkPurchase = () => {
           </div>
           <button
             onClick={fetchRequests}
-            className="px-4 py-2 bg-lime-500 text-white rounded hover:bg-lime-600 flex items-center gap-2"
+            className="px-4 py-2 bg-[#d9a82e] text-white rounded hover:bg-[#c89829] flex items-center gap-2"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -130,7 +130,7 @@ const AdminBulkPurchase = () => {
               {requests.filter(r => r.status === 'contacted').length}
             </p>
           </div>
-          <div className="bg-green-50 p-4 rounded-lg shadow-sm border border-green-200">
+          <div className="bg-green-50 p-4 rounded-lg shadow-sm border border-[#2377c1]">
             <p className="text-green-800 text-sm">Completed</p>
             <p className="text-2xl font-bold text-green-900">
               {requests.filter(r => r.status === 'done').length}
@@ -140,7 +140,7 @@ const AdminBulkPurchase = () => {
 
         {loading ? (
           <div className="bg-white rounded-lg shadow-sm p-8 text-center">
-            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-lime-500"></div>
+            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-[#2377c1]"></div>
             <p className="mt-2 text-gray-600">Loading...</p>
           </div>
         ) : error ? (
@@ -221,7 +221,7 @@ const AdminBulkPurchase = () => {
                                   <div
                                     key={status}
                                     className={`px-4 py-2.5 cursor-pointer hover:bg-gray-50 text-sm transition-colors first:rounded-t-lg last:rounded-b-lg
-                                      ${req.status === status ? 'font-bold text-lime-600 bg-lime-50' : 'text-gray-700'}`}
+                                      ${req.status === status ? 'font-bold text-[#d9a82e] bg-[#e8f4fd]' : 'text-gray-700'}`}
                                     onClick={() => {
                                       updateStatus(req._id, status);
                                       setOpenDropdownId(null);

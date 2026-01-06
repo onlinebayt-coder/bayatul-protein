@@ -112,7 +112,7 @@ const AdminNewsletter = () => {
             <option value="events">Events Only</option>
           </select>
           <button
-            className="ml-auto bg-lime-500 text-white px-4 py-2 rounded disabled:opacity-50"
+            className="ml-auto bg-[#d9a82e] text-white px-4 py-2 rounded disabled:opacity-50"
             disabled={selected.length === 0}
             onClick={handleSendEmail}
           >
@@ -160,7 +160,7 @@ const AdminNewsletter = () => {
                     <td className="border p-2">{new Date(s.createdAt).toLocaleString()}</td>
                     <td className="border p-2 text-center">
                       <button
-                        className="px-3 py-1 bg-lime-500 text-white rounded"
+                        className="px-3 py-1 bg-[#d9a82e] text-white rounded"
                         onClick={() => handleSingleSend(s._id)}
                       >
                         Send Mail
@@ -215,7 +215,7 @@ const AdminNewsletter = () => {
                   Cancel
                 </button>
                 <button
-                  className="px-4 py-2 bg-lime-500 text-white rounded disabled:opacity-50"
+                  className="px-4 py-2 bg-[#d9a82e] text-white rounded disabled:opacity-50"
                   disabled={!selectedTemplate || sending}
                   onClick={handleSendBulk}
                 >

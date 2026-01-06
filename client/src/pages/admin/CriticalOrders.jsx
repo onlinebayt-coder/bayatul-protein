@@ -970,17 +970,12 @@ const CriticalOrders = () => {
                         <div className="text-sm font-medium text-red-600">#{order._id.slice(-6)}</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        {order.deliveryType === "pickup" ? (
-                          <>
-                            <div className="text-sm text-gray-900">{order.pickupDetails?.location || "N/A"}</div>
-                            <div className="text-sm text-gray-500">{order.pickupDetails?.phone || "N/A"}</div>
-                          </>
-                        ) : (
-                          <>
-                            <div className="text-sm text-gray-900">{order.shippingAddress?.name || "N/A"}</div>
-                            <div className="text-sm text-gray-500">{order.shippingAddress?.email || "N/A"}</div>
-                          </>
-                        )}
+                        <div className="text-sm text-gray-900">
+                          {order.shippingAddress?.name || order.pickupDetails?.name || order.user?.name || "N/A"}
+                        </div>
+                        <div className="text-sm text-gray-500">
+                          {order.shippingAddress?.email || order.pickupDetails?.email || order.user?.email || "N/A"}
+                        </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm text-gray-900">{new Date(order.createdAt).toLocaleDateString()}</div>
@@ -998,7 +993,7 @@ const CriticalOrders = () => {
                               order.status === "Processing"
                                 ? "bg-yellow-100 text-yellow-800"
                                 : order.status === "Confirmed"
-                                  ? "bg-lime-100 text-lime-800"
+                                  ? "bg-blue-100 text-[#2377c1]"
                                   : order.status === "Shipped"
                                     ? "bg-purple-100 text-purple-800"
                                     : order.status === "Out for Delivery"
@@ -1201,7 +1196,7 @@ const CriticalOrders = () => {
                         selectedOrder.status === "Processing"
                           ? "bg-yellow-100 text-yellow-800"
                           : selectedOrder.status === "Confirmed"
-                            ? "bg-lime-100 text-lime-800"
+                            ? "bg-blue-100 text-[#2377c1]"
                             : selectedOrder.status === "Shipped"
                               ? "bg-purple-100 text-purple-800"
                               : selectedOrder.status === "Out for Delivery"
@@ -1223,7 +1218,7 @@ const CriticalOrders = () => {
                       <select
                         value={selectedOrder.isPaid ? "Paid" : "Unpaid"}
                         onChange={(e) => handleUpdatePaymentStatus(selectedOrder._id, e.target.value === "Paid")}
-                        className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                        className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#d9a82e] focus:border-transparent"
                         disabled={processingAction}
                       >
                         <option value="Unpaid">Unpaid</option>
@@ -1358,7 +1353,7 @@ const CriticalOrders = () => {
                       </div>
                     )}
                     {showCouponDetail && (
-                      <div className="bg-green-50 border border-green-200 rounded-md p-3 -mx-1">
+                      <div className="bg-green-50 border border-[#2377c1] rounded-md p-3 -mx-1">
                         <div className="flex justify-between items-center">
                           <div>
                             <span className="text-sm font-medium text-green-800">Coupon Applied</span>
@@ -1560,7 +1555,7 @@ const CriticalOrders = () => {
                     <button
                       onClick={handleSaveOrderDetails}
                       disabled={processingAction}
-                      className="flex items-center space-x-2 bg-green-600 hover:bg-green-700 disabled:bg-gray-400 text-white px-4 py-2 rounded-md transition-colors"
+                      className="flex items-center space-x-2 bg-[#d9a82e] hover:bg-[#c89829] disabled:bg-gray-400 text-white px-4 py-2 rounded-md transition-colors"
                     >
                       <Save size={16} />
                       <span>{processingAction ? "Saving..." : "Save Details"}</span>
@@ -1624,7 +1619,7 @@ const CriticalOrders = () => {
                     onChange={(e) => setNotificationMessage(e.target.value)}
                     placeholder="Enter a message to include in the notification email..."
                     rows="4"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#d9a82e] focus:border-transparent"
                   />
                   <p className="text-xs text-gray-500 mt-1">
                     This message will be displayed in the customer's notification email. Leave empty to send without a message.
@@ -1646,7 +1641,7 @@ const CriticalOrders = () => {
                 <button
                   onClick={handleConfirmSendNotification}
                   disabled={processingAction}
-                  className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-md flex items-center transition-colors disabled:bg-gray-400"
+                  className="px-4 py-2 bg-[#d9a82e] hover:bg-[#c89829] text-white rounded-md flex items-center transition-colors disabled:bg-gray-400"
                 >
                   {processingAction ? (
                     <>

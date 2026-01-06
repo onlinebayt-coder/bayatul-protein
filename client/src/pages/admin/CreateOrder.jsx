@@ -394,7 +394,7 @@ export default function CreateOrder() {
                   </div>
                   <button
                     type="button"
-                    className="inline-flex items-center gap-1 bg-lime-600 text-white text-sm px-3 py-1 rounded"
+                    className="inline-flex items-center gap-1 bg-[#c89829] text-white text-sm px-3 py-1 rounded"
                     onClick={() => addProduct(p)}
                   >
                     <Plus size={14} /> Add
@@ -528,7 +528,7 @@ export default function CreateOrder() {
             disabled={!canSubmit}
             onClick={handleCreate}
             className={`mt-4 w-full inline-flex items-center justify-center gap-2 px-4 py-2 rounded text-white ${
-              canSubmit ? "bg-lime-600 hover:bg-lime-700" : "bg-gray-400 cursor-not-allowed"
+              canSubmit ? "bg-[#c89829] hover:bg-[#b88824]" : "bg-gray-400 cursor-not-allowed"
             }`}
             title={!canSubmit ? "Add at least one item and fill shipping details" : "Create order"}
           >

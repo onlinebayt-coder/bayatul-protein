@@ -211,7 +211,7 @@ const ProductVariationModal = ({ isOpen, onClose, onSelectProducts, selectedVari
                 placeholder="e.g., 16GB RAM, 512GB SSD, Black Color"
                 value={selfText}
                 onChange={(e) => setSelfText(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 text-sm font-medium"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d9a82e] text-sm font-medium"
               />
               <p className="text-xs text-gray-600 mt-1">
                 <strong>Important:</strong> This is how THIS product will appear in the variation selector when customers view any linked product.

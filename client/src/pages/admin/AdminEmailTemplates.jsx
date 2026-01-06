@@ -88,7 +88,7 @@ const AdminEmailTemplates = () => {
       <AdminSidebar />
       <div className="flex-1 ml-64 p-6 max-w-5xl">
         <h1 className="text-2xl font-bold mb-4">Email Templates</h1>
-        <button className="mb-4 px-4 py-2 bg-lime-500 text-white rounded" onClick={startNew}>
+        <button className="mb-4 px-4 py-2 bg-[#d9a82e] text-white rounded" onClick={startNew}>
           New Template
         </button>
         {loading ? (
@@ -167,7 +167,7 @@ const AdminEmailTemplates = () => {
               </label>
             </div>
             <div className="flex gap-2 mt-4">
-              <button type="submit" className="px-4 py-2 bg-lime-500 text-white rounded">Save</button>
+              <button type="submit" className="px-4 py-2 bg-[#d9a82e] text-white rounded">Save</button>
               <button type="button" className="px-4 py-2 bg-gray-200 rounded" onClick={cancelEdit}>Cancel</button>
             </div>
           </form>

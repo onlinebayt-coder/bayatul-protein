@@ -542,7 +542,7 @@ const AdminCategorySlider = () => {
                   setImagePreview(null)
                   setShowCustomItemModal(true)
                 }}
-                className="px-4 py-2 bg-lime-500 text-white rounded-lg hover:bg-lime-600 transition-colors font-medium"
+                className="px-4 py-2 bg-[#d9a82e] text-white rounded-lg hover:bg-[#c89829] transition-colors font-medium"
               >
                 + Add Custom Item
               </button>
@@ -553,7 +553,7 @@ const AdminCategorySlider = () => {
               <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
                 <div className="overflow-x-auto">
                   <table className="w-full">
-                    <thead className="bg-lime-50 border-b border-lime-200">
+                    <thead className="bg-[#e8f4fd] border-b border-[#2377c1]">
                       <tr>
                         <th className="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                           Image
@@ -676,7 +676,7 @@ const AdminCategorySlider = () => {
                         required
                         value={customItemForm.name}
                         onChange={(e) => setCustomItemForm({ ...customItemForm, name: e.target.value })}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-lime-500"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d9a82e]"
                         placeholder="e.g., Summer Sale, New Arrivals"
                       />
                     </div>
@@ -708,7 +708,7 @@ const AdminCategorySlider = () => {
                         />
                         <label
                           htmlFor="customItemImage"
-                          className="flex items-center justify-center w-full px-4 py-3 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-lime-500 hover:bg-lime-50 transition-colors"
+                          className="flex items-center justify-center w-full px-4 py-3 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-[#2377c1] hover:bg-[#e8f4fd] transition-colors"
                         >
                           <div className="text-center">
                             <svg
@@ -747,7 +747,7 @@ const AdminCategorySlider = () => {
                         required
                         value={customItemForm.redirectUrl}
                         onChange={(e) => setCustomItemForm({ ...customItemForm, redirectUrl: e.target.value })}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-lime-500"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d9a82e]"
                         placeholder="e.g., /shop/summer-sale or https://example.com/promo"
                       />
                       <p className="text-xs text-gray-500 mt-1">
@@ -772,7 +772,7 @@ const AdminCategorySlider = () => {
                       <button
                         type="submit"
                         disabled={uploadingImage}
-                        className="flex-1 px-4 py-2 bg-lime-500 text-white rounded-lg hover:bg-lime-600 transition-colors font-medium disabled:bg-lime-400 disabled:cursor-not-allowed"
+                        className="flex-1 px-4 py-2 bg-[#d9a82e] text-white rounded-lg hover:bg-[#c89829] transition-colors font-medium disabled:bg-[#d9a82e] disabled:cursor-not-allowed"
                       >
                         {uploadingImage ? "Uploading..." : editingCustomItem ? "Update Item" : "Create Item"}
                       </button>
@@ -810,7 +810,7 @@ const AdminCategorySlider = () => {
                     setSliderShape(e.target.value)
                     updateSettings({ categorySliderShape: e.target.value })
                   }}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-lime-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d9a82e]"
                 >
                   <option value="circle">Circle</option>
                   <option value="square">Square</option>
@@ -827,7 +827,7 @@ const AdminCategorySlider = () => {
                     setLayoutType(e.target.value)
                     updateSettings({ categorySliderLayoutType: e.target.value })
                   }}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-lime-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d9a82e]"
                 >
                   <option value="default">Default - Standard layout</option>
                   <option value="compact">Compact - Smaller with tight spacing</option>
@@ -859,7 +859,7 @@ const AdminCategorySlider = () => {
                     setLevelFilter("all")
                   }
                 }}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-lime-500 bg-white"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d9a82e] bg-white"
               >
                 <option value="all">🌐 All Categories (No Parent Filter)</option>
                 {parentCategories.map((parent) => (
@@ -882,7 +882,7 @@ const AdminCategorySlider = () => {
                 onClick={() => setStatusFilter("all")}
                 className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                   statusFilter === "all"
-                    ? "bg-lime-500 text-white"
+                    ? "bg-[#d9a82e] text-white"
                     : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                 }`}
               >
@@ -918,7 +918,7 @@ const AdminCategorySlider = () => {
                 onClick={() => setSliderFilter("all")}
                 className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                   sliderFilter === "all"
-                    ? "bg-lime-500 text-white"
+                    ? "bg-[#d9a82e] text-white"
                     : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                 }`}
               >
@@ -928,7 +928,7 @@ const AdminCategorySlider = () => {
                 onClick={() => setSliderFilter("showing")}
                 className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                   sliderFilter === "showing"
-                    ? "bg-lime-500 text-white"
+                    ? "bg-[#d9a82e] text-white"
                     : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                 }`}
               >
@@ -951,7 +951,7 @@ const AdminCategorySlider = () => {
                 onClick={() => setLevelFilter("all")}
                 className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                   levelFilter === "all"
-                    ? "bg-lime-500 text-white"
+                    ? "bg-[#d9a82e] text-white"
                     : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                 }`}
               >
@@ -961,7 +961,7 @@ const AdminCategorySlider = () => {
                 onClick={() => setLevelFilter("parent")}
                 className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                   levelFilter === "parent"
-                    ? "bg-lime-500 text-white"
+                    ? "bg-[#d9a82e] text-white"
                     : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                 }`}
                 disabled={selectedParentId !== "all"}
@@ -973,7 +973,7 @@ const AdminCategorySlider = () => {
                 onClick={() => setLevelFilter("1")}
                 className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                   levelFilter === "1"
-                    ? "bg-lime-500 text-white"
+                    ? "bg-[#d9a82e] text-white"
                     : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                 }`}
               >
@@ -983,7 +983,7 @@ const AdminCategorySlider = () => {
                 onClick={() => setLevelFilter("2")}
                 className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                   levelFilter === "2"
-                    ? "bg-lime-500 text-white"
+                    ? "bg-[#d9a82e] text-white"
                     : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                 }`}
               >
@@ -993,7 +993,7 @@ const AdminCategorySlider = () => {
                 onClick={() => setLevelFilter("3")}
                 className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                   levelFilter === "3"
-                    ? "bg-lime-500 text-white"
+                    ? "bg-[#d9a82e] text-white"
                     : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                 }`}
               >
@@ -1003,7 +1003,7 @@ const AdminCategorySlider = () => {
                 onClick={() => setLevelFilter("4")}
                 className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                   levelFilter === "4"
-                    ? "bg-lime-500 text-white"
+                    ? "bg-[#d9a82e] text-white"
                     : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                 }`}
               >
@@ -1019,7 +1019,7 @@ const AdminCategorySlider = () => {
                 placeholder="Search categories..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-lime-500"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d9a82e]"
               />
             </div>
           </div>
@@ -1069,7 +1069,7 @@ const AdminCategorySlider = () => {
                         showToast("Error selecting all categories", "error")
                       }
                     }}
-                    className="px-3 py-1.5 bg-lime-500 text-white text-sm rounded-lg hover:bg-lime-600 transition-colors font-medium"
+                    className="px-3 py-1.5 bg-[#d9a82e] text-white text-sm rounded-lg hover:bg-[#c89829] transition-colors font-medium"
                   >
                     Select All
                   </button>
@@ -1247,7 +1247,7 @@ const AdminCategorySlider = () => {
                             type="checkbox"
                             checked={!!item.showInSlider}
                             onChange={() => toggleSlider(item._id, item.type, !!item.showInSlider)}
-                            className="w-4 h-4 text-lime-500 border-gray-300 rounded focus:ring-lime-500"
+                            className="w-4 h-4 text-lime-500 border-gray-300 rounded focus:ring-[#d9a82e]"
                           />
                         </td>
                         <td className="px-6 py-4">
@@ -1296,7 +1296,7 @@ const AdminCategorySlider = () => {
                         <td className="px-6 py-4">
                           <div className="text-sm font-medium">
                             {item.showInSlider ? (
-                              <span className="text-lime-600">Showing</span>
+                              <span className="text-[#d9a82e]">Showing</span>
                             ) : (
                               <span className="text-gray-600">Not Showing</span>
                             )}

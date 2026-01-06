@@ -218,7 +218,7 @@ const AdminBrands = () => {
           <h1 className="text-2xl font-bold">Manage Brands</h1>
           <Link
             to="/admin/add-brand"
-            className="bg-lime-500 hover:bg-lime-600 text-white px-4 py-2 rounded-lg transition-colors"
+            className="bg-[#d9a82e] hover:bg-[#c89829] text-white px-4 py-2 rounded-lg transition-colors"
           >
             Add New Brand
           </Link>
@@ -231,7 +231,7 @@ const AdminBrands = () => {
             placeholder="Search brands..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full max-w-md px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-lime-500"
+            className="w-full max-w-md px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d9a82e]"
           />
         </div>
 
@@ -314,7 +314,7 @@ const AdminBrands = () => {
                             href={brand.website}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-lime-600 hover:text-lime-900"
+                            className="text-[#d9a82e] hover:text-[#2377c1]"
                           >
                             {brand.website}
                           </a>
@@ -400,7 +400,7 @@ const AdminBrands = () => {
                         onClick={() => setCurrentPage(page)}
                         className={`relative inline-flex items-center px-4 py-2 border text-sm font-medium ${
                           currentPage === page
-                            ? "z-10 bg-lime-50 border-lime-500 text-lime-600"
+                            ? "z-10 bg-[#e8f4fd] border-[#2377c1] text-[#d9a82e]"
                             : "bg-white border-gray-300 text-gray-500 hover:bg-gray-50"
                         }`}
                       >

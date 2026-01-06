@@ -257,7 +257,7 @@
 //         </div>
 
 //         <div className="flex gap-4 mb-6">
-//           <label className="bg-lime-500 hover:bg-lime-600 text-white px-6 py-2 rounded cursor-pointer">
+//           <label className="bg-[#d9a82e] hover:bg-[#c89829] text-white px-6 py-2 rounded cursor-pointer">
 //             Import CSV File
 //             <input type="file" accept=".csv" onChange={handleFileUpload} className="hidden" />
 //           </label>
@@ -308,7 +308,7 @@
 //               {previewProducts.length > 0 && (
 //                 <button
 //                   onClick={handleBulkSave}
-//                   className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded mt-3"
+//                   className="bg-[#d9a82e] hover:bg-[#c89829] text-white px-6 py-2 rounded mt-3"
 //                   disabled={loading}
 //                 >
 //                   {loading ? "Saving..." : `Save ${previewProducts.length} Products`}
@@ -321,7 +321,7 @@
 //         {saveResult && (
 //           <div className="mb-4">
 //             <div className={`border rounded-lg p-4 ${
-//               saveResult.failed > 0 ? 'bg-yellow-50 border-yellow-200' : 'bg-green-50 border-green-200'
+//               saveResult.failed > 0 ? 'bg-yellow-50 border-yellow-200' : 'bg-green-50 border-[#2377c1]'
 //             }`}>
 //               <h3 className={`font-semibold mb-2 ${
 //                 saveResult.failed > 0 ? 'text-yellow-800' : 'text-green-800'
@@ -1061,11 +1061,11 @@ const AddBulkProducts = () => {
         </div>
 
         <div className="flex gap-4 mb-6">
-          <label className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded cursor-pointer inline-flex items-center gap-2">
+          <label className="bg-[#d9a82e] hover:bg-[#c89829] text-white px-6 py-2 rounded cursor-pointer inline-flex items-center gap-2">
             📊 Import Excel File (with Update Support)
             <input type="file" accept=".xlsx,.xls" onChange={handleFileUpload} className="hidden" />
           </label>
-          <label className="bg-lime-500 hover:bg-lime-600 text-white px-6 py-2 rounded cursor-pointer inline-flex items-center gap-2">
+          <label className="bg-[#d9a82e] hover:bg-[#c89829] text-white px-6 py-2 rounded cursor-pointer inline-flex items-center gap-2">
             📄 Import CSV File (Create Only)
             <input type="file" accept=".csv" onChange={handleFileUpload} className="hidden" />
           </label>
@@ -1096,7 +1096,7 @@ const AddBulkProducts = () => {
             <h3 className="text-xl font-semibold mb-4">Import Results</h3>
             
             <div className="grid grid-cols-3 gap-4 mb-6">
-              <div className="bg-green-50 border border-green-200 rounded-lg p-4 text-center">
+              <div className="bg-green-50 border border-[#2377c1] rounded-lg p-4 text-center">
                 <div className="text-3xl font-bold text-green-700">{importResults.created || 0}</div>
                 <div className="text-sm text-green-600 mt-1">Products Created</div>
               </div>
@@ -1229,7 +1229,7 @@ const AddBulkProducts = () => {
               {previewProducts.length > 0 && (
                 <button
                   onClick={handleBulkSave}
-                  className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded mt-3"
+                  className="bg-[#d9a82e] hover:bg-[#c89829] text-white px-6 py-2 rounded mt-3"
                   disabled={loading}
                 >
                   {loading ? "Saving..." : `Save ${previewProducts.length} Products`}
@@ -1241,7 +1241,7 @@ const AddBulkProducts = () => {
 
         {saveResult && (
           <div className="mb-4">
-            <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+            <div className="bg-green-50 border border-[#2377c1] rounded-lg p-4">
               <h3 className="font-semibold text-green-800 mb-2">Save Results:</h3>
               <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-4">
                 <div className="bg-white p-3 rounded shadow-sm text-center">

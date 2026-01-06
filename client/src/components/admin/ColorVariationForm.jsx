@@ -241,7 +241,7 @@ const ColorVariationForm = ({ colorVariations = [], onChange }) => {
 
                     {/* Discount Preview */}
                     {variation.price > 0 && variation.offerPrice > 0 && variation.offerPrice < variation.price && (
-                      <div className="bg-green-50 border border-green-200 rounded-md p-3">
+                      <div className="bg-green-50 border border-[#2377c1] rounded-md p-3">
                         <div className="flex items-center justify-between text-sm">
                           <span className="text-green-800 font-medium">
                             💰 Discount: {Math.round(((variation.price - variation.offerPrice) / variation.price) * 100)}% OFF

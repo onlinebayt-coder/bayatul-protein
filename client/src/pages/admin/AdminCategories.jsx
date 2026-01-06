@@ -241,7 +241,7 @@ const AdminCategories = () => {
             </div>
             {/* <Link
               to="/admin/add-category"
-              className="bg-lime-500 hover:bg-lime-600 text-white px-6 py-3 rounded-lg flex items-center space-x-2 transition-colors duration-200"
+              className="bg-[#d9a82e] hover:bg-[#c89829] text-white px-6 py-3 rounded-lg flex items-center space-x-2 transition-colors duration-200"
             >
               <Plus size={20} />
               <span>Add New Category</span>

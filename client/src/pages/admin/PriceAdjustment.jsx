@@ -251,7 +251,7 @@ const PriceAdjustment = () => {
               </div>
               {totalSelected > 0 && (
                 <>
-                  <span className="text-sm text-lime-600 font-medium">{totalSelected} selected</span>
+                  <span className="text-sm text-[#d9a82e] font-medium">{totalSelected} selected</span>
                   <button
                     onClick={clearSelection}
                     className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 transition-colors"
@@ -366,7 +366,7 @@ const PriceAdjustment = () => {
                           onClick={toggleSelectPage}
                           className={`inline-flex items-center gap-1 rounded focus:outline-none ${
                             isAllOnPageSelected
-                              ? "text-lime-500 hover:text-lime-600"
+                              ? "text-lime-500 hover:text-[#d9a82e]"
                               : "text-gray-600 hover:text-gray-800"
                           }`}
                         >
@@ -427,7 +427,7 @@ const PriceAdjustment = () => {
                               onClick={() => toggleSelectOne(product._id)}
                               className={`${
                                 selectedIds.has(product._id)
-                                  ? "text-lime-500 hover:text-lime-600"
+                                  ? "text-lime-500 hover:text-[#d9a82e]"
                                   : "text-gray-600 hover:text-gray-800"
                               } rounded focus:outline-none`}
                             >

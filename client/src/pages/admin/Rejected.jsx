@@ -276,7 +276,7 @@ const Rejected = () => {
                     {selectedOrder.status !== "Refunded" && selectedOrder.isPaid && (
                       <button
                         onClick={() => handleProcessRefund(selectedOrder._id)}
-                        className="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-md flex items-center justify-center"
+                        className="w-full bg-[#d9a82e] hover:bg-[#c89829] text-white font-medium py-2 px-4 rounded-md flex items-center justify-center"
                         disabled={processingAction}
                       >
                         <DollarSign size={18} className="mr-2" />

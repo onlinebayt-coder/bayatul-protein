@@ -91,15 +91,15 @@
 //       </div>
 
 //       {/* Order Summary Section */}
-//       <div className="bg-white  border-l-4 pl-2 border-lime-500">
-//         <h3 className="text-2xl font-bold text-lime-800 mb-2 uppercase tracking-wide">📋 Order Summary</h3>
+//       <div className="bg-white  border-l-4 pl-2 border-[#2377c1]">
+//         <h3 className="text-2xl font-bold text-[#2377c1] mb-2 uppercase tracking-wide">📋 Order Summary</h3>
 
 //         {/* Addresses */}
 //         <div className="grid grid-cols-2 md:grid-cols-2 gap-6 mb-2">
 //           {/* Shipping Address */}
-//           <div className="bg-white border-2 border-lime-200 rounded-lg px-3 py-1 relative">
+//           <div className="bg-white border-2 border-[#2377c1] rounded-lg px-3 py-1 relative">
 //             <div className="absolute top-0 left-0 right-0  bg-gradient-to-r from-lime-400 to-lime-600"></div>
-//             <h4 className="text-lg font-bold text-lime-800 flex items-center">🚚 Shipping Address</h4>
+//             <h4 className="text-lg font-bold text-[#2377c1] flex items-center">🚚 Shipping Address</h4>
 //             <div className=" text-sm">
 //               <p className="font-semibold text-gray-900 text-base">{order.shippingAddress?.name || "N/A"}</p>
 //               <p className="text-gray-700">{order.shippingAddress?.address || "N/A"}</p>
@@ -113,9 +113,9 @@
 //           </div>
 
 //           {/* Billing Address */}
-//           <div className="bg-white border-2 border-lime-200 rounded-lg px-3 py-1 relative">
+//           <div className="bg-white border-2 border-[#2377c1] rounded-lg px-3 py-1 relative">
 //             <div className="absolute top-0 left-0 right-0  bg-gradient-to-r from-lime-400 to-lime-600"></div>
-//             <h4 className="text-lg font-bold text-lime-800 flex items-center">💳 Billing Address</h4>
+//             <h4 className="text-lg font-bold text-[#2377c1] flex items-center">💳 Billing Address</h4>
 //             <div className="text-sm">
 //               <p className="font-semibold text-gray-900 text-base">
 //                 {order.billingAddress?.name || order.shippingAddress?.name || "N/A"}
@@ -151,9 +151,9 @@
 //                 <tr key={item._id || index} className={`border-b ${index % 2 === 0 ? "bg-gray-50" : "bg-white"}`}>
 //                   <td className="p-4 font-medium text-gray-900">{item.name}</td>
 //                   <td className="p-4 text-gray-600 whitespace-nowrap">{item.product?.sku || item.sku || "-"}</td>
-//                   <td className="p-4 text-center font-semibold text-lime-600">{item.quantity}</td>
+//                   <td className="p-4 text-center font-semibold text-[#d9a82e]">{item.quantity}</td>
 //                   <td className="p-4 text-right font-medium">{formatPrice(item.price)}</td>
-//                   <td className="p-4 text-right font-bold text-lime-600">{formatPrice(item.price * item.quantity)}</td>
+//                   <td className="p-4 text-right font-bold text-[#d9a82e]">{formatPrice(item.price * item.quantity)}</td>
 //                 </tr>
 //               )) || (
 //                 <tr>
@@ -167,7 +167,7 @@
 //         </div>
 
 //         {/* Totals */}
-//         <div className="bg-white border-2 border-lime-200 rounded-lg p-3">
+//         <div className="bg-white border-2 border-[#2377c1] rounded-lg p-3">
 //           <div className="space-y-1">
 //             <div className="flex justify-between text-gray-700">
 //               <span>💰 Sub-Total:</span>
@@ -208,8 +208,8 @@
 //               <span className="font-medium">{formatPrice(order.shippingPrice || 0)}</span>
 //             </div>
 
-//             <div className="border-t-2 border-lime-500">
-//               <div className="flex justify-between text-xl font-bold text-lime-800 bg-lime-100 p-2 rounded-lg">
+//             <div className="border-t-2 border-[#2377c1]">
+//               <div className="flex justify-between text-xl font-bold text-[#2377c1] bg-blue-100 p-2 rounded-lg">
 //                 <span> TOTAL AMOUNT:</span>
 //                 <span>{formatPrice(order.totalPrice || 0)}</span>
 //               </div>
@@ -651,7 +651,7 @@
 //         </div>
 //         <button
 //           onClick={fetchOrders}
-//           className="flex items-center space-x-2 bg-lime-500 hover:bg-lime-600 text-white px-4 py-2 rounded-md transition-colors"
+//           className="flex items-center space-x-2 bg-[#d9a82e] hover:bg-[#c89829] text-white px-4 py-2 rounded-md transition-colors"
 //           disabled={loading}
 //         >
 //           <RefreshCw className={`w-4 h-4 ${loading ? "animate-spin" : ""}`} />
@@ -669,7 +669,7 @@
 //       )}
 
 //       {showBulkActions && (
-//         <div className="mb-6 bg-white p-4 rounded-lg shadow-sm border-l-4 border-lime-500">
+//         <div className="mb-6 bg-white p-4 rounded-lg shadow-sm border-l-4 border-[#2377c1]">
 //           <div className="flex items-center justify-between">
 //             <div className="flex items-center space-x-4">
 //               <span className="text-sm font-medium text-gray-700">
@@ -680,7 +680,7 @@
 //                 <select
 //                   value={bulkStatus}
 //                   onChange={(e) => setBulkStatus(e.target.value)}
-//                   className="border border-gray-300 rounded-md px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-lime-500"
+//                   className="border border-gray-300 rounded-md px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-[#d9a82e]"
 //                 >
 //                   <option value="">Select Status</option>
 //                   {orderStatusOptions.map((status) => (
@@ -692,7 +692,7 @@
 //                 <button
 //                   onClick={handleBulkStatusUpdate}
 //                   disabled={!bulkStatus || processingAction}
-//                   className="bg-lime-500 hover:bg-lime-600 disabled:bg-gray-400 text-white px-4 py-1 rounded-md text-sm font-medium transition-colors"
+//                   className="bg-[#d9a82e] hover:bg-[#c89829] disabled:bg-gray-400 text-white px-4 py-1 rounded-md text-sm font-medium transition-colors"
 //                 >
 //                   {processingAction ? "Updating..." : "Update"}
 //                 </button>
@@ -720,17 +720,17 @@
 //             placeholder="Search orders by ID, customer name, or email..."
 //             value={searchTerm}
 //             onChange={(e) => setSearchTerm(e.target.value)}
-//             className="pl-10 pr-4 py-2 w-full md:w-96 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-lime-500 focus:border-transparent"
+//             className="pl-10 pr-4 py-2 w-full md:w-96 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#d9a82e] focus:border-transparent"
 //           />
 //         </div>
 //         <div className="text-sm text-gray-600">
-//           Total Online Orders: <span className="font-semibold text-lime-600">{filteredOrders.length}</span>
+//           Total Online Orders: <span className="font-semibold text-[#d9a82e]">{filteredOrders.length}</span>
 //         </div>
 //       </div>
 
 //       {loading ? (
 //         <div className="flex justify-center items-center h-64">
-//           <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-lime-500"></div>
+//           <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#2377c1]"></div>
 //         </div>
 //       ) : (
 //         <div className="bg-white rounded-lg shadow-sm overflow-hidden">
@@ -743,7 +743,7 @@
 //                       type="checkbox"
 //                       checked={selectAll}
 //                       onChange={handleSelectAll}
-//                       className="h-4 w-4 text-lime-500 focus:ring-lime-500 border-gray-300 rounded"
+//                       className="h-4 w-4 text-lime-500 focus:ring-[#d9a82e] border-gray-300 rounded"
 //                     />
 //                   </th>
 //                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -773,18 +773,18 @@
 //                 {filteredOrders.map((order) => (
 //                   <tr
 //                     key={order._id}
-//                     className={`hover:bg-gray-50 ${selectedOrders.includes(order._id) ? "bg-lime-50" : ""}`}
+//                     className={`hover:bg-gray-50 ${selectedOrders.includes(order._id) ? "bg-[#e8f4fd]" : ""}`}
 //                   >
 //                     <td className="px-6 py-4 whitespace-nowrap">
 //                       <input
 //                         type="checkbox"
 //                         checked={selectedOrders.includes(order._id)}
 //                         onChange={() => handleSelectOrder(order._id)}
-//                         className="h-4 w-4 text-lime-500 focus:ring-lime-500 border-gray-300 rounded"
+//                         className="h-4 w-4 text-lime-500 focus:ring-[#d9a82e] border-gray-300 rounded"
 //                       />
 //                     </td>
 //                     <td className="px-6 py-4 whitespace-nowrap">
-//                       <div className="text-sm font-medium text-lime-600">#{order._id.slice(-6)}</div>
+//                       <div className="text-sm font-medium text-[#d9a82e]">#{order._id.slice(-6)}</div>
 //                     </td>
 //                     <td className="px-6 py-4 whitespace-nowrap">
 //                       {order.deliveryType === "pickup" ? (
@@ -815,7 +815,7 @@
 //                             order.status === "Processing"
 //                               ? "bg-yellow-100 text-yellow-800"
 //                               : order.status === "Confirmed"
-//                                 ? "bg-lime-100 text-lime-800"
+//                                 ? "bg-blue-100 text-[#2377c1]"
 //                                 : order.status === "Shipped"
 //                                   ? "bg-purple-100 text-purple-800"
 //                                   : order.status === "Out for Delivery"
@@ -889,7 +889,7 @@
 //                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
 //                       <button
 //                         onClick={() => handleViewOrder(order)}
-//                         className="text-lime-600 hover:text-lime-900 mr-4"
+//                         className="text-[#d9a82e] hover:text-[#2377c1] mr-4"
 //                         title="View Order Details"
 //                       >
 //                         <Eye size={18} />
@@ -932,7 +932,7 @@
 //                   <span>/</span>
 //                   <span>Online Orders</span>
 //                   <span>/</span>
-//                   <span className="text-lime-600">View</span>
+//                   <span className="text-[#d9a82e]">View</span>
 //                 </div>
 //                 <h2 className="text-2xl font-bold text-gray-900">Order ID: {selectedOrder._id.slice(-6)}</h2>
 //               </div>
@@ -947,12 +947,12 @@
 //             <div className="p-6">
 //               {/* Order Summary Cards */}
 //               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-//                 <div className="bg-lime-50 p-4 rounded-lg">
+//                 <div className="bg-[#e8f4fd] p-4 rounded-lg">
 //                   <div className="flex items-center space-x-2">
-//                     <Package className="text-lime-600" size={20} />
+//                     <Package className="text-[#d9a82e]" size={20} />
 //                     <div>
 //                       <p className="text-sm text-gray-600">Status</p>
-//                       <p className="font-semibold text-lime-900">{selectedOrder.status || "Processing"}</p>
+//                       <p className="font-semibold text-[#2377c1]">{selectedOrder.status || "Processing"}</p>
 //                     </div>
 //                   </div>
 //                 </div>
@@ -997,7 +997,7 @@
 //                   <select
 //                     value={selectedOrder.status || "Processing"}
 //                     onChange={(e) => handleUpdateStatus(selectedOrder._id, e.target.value)}
-//                     className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:border-transparent"
+//                     className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#d9a82e] focus:border-transparent"
 //                     disabled={processingAction}
 //                   >
 //                     {orderStatusOptions.map((status) => (
@@ -1011,7 +1011,7 @@
 //                       selectedOrder.status === "Processing"
 //                         ? "bg-yellow-100 text-yellow-800"
 //                         : selectedOrder.status === "Confirmed"
-//                           ? "bg-lime-100 text-lime-800"
+//                           ? "bg-blue-100 text-[#2377c1]"
 //                           : selectedOrder.status === "Shipped"
 //                             ? "bg-purple-100 text-purple-800"
 //                             : selectedOrder.status === "Out for Delivery"
@@ -1033,7 +1033,7 @@
 //                     <select
 //                       value={selectedOrder.isPaid ? "Paid" : "Unpaid"}
 //                       onChange={(e) => handleUpdatePaymentStatus(selectedOrder._id, e.target.value === "Paid")}
-//                       className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+//                       className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#d9a82e] focus:border-transparent"
 //                       disabled={processingAction}
 //                     >
 //                       <option value="Unpaid">Unpaid</option>
@@ -1101,7 +1101,7 @@
 //                   )}
 //                   <div className="border-t pt-2 flex justify-between">
 //                     <span className="text-lg font-semibold text-gray-900">Total:</span>
-//                     <span className="text-lg font-bold text-lime-600">
+//                     <span className="text-lg font-bold text-[#d9a82e]">
 //                       {formatPrice(selectedOrder.totalPrice || 0)}
 //                     </span>
 //                   </div>
@@ -1224,7 +1224,7 @@
 //                         value={trackingId}
 //                         onChange={(e) => setTrackingId(e.target.value)}
 //                         placeholder="Enter tracking ID"
-//                         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-lime-500 focus:border-transparent"
+//                         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#d9a82e] focus:border-transparent"
 //                       />
 //                     </div>
 //                   </div>
@@ -1236,7 +1236,7 @@
 //                         type="date"
 //                         value={estimatedDelivery}
 //                         onChange={(e) => setEstimatedDelivery(e.target.value)}
-//                         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-lime-500 focus:border-transparent"
+//                         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#d9a82e] focus:border-transparent"
 //                       />
 //                     </div>
 //                   </div>
@@ -1255,7 +1255,7 @@
 //                   <button
 //                     onClick={handleSaveOrderDetails}
 //                     disabled={processingAction}
-//                     className="flex items-center space-x-2 bg-green-600 hover:bg-green-700 disabled:bg-gray-400 text-white px-4 py-2 rounded-md transition-colors"
+//                     className="flex items-center space-x-2 bg-[#d9a82e] hover:bg-[#c89829] disabled:bg-gray-400 text-white px-4 py-2 rounded-md transition-colors"
 //                   >
 //                     <Save size={16} />
 //                     <span>{processingAction ? "Saving..." : "Save Details"}</span>
@@ -1280,7 +1280,7 @@
 //                 </button>
 //                 <button
 //                   onClick={() => handleSendNotification(selectedOrder._id)}
-//                   className="bg-lime-600 hover:bg-lime-700 text-white font-medium py-2 px-6 rounded-md flex items-center transition-colors"
+//                   className="bg-[#c89829] hover:bg-[#b88824] text-white font-medium py-2 px-6 rounded-md flex items-center transition-colors"
 //                   disabled={processingAction}
 //                 >
 //                   <Mail size={18} className="mr-2" />
@@ -1549,15 +1549,15 @@ const InvoiceComponent = forwardRef(({ order }, ref) => {
         {/* Top row: two columns with logos */}
         <div className="relative z-10 flex justify-between items-start w-full">
           <div className="mb-4">
-            <h4 className="text-lg font-bold text-lime-800 mb-2 uppercase">🛍️ Order Items</h4>
+            <h4 className="text-lg font-bold text-[#2377c1] mb-2 uppercase">🛍️ Order Items</h4>
             <div className="overflow-x-auto">
-              <table className="w-full border-collapse border border-lime-300">
+              <table className="w-full border-collapse border border-[#2377c1]">
                 <thead>
-                  <tr className="bg-lime-100">
-                    <th className="border border-lime-300 px-3 py-2 text-left text-sm font-bold">Product</th>
-                    <th className="border border-lime-300 px-3 py-2 text-center text-sm font-bold">Qty</th>
-                    <th className="border border-lime-300 px-3 py-2 text-right text-sm font-bold">Price</th>
-                    <th className="border border-lime-300 px-3 py-2 text-right text-sm font-bold">Total</th>
+                  <tr className="bg-blue-100">
+                    <th className="border border-[#2377c1] px-3 py-2 text-left text-sm font-bold">Product</th>
+                    <th className="border border-[#2377c1] px-3 py-2 text-center text-sm font-bold">Qty</th>
+                    <th className="border border-[#2377c1] px-3 py-2 text-right text-sm font-bold">Price</th>
+                    <th className="border border-[#2377c1] px-3 py-2 text-right text-sm font-bold">Total</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -1570,21 +1570,21 @@ const InvoiceComponent = forwardRef(({ order }, ref) => {
                     const baseTotal = basePrice * quantity
 
                     return (
-                      <tr key={index} className="hover:bg-lime-50">
-                        <td className="border border-lime-300 px-3 py-2 text-sm">
+                      <tr key={index} className="hover:bg-[#e8f4fd]">
+                        <td className="border border-[#2377c1] px-3 py-2 text-sm">
                           <div className="font-medium text-gray-900">{item.name}</div>
                           {showDiscount && (
                             <div className="text-xs text-gray-500">Base: {formatPrice(basePrice)}</div>
                           )}
                         </td>
-                        <td className="border border-lime-300 px-3 py-2 text-center text-sm">{quantity}</td>
-                        <td className="border border-lime-300 px-3 py-2 text-right text-sm">
+                        <td className="border border-[#2377c1] px-3 py-2 text-center text-sm">{quantity}</td>
+                        <td className="border border-[#2377c1] px-3 py-2 text-right text-sm">
                           {showDiscount && (
                             <span className="block text-xs text-gray-400 line-through">{formatPrice(basePrice)}</span>
                           )}
                           <span className="font-semibold text-gray-900">{formatPrice(salePrice)}</span>
                         </td>
-                        <td className="border border-lime-300 px-3 py-2 text-right text-sm font-semibold">
+                        <td className="border border-[#2377c1] px-3 py-2 text-right text-sm font-semibold">
                           {showDiscount && (
                             <span className="block text-xs text-gray-400 font-normal line-through">
                               {formatPrice(baseTotal)}
@@ -1599,9 +1599,9 @@ const InvoiceComponent = forwardRef(({ order }, ref) => {
               </table>
             </div>
           </div>
-          <div className="bg-white border-2 border-lime-200 rounded-lg px-3 py-1 relative">
+          <div className="bg-white border-2 border-[#2377c1] rounded-lg px-3 py-1 relative">
             <div className="absolute top-0 left-0 right-0  bg-gradient-to-r from-lime-400 to-lime-600"></div>
-            <h4 className="text-lg font-bold text-lime-800 flex items-center">🚚 Shipping Address</h4>
+            <h4 className="text-lg font-bold text-[#2377c1] flex items-center">🚚 Shipping Address</h4>
             <div className=" text-sm">
               <p className="font-semibold text-gray-900 text-base">{order.shippingAddress?.name || "N/A"}</p>
               <p className="text-gray-700">{order.shippingAddress?.address || "N/A"}</p>
@@ -1615,9 +1615,9 @@ const InvoiceComponent = forwardRef(({ order }, ref) => {
           </div>
 
           {/* Billing Address */}
-          <div className="bg-white border-2 border-lime-200 rounded-lg px-3 py-1 relative">
+          <div className="bg-white border-2 border-[#2377c1] rounded-lg px-3 py-1 relative">
             <div className="absolute top-0 left-0 right-0  bg-gradient-to-r from-lime-400 to-lime-600"></div>
-            <h4 className="text-lg font-bold text-lime-800 flex items-center">💳 Billing Address</h4>
+            <h4 className="text-lg font-bold text-[#2377c1] flex items-center">💳 Billing Address</h4>
             <div className="text-sm">
               <p className="font-semibold text-gray-900 text-base">
                 {order.billingAddress?.name || order.shippingAddress?.name || "N/A"}
@@ -1653,9 +1653,9 @@ const InvoiceComponent = forwardRef(({ order }, ref) => {
                 <tr key={item._id || index} className={`border-b ${index % 2 === 0 ? "bg-gray-50" : "bg-white"}`}>
                   <td className="p-4 font-medium text-gray-900">{item.name}</td>
                   <td className="p-4 text-gray-600 whitespace-nowrap">{item.product?.sku || item.sku || "-"}</td>
-                  <td className="p-4 text-center font-semibold text-lime-600">{item.quantity}</td>
+                  <td className="p-4 text-center font-semibold text-[#d9a82e]">{item.quantity}</td>
                   <td className="p-4 text-right font-medium">{formatPrice(item.price)}</td>
-                  <td className="p-4 text-right font-bold text-lime-600">{formatPrice(item.price * item.quantity)}</td>
+                  <td className="p-4 text-right font-bold text-[#d9a82e]">{formatPrice(item.price * item.quantity)}</td>
                 </tr>
               )) || (
                 <tr>
@@ -1669,7 +1669,7 @@ const InvoiceComponent = forwardRef(({ order }, ref) => {
         </div>
 
         {/* Totals */}
-        <div className="bg-white border-2 border-lime-200 rounded-lg p-3">
+        <div className="bg-white border-2 border-[#2377c1] rounded-lg p-3">
           <div className="space-y-1">
             {baseSubtotal > 0 && (
               <div className="flex justify-between text-gray-500">
@@ -1710,8 +1710,8 @@ const InvoiceComponent = forwardRef(({ order }, ref) => {
               <span className="font-medium">{formatPrice(shipping)}</span>
             </div>
 
-            <div className="border-t-2 border-lime-500">
-              <div className="flex justify-between text-xl font-bold text-lime-800 bg-lime-100 p-2 rounded-lg">
+            <div className="border-t-2 border-[#2377c1]">
+              <div className="flex justify-between text-xl font-bold text-[#2377c1] bg-blue-100 p-2 rounded-lg">
                 <span> TOTAL AMOUNT:</span>
                 <span>{formatPrice(total)}</span>
               </div>
@@ -2154,7 +2154,7 @@ const OnlineOrders = () => {
         </div>
         <button
           onClick={fetchOrders}
-          className="flex items-center space-x-2 bg-lime-500 hover:bg-lime-600 text-white px-4 py-2 rounded-md transition-colors"
+          className="flex items-center space-x-2 bg-[#d9a82e] hover:bg-[#c89829] text-white px-4 py-2 rounded-md transition-colors"
           disabled={loading}
         >
           <RefreshCw className={`w-4 h-4 ${loading ? "animate-spin" : ""}`} />
@@ -2172,7 +2172,7 @@ const OnlineOrders = () => {
       )}
 
       {showBulkActions && (
-        <div className="mb-6 bg-white p-4 rounded-lg shadow-sm border-l-4 border-lime-500">
+        <div className="mb-6 bg-white p-4 rounded-lg shadow-sm border-l-4 border-[#2377c1]">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <span className="text-sm font-medium text-gray-700">
@@ -2183,7 +2183,7 @@ const OnlineOrders = () => {
                 <select
                   value={bulkStatus}
                   onChange={(e) => setBulkStatus(e.target.value)}
-                  className="border border-gray-300 rounded-md px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-lime-500"
+                  className="border border-gray-300 rounded-md px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-[#d9a82e]"
                 >
                   <option value="">Select Status</option>
                   {orderStatusOptions.map((status) => (
@@ -2195,7 +2195,7 @@ const OnlineOrders = () => {
                 <button
                   onClick={handleBulkStatusUpdate}
                   disabled={!bulkStatus || processingAction}
-                  className="bg-lime-500 hover:bg-lime-600 disabled:bg-gray-400 text-white px-4 py-1 rounded-md text-sm font-medium transition-colors"
+                  className="bg-[#d9a82e] hover:bg-[#c89829] disabled:bg-gray-400 text-white px-4 py-1 rounded-md text-sm font-medium transition-colors"
                 >
                   {processingAction ? "Updating..." : "Update"}
                 </button>
@@ -2223,17 +2223,17 @@ const OnlineOrders = () => {
             placeholder="Search orders by ID, customer name, or email..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="pl-10 pr-4 py-2 w-full md:w-96 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-lime-500 focus:border-transparent"
+            className="pl-10 pr-4 py-2 w-full md:w-96 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#d9a82e] focus:border-transparent"
           />
         </div>
         <div className="text-sm text-gray-600">
-          Total Online Orders: <span className="font-semibold text-lime-600">{filteredOrders.length}</span>
+          Total Online Orders: <span className="font-semibold text-[#d9a82e]">{filteredOrders.length}</span>
         </div>
       </div>
 
       {loading ? (
         <div className="flex justify-center items-center h-64">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-lime-500"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#2377c1]"></div>
         </div>
       ) : (
         <div className="bg-white rounded-lg shadow-sm overflow-hidden">
@@ -2246,7 +2246,7 @@ const OnlineOrders = () => {
                       type="checkbox"
                       checked={selectAll}
                       onChange={handleSelectAll}
-                      className="h-4 w-4 text-lime-500 focus:ring-lime-500 border-gray-300 rounded"
+                      className="h-4 w-4 text-lime-500 focus:ring-[#d9a82e] border-gray-300 rounded"
                     />
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -2276,31 +2276,26 @@ const OnlineOrders = () => {
                 {filteredOrders.map((order) => (
                   <tr
                     key={order._id}
-                    className={`hover:bg-gray-50 ${selectedOrders.includes(order._id) ? "bg-lime-50" : ""}`}
+                    className={`hover:bg-gray-50 ${selectedOrders.includes(order._id) ? "bg-[#e8f4fd]" : ""}`}
                   >
                     <td className="px-6 py-4 whitespace-nowrap">
                       <input
                         type="checkbox"
                         checked={selectedOrders.includes(order._id)}
                         onChange={() => handleSelectOrder(order._id)}
-                        className="h-4 w-4 text-lime-500 focus:ring-lime-500 border-gray-300 rounded"
+                        className="h-4 w-4 text-lime-500 focus:ring-[#d9a82e] border-gray-300 rounded"
                       />
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm font-medium text-lime-600">#{order._id.slice(-6)}</div>
+                      <div className="text-sm font-medium text-[#d9a82e]">#{order._id.slice(-6)}</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      {order.deliveryType === "pickup" ? (
-                        <>
-                          <div className="text-sm text-gray-900">{order.pickupDetails?.location || "N/A"}</div>
-                          <div className="text-sm text-gray-500">{order.pickupDetails?.phone || "N/A"}</div>
-                        </>
-                      ) : (
-                        <>
-                          <div className="text-sm text-gray-900">{order.shippingAddress?.name || "N/A"}</div>
-                          <div className="text-sm text-gray-500">{order.shippingAddress?.email || "N/A"}</div>
-                        </>
-                      )}
+                      <div className="text-sm text-gray-900">
+                        {order.shippingAddress?.name || order.pickupDetails?.name || order.user?.name || "N/A"}
+                      </div>
+                      <div className="text-sm text-gray-500">
+                        {order.shippingAddress?.email || order.pickupDetails?.email || order.user?.email || "N/A"}
+                      </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="text-sm text-gray-900">{new Date(order.createdAt).toLocaleDateString()}</div>
@@ -2318,7 +2313,7 @@ const OnlineOrders = () => {
                             order.status === "Processing"
                               ? "bg-yellow-100 text-yellow-800"
                               : order.status === "Confirmed"
-                                ? "bg-lime-100 text-lime-800"
+                                ? "bg-blue-100 text-[#2377c1]"
                                 : order.status === "Shipped"
                                   ? "bg-purple-100 text-purple-800"
                                   : order.status === "Out for Delivery"
@@ -2392,7 +2387,7 @@ const OnlineOrders = () => {
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                       <button
                         onClick={() => handleViewOrder(order)}
-                        className="text-lime-600 hover:text-lime-900 mr-4"
+                        className="text-[#d9a82e] hover:text-[#2377c1] mr-4"
                         title="View Order Details"
                       >
                         <Eye size={18} />
@@ -2435,7 +2430,7 @@ const OnlineOrders = () => {
                   <span>/</span>
                   <span>Online Orders</span>
                   <span>/</span>
-                  <span className="text-lime-600">View</span>
+                  <span className="text-[#d9a82e]">View</span>
                 </div>
                 <h2 className="text-2xl font-bold text-gray-900">Order ID: {selectedOrder._id.slice(-6)}</h2>
               </div>
@@ -2450,12 +2445,12 @@ const OnlineOrders = () => {
             <div className="p-6">
               {/* Order Summary Cards */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-                <div className="bg-lime-50 p-4 rounded-lg">
+                <div className="bg-[#e8f4fd] p-4 rounded-lg">
                   <div className="flex items-center space-x-2">
-                    <Package className="text-lime-600" size={20} />
+                    <Package className="text-[#d9a82e]" size={20} />
                     <div>
                       <p className="text-sm text-gray-600">Status</p>
-                      <p className="font-semibold text-lime-900">{selectedOrder.status || "Processing"}</p>
+                      <p className="font-semibold text-[#2377c1]">{selectedOrder.status || "Processing"}</p>
                     </div>
                   </div>
                 </div>
@@ -2500,7 +2495,7 @@ const OnlineOrders = () => {
                   <select
                     value={selectedOrder.status || "Processing"}
                     onChange={(e) => handleUpdateStatus(selectedOrder._id, e.target.value)}
-                    className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:border-transparent"
+                    className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#d9a82e] focus:border-transparent"
                     disabled={processingAction}
                   >
                     {orderStatusOptions.map((status) => (
@@ -2514,7 +2509,7 @@ const OnlineOrders = () => {
                       selectedOrder.status === "Processing"
                         ? "bg-yellow-100 text-yellow-800"
                         : selectedOrder.status === "Confirmed"
-                          ? "bg-lime-100 text-lime-800"
+                          ? "bg-blue-100 text-[#2377c1]"
                           : selectedOrder.status === "Shipped"
                             ? "bg-purple-100 text-purple-800"
                             : selectedOrder.status === "Out for Delivery"
@@ -2536,7 +2531,7 @@ const OnlineOrders = () => {
                     <select
                       value={selectedOrder.isPaid ? "Paid" : "Unpaid"}
                       onChange={(e) => handleUpdatePaymentStatus(selectedOrder._id, e.target.value === "Paid")}
-                      className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                      className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#d9a82e] focus:border-transparent"
                       disabled={processingAction}
                     >
                       <option value="Unpaid">Unpaid</option>
@@ -2620,7 +2615,7 @@ const OnlineOrders = () => {
                   </div>
                   <div className="border-t pt-2 flex justify-between">
                     <span className="text-lg font-semibold text-gray-900">Total:</span>
-                    <span className="text-lg font-bold text-lime-600">{formatPrice(selectedTotals.total)}</span>
+                    <span className="text-lg font-bold text-[#d9a82e]">{formatPrice(selectedTotals.total)}</span>
                   </div>
                 </div>
               </div>
@@ -2741,7 +2736,7 @@ const OnlineOrders = () => {
                         value={trackingId}
                         onChange={(e) => setTrackingId(e.target.value)}
                         placeholder="Enter tracking ID"
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-lime-500 focus:border-transparent"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#d9a82e] focus:border-transparent"
                       />
                     </div>
                   </div>
@@ -2753,7 +2748,7 @@ const OnlineOrders = () => {
                         type="date"
                         value={estimatedDelivery}
                         onChange={(e) => setEstimatedDelivery(e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-lime-500 focus:border-transparent"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#d9a82e] focus:border-transparent"
                       />
                     </div>
                   </div>
@@ -2772,7 +2767,7 @@ const OnlineOrders = () => {
                   <button
                     onClick={handleSaveOrderDetails}
                     disabled={processingAction}
-                    className="flex items-center space-x-2 bg-green-600 hover:bg-green-700 disabled:bg-gray-400 text-white px-4 py-2 rounded-md transition-colors"
+                    className="flex items-center space-x-2 bg-[#d9a82e] hover:bg-[#c89829] disabled:bg-gray-400 text-white px-4 py-2 rounded-md transition-colors"
                   >
                     <Save size={16} />
                     <span>{processingAction ? "Saving..." : "Save Details"}</span>
@@ -2797,7 +2792,7 @@ const OnlineOrders = () => {
                 </button>
                 <button
                   onClick={() => handleSendNotification(selectedOrder._id)}
-                  className="bg-lime-600 hover:bg-lime-700 text-white font-medium py-2 px-6 rounded-md flex items-center transition-colors"
+                  className="bg-[#c89829] hover:bg-[#b88824] text-white font-medium py-2 px-6 rounded-md flex items-center transition-colors"
                   disabled={processingAction}
                 >
                   <Mail size={18} className="mr-2" />

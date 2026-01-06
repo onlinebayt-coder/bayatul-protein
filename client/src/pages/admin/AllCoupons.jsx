@@ -196,7 +196,7 @@ const AllCoupons = () => {
           <h1 className="text-2xl font-bold text-gray-900">All Coupons</h1>
           <button
             onClick={() => setShowForm(true)}
-            className="bg-lime-400 text-black font-medium py-2 px-4 rounded-md flex items-center"
+            className="bg-[#d9a82e] text-black font-medium py-2 px-4 rounded-md flex items-center"
           >
             <Plus size={18} className="mr-1" />
             Add New Coupon
@@ -206,19 +206,19 @@ const AllCoupons = () => {
         {/* Filter Buttons */}
         <div className="flex gap-3 mb-6">
           <button
-            className={`px-4 py-2 rounded-md font-medium border ${filter === "all" ? "bg-lime-500 text-white border-lime-500" : "bg-white text-gray-700 border-gray-300"}`}
+            className={`px-4 py-2 rounded-md font-medium border ${filter === "all" ? "bg-[#d9a82e] text-white border-[#2377c1]" : "bg-white text-gray-700 border-gray-300"}`}
             onClick={() => setFilter("all")}
           >
             All
           </button>
           <button
-            className={`px-4 py-2 rounded-md font-medium border ${filter === "active" ? "bg-lime-500 text-white border-lime-500" : "bg-white text-gray-700 border-gray-300"}`}
+            className={`px-4 py-2 rounded-md font-medium border ${filter === "active" ? "bg-[#d9a82e] text-white border-[#2377c1]" : "bg-white text-gray-700 border-gray-300"}`}
             onClick={() => setFilter("active")}
           >
             Active
           </button>
           <button
-            className={`px-4 py-2 rounded-md font-medium border ${filter === "expired" ? "bg-lime-500 text-white border-lime-500" : "bg-white text-gray-700 border-gray-300"}`}
+            className={`px-4 py-2 rounded-md font-medium border ${filter === "expired" ? "bg-[#d9a82e] text-white border-[#2377c1]" : "bg-white text-gray-700 border-gray-300"}`}
             onClick={() => setFilter("expired")}
           >
             Expired/Disabled

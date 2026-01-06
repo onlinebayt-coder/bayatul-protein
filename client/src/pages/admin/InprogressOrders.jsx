@@ -204,17 +204,12 @@ const InprogressOrders = () => {
                         <div className="text-sm font-medium text-blue-600">#{order._id.slice(-6)}</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        {order.deliveryType === 'pickup' ? (
-                          <>
-                            <div className="text-sm text-gray-900">{order.pickupDetails?.location || 'N/A'}</div>
-                            <div className="text-sm text-gray-500">{order.pickupDetails?.phone || 'N/A'}</div>
-                          </>
-                        ) : (
-                          <>
-                            <div className="text-sm text-gray-900">{order.shippingAddress?.name || 'N/A'}</div>
-                            <div className="text-sm text-gray-500">{order.shippingAddress?.email || 'N/A'}</div>
-                          </>
-                        )}
+                        <div className="text-sm text-gray-900">
+                          {order.shippingAddress?.name || order.pickupDetails?.name || order.user?.name || 'N/A'}
+                        </div>
+                        <div className="text-sm text-gray-500">
+                          {order.shippingAddress?.email || order.pickupDetails?.email || order.user?.email || 'N/A'}
+                        </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm text-gray-900">{new Date(order.updatedAt).toLocaleDateString()}</div>
@@ -318,7 +313,7 @@ const InprogressOrders = () => {
                   <div className="space-y-3">
                     <button
                       onClick={() => handleMarkReadyForShipment(selectedOrder._id)}
-                      className="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-md flex items-center justify-center"
+                      className="w-full bg-[#d9a82e] hover:bg-[#c89829] text-white font-medium py-2 px-4 rounded-md flex items-center justify-center"
                       disabled={processingAction}
                     >
                       <Truck size={18} className="mr-2" />

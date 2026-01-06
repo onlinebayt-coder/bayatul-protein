@@ -416,7 +416,7 @@ const AddBannerCard = () => {
                       </div>
 
                       {formData.name && (
-                        <div className="bg-green-50 border border-green-200 rounded-lg p-3">
+                        <div className="bg-green-50 border border-[#2377c1] rounded-lg p-3">
                           <p className="text-sm text-green-800">
                             ✓ Selected: <strong>{formData.name}</strong>
                           </p>
@@ -467,7 +467,7 @@ const AddBannerCard = () => {
                       </div>
 
                       {formData.name && (
-                        <div className="bg-green-50 border border-green-200 rounded-lg p-3">
+                        <div className="bg-green-50 border border-[#2377c1] rounded-lg p-3">
                           <p className="text-sm text-green-800">
                             ✓ Selected: <strong>{formData.name}</strong>
                           </p>

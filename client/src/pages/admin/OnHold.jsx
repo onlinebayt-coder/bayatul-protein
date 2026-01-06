@@ -104,15 +104,15 @@ const InvoiceComponent = forwardRef(({ order }, ref) => {
       </div>
 
       {/* Order Summary Section */}
-      <div className="bg-white  border-l-4 pl-2 border-lime-500">
-        <h3 className="text-2xl font-bold text-lime-800 mb-2 uppercase tracking-wide">📋 Order Summary</h3>
+      <div className="bg-white  border-l-4 pl-2 border-emerald-500">
+        <h3 className="text-2xl font-bold text-emerald-800 mb-2 uppercase tracking-wide">📋 Order Summary</h3>
 
         {/* Addresses */}
         <div className="grid grid-cols-2 md:grid-cols-2 gap-6 mb-2">
           {/* Shipping Address */}
-          <div className="bg-white border-2 border-lime-200 rounded-lg px-3 py-1 relative">
+          <div className="bg-white border-2 border-emerald-200 rounded-lg px-3 py-1 relative">
             <div className="absolute -top-3 left-3 bg-white px-2">
-              <h4 className="text-sm font-bold text-lime-700 uppercase">📦 Shipping Address</h4>
+              <h4 className="text-sm font-bold text-emerald-700 uppercase">📦 Shipping Address</h4>
             </div>
             <div className="pt-2 space-y-1 text-sm">
               <p>
@@ -140,9 +140,9 @@ const InvoiceComponent = forwardRef(({ order }, ref) => {
           </div>
 
           {/* Billing Address */}
-          <div className="bg-white border-2 border-lime-200 rounded-lg px-3 py-1 relative">
+          <div className="bg-white border-2 border-emerald-200 rounded-lg px-3 py-1 relative">
             <div className="absolute -top-3 left-3 bg-white px-2">
-              <h4 className="text-sm font-bold text-lime-700 uppercase">💳 Billing Address</h4>
+              <h4 className="text-sm font-bold text-emerald-700 uppercase">💳 Billing Address</h4>
             </div>
             <div className="pt-2 space-y-1 text-sm">
               <p>
@@ -180,15 +180,15 @@ const InvoiceComponent = forwardRef(({ order }, ref) => {
 
         {/* Order Items */}
         <div className="mb-4">
-          <h4 className="text-lg font-bold text-lime-800 mb-2 uppercase">🛍️ Order Items</h4>
+          <h4 className="text-lg font-bold text-emerald-800 mb-2 uppercase">🛍️ Order Items</h4>
           <div className="overflow-x-auto">
-            <table className="w-full border-collapse border border-lime-300">
+            <table className="w-full border-collapse border border-emerald-300">
               <thead>
-                <tr className="bg-lime-100">
-                  <th className="border border-lime-300 px-3 py-2 text-left text-sm font-bold">Product</th>
-                  <th className="border border-lime-300 px-3 py-2 text-center text-sm font-bold">Qty</th>
-                  <th className="border border-lime-300 px-3 py-2 text-right text-sm font-bold">Price</th>
-                  <th className="border border-lime-300 px-3 py-2 text-right text-sm font-bold">Total</th>
+                <tr className="bg-emerald-100">
+                  <th className="border border-emerald-300 px-3 py-2 text-left text-sm font-bold">Product</th>
+                  <th className="border border-emerald-300 px-3 py-2 text-center text-sm font-bold">Qty</th>
+                  <th className="border border-emerald-300 px-3 py-2 text-right text-sm font-bold">Price</th>
+                  <th className="border border-emerald-300 px-3 py-2 text-right text-sm font-bold">Total</th>
                 </tr>
               </thead>
               <tbody>
@@ -200,8 +200,8 @@ const InvoiceComponent = forwardRef(({ order }, ref) => {
                   const baseTotal = basePrice * (item.quantity || 0)
 
                   return (
-                    <tr key={index} className="hover:bg-lime-50">
-                      <td className="border border-lime-300 px-3 py-2 text-sm">
+                    <tr key={index} className="hover:bg-emerald-50">
+                      <td className="border border-emerald-300 px-3 py-2 text-sm">
                         <div className="font-medium text-gray-900">{item.name}</div>
                         {item.selectedColorData && (
                           <div className="text-xs text-purple-600 font-medium mt-1 flex items-center">
@@ -213,14 +213,14 @@ const InvoiceComponent = forwardRef(({ order }, ref) => {
                           <div className="text-xs text-gray-500">Base: {formatPrice(basePrice)}</div>
                         )}
                       </td>
-                      <td className="border border-lime-300 px-3 py-2 text-center text-sm">{item.quantity}</td>
-                      <td className="border border-lime-300 px-3 py-2 text-right text-sm">
+                      <td className="border border-emerald-300 px-3 py-2 text-center text-sm">{item.quantity}</td>
+                      <td className="border border-emerald-300 px-3 py-2 text-right text-sm">
                         {showDiscount && (
                           <span className="block text-xs text-gray-400 line-through">{formatPrice(basePrice)}</span>
                         )}
                         <span className="font-semibold text-gray-900">{formatPrice(itemPrice)}</span>
                       </td>
-                      <td className="border border-lime-300 px-3 py-2 text-right text-sm font-semibold">
+                      <td className="border border-emerald-300 px-3 py-2 text-right text-sm font-semibold">
                         {showDiscount && (
                           <span className="block text-xs text-gray-400 font-normal line-through">
                             {formatPrice(baseTotal)}
@@ -256,7 +256,7 @@ const InvoiceComponent = forwardRef(({ order }, ref) => {
         </div>
 
         {/* Total Amount */}
-        <div className="bg-white border-2 border-lime-200 rounded-lg p-3">
+        <div className="bg-white border-2 border-emerald-200 rounded-lg p-3">
           <div className="space-y-1">
             {baseSubtotal > 0 && (
               <div className="flex justify-between text-gray-500">
@@ -297,8 +297,8 @@ const InvoiceComponent = forwardRef(({ order }, ref) => {
               <span className="font-medium">{formatPrice(shipping)}</span>
             </div>
 
-            <div className="border-t-2 border-lime-500">
-              <div className="flex justify-between text-xl font-bold text-lime-800 bg-lime-100 p-2 rounded-lg">
+            <div className="border-t-2 border-emerald-500">
+              <div className="flex justify-between text-xl font-bold text-emerald-800 bg-emerald-100 p-2 rounded-lg">
                 <span> TOTAL AMOUNT:</span>
                 <span>{formatPrice(displayTotal)}</span>
               </div>
@@ -748,8 +748,12 @@ const OnHold = () => {
                         <div className="text-sm font-medium text-blue-600">#{order._id.slice(-6)}</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-900">{order.shippingAddress.name}</div>
-                        <div className="text-sm text-gray-500">{order.shippingAddress.email}</div>
+                        <div className="text-sm text-gray-900">
+                          {order.shippingAddress?.name || order.pickupDetails?.name || order.user?.name || "N/A"}
+                        </div>
+                        <div className="text-sm text-gray-500">
+                          {order.shippingAddress?.email || order.pickupDetails?.email || order.user?.email || "N/A"}
+                        </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="relative">
@@ -941,7 +945,7 @@ const OnHold = () => {
                   <select
                     value={selectedOrder.isPaid ? "Paid" : "Unpaid"}
                     onChange={(e) => handleUpdatePayment(selectedOrder._id, e.target.value === "Paid")}
-                    className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#d9a82e] focus:border-transparent"
                     disabled={processingAction}
                   >
                     <option value="Unpaid">Unpaid</option>
@@ -1041,7 +1045,7 @@ const OnHold = () => {
                     </div>
                   )}
                   {showCouponDetail && (
-                    <div className="bg-green-50 border border-green-200 rounded-md p-3 -mx-1">
+                    <div className="bg-green-50 border border-[#2377c1] rounded-md p-3 -mx-1">
                       <div className="flex justify-between items-center">
                         <div>
                           <span className="text-sm font-medium text-green-800">Coupon Applied</span>
@@ -1055,7 +1059,7 @@ const OnHold = () => {
                   )}
                   <div className="border-t pt-2 flex justify-between">
                     <span className="text-lg font-semibold text-gray-900">Total:</span>
-                    <span className="text-lg font-bold text-lime-600">
+                    <span className="text-lg font-bold text-emerald-600">
                       {formatPrice(selectedTotals.total)}
                     </span>
                   </div>
@@ -1179,7 +1183,7 @@ const OnHold = () => {
                         value={trackingId}
                         onChange={(e) => setTrackingId(e.target.value)}
                         placeholder="Enter tracking ID"
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-lime-500 focus:border-transparent"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                       />
                     </div>
                   </div>
@@ -1191,15 +1195,15 @@ const OnHold = () => {
                         type="date"
                         value={estimatedDelivery}
                         onChange={(e) => setEstimatedDelivery(e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-lime-500 focus:border-transparent"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                       />
                     </div>
                   </div>
                 </div>
 
                 {showCouponDetail && (
-                  <div className="mt-4 bg-lime-50 border border-lime-200 p-4 rounded-lg space-y-2">
-                    <p className="text-sm font-medium text-lime-700">{couponCodeLabel ? "Coupon Details" : "Discount Details"}</p>
+                  <div className="mt-4 bg-emerald-50 border border-emerald-200 p-4 rounded-lg space-y-2">
+                    <p className="text-sm font-medium text-emerald-700">{couponCodeLabel ? "Coupon Details" : "Discount Details"}</p>
                     {couponCodeLabel && (
                       <div className="flex justify-between text-sm text-gray-700">
                         <span>Code:</span>
@@ -1229,7 +1233,7 @@ const OnHold = () => {
                     onChange={(e) => setSellerComments(e.target.value)}
                     placeholder="Add seller comments here..."
                     rows="3"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-lime-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                   />
                 </div>
 
@@ -1237,7 +1241,7 @@ const OnHold = () => {
                   <button
                     onClick={handleSaveOrderDetails}
                     disabled={processingAction}
-                    className="flex items-center space-x-2 bg-green-600 hover:bg-green-700 disabled:bg-gray-400 text-white px-4 py-2 rounded-md transition-colors"
+                    className="flex items-center space-x-2 bg-[#d9a82e] hover:bg-[#c89829] disabled:bg-gray-400 text-white px-4 py-2 rounded-md transition-colors"
                   >
                     <Save size={16} />
                     <span>{processingAction ? "Saving..." : "Save Details"}</span>
@@ -1262,7 +1266,7 @@ const OnHold = () => {
                 </button>
                 <button
                   onClick={() => handleSendNotification(selectedOrder._id)}
-                  className="bg-lime-600 hover:bg-lime-700 text-white font-medium py-2 px-6 rounded-md flex items-center transition-colors"
+                  className="bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2 px-6 rounded-md flex items-center transition-colors"
                   disabled={processingAction}
                 >
                   <Mail size={18} className="mr-2" />
@@ -1270,7 +1274,7 @@ const OnHold = () => {
                 </button>
                 <button
                   onClick={() => handleResumeOrder(selectedOrder._id)}
-                  className="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-6 rounded-md flex items-center transition-colors"
+                  className="bg-[#d9a82e] hover:bg-[#c89829] text-white font-medium py-2 px-6 rounded-md flex items-center transition-colors"
                   disabled={processingAction}
                 >
                   <Play size={18} className="mr-2" />
@@ -1309,7 +1313,7 @@ const OnHold = () => {
                   onChange={(e) => setNotificationMessage(e.target.value)}
                   placeholder="Enter a message to include in the notification email..."
                   rows="4"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#d9a82e] focus:border-transparent"
                 />
                 <p className="text-xs text-gray-500 mt-1">
                   This message will be displayed in the customer's notification email. Leave empty to send without a message.
@@ -1331,7 +1335,7 @@ const OnHold = () => {
               <button
                 onClick={handleConfirmSendNotification}
                 disabled={processingAction}
-                className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-md flex items-center transition-colors disabled:bg-gray-400"
+                className="px-4 py-2 bg-[#d9a82e] hover:bg-[#c89829] text-white rounded-md flex items-center transition-colors disabled:bg-gray-400"
               >
                 {processingAction ? (
                   <>

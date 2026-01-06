@@ -222,7 +222,7 @@ const AddGamingZoneCategory = () => {
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Gaming Zone Page
                 </label>
-                <div className="px-4 py-3 bg-green-50 border border-green-200 rounded-lg">
+                <div className="px-4 py-3 bg-green-50 border border-[#2377c1] rounded-lg">
                   <p className="text-lg font-semibold text-green-900">
                     {gamingZonePages.find(p => p.slug === formData.gamingZonePageSlug)?.name || formData.gamingZonePageSlug || "Loading..."}
                   </p>

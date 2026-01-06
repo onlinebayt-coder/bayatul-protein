@@ -333,14 +333,10 @@ const AdminOrders = () => {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm text-gray-900">
-                          {order.deliveryType === "home"
-                            ? order.shippingAddress?.name || order.user?.name || "N/A"
-                            : order.user?.name || "N/A"}
+                          {order.shippingAddress?.name || order.pickupDetails?.name || order.user?.name || "N/A"}
                         </div>
                         <div className="text-sm text-gray-500">
-                          {order.deliveryType === "home"
-                            ? order.shippingAddress?.email || order.user?.email || "N/A"
-                            : order.user?.email || "N/A"}
+                          {order.shippingAddress?.email || order.pickupDetails?.email || order.user?.email || "N/A"}
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">

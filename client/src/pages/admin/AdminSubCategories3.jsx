@@ -383,7 +383,7 @@ const AdminSubCategories3 = () => {
             </div>
             <Link
               to="/admin/subcategories-3/add"
-              className="bg-lime-500 hover:bg-lime-600 text-white px-6 py-3 rounded-lg flex items-center space-x-2 transition-colors duration-200"
+              className="bg-[#d9a82e] hover:bg-[#c89829] text-white px-6 py-3 rounded-lg flex items-center space-x-2 transition-colors duration-200"
             >
               <Plus size={20} />
               <span>Add New Sub Category 3</span>

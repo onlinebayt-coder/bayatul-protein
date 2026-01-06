@@ -1297,7 +1297,7 @@ const AdminProducts = () => {
                 </label>
                 
                 {importFile && (
-                  <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded">
+                  <div className="mt-4 p-3 bg-green-50 border border-[#2377c1] rounded">
                     <p className="text-sm text-green-800">
                       Selected: <strong>{importFile.name}</strong>
                     </p>
@@ -1311,7 +1311,7 @@ const AdminProducts = () => {
                 <h3 className="font-semibold mb-3">Import Results:</h3>
                 
                 <div className="grid grid-cols-3 gap-3 mb-4">
-                  <div className="bg-green-50 border border-green-200 rounded p-3 text-center">
+                  <div className="bg-green-50 border border-[#2377c1] rounded p-3 text-center">
                     <div className="text-2xl font-bold text-green-700">{importResults.created || 0}</div>
                     <div className="text-xs text-green-600">Created</div>
                   </div>
@@ -1820,7 +1820,7 @@ const AdminProducts = () => {
                               <button
                                 onClick={toggleSelectPage}
                                 className={`inline-flex items-center rounded focus:outline-none ${
-                                  isAllOnPageSelected ? 'text-lime-500 hover:text-lime-600' : 'text-gray-600 hover:text-gray-800'
+                                  isAllOnPageSelected ? 'text-lime-500 hover:text-[#d9a82e]' : 'text-gray-600 hover:text-gray-800'
                                 }`}
                                 title="Select/deselect current page"
                               >
@@ -1923,7 +1923,7 @@ const AdminProducts = () => {
                                 id={`product-row-${product._id}`}
                 className={`hover:bg-gray-50 transition-colors ${
                                   justEditedId === product._id
-                  ? "bg-lime-100 ring-2 ring-lime-500 animate-pulse"
+                  ? "bg-blue-100 ring-2 ring-[#d9a82e] animate-pulse"
                                     : ""
                                 }`}
                               >
@@ -1931,7 +1931,7 @@ const AdminProducts = () => {
                                 <td className="px-2 py-4 whitespace-nowrap">
                                   <button
                                     onClick={() => toggleSelectOne(product._id)}
-                                    className={`${(selectAllMode || selectedIds.has(product._id)) ? 'text-lime-500 hover:text-lime-600' : 'text-gray-600 hover:text-gray-800'} rounded focus:outline-none`}
+                                    className={`${(selectAllMode || selectedIds.has(product._id)) ? 'text-lime-500 hover:text-[#d9a82e]' : 'text-gray-600 hover:text-gray-800'} rounded focus:outline-none`}
                                   >
                                     {(selectAllMode || selectedIds.has(product._id)) ? <CheckSquare size={16} /> : <Square size={16} />}
                                   </button>

@@ -216,7 +216,7 @@ const AdminSEOSettings = () => {
           </div>
           <button
             onClick={() => setShowModal(true)}
-            className="flex items-center gap-2 bg-lime-500 text-white px-4 py-2 rounded-lg hover:bg-lime-600 transition"
+            className="flex items-center gap-2 bg-[#d9a82e] text-white px-4 py-2 rounded-lg hover:bg-[#c89829] transition"
           >
             <Plus size={20} />
             Add Redirect
@@ -234,14 +234,14 @@ const AdminSEOSettings = () => {
                   placeholder="Search redirects..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-lime-500"
+                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d9a82e]"
                 />
               </div>
             </div>
             <select
               value={filterStatus}
               onChange={(e) => setFilterStatus(e.target.value)}
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-lime-500"
+              className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d9a82e]"
             >
               <option value="">All Status</option>
               <option value="Active">Active</option>
@@ -354,7 +354,7 @@ const AdminSEOSettings = () => {
                 value={formData.redirectFrom}
                 onChange={handleInputChange}
                 placeholder="/old-product-url"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-lime-500"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d9a82e]"
               />
               <p className="text-xs text-gray-500 mt-1">The URL path to redirect from (must start with /). Trailing slashes will be automatically removed.</p>
             </div>
@@ -368,7 +368,7 @@ const AdminSEOSettings = () => {
                 value={formData.redirectTo}
                 onChange={handleInputChange}
                 placeholder="/new-product-url or https://example.com"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-lime-500"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d9a82e]"
               />
               <p className="text-xs text-gray-500 mt-1">The destination URL (internal path or external URL). Trailing slashes will be automatically removed for internal URLs.</p>
             </div>
@@ -380,7 +380,7 @@ const AdminSEOSettings = () => {
                 name="redirectType"
                 value={formData.redirectType}
                 onChange={handleInputChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-lime-500"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d9a82e]"
               >
                 <option value="301">301 - Permanent Redirect</option>
                 <option value="302">302 - Temporary Redirect</option>
@@ -397,7 +397,7 @@ const AdminSEOSettings = () => {
                 name="status"
                 value={formData.status}
                 onChange={handleInputChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-lime-500"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d9a82e]"
               >
                 <option value="Active">Active</option>
                 <option value="Inactive">Inactive</option>
@@ -414,7 +414,7 @@ const AdminSEOSettings = () => {
                 onChange={handleInputChange}
                 placeholder="Add notes about this redirect..."
                 rows="3"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-lime-500"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d9a82e]"
               />
             </div>
 
@@ -429,7 +429,7 @@ const AdminSEOSettings = () => {
               </button>
               <button
                 type="submit"
-                className="px-4 py-2 bg-lime-500 text-white rounded-lg hover:bg-lime-600 transition font-medium"
+                className="px-4 py-2 bg-[#d9a82e] text-white rounded-lg hover:bg-[#c89829] transition font-medium"
               >
                 {editingRedirect ? "Update Redirect" : "Add Redirect"}
               </button>

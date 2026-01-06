@@ -105,16 +105,16 @@ const InvoiceComponent = forwardRef(({ order }, ref) => {
       </div>
 
       {/* Order Summary Section */}
-      <div className="bg-white  border-l-4 pl-2 border-lime-500">
-        <h3 className="text-2xl font-bold text-lime-800 mb-2 uppercase tracking-wide">📋 Order Summary</h3>
+      <div className="bg-white  border-l-4 pl-2 border-[#2377c1]">
+        <h3 className="text-2xl font-bold text-[#2377c1] mb-2 uppercase tracking-wide">📋 Order Summary</h3>
 
         {/* Addresses */}
         {/* Addresses */}
         <div className="grid grid-cols-2 md:grid-cols-2 gap-6 mb-2">
           {/* Shipping Address */}
-          <div className="bg-white border-2 border-lime-200 rounded-lg px-3 py-1 relative">
+          <div className="bg-white border-2 border-[#2377c1] rounded-lg px-3 py-1 relative">
             <div className="absolute -top-3 left-3 bg-white px-2">
-              <h4 className="text-sm font-bold text-lime-700 uppercase">📦 Shipping Address</h4>
+              <h4 className="text-sm font-bold text-[#2377c1] uppercase">📦 Shipping Address</h4>
             </div>
             <div className="pt-2 space-y-1 text-sm">
               <p>
@@ -142,9 +142,9 @@ const InvoiceComponent = forwardRef(({ order }, ref) => {
           </div>
 
           {/* Billing Address */}
-          <div className="bg-white border-2 border-lime-200 rounded-lg px-3 py-1 relative">
+          <div className="bg-white border-2 border-[#2377c1] rounded-lg px-3 py-1 relative">
             <div className="absolute -top-3 left-3 bg-white px-2">
-              <h4 className="text-sm font-bold text-lime-700 uppercase">💳 Billing Address</h4>
+              <h4 className="text-sm font-bold text-[#2377c1] uppercase">💳 Billing Address</h4>
             </div>
             <div className="pt-2 space-y-1 text-sm">
               <p>
@@ -182,15 +182,15 @@ const InvoiceComponent = forwardRef(({ order }, ref) => {
 
         {/* Order Items */}
         <div className="mb-4">
-          <h4 className="text-lg font-bold text-lime-800 mb-2 uppercase">🛍️ Order Items</h4>
+          <h4 className="text-lg font-bold text-[#2377c1] mb-2 uppercase">🛍️ Order Items</h4>
           <div className="overflow-x-auto">
-            <table className="w-full border-collapse border border-lime-300">
+            <table className="w-full border-collapse border border-[#2377c1]">
               <thead>
-                <tr className="bg-lime-100">
-                  <th className="border border-lime-300 px-3 py-2 text-left text-sm font-bold">Product</th>
-                  <th className="border border-lime-300 px-3 py-2 text-center text-sm font-bold">Qty</th>
-                  <th className="border border-lime-300 px-3 py-2 text-right text-sm font-bold">Price</th>
-                  <th className="border border-lime-300 px-3 py-2 text-right text-sm font-bold">Total</th>
+                <tr className="bg-blue-100">
+                  <th className="border border-[#2377c1] px-3 py-2 text-left text-sm font-bold">Product</th>
+                  <th className="border border-[#2377c1] px-3 py-2 text-center text-sm font-bold">Qty</th>
+                  <th className="border border-[#2377c1] px-3 py-2 text-right text-sm font-bold">Price</th>
+                  <th className="border border-[#2377c1] px-3 py-2 text-right text-sm font-bold">Total</th>
                 </tr>
               </thead>
               <tbody>
@@ -202,8 +202,8 @@ const InvoiceComponent = forwardRef(({ order }, ref) => {
                   const baseTotal = basePrice * (item.quantity || 0)
 
                   return (
-                    <tr key={index} className="hover:bg-lime-50">
-                      <td className="border border-lime-300 px-3 py-2 text-sm">
+                    <tr key={index} className="hover:bg-[#e8f4fd]">
+                      <td className="border border-[#2377c1] px-3 py-2 text-sm">
                         <div className="font-medium text-gray-900">{item.name}</div>
                         {item.selectedColorData && (
                           <div className="text-xs text-purple-600 font-medium mt-1 flex items-center">
@@ -220,14 +220,14 @@ const InvoiceComponent = forwardRef(({ order }, ref) => {
                           <div className="text-xs text-gray-500">Base: {formatPrice(basePrice)}</div>
                         )}
                       </td>
-                      <td className="border border-lime-300 px-3 py-2 text-center text-sm">{item.quantity}</td>
-                      <td className="border border-lime-300 px-3 py-2 text-right text-sm">
+                      <td className="border border-[#2377c1] px-3 py-2 text-center text-sm">{item.quantity}</td>
+                      <td className="border border-[#2377c1] px-3 py-2 text-right text-sm">
                         {showDiscount && (
                           <span className="block text-xs text-gray-400 line-through">{formatPrice(basePrice)}</span>
                         )}
                         <span className="font-semibold text-gray-900">{formatPrice(itemPrice)}</span>
                       </td>
-                      <td className="border border-lime-300 px-3 py-2 text-right text-sm font-semibold">
+                      <td className="border border-[#2377c1] px-3 py-2 text-right text-sm font-semibold">
                         {showDiscount && (
                           <span className="block text-xs text-gray-400 font-normal line-through">
                             {formatPrice(baseTotal)}
@@ -292,7 +292,7 @@ const InvoiceComponent = forwardRef(({ order }, ref) => {
             )}
 
             {(couponDiscount > 0 || (order.couponCode && order.discountAmount > 0)) && (
-              <div className="bg-green-50 border border-green-200 rounded-md p-3 -mx-1">
+              <div className="bg-green-50 border border-[#2377c1] rounded-md p-3 -mx-1">
                 <div className="flex justify-between items-center">
                   <div>
                     <span className="text-sm font-medium text-green-800">Coupon Applied</span>
@@ -307,7 +307,7 @@ const InvoiceComponent = forwardRef(({ order }, ref) => {
 
             <div className="border-t pt-2 flex justify-between">
               <span className="text-lg font-semibold text-gray-900">Total:</span>
-              <span className="text-lg font-bold text-lime-600">{formatPrice(total)}</span>
+              <span className="text-lg font-bold text-[#d9a82e]">{formatPrice(total)}</span>
             </div>
           </div>
         </div>
@@ -794,7 +794,7 @@ const CancelledOrders = () => {
         </div>
         <button
           onClick={fetchOrders}
-          className="flex items-center space-x-2 bg-lime-500 hover:bg-lime-600 text-white px-4 py-2 rounded-md transition-colors"
+          className="flex items-center space-x-2 bg-[#d9a82e] hover:bg-[#c89829] text-white px-4 py-2 rounded-md transition-colors"
           disabled={loading}
         >
           <RefreshCw className={`w-4 h-4 ${loading ? "animate-spin" : ""}`} />
@@ -812,7 +812,7 @@ const CancelledOrders = () => {
       )}
 
       {showBulkActions && (
-        <div className="mb-6 bg-white p-4 rounded-lg shadow-sm border-l-4 border-lime-500">
+        <div className="mb-6 bg-white p-4 rounded-lg shadow-sm border-l-4 border-[#2377c1]">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <span className="text-sm font-medium text-gray-700">
@@ -823,7 +823,7 @@ const CancelledOrders = () => {
                 <select
                   value={bulkStatus}
                   onChange={(e) => setBulkStatus(e.target.value)}
-                  className="border border-gray-300 rounded-md px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-lime-500"
+                  className="border border-gray-300 rounded-md px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-[#d9a82e]"
                 >
                   <option value="">Select Status</option>
                   {orderStatusOptions.map((status) => (
@@ -835,7 +835,7 @@ const CancelledOrders = () => {
                 <button
                   onClick={handleBulkStatusUpdate}
                   disabled={!bulkStatus || processingAction}
-                  className="bg-lime-500 hover:bg-lime-600 disabled:bg-gray-400 text-white px-4 py-1 rounded-md text-sm font-medium transition-colors"
+                  className="bg-[#d9a82e] hover:bg-[#c89829] disabled:bg-gray-400 text-white px-4 py-1 rounded-md text-sm font-medium transition-colors"
                 >
                   {processingAction ? "Updating..." : "Update"}
                 </button>
@@ -863,17 +863,17 @@ const CancelledOrders = () => {
             placeholder="Search orders by ID, customer name, or email..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="pl-10 pr-4 py-2 w-full md:w-96 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-lime-500 focus:border-transparent"
+            className="pl-10 pr-4 py-2 w-full md:w-96 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#d9a82e] focus:border-transparent"
           />
         </div>
         <div className="text-sm text-gray-600">
-          Total Cancelled Orders: <span className="font-semibold text-lime-600">{filteredOrders.length}</span>
+          Total Cancelled Orders: <span className="font-semibold text-[#d9a82e]">{filteredOrders.length}</span>
         </div>
       </div>
 
       {loading ? (
         <div className="flex justify-center items-center h-64">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-lime-500"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#2377c1]"></div>
         </div>
       ) : (
         <div className="bg-white rounded-lg shadow-sm" style={{ overflow: 'visible' }}>
@@ -886,7 +886,7 @@ const CancelledOrders = () => {
                       type="checkbox"
                       checked={selectAll}
                       onChange={handleSelectAll}
-                      className="h-4 w-4 text-lime-500 focus:ring-lime-500 border-gray-300 rounded"
+                      className="h-4 w-4 text-lime-500 focus:ring-[#d9a82e] border-gray-300 rounded"
                     />
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -916,31 +916,26 @@ const CancelledOrders = () => {
                 {filteredOrders.map((order) => (
                   <tr
                     key={order._id}
-                    className={`hover:bg-gray-50 ${selectedOrders.includes(order._id) ? "bg-lime-50" : ""}`}
+                    className={`hover:bg-gray-50 ${selectedOrders.includes(order._id) ? "bg-[#e8f4fd]" : ""}`}
                   >
                     <td className="px-6 py-4 whitespace-nowrap">
                       <input
                         type="checkbox"
                         checked={selectedOrders.includes(order._id)}
                         onChange={() => handleSelectOrder(order._id)}
-                        className="h-4 w-4 text-lime-500 focus:ring-lime-500 border-gray-300 rounded"
+                        className="h-4 w-4 text-lime-500 focus:ring-[#d9a82e] border-gray-300 rounded"
                       />
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm font-medium text-lime-600">#{order._id.slice(-6)}</div>
+                      <div className="text-sm font-medium text-[#d9a82e]">#{order._id.slice(-6)}</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      {order.deliveryType === "pickup" ? (
-                        <>
-                          <div className="text-sm text-gray-900">{order.pickupDetails?.location || "N/A"}</div>
-                          <div className="text-sm text-gray-500">{order.pickupDetails?.phone || "N/A"}</div>
-                        </>
-                      ) : (
-                        <>
-                          <div className="text-sm text-gray-900">{order.shippingAddress?.name || "N/A"}</div>
-                          <div className="text-sm text-gray-500">{order.shippingAddress?.email || "N/A"}</div>
-                        </>
-                      )}
+                      <div className="text-sm text-gray-900">
+                        {order.shippingAddress?.name || order.pickupDetails?.name || order.user?.name || "N/A"}
+                      </div>
+                      <div className="text-sm text-gray-500">
+                        {order.shippingAddress?.email || order.pickupDetails?.email || order.user?.email || "N/A"}
+                      </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="text-sm text-gray-900">{new Date(order.createdAt).toLocaleDateString()}</div>
@@ -958,7 +953,7 @@ const CancelledOrders = () => {
                             order.status === "Processing"
                               ? "bg-yellow-100 text-yellow-800"
                               : order.status === "Confirmed"
-                                ? "bg-lime-100 text-lime-800"
+                                ? "bg-blue-100 text-[#2377c1]"
                                 : order.status === "Shipped"
                                   ? "bg-purple-100 text-purple-800"
                                   : order.status === "Out for Delivery"
@@ -1032,7 +1027,7 @@ const CancelledOrders = () => {
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                       <button
                         onClick={() => handleViewOrder(order)}
-                        className="text-lime-600 hover:text-lime-900 mr-4"
+                        className="text-[#d9a82e] hover:text-[#2377c1] mr-4"
                         title="View Order Details"
                       >
                         <Eye size={18} />
@@ -1073,7 +1068,7 @@ const CancelledOrders = () => {
                   <span>/</span>
                   <span>Cancelled Orders</span>
                   <span>/</span>
-                  <span className="text-lime-600">View</span>
+                  <span className="text-[#d9a82e]">View</span>
                 </div>
                 <h2 className="text-2xl font-bold text-gray-900">Order ID: {selectedOrder._id.slice(-6)}</h2>
               </div>
@@ -1088,12 +1083,12 @@ const CancelledOrders = () => {
             <div className="p-6">
               {/* Order Summary Cards */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-                <div className="bg-lime-50 p-4 rounded-lg">
+                <div className="bg-[#e8f4fd] p-4 rounded-lg">
                   <div className="flex items-center space-x-2">
-                    <Package className="text-lime-600" size={20} />
+                    <Package className="text-[#d9a82e]" size={20} />
                     <div>
                       <p className="text-sm text-gray-600">Status</p>
-                      <p className="font-semibold text-lime-900">{selectedOrder.status || "Cancelled"}</p>
+                      <p className="font-semibold text-[#2377c1]">{selectedOrder.status || "Cancelled"}</p>
                     </div>
                   </div>
                 </div>
@@ -1138,7 +1133,7 @@ const CancelledOrders = () => {
                   <select
                     value={selectedOrder.status || "Cancelled"}
                     onChange={(e) => handleUpdateStatus(selectedOrder._id, e.target.value)}
-                    className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:border-transparent"
+                    className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#d9a82e] focus:border-transparent"
                     disabled={processingAction}
                   >
                     {orderStatusOptions.map((status) => (
@@ -1152,7 +1147,7 @@ const CancelledOrders = () => {
                       selectedOrder.status === "Processing"
                         ? "bg-yellow-100 text-yellow-800"
                         : selectedOrder.status === "Confirmed"
-                          ? "bg-lime-100 text-lime-800"
+                          ? "bg-blue-100 text-[#2377c1]"
                           : selectedOrder.status === "Shipped"
                             ? "bg-purple-100 text-purple-800"
                             : selectedOrder.status === "Out for Delivery"
@@ -1174,7 +1169,7 @@ const CancelledOrders = () => {
                     <select
                       value={selectedOrder.isPaid ? "Paid" : "Unpaid"}
                       onChange={(e) => handleUpdatePaymentStatus(selectedOrder._id, e.target.value === "Paid")}
-                      className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                      className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#d9a82e] focus:border-transparent"
                       disabled={processingAction}
                     >
                       <option value="Unpaid">Unpaid</option>
@@ -1305,7 +1300,7 @@ const CancelledOrders = () => {
                       </div>
                     )}
                     {showCouponDetail && (
-                      <div className="bg-green-50 border border-green-200 rounded-md p-3 -mx-1">
+                      <div className="bg-green-50 border border-[#2377c1] rounded-md p-3 -mx-1">
                         <div className="flex justify-between items-center">
                           <div>
                             <span className="text-sm font-medium text-green-800">Coupon Applied</span>
@@ -1319,7 +1314,7 @@ const CancelledOrders = () => {
                     )}
                   <div className="border-t pt-2 flex justify-between">
                     <span className="text-lg font-semibold text-gray-900">Total:</span>
-                    <span className="text-lg font-bold text-lime-600">
+                    <span className="text-lg font-bold text-[#d9a82e]">
                       {formatPrice(selectedTotals.total)}
                     </span>
                   </div>
@@ -1442,7 +1437,7 @@ const CancelledOrders = () => {
                         value={trackingId}
                         onChange={(e) => setTrackingId(e.target.value)}
                         placeholder="Enter tracking ID"
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-lime-500 focus:border-transparent"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#d9a82e] focus:border-transparent"
                       />
                     </div>
                   </div>
@@ -1454,15 +1449,15 @@ const CancelledOrders = () => {
                         type="date"
                         value={estimatedDelivery}
                         onChange={(e) => setEstimatedDelivery(e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-lime-500 focus:border-transparent"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#d9a82e] focus:border-transparent"
                       />
                     </div>
                   </div>
                 </div>
 
                 {showCouponDetail && (
-                  <div className="mt-4 bg-lime-50 border border-lime-200 p-4 rounded-lg space-y-2">
-                    <p className="text-sm font-medium text-lime-700">{couponCodeLabel ? "Coupon Details" : "Discount Details"}</p>
+                  <div className="mt-4 bg-[#e8f4fd] border border-[#2377c1] p-4 rounded-lg space-y-2">
+                    <p className="text-sm font-medium text-[#2377c1]">{couponCodeLabel ? "Coupon Details" : "Discount Details"}</p>
                     {couponCodeLabel && (
                       <div className="flex justify-between text-sm text-gray-700">
                         <span>Code:</span>
@@ -1492,7 +1487,7 @@ const CancelledOrders = () => {
                     onChange={(e) => setSellerComments(e.target.value)}
                     placeholder="Add seller comments here..."
                     rows="3"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-lime-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#d9a82e] focus:border-transparent"
                   />
                 </div>
 
@@ -1500,7 +1495,7 @@ const CancelledOrders = () => {
                   <button
                     onClick={handleSaveOrderDetails}
                     disabled={processingAction}
-                    className="flex items-center space-x-2 bg-green-600 hover:bg-green-700 disabled:bg-gray-400 text-white px-4 py-2 rounded-md transition-colors"
+                    className="flex items-center space-x-2 bg-[#d9a82e] hover:bg-[#c89829] disabled:bg-gray-400 text-white px-4 py-2 rounded-md transition-colors"
                   >
                     <Save size={16} />
                     <span>{processingAction ? "Saving..." : "Save Details"}</span>
@@ -1525,7 +1520,7 @@ const CancelledOrders = () => {
                 </button>
                 <button
                   onClick={() => handleSendNotification(selectedOrder._id)}
-                  className="bg-lime-600 hover:bg-lime-700 text-white font-medium py-2 px-6 rounded-md flex items-center transition-colors"
+                  className="bg-[#c89829] hover:bg-[#b88824] text-white font-medium py-2 px-6 rounded-md flex items-center transition-colors"
                   disabled={processingAction}
                 >
                   <Mail size={18} className="mr-2" />
@@ -1564,7 +1559,7 @@ const CancelledOrders = () => {
                   onChange={(e) => setNotificationMessage(e.target.value)}
                   placeholder="Enter a message to include in the notification email..."
                   rows="4"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#d9a82e] focus:border-transparent"
                 />
                 <p className="text-xs text-gray-500 mt-1">
                   This message will be displayed in the customer's notification email. Leave empty to send without a message.
@@ -1586,7 +1581,7 @@ const CancelledOrders = () => {
               <button
                 onClick={handleConfirmSendNotification}
                 disabled={processingAction}
-                className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-md flex items-center transition-colors disabled:bg-gray-400"
+                className="px-4 py-2 bg-[#d9a82e] hover:bg-[#c89829] text-white rounded-md flex items-center transition-colors disabled:bg-gray-400"
               >
                 {processingAction ? (
                   <>
