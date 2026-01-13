@@ -55,11 +55,11 @@ function LegalSection() {
   ]
 
   return (
-    <section className="py-12 bg-gradient-to-b from-white to-gray-50">
+    <section className="py-12 bg-white">
       <div className="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900  mb-3">
             Legal & Policies
           </h2>
           <p className="text-gray-600 text-base md:text-lg max-w-2xl mx-auto">
@@ -67,43 +67,83 @@ function LegalSection() {
           </p>
         </div>
 
-        {/* Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Mobile Layout - 2 boxes with 4 items each */}
+        <div className="block sm:hidden space-y-4">
+          {/* Box 1 - First 4 items */}
+          <div className="bg-white rounded-xl border-2 border-gray-200 p-4">
+            <div className="grid grid-cols-2 gap-4">
+              {legalItems.slice(0, 4).map((item, index) => {
+                const Icon = item.icon
+                return (
+                  <Link
+                    key={index}
+                    to={item.path}
+                    className="group flex flex-col items-center text-center p-3"
+                  >
+                    {/* Icon */}
+                    <div className="w-12 h-12 border-2 border-[#d9a82e] rounded-full flex items-center justify-center mb-2 group-hover:bg-[#d9a82e] transition-all duration-300">
+                      <Icon className="w-5 h-5 text-[#d9a82e] group-hover:text-white transition-colors duration-300" />
+                    </div>
+                    {/* Title only */}
+                    <h3 className="text-xs font-bold text-[#3d87c8] group-hover:text-[#d9a82e] transition-colors duration-300">
+                      {item.title}
+                    </h3>
+                  </Link>
+                )
+              })}
+            </div>
+          </div>
+
+          {/* Box 2 - Last 4 items */}
+          <div className="bg-white rounded-xl border-2 border-gray-200 p-4">
+            <div className="grid grid-cols-2 gap-4">
+              {legalItems.slice(4, 8).map((item, index) => {
+                const Icon = item.icon
+                return (
+                  <Link
+                    key={index}
+                    to={item.path}
+                    className="group flex flex-col items-center text-center p-3"
+                  >
+                    {/* Icon */}
+                    <div className="w-12 h-12 border-2 border-[#d9a82e] rounded-full flex items-center justify-center mb-2 group-hover:bg-[#d9a82e] transition-all duration-300">
+                      <Icon className="w-5 h-5 text-[#d9a82e] group-hover:text-white transition-colors duration-300" />
+                    </div>
+                    {/* Title only */}
+                    <h3 className="text-xs font-bold text-[#3d87c8] group-hover:text-[#d9a82e] transition-colors duration-300">
+                      {item.title}
+                    </h3>
+                  </Link>
+                )
+              })}
+            </div>
+          </div>
+        </div>
+
+        {/* Desktop/Tablet Layout - Original grid */}
+        <div className="hidden sm:grid grid-cols-2 lg:grid-cols-4 gap-6">
           {legalItems.map((item, index) => {
             const Icon = item.icon
             return (
               <Link
                 key={index}
                 to={item.path}
-                className="group bg-white rounded-xl p-6 border-2 border-gray-100 hover:border-[#e2edf4] transition-all duration-300 hover:shadow-lg hover:shadow-blue-100/50 hover:-translate-y-1"
+                className="group bg-white rounded-xl p-6 transition-all duration-300  text-center"
               >
                 {/* Icon */}
-                <div className="w-14 h-14 bg-[#e2edf4] rounded-lg flex items-center justify-center mb-4 group-hover:bg-blue-500 transition-colors duration-300">
-                  <Icon className="w-7 h-7 text-gray-700 group-hover:text-white transition-colors duration-300" />
+                <div className="w-16 h-16 border-2 border-[#d9a82e] rounded-full flex items-center justify-center mb-4 mx-auto group-hover:bg-[#d9a82e] transition-all duration-300">
+                  <Icon className="w-7 h-7 text-[#d9a82e] group-hover:text-white transition-colors duration-300" />
                 </div>
 
                 {/* Title */}
-                <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-300">
+                <h3 className="text-lg font-bold text-[#3d87c8] mb-2 group-hover:text-[#d9a82e] transition-colors duration-300">
                   {item.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-sm text-gray-600 leading-relaxed">
+                <p className="text-sm text-gray-600 leading-relaxed ">
                   {item.description}
                 </p>
-
-                {/* Arrow Icon */}
-                <div className="mt-4 flex items-center text-sm font-semibold text-gray-700 group-hover:text-blue-600 transition-colors duration-300">
-                  <span>Learn more</span>
-                  <svg 
-                    className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </div>
               </Link>
             )
           })}

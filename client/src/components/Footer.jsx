@@ -220,60 +220,98 @@ const Footer = ({ className = "" }) => {
               </div>
 
               {/* Right Section - Newsletter & App Download */}
-              <div className="flex flex-col">
-                 <div className="flex items-center justify-center mb-8 pb-6 border-b-2 border-white/30">
-              <div className="flex-shrink-0">
-                <img src="/white (2).png" alt="Baytal-Protein Logo" className="w-40 lg:w-48 filter drop-shadow-lg justify-center" />
-              </div>
-              
-            </div>
-                <h3 className="text-xl lg:text-2xl font-bold text-white mb-4">Stay in the loop with our weekly newsletter</h3>
+              <div className="grid grid-cols-12 gap-6">
                 
-                {/* Newsletter Form */}
-                <form onSubmit={handleNewsletterSubmit} className="mb-6">
-                  <div className="relative">
-                    <input
-                      type="email"
-                      placeholder="Enter your email"
-                      className="w-full px-4 py-3.5 text-sm bg-white/90 placeholder-gray-500 rounded-lg border-2 border-transparent text-[#2377c1] focus:outline-none focus:border-[#d9a82e] focus:ring-2 focus:ring-[#d9a82e]/50 transition-all duration-300"
-                      value={newsletterEmail}
-                      onChange={handleNewsletterInput}
-                      required
-                    />
-                    <button 
-                      type="submit" 
-                      className="absolute right-2 top-1/2 -translate-y-1/2 bg-[#d9a82e] hover:bg-[#d9a82e]/90 text-white rounded-md px-5 py-2 text-sm font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
-                    >
-                      →
-                    </button>
+                {/* Left Side - Payment Methods (3 columns) */}
+                <div className="col-span-12 lg:col-span-3 flex flex-col justify-start">
+                  <h3 className="text-white text-lg font-bold mb-2 pb-2 border-b-2 border-[#d9a82e]">Payments</h3>
+                  <div className="flex flex-col gap-2 mt-3">
+                    {/* Mastercard */}
+                    <div className="flex justify-center items-center bg-white rounded-lg p-3 hover:shadow-md transition-shadow">
+                      <div className="flex flex-col items-center gap-1">
+                        <div className="flex items-center">
+                          <div className="w-7 h-7 rounded-full bg-red-500"></div>
+                          <div className="w-7 h-7 rounded-full bg-orange-400 -ml-4"></div>
+                        </div>
+                        <span className="text-gray-800 font-semibold text-sm">mastercard</span>
+                      </div>
+                    </div>
+                    
+                    {/* VISA */}
+                    <div className="flex justify-center items-center bg-white rounded-lg p-3 hover:shadow-md transition-shadow">
+                      <span className="text-blue-600 font-bold text-2xl italic" style={{ fontFamily: 'serif' }}>VISA</span>
+                    </div>
+                    
+                    {/* Tamara */}
+                    <div className="flex justify-center items-center bg-white rounded-lg p-3 hover:shadow-md transition-shadow">
+                      <div className="bg-gradient-to-r from-amber-100 to-amber-200 px-4 py-1.5 rounded-full">
+                        <span className="text-gray-800 font-semibold text-base">tamara</span>
+                      </div>
+                    </div>
+                    
+                    {/* Tabby */}
+                    <div className="flex justify-center items-center bg-white rounded-lg p-3 hover:shadow-md transition-shadow">
+                      <span className="text-cyan-400 font-bold text-xl tracking-wide" style={{ fontFamily: 'sans-serif' }}>tabby</span>
+                    </div>
+                    
+                    {/* COD */}
+                    <div className="flex justify-center items-center bg-white rounded-lg p-3 hover:shadow-md transition-shadow">
+                      <span className="text-gray-900 font-bold text-xl">COD</span>
+                    </div>
                   </div>
-                </form>
-
-                {/* App Download Buttons */}
-                <div className="flex gap-3 justify-center mb-4">
-                  <img 
-                    src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" 
-                    alt="Download on App Store" 
-                    className="h-11 rounded-lg hover:scale-105 transition-transform duration-300 cursor-pointer"
-                  />
-                  <img 
-                    src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" 
-                    alt="Get it on Google Play" 
-                    className="h-11 rounded-lg hover:scale-105 transition-transform duration-300 cursor-pointer"
-                  />
                 </div>
 
-                {showNewsletterModal && (
-                  <NewsletterModal
-                    email={newsletterEmail}
-                    onClose={() => setShowNewsletterModal(false)}
-                  />
-                )}
-                
+                {/* Right Side - Logo, Newsletter, App Download (9 columns) */}
+                <div className="col-span-12 lg:col-span-9">
+                  <div className="flex items-center justify-center mb-8 pb-6 border-b-2 border-white/30">
+                    <div className="flex-shrink-0">
+                      <img src="/white (2).png" alt="Baytal-Protein Logo" className="w-40 lg:w-48 filter drop-shadow-lg justify-center" />
+                    </div>
+                  </div>
+                  
+                  <h3 className="text-xl lg:text-4xl text-center font-bold text-white mb-4">Stay in the loop with our weekly newsletter</h3>
+                  
+                  {/* Newsletter Form */}
+                  <form onSubmit={handleNewsletterSubmit} className="mb-6 mx-9">
+                    <div className="relative">
+                      <input
+                        type="email"
+                        placeholder="Enter your email"
+                        className="w-full px-4 py-3.5 text-sm bg-white/90 placeholder-gray-500 rounded-lg border-2 border-transparent text-[#2377c1] focus:outline-none focus:border-[#d9a82e] focus:ring-2 focus:ring-[#d9a82e]/50 transition-all duration-300"
+                        value={newsletterEmail}
+                        onChange={handleNewsletterInput}
+                        required
+                      />
+                      <button 
+                        type="submit" 
+                        className="absolute right-2 top-1/2 -translate-y-1/2 bg-[#d9a82e] hover:bg-[#d9a82e]/90 text-white rounded-md px-5 py-2 text-sm font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
+                      >
+                        →
+                      </button>
+                    </div>
+                  </form>
 
-                 <div className="flex-1 mt-5 flex justify-center">
-                <img src="/1.svg" alt="Payment Methods" className="h-8 lg:h-10 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity duration-300" />
-              </div>
+                  {/* App Download Buttons */}
+                  <div className="flex gap-3 justify-center mb-4">
+                    <img 
+                      src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" 
+                      alt="Download on App Store" 
+                      className="h-11 rounded-lg hover:scale-105 transition-transform duration-300 cursor-pointer"
+                    />
+                    <img 
+                      src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" 
+                      alt="Get it on Google Play" 
+                      className="h-11 rounded-lg hover:scale-105 transition-transform duration-300 cursor-pointer"
+                    />
+                  </div>
+
+                  {showNewsletterModal && (
+                    <NewsletterModal
+                      email={newsletterEmail}
+                      onClose={() => setShowNewsletterModal(false)}
+                    />
+                  )}
+                </div>
 
               </div>
               
@@ -312,163 +350,147 @@ const Footer = ({ className = "" }) => {
 
       {/* Mobile Footer - Only visible on mobile */}
       <footer className="md:hidden bg-[#2377c1]">
-        {/* Legal Section */}
-        <div className="border-b border-white/30">
-          <button
-            onClick={() => toggleSection("legal")}
-            className="w-full flex justify-between items-center p-4 text-left"
-          >
-            <span className="text-base font-bold text-white">Support</span>
-            <div className={`transform transition-transform duration-300 ${openSections.legal ? 'rotate-180' : ''}`}>
-              {openSections.legal ? 
-                <Minus size={20} className="text-white" /> : 
-                <Plus size={20} className="text-white" />
-              }
-            </div>
-          </button>
-          {openSections.legal && (
-            <div className="px-4 pb-4 animate-fadeIn">
-              <ul className="space-y-3">
-                <li>
-                  <Link to="/about" className="text-white hover:text-[#d9a82e] transition-colors duration-300 text-sm flex items-center group">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#d9a82e] mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                    About Us
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/contact" className="text-white hover:text-[#d9a82e] transition-colors duration-300 text-sm flex items-center group">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#d9a82e] mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                    Contact Us
-                  </Link>
-                </li>
-                <li>
-                  <a href="https://blog.grabatoz.ae/" rel="noopener noreferrer" className="text-white hover:text-[#d9a82e] transition-colors duration-300 text-sm flex items-center group">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#d9a82e] mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                    Blog
-                  </a>
-                </li>
-                <li>
-                  <Link to="/shop" className="text-white hover:text-[#d9a82e] transition-colors duration-300 text-sm flex items-center group">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#d9a82e] mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                    Shop
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/login" className="text-white hover:text-[#d9a82e] transition-colors duration-300 text-sm flex items-center group">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#d9a82e] mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                    Login
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/register" className="text-white hover:text-[#d9a82e] transition-colors duration-300 text-sm flex items-center group">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#d9a82e] mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                    Register
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          )}
+        {/* Support Section - Always Visible */}
+        <div className="px-5 py-5">
+          <h3 className="text-lg font-bold text-white mb-4 text-center">Support</h3>
+          <div className="grid grid-cols-2 gap-2.5">
+            <Link to="/about" className="flex items-center gap-2.5 text-white hover:text-[#d9a82e] transition-all duration-300 text-sm py-3 px-3.5 rounded-lg bg-white/10 border border-white/10 hover:border-[#d9a82e]/50 hover:bg-white/15 hover:shadow-lg">
+              <Building2 size={18} className="flex-shrink-0" />
+              <span className="font-medium">About Us</span>
+            </Link>
+            <Link to="/contact" className="flex items-center gap-2.5 text-white hover:text-[#d9a82e] transition-all duration-300 text-sm py-3 px-3.5 rounded-lg bg-white/10 border border-white/10 hover:border-[#d9a82e]/50 hover:bg-white/15 hover:shadow-lg">
+              <Phone size={18} className="flex-shrink-0" />
+              <span className="font-medium">Contact</span>
+            </Link>
+            <a href="https://blog.grabatoz.ae/" rel="noopener noreferrer" className="flex items-center gap-2.5 text-white hover:text-[#d9a82e] transition-all duration-300 text-sm py-3 px-3.5 rounded-lg bg-white/10 border border-white/10 hover:border-[#d9a82e]/50 hover:bg-white/15 hover:shadow-lg">
+              <BookOpen size={18} className="flex-shrink-0" />
+              <span className="font-medium">Blog</span>
+            </a>
+            <Link to="/shop" className="flex items-center gap-2.5 text-white hover:text-[#d9a82e] transition-all duration-300 text-sm py-3 px-3.5 rounded-lg bg-white/10 border border-white/10 hover:border-[#d9a82e]/50 hover:bg-white/15 hover:shadow-lg">
+              <ShoppingBag size={18} className="flex-shrink-0" />
+              <span className="font-medium">Shop</span>
+            </Link>
+            <Link to="/login" className="flex items-center gap-2.5 text-white hover:text-[#d9a82e] transition-all duration-300 text-sm py-3 px-3.5 rounded-lg bg-white/10 border border-white/10 hover:border-[#d9a82e]/50 hover:bg-white/15 hover:shadow-lg">
+              <LogIn size={18} className="flex-shrink-0" />
+              <span className="font-medium">Login</span>
+            </Link>
+            <Link to="/register" className="flex items-center gap-2.5 text-white hover:text-[#d9a82e] transition-all duration-300 text-sm py-3 px-3.5 rounded-lg bg-white/10 border border-white/10 hover:border-[#d9a82e]/50 hover:bg-white/15 hover:shadow-lg">
+              <UserPlus size={18} className="flex-shrink-0" />
+              <span className="font-medium">Register</span>
+            </Link>
+          </div>
         </div>
 
-        {/* Connect Section */}
-        <div className="border-b border-[#d9a82e]/20">
-          <button
-            onClick={() => toggleSection("connect")}
-            className="w-full flex justify-between items-center p-4 text-left"
-          >
-            <span className="text-base font-bold text-white">Connect</span>
-            <div className={`transform transition-transform duration-300 ${openSections.connect ? 'rotate-180' : ''}`}>
-              {openSections.connect ? 
-                <Minus size={20} className="text-white" /> : 
-                <Plus size={20} className="text-white" />
-              }
-            </div>
-          </button>
-          {openSections.connect && (
-            <div className="px-4 pb-4 animate-fadeIn">
-              <div className="grid grid-cols-4 gap-3">
-                <a
-                  href="https://www.facebook.com/grabatozae/"
-                  className="w-12 h-12 rounded-xl flex items-center justify-center bg-gray-800/50 backdrop-blur-sm border border-gray-700 hover:border-[#d9a82e] transition-all duration-300 hover:scale-110"
-                  aria-label="Facebook"
-                >
-                  <Facebook size={20} className="text-[#e2edf4] hover:text-[#d9a82e]" />
-                </a>
-                <a
-                  href="https://x.com/GrabAtoz"
-                  className="w-12 h-12 rounded-xl flex items-center justify-center bg-[#e2edf4]/10 backdrop-blur-sm border border-[#e2edf4]/20 hover:border-[#d9a82e] transition-all duration-300 hover:scale-110"
-                  aria-label="X (Twitter)"
-                >
-                  <svg viewBox="0 0 24 24" className="w-5 h-5 text-[#e2edf4] fill-current" role="img">
-                    <path d="M18.25 2h3.5l-7.66 8.73L24 22h-6.87l-5.02-6.58L6.3 22H2.8l8.2-9.34L0 2h7.04l4.54 6.02L18.25 2z" />
-                  </svg>
-                </a>
-                <a
-                  href="https://www.instagram.com/grabatoz/"
-                  className="w-12 h-12 rounded-xl flex items-center justify-center bg-[#e2edf4]/10 backdrop-blur-sm border border-[#e2edf4]/20 hover:border-[#d9a82e] transition-all duration-300 hover:scale-110"
-                  aria-label="Instagram"
-                >
-                  <Instagram size={20} className="text-[#e2edf4]" />
-                </a>
-                <a
-                  href="https://www.linkedin.com/company/grabatozae"
-                  className="w-12 h-12 rounded-xl flex items-center justify-center bg-[#e2edf4]/10 backdrop-blur-sm border border-[#e2edf4]/20 hover:border-[#d9a82e] transition-all duration-300 hover:scale-110"
-                  aria-label="LinkedIn"
-                >
-                  <Linkedin size={20} className="text-[#e2edf4]" />
-                </a>
-                <a
-                  href="https://www.pinterest.com/grabatoz/"
-                  className="w-12 h-12 rounded-xl flex items-center justify-center bg-[#e2edf4]/10 backdrop-blur-sm border border-[#e2edf4]/20 hover:border-[#d9a82e] transition-all duration-300 hover:scale-110"
-                  aria-label="Pinterest"
-                >
-                  <FontAwesomeIcon icon={faPinterest} style={{ width: '20px', height: '20px' }} className="text-[#e2edf4]" />
-                </a>
-                <a
-                  href="https://www.tiktok.com/@grabatoz"
-                  className="w-12 h-12 rounded-xl flex items-center justify-center bg-[#e2edf4]/10 backdrop-blur-sm border border-[#e2edf4]/20 hover:border-[#d9a82e] transition-all duration-300 hover:scale-110"
-                  aria-label="TikTok"
-                >
-                  <FontAwesomeIcon icon={faTiktok} style={{ width: '20px', height: '20px' }} className="text-[#e2edf4]" />
-                </a>
-                <a
-                  href="https://www.youtube.com/@grabAtoZ"
-                  className="w-12 h-12 rounded-xl flex items-center justify-center bg-[#e2edf4]/10 backdrop-blur-sm border border-[#e2edf4]/20 hover:border-[#d9a82e] transition-all duration-300 hover:scale-110"
-                  aria-label="YouTube"
-                >
-                  <FontAwesomeIcon icon={faYoutube} style={{ width: '20px', height: '20px' }} className="text-[#e2edf4]" />
-                </a>
-              </div>
-            </div>
-          )}
+        {/* Connect Section - Always Visible with Better Layout */}
+        <div className="p-5">
+          <h3 className="text-lg font-bold text-white mb-4 text-center">Connect With Us</h3>
+          <div className="flex justify-center items-center gap-2 flex-wrap max-w-xs mx-auto">
+            <a
+              href="https://www.facebook.com/grabatozae/"
+              className="w-14 h-14 rounded-xl flex items-center justify-center bg-white/10 backdrop-blur-sm border-2 border-white/30 hover:border-[#d9a82e] hover:bg-white/20 transition-all duration-300 hover:scale-110 hover:shadow-lg"
+              aria-label="Facebook"
+            >
+              <Facebook size={24} className="text-white" />
+            </a>
+            <a
+              href="https://x.com/GrabAtoz"
+              className="w-14 h-14 rounded-xl flex items-center justify-center bg-white/10 backdrop-blur-sm border-2 border-white/30 hover:border-[#d9a82e] hover:bg-white/20 transition-all duration-300 hover:scale-110 hover:shadow-lg"
+              aria-label="X (Twitter)"
+            >
+              <svg viewBox="0 0 24 24" className="w-6 h-6 text-white fill-current" role="img">
+                <path d="M18.25 2h3.5l-7.66 8.73L24 22h-6.87l-5.02-6.58L6.3 22H2.8l8.2-9.34L0 2h7.04l4.54 6.02L18.25 2z" />
+              </svg>
+            </a>
+            <a
+              href="https://www.instagram.com/grabatoz/"
+              className="w-14 h-14 rounded-xl flex items-center justify-center bg-white/10 backdrop-blur-sm border-2 border-white/30 hover:border-[#d9a82e] hover:bg-white/20 transition-all duration-300 hover:scale-110 hover:shadow-lg"
+              aria-label="Instagram"
+            >
+              <Instagram size={24} className="text-white" />
+            </a>
+            <a
+              href="https://www.linkedin.com/company/grabatozae"
+              className="w-14 h-14 rounded-xl flex items-center justify-center bg-white/10 backdrop-blur-sm border-2 border-white/30 hover:border-[#d9a82e] hover:bg-white/20 transition-all duration-300 hover:scale-110 hover:shadow-lg"
+              aria-label="LinkedIn"
+            >
+              <Linkedin size={24} className="text-white" />
+            </a>
+            <a
+              href="https://www.pinterest.com/grabatoz/"
+              className="w-14 h-14 rounded-xl flex items-center justify-center bg-white/10 backdrop-blur-sm border-2 border-white/30 hover:border-[#d9a82e] hover:bg-white/20 transition-all duration-300 hover:scale-110 hover:shadow-lg"
+              aria-label="Pinterest"
+            >
+              <FontAwesomeIcon icon={faPinterest} style={{ width: '24px', height: '24px' }} className="text-white" />
+            </a>
+            <a
+              href="https://www.tiktok.com/@grabatoz"
+              className="w-14 h-14 rounded-xl flex items-center justify-center bg-white/10 backdrop-blur-sm border-2 border-white/30 hover:border-[#d9a82e] hover:bg-white/20 transition-all duration-300 hover:scale-110 hover:shadow-lg"
+              aria-label="TikTok"
+            >
+              <FontAwesomeIcon icon={faTiktok} style={{ width: '24px', height: '24px' }} className="text-white" />
+            </a>
+            <a
+              href="https://www.youtube.com/@grabAtoZ"
+              className="w-14 h-14 rounded-xl flex items-center justify-center bg-white/10 backdrop-blur-sm border-2 border-white/30 hover:border-[#d9a82e] hover:bg-white/20 transition-all duration-300 hover:scale-110 hover:shadow-lg"
+              aria-label="YouTube"
+            >
+              <FontAwesomeIcon icon={faYoutube} style={{ width: '24px', height: '24px' }} className="text-white" />
+            </a>
+          </div>
         </div>
 
-        {/* Shop On The Go Section - Always Visible with Modern Design */}
-        <div className="bg-[#2377c1] text-white p-6 relative overflow-hidden border-t-2 border-white/30">
+        {/* Shop On The Go Section - Redesigned */}
+        <div className="bg-[#2377c1] text-white p-6 relative overflow-hidden">
           {/* Decorative background */}
-          <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0 opacity-10">
             <div className="absolute top-0 right-0 w-48 h-48 bg-[#d9a82e] rounded-full filter blur-3xl"></div>
+            <div className="absolute bottom-0 left-0 w-48 h-48 bg-[#e2edf4] rounded-full filter blur-3xl"></div>
           </div>
 
-          <div className="relative z-10">
-            <h3 className="text-xl font-bold text-center mb-4 text-white">Shop On The Go</h3>
-            
-            <div className="flex justify-center mb-6">
-              <img src="/google_play.png" alt="Google Play" className="h-10 rounded-lg hover:scale-105 transition-transform duration-300 cursor-pointer" />
+          <div className="relative z-10 space-y-6">
+            {/* App Download Section */}
+            <div className="text-center">
+              <h3 className="text-xl font-bold mb-4 text-white">Download Our App</h3>
+              <div className="flex gap-3 justify-center">
+                <img 
+                  src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" 
+                  alt="Download on App Store" 
+                  className="h-11 rounded-lg hover:scale-105 transition-transform duration-300 cursor-pointer shadow-lg"
+                />
+                <img 
+                  src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" 
+                  alt="Get it on Google Play" 
+                  className="h-11 rounded-lg hover:scale-105 transition-transform duration-300 cursor-pointer shadow-lg" 
+                />
+              </div>
             </div>
 
-            {/* Payment Methods */}
-            <div className="flex justify-center mb-6">
-              <img src="/1.svg" alt="Payment Methods" className="h-10 w-auto opacity-80" />
+            {/* Payment Methods Section */}
+            <div className="text-center ">
+              <h3 className="text-lg font-bold mb-4 text-white">We Accept</h3>
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+                <img 
+                  src="/1.svg" 
+                  alt="Payment Methods" 
+                  className="h-10 w-auto mx-auto opacity-95 hover:opacity-100 transition-all duration-300 hover:scale-105" 
+                />
+              </div>
             </div>
 
-            {/* Copyright with Modern Design */}
-            <div className="text-center text-sm space-y-2">
-              <p className="text-white">
-                © 2025 <span className="text-[#d9a82e] font-semibold">Baytal-Protien</span> | Powered by <span className="text-white">Crown Excel</span>
+            {/* Copyright Section */}
+            <div className="text-center text-xs space-y-2 pt-6">
+              {/* <p className="text-white/90">
+                © 2025 <span className="text-[#d9a82e] font-bold">Baytal-Protien</span>
+              </p> */}
+              <p className="text-white/80">
+                Powered by <span className="text-white font-semibold">Crown Excel</span>
               </p>
-              <p className="text-white">
-                Developed By <span className="text-[#d9a82e] font-semibold"><a href="https://techsolutionor.com" target="_blank" rel="noopener noreferrer">Tech Solutionor</a></span>
+              <p className="text-white/80">
+                Developed By <span className="text-[#d9a82e] font-semibold">
+                  <a href="https://techsolutionor.com" target="_blank" rel="noopener noreferrer" className="hover:underline">
+                    Tech Solutionor
+                  </a>
+                </span>
               </p>
             </div>
           </div>

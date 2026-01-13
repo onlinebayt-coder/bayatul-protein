@@ -1,17 +1,17 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
-import { ChevronDown, ChevronLeft, ChevronRight, Minus, Plus, X } from "lucide-react"
+import { ChevronDown, ChevronLeft, ChevronRight, Minus, Plus, X, Heart } from "lucide-react"
 import axios from "axios"
-import { useNavigate, useLocation, useParams } from "react-router-dom"
+import { useNavigate, useLocation, useParams, Link } from "react-router-dom"
 import { useCart } from "../context/CartContext"
-import HomeStyleProductCard from "../components/HomeStyleProductCard"
+import { useWishlist } from "../context/WishlistContext"
 import ProductSchema from "../components/ProductSchema"
 import SEO from "../components/SEO"
 import productCache from "../services/productCache"
 import { generateShopURL, parseShopURL, createSlug } from "../utils/urlUtils"
 import { createMetaDescription, generateSEOTitle } from "../utils/seoHelpers"
-import { getFullImageUrl } from "../utils/imageUtils"
+import { getFullImageUrl, getImageUrl } from "../utils/imageUtils"
 
 import config from "../config/config"
 import "rc-slider/assets/index.css"
@@ -28,6 +28,163 @@ if (typeof document !== "undefined" && !document.getElementById("bounce-keyframe
   style.id = "bounce-keyframes"
   style.innerHTML = bounceKeyframes
   document.head.appendChild(style)
+}
+
+// Status badge color helper (consistent with RandomProducts)
+const getStatusColor = (status) => {
+  const statusLower = (status || "").toLowerCase()
+  if (statusLower.includes("available")) return "bg-green-600"
+  if (statusLower.includes("out of stock") || statusLower.includes("outofstock")) return "bg-red-600"
+  if (statusLower.includes("pre-order") || statusLower.includes("preorder")) return "bg-blue-600"
+  if (statusLower.includes("limited") || statusLower.includes("low stock")) return "bg-yellow-500"
+  return "bg-gray-600"
+}
+
+// Render price with mobile-only hidden .00
+const PriceText = ({ value }) => {
+  const num = Number(value || 0)
+  const fixed = num.toFixed(2)
+  const [intPart, decPart] = fixed.split(".")
+  const showDecimalOnMobile = decPart !== "00"
+  return (
+    <>
+      Rs. {intPart}
+      <span className={showDecimalOnMobile ? "" : "hidden md:inline"}>.{decPart}</span> AED
+    </>
+  )
+}
+
+const getPriceInfo = (p) => {
+  const price = Number(p?.price) || 0
+  const offer = Number(p?.offerPrice) || 0
+  const hasDiscount = offer > 0 && offer < price
+  const current = hasDiscount ? offer : price
+  const old = hasDiscount ? price : 0
+  return { current, old, hasDiscount }
+}
+
+const ProductCard = ({ product }) => {
+  const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist()
+  const [isWishlisted, setIsWishlisted] = useState(false)
+  const href = product?.slug || product?._id ? `/product/${product.slug || product._id}` : "#"
+
+  useEffect(() => {
+    setIsWishlisted(isInWishlist(product._id))
+  }, [isInWishlist, product._id])
+
+  const handleWishlistToggle = (e) => {
+    e.preventDefault()
+    if (isWishlisted) {
+      removeFromWishlist(product._id)
+    } else {
+      addToWishlist(product)
+    }
+    setIsWishlisted(!isWishlisted)
+  }
+
+  // Prices
+  const { current, old, hasDiscount } = getPriceInfo(product)
+
+  // Rating data
+  const rating = Number(product?.averageRating ?? product?.rating ?? 0) || 0
+  const reviewCount = Number(product?.reviewCount ?? product?.numReviews ?? 0) || 0
+
+  // Badge data
+  const discount = product.discount && Number(product.discount) > 0 ? `${product.discount}% Off` : null
+  const stockStatus = product.stockStatus || (product.countInStock > 0 ? "Available" : "Out of Stock")
+
+  const Star = ({ filled }) => (
+    <svg
+      viewBox="0 0 20 20"
+      className={`w-3.5 h-3.5 ${filled ? "fill-yellow-400" : "fill-gray-300"}`}
+      aria-hidden="true"
+    >
+      <path d="M10 15.27 16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z" />
+    </svg>
+  )
+
+  return (
+    <article className="group text-left md:text-center">
+      <Link to={href} className="block">
+        <div className="relative flex items-center justify-center bg-white">
+          <div className="aspect-[4/3] w-full max-w-[260px] mx-auto flex items-center justify-center">
+            <img
+              src={
+                getImageUrl(product) ||
+                "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Crect width='120' height='120' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='14' fill='%239ca3af'%3ENo Image%3C/text%3E%3C/svg%3E"
+              }
+              alt={product?.name || "Product"}
+              className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-[1.03]"
+              loading="lazy"
+              onError={(e) => {
+                e.currentTarget.src =
+                  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Crect width='120' height='120' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='14' fill='%239ca3af'%3ENo Image%3C/text%3E%3C/svg%3E"
+              }}
+            />
+          </div>
+
+          {/* Status + discount badges */}
+          <div className="absolute left-3 top-3 flex flex-col gap-1">
+            <div
+              className={`${getStatusColor(
+                stockStatus,
+              )} text-white px-1.5 py-0.5 rounded text-[10px] font-medium shadow-sm`}
+            >
+              {stockStatus.replace("Available Product", "Available")}
+            </div>
+            {discount && (
+              <div className="bg-[#d9a82e] text-white px-1.5 py-0.5 rounded text-[10px] font-semibold shadow-sm">
+                {discount}
+              </div>
+            )}
+          </div>
+
+          {/* Wishlist Icon */}
+          <button
+            onClick={handleWishlistToggle}
+            className="absolute right-3 top-3 w-8 h-8 rounded-full bg-white flex items-center justify-center hover:bg-gray-50 transition-all z-10"
+            aria-label={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
+          >
+            <Heart
+              size={18}
+              className={`transition-colors ${
+                isWishlisted ? "fill-red-500 text-red-500" : "text-gray-600"
+              }`}
+            />
+          </button>
+        </div>
+      </Link>
+
+      {/* Reviews row above product name */}
+      <div className="mt-2 px-4 md:px-10 flex items-center justify-start md:justify-center gap-1">
+        {Array.from({ length: 5 }).map((_, i) => (
+          <Star key={i} filled={i < Math.round(rating)} />
+        ))}
+        <span className="ml-1 text-xs text-gray-600">({reviewCount})</span>
+      </div>
+
+      <div className="mt-2 text-[13px] md:px-10 md:text-sm font-semibold text-black leading-snug line-clamp-2 min-h-[40px] text-left md:text-center">
+        {product?.name || "Product"}
+      </div>
+
+      {/* Price row: current + crossed old price if discounted */}
+      <div className="mt-1 text-[13px] flex items-center justify-start md:justify-center gap-2">
+        <span className="text-red-600 font-semibold whitespace-nowrap"><PriceText value={current} /></span>
+        {hasDiscount && (
+          <span className="text-gray-500 line-through whitespace-nowrap"><PriceText value={old} /></span>
+        )}
+      </div>
+
+      <div className="mt-4 flex justify-start md:justify-center">
+        <Link
+          to={href}
+          className="inline-flex items-center justify-center rounded-full bg-[#e2edf4] text-black px-6 py-2 md:px-7 md:py-2.5 text-sm font-semibold shadow-sm hover:brightness-95 transition"
+        >
+          Choose options
+        </Link>
+      </div>
+    </article>
+  )
 }
 
 // Right-anchored custom dropdown to avoid right overflow
@@ -68,7 +225,7 @@ const SortDropdown = ({ value, onChange }) => {
       <button
         type="button"
         onClick={() => setOpen((s) => !s)}
-        className="px-4 py-2 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-green-500 flex items-center gap-2"
+        className="px-4 py-2 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#d9a82e] focus:border-[#d9a82e] flex items-center gap-2"
         aria-haspopup="listbox"
         aria-expanded={open}
       >
@@ -154,10 +311,10 @@ const PriceFilter = ({ min, max, onApply, initialRange }) => {
         max={max}
         value={range}
         onChange={handleSliderChange}
-        trackStyle={[{ backgroundColor: "#84cc16" }]}
+        trackStyle={[{ backgroundColor: "#2377c1" }]}
         handleStyle={[
-          { backgroundColor: "#84cc16", borderColor: "#84cc16" },
-          { backgroundColor: "#84cc16", borderColor: "#84cc16" },
+          { backgroundColor: "#2377c1", borderColor: "#2377c1" },
+          { backgroundColor: "#2377c1", borderColor: "#2377c1" },
         ]}
         railStyle={{ backgroundColor: "#e5e7eb" }}
       />
@@ -168,7 +325,7 @@ const PriceFilter = ({ min, max, onApply, initialRange }) => {
       <div className="flex gap-2 mb-4">
         <input
           type="number"
-          className="w-1/2 border rounded px-2 py-1 text-center focus:border-lime-500 focus:ring-lime-500"
+          className="w-1/2 border rounded px-2 py-1 text-center focus:border-[#2377c1] focus:ring-[#2377c1]"
           value={inputMin}
           min={min}
           max={inputMax}
@@ -182,7 +339,7 @@ const PriceFilter = ({ min, max, onApply, initialRange }) => {
         />
         <input
           type="number"
-          className="w-1/2 border rounded px-2 py-1 text-center focus:border-lime-500 focus:ring-lime-500"
+          className="w-1/2 border rounded px-2 py-1 text-center focus:border-[#2377c1] focus:ring-[#2377c1]"
           value={inputMax}
           min={inputMin}
           max={max}
@@ -197,7 +354,7 @@ const PriceFilter = ({ min, max, onApply, initialRange }) => {
       </div>
       <button
         type="button"
-        className="w-full bg-white border border-lime-500 text-lime-600 rounded py-2 font-semibold hover:bg-lime-50 hover:text-lime-700 hover:border-lime-600 transition"
+        className="w-full bg-white border border-[#2377c1] text-[#2377c1] rounded py-2 font-semibold hover:bg-[#e2edf4] hover:text-[#1a5a8f] hover:border-[#1a5a8f] transition"
         onClick={handleApply}
       >
         Apply
@@ -1334,7 +1491,7 @@ const Shop = () => {
                 stockFilters.onSale ||
                 priceRange[0] !== minPrice || 
                 priceRange[1] !== maxPrice) && (
-                <div className="border border-lime-200 rounded-lg p-4 bg-lime-50">
+                <div className="border border-[#2377c1] rounded-lg p-4 bg-[#e2edf4]">
                   <div className="flex items-center justify-between mb-3">
                     <h3 className="text-sm font-semibold text-gray-900">Active Filters</h3>
                     <button
@@ -1501,7 +1658,7 @@ const Shop = () => {
                   onClick={() => setShowPriceFilter(!showPriceFilter)}
                   className={`flex items-center justify-between w-full text-left font-medium ${
                     priceRange[0] !== minPrice || priceRange[1] !== maxPrice
-                      ? "text-lime-500"
+                      ? "text-[#2377c1]"
                       : "text-gray-900"
                   }`}
                 >
@@ -1526,7 +1683,7 @@ const Shop = () => {
                   onClick={() => setShowCategoryFilter(!showCategoryFilter)}
                   className={`flex items-center justify-between w-full text-left font-medium ${
                     selectedCategory !== "all" || selectedSubCategories.length > 0 || selectedSubCategory2 || selectedSubCategory3 || selectedSubCategory4
-                      ? "text-lime-500"
+                      ? "text-[#2377c1]"
                       : "text-gray-900"
                   }`}
                 >
@@ -1546,7 +1703,7 @@ const Shop = () => {
                         />
                         <div
                           className={`w-4 h-4 rounded-full border-2 flex items-center justify-center mr-2 ${
-                            selectedCategory === "all" ? "border-lime-600 bg-lime-600" : "border-gray-300"
+                            selectedCategory === "all" ? "border-[#2377c1] bg-[#2377c1]" : "border-gray-300"
                           }`}
                         >
                           {selectedCategory === "all" && <div className="w-2 h-2 rounded-full bg-white"></div>}
@@ -1578,13 +1735,13 @@ const Shop = () => {
                                 />
                                 <div
                                   className={`w-4 h-4 rounded-full border-2 flex items-center justify-center mr-2 ${
-                                    isSelected ? "border-lime-600 bg-lime-600" : "border-gray-300"
+                                    isSelected ? "border-[#2377c1] bg-[#2377c1]" : "border-gray-300"
                                   }`}
                                 >
                                   {isSelected && <div className="w-2 h-2 rounded-full bg-white"></div>}
                                 </div>
                               </div>
-                              <span className={`text-sm ${isSelected ? "text-lime-600 font-semibold" : "text-gray-700"}`}>
+                              <span className={`text-sm ${isSelected ? "text-[#2377c1] font-semibold" : "text-gray-700"}`}>
                                 {category.name}
                               </span>
                             </div>
@@ -1623,13 +1780,13 @@ const Shop = () => {
                                       />
                                       <div
                                         className={`w-4 h-4 rounded-full border-2 flex items-center justify-center mr-2 ${
-                                          isLevel1Selected ? "border-lime-600 bg-lime-600" : "border-gray-300"
+                                          isLevel1Selected ? "border-[#2377c1] bg-[#2377c1]" : "border-gray-300"
                                         }`}
                                       >
                                         {isLevel1Selected && <div className="w-2 h-2 rounded-full bg-white"></div>}
                                       </div>
                                     </div>
-                                    <span className={`text-sm ${isLevel1Selected ? "text-lime-600 font-semibold" : "text-gray-600"}`}>
+                                    <span className={`text-sm ${isLevel1Selected ? "text-[#2377c1] font-semibold" : "text-gray-600"}`}>
                                       {level1.name}
                                     </span>
                                   </div>
@@ -1668,13 +1825,13 @@ const Shop = () => {
                                             />
                                             <div
                                               className={`w-4 h-4 rounded-full border-2 flex items-center justify-center mr-2 ${
-                                                isLevel2Selected ? "border-lime-600 bg-lime-600" : "border-gray-300"
+                                                isLevel2Selected ? "border-[#2377c1] bg-[#2377c1]" : "border-gray-300"
                                               }`}
                                             >
                                               {isLevel2Selected && <div className="w-2 h-2 rounded-full bg-white"></div>}
                                             </div>
                                           </div>
-                                          <span className={`text-sm ${isLevel2Selected ? "text-lime-600 font-semibold" : "text-gray-600"}`}>
+                                          <span className={`text-sm ${isLevel2Selected ? "text-[#2377c1] font-semibold" : "text-gray-600"}`}>
                                             {level2.name}
                                           </span>
                                         </div>
@@ -1713,13 +1870,13 @@ const Shop = () => {
                                                   />
                                                   <div
                                                     className={`w-4 h-4 rounded-full border-2 flex items-center justify-center mr-2 ${
-                                                      isLevel3Selected ? "border-lime-600 bg-lime-600" : "border-gray-300"
+                                                      isLevel3Selected ? "border-[#2377c1] bg-[#2377c1]" : "border-gray-300"
                                                     }`}
                                                   >
                                                     {isLevel3Selected && <div className="w-2 h-2 rounded-full bg-white"></div>}
                                                   </div>
                                                 </div>
-                                                <span className={`text-sm ${isLevel3Selected ? "text-lime-600 font-semibold" : "text-gray-600"}`}>
+                                                <span className={`text-sm ${isLevel3Selected ? "text-[#2377c1] font-semibold" : "text-gray-600"}`}>
                                                   {level3.name}
                                                 </span>
                                               </div>
@@ -1755,13 +1912,13 @@ const Shop = () => {
                                                         />
                                                         <div
                                                           className={`w-4 h-4 rounded-full border-2 flex items-center justify-center mr-2 ${
-                                                            isLevel4Selected ? "border-lime-600 bg-lime-600" : "border-gray-300"
+                                                            isLevel4Selected ? "border-[#2377c1] bg-[#2377c1]" : "border-gray-300"
                                                           }`}
                                                         >
                                                           {isLevel4Selected && <div className="w-2 h-2 rounded-full bg-white"></div>}
                                                         </div>
                                                       </div>
-                                                      <span className={`text-sm ${isLevel4Selected ? "text-lime-600 font-semibold" : "text-gray-600"}`}>
+                                                      <span className={`text-sm ${isLevel4Selected ? "text-[#2377c1] font-semibold" : "text-gray-600"}`}>
                                                         {level4.name}
                                                       </span>
                                                     </div>
@@ -1790,13 +1947,13 @@ const Shop = () => {
                 <button
                   onClick={() => setShowBrandFilter(!showBrandFilter)}
                   className={`flex items-center justify-between w-full text-left font-medium ${
-                    selectedBrands.length > 0 ? "text-lime-500" : "text-gray-900"
+                    selectedBrands.length > 0 ? "text-[#2377c1]" : "text-gray-900"
                   }`}
                 >
                   <span className="flex items-center gap-2">
                     Brands
                     {selectedBrands.length > 0 && (
-                      <span className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-lime-500 rounded-full">
+                      <span className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-[#d9a82e] rounded-full">
                         {selectedBrands.length}
                       </span>
                     )}
@@ -1810,7 +1967,7 @@ const Shop = () => {
                       placeholder="Search brands..."
                       value={brandSearch}
                       onChange={(e) => setBrandSearch(e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-lime-500 focus:border-lime-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#2377c1] focus:border-[#2377c1]"
                     />
                     <div className="space-y-2 max-h-64 overflow-y-auto">
                       {filteredBrands.map((brand) => (
@@ -1820,7 +1977,7 @@ const Shop = () => {
                             id={`brand-mobile-${brand._id}`}
                             checked={selectedBrands.includes(brand._id)}
                             onChange={() => handleBrandChange(brand._id)}
-                            className="w-4 h-4 text-lime-600 border-gray-300 rounded focus:ring-lime-500"
+                            className="w-4 h-4 text-[#2377c1] border-gray-300 rounded focus:ring-[#2377c1]"
                           />
                           <label htmlFor={`brand-mobile-${brand._id}`} className="ml-2 text-sm text-gray-700 cursor-pointer">
                             {brand.name}
@@ -1839,7 +1996,7 @@ const Shop = () => {
               <div className="border-b pb-4">
                 <div className={`font-medium mb-4 ${
                   stockFilters.inStock || stockFilters.outOfStock || stockFilters.onSale
-                    ? "text-lime-500"
+                    ? "text-[#2377c1]"
                     : "text-gray-900"
                 }`}>Stock Status</div>
                 <div className="space-y-2">
@@ -1850,7 +2007,7 @@ const Shop = () => {
                       name="stock-filter-mobile"
                       checked={!stockFilters.inStock && !stockFilters.outOfStock && !stockFilters.onSale}
                       onChange={() => setStockFilters({ inStock: false, outOfStock: false, onSale: false })}
-                      className="w-4 h-4 text-lime-600 border-gray-300 focus:ring-lime-500"
+                      className="w-4 h-4 text-[#2377c1] border-gray-300 focus:ring-[#2377c1]"
                     />
                     <label htmlFor="stock-all-mobile" className="ml-2 text-sm text-gray-700 cursor-pointer">
                       All Products
@@ -1863,7 +2020,7 @@ const Shop = () => {
                       name="stock-filter-mobile"
                       checked={stockFilters.inStock}
                       onChange={() => handleStockFilterChange('inStock')}
-                      className="w-4 h-4 text-lime-600 border-gray-300 focus:ring-lime-500"
+                      className="w-4 h-4 text-[#2377c1] border-gray-300 focus:ring-[#2377c1]"
                     />
                     <label htmlFor="stock-in-mobile" className="ml-2 text-sm text-gray-700 cursor-pointer">
                       In Stock
@@ -1876,7 +2033,7 @@ const Shop = () => {
                       name="stock-filter-mobile"
                       checked={stockFilters.outOfStock}
                       onChange={() => handleStockFilterChange('outOfStock')}
-                      className="w-4 h-4 text-lime-600 border-gray-300 focus:ring-lime-500"
+                      className="w-4 h-4 text-[#2377c1] border-gray-300 focus:ring-[#2377c1]"
                     />
                     <label htmlFor="stock-out-mobile" className="ml-2 text-sm text-gray-700 cursor-pointer">
                       Out of Stock
@@ -1889,7 +2046,7 @@ const Shop = () => {
               <div className="space-y-3 pt-4">
                 <button
                   onClick={() => setIsMobileFilterOpen(false)}
-                  className="w-full px-4 py-3 bg-lime-600 text-white rounded-lg hover:bg-lime-700 transition-colors font-semibold"
+                  className="w-full px-4 py-3 bg-[#2377c1] text-white rounded-lg hover:bg-[#1a5a8f] transition-colors font-semibold"
                 >
                   Show {products.length} Products
                 </button>
@@ -1914,9 +2071,9 @@ const Shop = () => {
             {/* <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 space-y-6 sticky top-8 max-h-[calc(100vh-4rem)] overflow-y-auto scrollbar-hide"> */}
              <div className="bg-white rounded-lg p-6 space-y-6 sticky top-8 max-h-[calc(100vh-4rem)] overflow-y-auto scrollbar-hide">
               {showBreadcrumb && (
-                <div className="bg-lime-50 border border-lime-200 rounded-lg p-4 mb-4">
-                  <p className="text-sm font-semibold text-lime-900">Current Path:</p>
-                  <p className="text-sm text-lime-800 mt-1 break-words">{breadcrumbPath}</p>
+                <div className="bg-[#e2edf4] border border-[#2377c1] rounded-lg p-4 mb-4">
+                  <p className="text-sm font-semibold text-[#2377c1]">Current Path:</p>
+                  <p className="text-sm text-gray-700 mt-1 break-words">{breadcrumbPath}</p>
                 </div>
               )}
 
@@ -1932,7 +2089,7 @@ const Shop = () => {
                 stockFilters.onSale ||
                 priceRange[0] !== minPrice || 
                 priceRange[1] !== maxPrice) && (
-                <div className="border border-lime-200 rounded-lg p-4 bg-lime-50">
+                <div className="border border-[#2377c1] rounded-lg p-4 bg-[#e2edf4]">
                   <div className="flex items-center justify-between mb-3">
                     <h3 className="text-sm font-semibold text-gray-900">Active Filters</h3>
                     <button
@@ -2115,7 +2272,7 @@ const Shop = () => {
                   onClick={() => setShowPriceFilter(!showPriceFilter)}
                   className={`flex items-center justify-between w-full text-left font-medium ${
                     priceRange[0] !== minPrice || priceRange[1] !== maxPrice
-                      ? "text-lime-500"
+                      ? "text-[#2377c1]"
                       : "text-gray-900"
                   }`}
                 >
@@ -2139,7 +2296,7 @@ const Shop = () => {
                   onClick={() => setShowCategoryFilter(!showCategoryFilter)}
                   className={`flex items-center justify-between w-full text-left font-medium ${
                     selectedCategory !== "all" || selectedSubCategories.length > 0 || selectedSubCategory2 || selectedSubCategory3 || selectedSubCategory4
-                      ? "text-lime-500"
+                      ? "text-[#2377c1]"
                       : "text-gray-900"
                   }`}
                 >
@@ -2160,7 +2317,7 @@ const Shop = () => {
                         />
                         <div
                           className={`w-4 h-4 rounded-full border-2 flex items-center justify-center mr-2 ${
-                            selectedCategory === "all" ? "border-lime-600 bg-lime-600" : "border-gray-300"
+                            selectedCategory === "all" ? "border-[#2377c1] bg-[#2377c1]" : "border-gray-300"
                           }`}
                         >
                           {selectedCategory === "all" && <div className="w-2 h-2 rounded-full bg-white"></div>}
@@ -2194,13 +2351,13 @@ const Shop = () => {
                                 />
                                 <div
                                   className={`w-4 h-4 rounded-full border-2 flex items-center justify-center mr-2 ${
-                                    isSelected ? "border-lime-600 bg-lime-600" : "border-gray-300"
+                                    isSelected ? "border-[#2377c1] bg-[#2377c1]" : "border-gray-300"
                                   }`}
                                 >
                                   {isSelected && <div className="w-2 h-2 rounded-full bg-white"></div>}
                                 </div>
                               </div>
-                              <span className={`text-sm ${isSelected ? "text-lime-600 font-semibold" : "text-gray-700"}`}>
+                              <span className={`text-sm ${isSelected ? "text-[#2377c1] font-semibold" : "text-gray-700"}`}>
                                 {category.name}
                               </span>
                             </div>
@@ -2241,13 +2398,13 @@ const Shop = () => {
                                       />
                                       <div
                                         className={`w-4 h-4 rounded-full border-2 flex items-center justify-center mr-2 ${
-                                          isLevel1Selected ? "border-lime-600 bg-lime-600" : "border-gray-300"
+                                          isLevel1Selected ? "border-[#2377c1] bg-[#2377c1]" : "border-gray-300"
                                         }`}
                                       >
                                         {isLevel1Selected && <div className="w-2 h-2 rounded-full bg-white"></div>}
                                       </div>
                                     </div>
-                                    <span className={`text-sm ${isLevel1Selected ? "text-lime-600 font-semibold" : "text-gray-600"}`}>
+                                    <span className={`text-sm ${isLevel1Selected ? "text-[#2377c1] font-semibold" : "text-gray-600"}`}>
                                       {level1.name}
                                     </span>
                                   </div>
@@ -2288,13 +2445,13 @@ const Shop = () => {
                                             />
                                             <div
                                               className={`w-4 h-4 rounded-full border-2 flex items-center justify-center mr-2 ${
-                                                isLevel2Selected ? "border-lime-600 bg-lime-600" : "border-gray-300"
+                                                isLevel2Selected ? "border-[#2377c1] bg-[#2377c1]" : "border-gray-300"
                                               }`}
                                             >
                                               {isLevel2Selected && <div className="w-2 h-2 rounded-full bg-white"></div>}
                                             </div>
                                           </div>
-                                          <span className={`text-sm ${isLevel2Selected ? "text-lime-600 font-semibold" : "text-gray-600"}`}>
+                                          <span className={`text-sm ${isLevel2Selected ? "text-[#2377c1] font-semibold" : "text-gray-600"}`}>
                                             {level2.name}
                                           </span>
                                         </div>
@@ -2335,13 +2492,13 @@ const Shop = () => {
                                                   />
                                                   <div
                                                     className={`w-4 h-4 rounded-full border-2 flex items-center justify-center mr-2 ${
-                                                      isLevel3Selected ? "border-lime-600 bg-lime-600" : "border-gray-300"
+                                                      isLevel3Selected ? "border-[#2377c1] bg-[#2377c1]" : "border-gray-300"
                                                     }`}
                                                   >
                                                     {isLevel3Selected && <div className="w-2 h-2 rounded-full bg-white"></div>}
                                                   </div>
                                                 </div>
-                                                <span className={`text-sm ${isLevel3Selected ? "text-lime-600 font-semibold" : "text-gray-600"}`}>
+                                                <span className={`text-sm ${isLevel3Selected ? "text-[#2377c1] font-semibold" : "text-gray-600"}`}>
                                                   {level3.name}
                                                 </span>
                                               </div>
@@ -2377,13 +2534,13 @@ const Shop = () => {
                                                       />
                                                       <div
                                                         className={`w-4 h-4 rounded-full border-2 flex items-center justify-center mr-2 ${
-                                                          isLevel4Selected ? "border-lime-600 bg-lime-600" : "border-gray-300"
+                                                          isLevel4Selected ? "border-[#2377c1] bg-[#2377c1]" : "border-gray-300"
                                                         }`}
                                                       >
                                                         {isLevel4Selected && <div className="w-2 h-2 rounded-full bg-white"></div>}
                                                       </div>
                                                     </div>
-                                                    <span className={`text-sm ${isLevel4Selected ? "text-lime-600 font-semibold" : "text-gray-600"}`}>
+                                                    <span className={`text-sm ${isLevel4Selected ? "text-[#2377c1] font-semibold" : "text-gray-600"}`}>
                                                       {level4.name}
                                                     </span>
                                                   </div>
@@ -2411,13 +2568,13 @@ const Shop = () => {
                 <button
                   onClick={() => setShowBrandFilter(!showBrandFilter)}
                   className={`flex items-center justify-between w-full text-left font-medium ${
-                    selectedBrands.length > 0 ? "text-lime-500" : "text-gray-900"
+                    selectedBrands.length > 0 ? "text-[#2377c1]" : "text-gray-900"
                   }`}
                 >
                   <span className="flex items-center gap-2">
                     Brands
                     {selectedBrands.length > 0 && (
-                      <span className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-lime-500 rounded-full">
+                      <span className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-[#d9a82e] rounded-full">
                         {selectedBrands.length}
                       </span>
                     )}
@@ -2431,7 +2588,7 @@ const Shop = () => {
                       placeholder="Search brands..."
                       value={brandSearch}
                       onChange={(e) => setBrandSearch(e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-lime-500 focus:border-lime-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#2377c1] focus:border-[#2377c1]"
                     />
                     <div className="space-y-2">
                       {filteredBrands.map((brand) => (
@@ -2441,7 +2598,7 @@ const Shop = () => {
                             id={`brand-${brand._id}`}
                             checked={selectedBrands.includes(brand._id)}
                             onChange={() => handleBrandChange(brand._id)}
-                            className="w-4 h-4 text-lime-600 border-gray-300 rounded focus:ring-lime-500"
+                            className="w-4 h-4 text-[#2377c1] border-gray-300 rounded focus:ring-[#2377c1]"
                           />
                           <label htmlFor={`brand-${brand._id}`} className="ml-2 text-sm text-gray-700 cursor-pointer">
                             {brand.name}
@@ -2460,7 +2617,7 @@ const Shop = () => {
               <div className="border-b pb-4">
                 <div className={`font-medium mb-4 ${
                   stockFilters.inStock || stockFilters.outOfStock || stockFilters.onSale
-                    ? "text-lime-500"
+                    ? "text-[#2377c1]"
                     : "text-gray-900"
                 }`}>Stock Status</div>
                 <div className="space-y-2">
@@ -2471,7 +2628,7 @@ const Shop = () => {
                       name="stock-filter"
                       checked={!stockFilters.inStock && !stockFilters.outOfStock && !stockFilters.onSale}
                       onChange={() => setStockFilters({ inStock: false, outOfStock: false, onSale: false })}
-                      className="w-4 h-4 text-lime-600 border-gray-300 focus:ring-lime-500"
+                      className="w-4 h-4 text-[#2377c1] border-gray-300 focus:ring-[#2377c1]"
                     />
                     <label htmlFor="stock-all" className="ml-2 text-sm text-gray-700 cursor-pointer">
                       All Products
@@ -2484,7 +2641,7 @@ const Shop = () => {
                       name="stock-filter"
                       checked={stockFilters.inStock}
                       onChange={() => handleStockFilterChange('inStock')}
-                      className="w-4 h-4 text-lime-600 border-gray-300 focus:ring-lime-500"
+                      className="w-4 h-4 text-[#2377c1] border-gray-300 focus:ring-[#2377c1]"
                     />
                     <label htmlFor="stock-in" className="ml-2 text-sm text-gray-700 cursor-pointer">
                       In Stock
@@ -2497,7 +2654,7 @@ const Shop = () => {
                       name="stock-filter"
                       checked={stockFilters.outOfStock}
                       onChange={() => handleStockFilterChange('outOfStock')}
-                      className="w-4 h-4 text-lime-600 border-gray-300 focus:ring-lime-500"
+                      className="w-4 h-4 text-[#2377c1] border-gray-300 focus:ring-[#2377c1]"
                     />
                     <label htmlFor="stock-out" className="ml-2 text-sm text-gray-700 cursor-pointer">
                       Out of Stock
@@ -2523,7 +2680,7 @@ const Shop = () => {
             <div className="md:hidden mb-4 flex gap-2">
               <button
                 onClick={() => setIsMobileFilterOpen(true)}
-                className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-lime-600 text-white rounded-lg hover:bg-lime-700 transition-colors font-semibold shadow-md"
+                className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-[#2377c1] text-white rounded-lg hover:bg-[#1a5a8f] transition-colors font-semibold shadow-md"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
@@ -2537,7 +2694,7 @@ const Shop = () => {
                   stockFilters.onSale ||
                   priceRange[0] !== minPrice || 
                   priceRange[1] !== maxPrice) && (
-                  <span className="inline-flex items-center justify-center w-6 h-6 text-xs font-bold bg-white text-lime-600 rounded-full">
+                  <span className="inline-flex items-center justify-center w-6 h-6 text-xs font-bold bg-white text-[#d9a82e] rounded-full">
                     {[selectedCategory !== "all", selectedSubCategories.length > 0, selectedBrands.length, 
                       stockFilters.inStock || stockFilters.outOfStock || stockFilters.onSale,
                       priceRange[0] !== minPrice || priceRange[1] !== maxPrice].filter(Boolean).length}
@@ -2592,7 +2749,7 @@ const Shop = () => {
                       onClick={scrollSubCategoryPrev}
                       className={`absolute left-0 md:-left-5 top-1/2 -translate-y-1/2 z-10 shadow-lg rounded-full p-2 transition-colors ${
                         subCategoryScrollState.canScrollPrev 
-                          ? 'bg-lime-500 text-white hover:bg-lime-600 cursor-pointer' 
+                          ? 'bg-[#d9a82e] text-white hover:bg-[#2377c1] cursor-pointer' 
                           : 'bg-white cursor-default opacity-50'
                       }`}
                       disabled={!subCategoryScrollState.canScrollPrev}
@@ -2648,7 +2805,7 @@ const Shop = () => {
                       onClick={scrollSubCategoryNext}
                       className={`absolute right-0 md:-right-5 top-1/2 -translate-y-1/2 z-10 shadow-lg rounded-full p-2 transition-colors ${
                         subCategoryScrollState.canScrollNext 
-                          ? 'bg-lime-500 text-white hover:bg-lime-600 cursor-pointer' 
+                          ? 'bg-[#d9a82e] text-white hover:bg-[#2377c1] cursor-pointer' 
                           : 'bg-white cursor-default opacity-50'
                       }`}
                       disabled={!subCategoryScrollState.canScrollNext}
@@ -2693,7 +2850,7 @@ const Shop = () => {
                       onClick={scrollBrandPrev}
                       className={`absolute left-0 md:-left-5 top-1/2 -translate-y-1/2 z-10 shadow-lg rounded-full p-2 transition-colors ${
                         brandScrollState.canScrollPrev 
-                          ? 'bg-lime-500 text-white hover:bg-lime-600 cursor-pointer' 
+                          ? 'bg-[#d9a82e] text-white hover:bg-[#2377c1] cursor-pointer' 
                           : 'bg-white cursor-default opacity-50'
                       }`}
                       disabled={!brandScrollState.canScrollPrev}
@@ -2753,7 +2910,7 @@ const Shop = () => {
                       onClick={scrollBrandNext}
                       className={`absolute right-0 md:-right-5 top-1/2 -translate-y-1/2 z-10 shadow-lg rounded-full p-2 transition-colors ${
                         brandScrollState.canScrollNext 
-                          ? 'bg-lime-500 text-white hover:bg-lime-600 cursor-pointer' 
+                          ? 'bg-[#d9a82e] text-white hover:bg-[#2377c1] cursor-pointer' 
                           : 'bg-white cursor-default opacity-50'
                       }`}
                       disabled={!brandScrollState.canScrollNext}
@@ -2812,14 +2969,14 @@ const Shop = () => {
               <>
                 <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                   {products.slice(0, productsToShow).map((product) => (
-                    <HomeStyleProductCard key={product._id} product={product} />
+                    <ProductCard key={product._id} product={product} />
                   ))}
                 </div>
                 {productsToShow < products.length && (
                   <div className="flex justify-center mt-8">
                     <button
                       onClick={() => setProductsToShow((prev) => prev + 20)}
-                      className="px-6 py-2 bg-green-600 text-white rounded-lg shadow hover:bg-green-700 transition-colors font-semibold"
+                      className="px-6 py-2 bg-[#d9a82e] text-white rounded-lg shadow  transition-colors font-semibold"
                     >
                       Load More
                     </button>
@@ -2867,3 +3024,4 @@ const Shop = () => {
 }
 
 export default Shop
+

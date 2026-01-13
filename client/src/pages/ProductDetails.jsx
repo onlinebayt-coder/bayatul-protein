@@ -87,7 +87,7 @@ const ProductDetails = () => {
   const [showTabbyModal, setShowTabbyModal] = useState(false)
   const [showTamaraModal, setShowTamaraModal] = useState(false)
   const [showVideoModal, setShowVideoModal] = useState(false)
-  
+
   // Buyer Protection state
   const [selectedProtections, setSelectedProtections] = useState([])
   const [hasProtectionPlans, setHasProtectionPlans] = useState(false)
@@ -152,9 +152,9 @@ const ProductDetails = () => {
   }, [isMobile, showRatingDropdown])
 
   const [showCallbackModal, setShowCallbackModal] = useState(false)
-  const [callbackForm, setCallbackForm] = useState({ 
-    name: user?.name || "", 
-    email: user?.email || "", 
+  const [callbackForm, setCallbackForm] = useState({
+    name: user?.name || "",
+    email: user?.email || "",
     phone: "",
     customerNote: ""
   })
@@ -239,7 +239,7 @@ const ProductDetails = () => {
     const currentColor = getCurrentColor()
     const currentDos = getCurrentDos()
     const media = []
-    
+
     // Check DOS variation first (if selected)
     if (currentDos && currentDos.image) {
       media.push({ type: 'image', url: currentDos.image })
@@ -250,7 +250,7 @@ const ProductDetails = () => {
       }
       return media
     }
-    
+
     // Check color variation
     if (currentColor && currentColor.image) {
       media.push({ type: 'image', url: currentColor.image })
@@ -261,37 +261,37 @@ const ProductDetails = () => {
       }
       return media
     }
-    
+
     // Fallback to product images and videos
     if (product?.image) {
       media.push({ type: 'image', url: product.image })
     }
-    
+
     if (product?.galleryImages && product.galleryImages.length > 0) {
       product.galleryImages.filter(img => img).forEach(img => {
         media.push({ type: 'image', url: img })
       })
     }
-    
+
     // Add main product video if exists
     if (product?.video) {
       media.push({ type: 'video', url: product.video })
     }
-    
+
     // Add video gallery if exists
     if (product?.videoGallery && product.videoGallery.length > 0) {
       product.videoGallery.filter(vid => vid).forEach(vid => {
         media.push({ type: 'video', url: vid })
       })
     }
-    
+
     return media
   }
 
   const getEffectivePrice = () => {
     const currentColor = getCurrentColor()
     const currentDos = getCurrentDos()
-    
+
     // Get base price (from color if selected, otherwise from product)
     let basePrice = 0
     if (currentColor) {
@@ -303,7 +303,7 @@ const ProductDetails = () => {
       const productOfferPrice = Number(product?.offerPrice) || 0
       basePrice = (productOfferPrice > 0 && productOfferPrice < productBasePrice) ? productOfferPrice : productBasePrice
     }
-    
+
     // Add DOS price if selected (additive)
     if (currentDos) {
       const dosBasePrice = Number(currentDos.price) || 0
@@ -311,7 +311,7 @@ const ProductDetails = () => {
       const dosPrice = (dosOfferPrice > 0 && dosOfferPrice < dosBasePrice) ? dosOfferPrice : dosBasePrice
       basePrice += dosPrice
     }
-    
+
     return basePrice
   }
   const formatPerMonth = (n) =>
@@ -445,7 +445,7 @@ const ProductDetails = () => {
       // Try to get related products from the same category
       const { data } = await axios.get(`${config.API_URL}/api/products?category=${product.category._id}&limit=12`)
       let filtered = data.filter((p) => p._id !== product._id)
-      if (filtered.length === 0) { 
+      if (filtered.length === 0) {
         // If no related products, fetch all products and pick random ones (excluding current)
         const allRes = await axios.get(`${config.API_URL}/api/products`)
         filtered = allRes.data.filter((p) => p._id !== product._id)
@@ -552,7 +552,7 @@ const ProductDetails = () => {
     const bundleTotals = calculateBundleSavings()
 
     return (
-      <div className="bg-white border border-gray-200 rounded-lg p-6 mb-8">
+      <div className="bg-white rounded-lg p-6 mb-8">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-xl font-semibold text-gray-900">Frequently Bought Together</h3>
           <div className="bg-red-600 text-white px-3 py-1 rounded-full text-sm font-bold">25% OFF BUNDLE</div>
@@ -672,7 +672,7 @@ const ProductDetails = () => {
     // Check stock status based on selected color, DOS variation, or main product
     const currentColor = getCurrentColor()
     const currentDos = getCurrentDos()
-    
+
     if (currentDos && currentDos.countInStock <= 0) {
       showToast("Selected OS option is out of stock", "error")
       return
@@ -685,13 +685,13 @@ const ProductDetails = () => {
       showToast("Product is out of stock", "error")
       return
     }
-    
+
     // Calculate the final price based on variations:
     // If color is selected: use color price as base
     // If DOS is selected: add DOS price to base price (additive)
     let finalPrice = 0
     let baseImageUrl = product.image
-    
+
     // Get base price from color or product
     if (currentColor) {
       const colorPrice = currentColor.offerPrice > 0 ? currentColor.offerPrice : currentColor.price
@@ -700,13 +700,13 @@ const ProductDetails = () => {
     } else {
       finalPrice = product.offerPrice > 0 ? Number(product.offerPrice) : Number(product.price) || 0
     }
-    
+
     // Add DOS price if selected (additive)
     if (currentDos) {
       const dosPrice = currentDos.offerPrice > 0 ? currentDos.offerPrice : currentDos.price
       finalPrice += Number(dosPrice) || 0
     }
-    
+
     // Prepare product with variation data
     const productToAdd = {
       ...product,
@@ -733,10 +733,10 @@ const ProductDetails = () => {
       // Override image with color-specific image if available
       image: baseImageUrl,
     }
-    
+
     // Add main product to cart
     addToCart(productToAdd, quantity)
-    
+
     // Add selected protections to cart as separate items linked to the product
     if (selectedProtections.length > 0) {
       selectedProtections.forEach((protection) => {
@@ -778,1022 +778,412 @@ const ProductDetails = () => {
     setShowImageModal(true)
   }
 
-  // const fetchFrequentlyBought = async () => {
-  //   setFrequentlyBoughtLoading(true)
-  //   try {
-  //     const complementaryProducts = []
-
-  //     // Get product category and name to determine what accessories to show
-  //     const productName = product.name?.toLowerCase() || ""
-  //     const categoryName = product.category?.name?.toLowerCase() || ""
-  //     const brandName = product.brand?.name?.toLowerCase() || ""
-
-  //     console.log("Product details:", { productName, categoryName, brandName })
-
-  //     // Define complementary product logic based on main product type
-  //     if (categoryName.includes("laptop") || productName.includes("laptop")) {
-  //       // For laptops, get exactly 2 diverse accessories - one from each category
-  //       const accessoryCategories = [
-  //         {
-  //           name: "mouse",
-  //           searches: ["wireless mouse", "bluetooth mouse", "gaming mouse"],
-  //           keywords: ["mouse"],
-  //         },
-  //         {
-  //           name: "headphones",
-  //           searches: ["bluetooth headphones", "wireless headset", "gaming headset", "earbuds"],
-  //           keywords: ["headphone", "headset", "earbuds", "earphone"],
-  //         },
-  //         {
-  //           name: "keyboard",
-  //           searches: ["wireless keyboard", "bluetooth keyboard", "mechanical keyboard"],
-  //           keywords: ["keyboard"],
-  //         },
-  //         {
-  //           name: "accessories",
-  //           searches: ["laptop bag", "laptop stand", "cooling pad", "webcam", "usb hub", "portable speaker"],
-  //           keywords: ["bag", "stand", "cooling", "webcam", "hub", "speaker", "charger"],
-  //         },
-  //       ]
-
-  //       // Get one product from each category to ensure diversity - LIMIT TO 2
-  //       for (const category of accessoryCategories) {
-  //         let foundInCategory = false
-
-  //         for (const searchTerm of category.searches) {
-  //           if (foundInCategory) break
-
-  //           try {
-  //             const response = await axios.get(
-  //               `${config.API_URL}/api/products?search=${encodeURIComponent(searchTerm)}&limit=10`,
-  //             )
-  //             const accessories = response.data.filter(
-  //               (p) =>
-  //                 p._id !== product._id &&
-  //                 // Exclude main product categories
-  //                 !p.name?.toLowerCase().includes("laptop") &&
-  //                 !p.name?.toLowerCase().includes("desktop") &&
-  //                 !p.name?.toLowerCase().includes("computer") &&
-  //                 !p.name?.toLowerCase().includes("pc") &&
-  //                 !p.name?.toLowerCase().includes("monitor") &&
-  //                 !p.name?.toLowerCase().includes("aio") &&
-  //                 // Include only relevant accessories
-  //                 category.keywords.some(
-  //                   (keyword) =>
-  //                     p.name?.toLowerCase().includes(keyword) || p.category?.name?.toLowerCase().includes(keyword),
-  //                 ),
-  //             )
-
-  //             if (accessories.length > 0) {
-  //               // Add first matching product from this category
-  //               complementaryProducts.push(accessories[0])
-  //               foundInCategory = true
-  //               console.log(`Found ${category.name}:`, accessories[0].name)
-  //             }
-  //           } catch (error) {
-  //             console.log(`Search failed for: ${searchTerm}`)
-  //           }
-  //         }
-
-  //         // Stop when we have exactly 2 diverse products
-  //         if (complementaryProducts.length >= 2) break
-  //       }
-  //     } else if (categoryName.includes("desktop") || productName.includes("desktop")) {
-  //       // For desktops, get exactly 2 accessories
-  //       const desktopCategories = [
-  //         {
-  //           name: "monitor",
-  //           searches: ["monitor", "display"],
-  //           keywords: ["monitor", "display"],
-  //         },
-  //         {
-  //           name: "keyboard",
-  //           searches: ["wireless keyboard", "mechanical keyboard"],
-  //           keywords: ["keyboard"],
-  //         },
-  //         {
-  //           name: "mouse",
-  //           searches: ["wireless mouse", "gaming mouse"],
-  //           keywords: ["mouse"],
-  //         },
-  //       ]
-
-  //       for (const category of desktopCategories) {
-  //         let foundInCategory = false
-
-  //         for (const searchTerm of category.searches) {
-  //           if (foundInCategory) break
-
-  //           try {
-  //             const response = await axios.get(
-  //               `${config.API_URL}/api/products?search=${encodeURIComponent(searchTerm)}&limit=10`,
-  //             )
-  //             const accessories = response.data.filter(
-  //               (p) =>
-  //                 p._id !== product._id &&
-  //                 !p.name?.toLowerCase().includes("desktop") &&
-  //                 !p.name?.toLowerCase().includes("laptop") &&
-  //                 category.keywords.some((keyword) => p.name?.toLowerCase().includes(keyword)),
-  //             )
-
-  //             if (accessories.length > 0) {
-  //               complementaryProducts.push(accessories[0])
-  //               foundInCategory = true
-  //             }
-  //           } catch (error) {
-  //             console.log(`Search failed for: ${searchTerm}`)
-  //           }
-  //         }
-
-  //         // Stop when we have exactly 2 products
-  //         if (complementaryProducts.length >= 2) break
-  //       }
-  //     } else if (categoryName.includes("mobile") || categoryName.includes("phone") || productName.includes("phone")) {
-  //       // For phones, get exactly 2 phone accessories
-  //       const phoneCategories = [
-  //         {
-  //           name: "case",
-  //           searches: ["phone case", "mobile case"],
-  //           keywords: ["case", "cover"],
-  //         },
-  //         {
-  //           name: "charger",
-  //           searches: ["wireless charger", "phone charger", "power bank"],
-  //           keywords: ["charger", "power bank", "charging"],
-  //         },
-  //         {
-  //           name: "audio",
-  //           searches: ["wireless earbuds", "bluetooth headphones"],
-  //           keywords: ["earbuds", "headphone", "earphone"],
-  //         },
-  //       ]
-
-  //       for (const category of phoneCategories) {
-  //         let foundInCategory = false
-
-  //         for (const searchTerm of category.searches) {
-  //           if (foundInCategory) break
-
-  //           try {
-  //             const response = await axios.get(
-  //               `${config.API_URL}/api/products?search=${encodeURIComponent(searchTerm)}&limit=10`,
-  //             )
-  //             const accessories = response.data.filter(
-  //               (p) =>
-  //                 p._id !== product._id &&
-  //                 !p.name?.toLowerCase().includes("phone") &&
-  //                 !p.name?.toLowerCase().includes("mobile") &&
-  //                 category.keywords.some((keyword) => p.name?.toLowerCase().includes(keyword)),
-  //             )
-
-  //             if (accessories.length > 0) {
-  //               complementaryProducts.push(accessories[0])
-  //               foundInCategory = true
-  //             }
-  //           } catch (error) {
-  //             console.log(`Search failed for: ${searchTerm}`)
-  //           }
-  //         }
-
-  //         // Stop when we have exactly 2 products
-  //         if (complementaryProducts.length >= 2) break
-  //       }
-  //     }
-
-  //     // Remove duplicates and ensure exactly 2 items
-  //     const uniqueProducts = complementaryProducts
-  //       .filter((product, index, self) => index === self.findIndex((p) => p._id === product._id))
-  //       .slice(0, 2) // LIMIT TO EXACTLY 2 ACCESSORIES
-
-  //     console.log("Found complementary products:", uniqueProducts.length)
-  //     console.log(
-  //       "Products:",
-  //       uniqueProducts.map((p) => ({
-  //         name: p.name,
-  //         category: p.category?.name,
-  //         type: p.name?.toLowerCase().includes("mouse")
-  //           ? "mouse"
-  //           : p.name?.toLowerCase().includes("keyboard")
-  //             ? "keyboard"
-  //             : p.name?.toLowerCase().includes("headphone") || p.name?.toLowerCase().includes("headset")
-  //               ? "audio"
-  //               : "other",
-  //       })),
-  //     )
-
-  //     // If we don't have exactly 2, try fallback
-  //     if (uniqueProducts.length < 2) {
-  //       console.log(`Only found ${uniqueProducts.length} accessories, trying fallback...`)
-
-  //       try {
-  //         const fallbackResponse = await axios.get(`${config.API_URL}/api/products?limit=50`)
-  //         const fallbackAccessories = fallbackResponse.data.filter(
-  //           (p) =>
-  //             p._id !== product._id &&
-  //             (p.category?.name?.toLowerCase().includes("accessories") ||
-  //               p.name?.toLowerCase().includes("mouse") ||
-  //               p.name?.toLowerCase().includes("keyboard") ||
-  //               p.name?.toLowerCase().includes("headphone") ||
-  //               p.name?.toLowerCase().includes("speaker")) &&
-  //             // Exclude main product categories
-  //             !p.name?.toLowerCase().includes("laptop") &&
-  //             !p.name?.toLowerCase().includes("desktop") &&
-  //             !p.name?.toLowerCase().includes("computer") &&
-  //             !p.name?.toLowerCase().includes("phone") &&
-  //             !p.name?.toLowerCase().includes("tablet") &&
-  //             !p.name?.toLowerCase().includes("monitor") &&
-  //             !uniqueProducts.some((existing) => existing._id === p._id), // Don't duplicate
-  //         )
-
-  //         // Add fallback products to reach exactly 2 total
-  //         const needed = 2 - uniqueProducts.length
-  //         uniqueProducts.push(...fallbackAccessories.slice(0, needed))
-
-  //         console.log(
-  //           "Added fallback accessories:",
-  //           fallbackAccessories.slice(0, needed).map((p) => p.name),
-  //         )
-  //       } catch (error) {
-  //         console.error("Fallback accessories search failed:", error)
-  //       }
-  //     }
-
-  //     // Final check - ensure we have exactly 2 or hide the section
-  //     if (uniqueProducts.length === 0) {
-  //       console.log("No accessories found at all, hiding section")
-  //       setFrequentlyBought([])
-  //       setSelectedBundleItems({})
-  //       return
-  //     }
-
-  //     // Set the found products (limit to exactly 2)
-  //     const finalProducts = uniqueProducts.slice(0, 2)
-  //     setFrequentlyBought(finalProducts)
-
-  //     console.log(
-  //       "Final selected products:",
-  //       finalProducts.map((p) => ({ name: p.name, category: p.category?.name })),
-  //     )
-
-  //     // Auto-select ALL bundle items (current product + exactly 2 accessories = 3 total)
-  //     const autoSelectedItems = {
-  //       [product._id]: true, // Current product always selected
-  //     }
-
-  //     // Auto-select all found accessories (exactly 2)
-  //     finalProducts.forEach((item) => {
-  //       autoSelectedItems[item._id] = true
-  //     })
-
-  //     console.log("Auto-selected bundle items (total 3):", autoSelectedItems)
-  //     console.log("Bundle will have:", Object.keys(autoSelectedItems).length, "items total")
-  //     setSelectedBundleItems(autoSelectedItems)
-  //   } catch (error) {
-  //     console.error("Error fetching frequently bought products:", error)
-  //     setFrequentlyBought([])
-  //   } finally {
-  //     setFrequentlyBoughtLoading(false)
-  //   }
-  // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// CHANGE: replace frequently-bought logic with category-specific accessory mapping
-  // const fetchFrequentlyBought = async () => {
-  //   setFrequentlyBoughtLoading(true)
-  //   try {
-  //     if (!product) {
-  //       setFrequentlyBought([])
-  //       setSelectedBundleItems({})
-  //       return
-  //     }
-
-  //     const name = (product.name || "").toLowerCase()
-  //     const catName = (product.category?.name || "").toLowerCase()
-
-  //     // Helper: check if a text includes any of the words
-  //     const includesAny = (txt, words) => words.some((w) => txt.includes(w))
-
-  //     // Map primary product types to targeted accessory groups
-  //     const GROUPS = [
-  //       {
-  //         match: ["laptop", "notebook", "macbook"],
-  //         suggestions: [
-  //           {
-  //             label: "keyboard",
-  //             keywords: ["keyboard"],
-  //             searches: ["keyboard", "wireless keyboard", "bluetooth keyboard", "mechanical keyboard"],
-  //           },
-  //           {
-  //             label: "mouse",
-  //             keywords: ["mouse"],
-  //             searches: ["mouse", "wireless mouse", "gaming mouse", "bluetooth mouse"],
-  //           },
-  //           {
-  //             label: "laptop bag",
-  //             keywords: ["bag", "sleeve", "backpack"],
-  //             searches: ["laptop bag", "laptop sleeve", "laptop backpack"],
-  //           },
-  //           { label: "mouse pad", keywords: ["pad", "mat"], searches: ["mouse pad", "gaming mouse pad", "mouse mat"] },
-  //           {
-  //             label: "headphones",
-  //             keywords: ["headphone", "headset", "earbuds", "earphone"],
-  //             searches: ["headphones", "headset", "earbuds"],
-  //           },
-  //           { label: "hdmi cable", keywords: ["hdmi"], searches: ["hdmi cable"] },
-  //         ],
-  //         excludeMain: ["laptop", "desktop", "monitor", "aio", "computer", "pc"],
-  //       },
-  //       {
-  //         match: ["printer"],
-  //         suggestions: [
-  //           { label: "usb cable", keywords: ["usb", "cable"], searches: ["usb cable", "printer cable"] },
-  //           { label: "router", keywords: ["router"], searches: ["router"] },
-  //           { label: "switch", keywords: ["switch"], searches: ["network switch", "gigabit switch"] },
-  //           {
-  //             label: "ethernet cable",
-  //             keywords: ["ethernet", "lan", "network"],
-  //             searches: ["ethernet cable", "lan cable", "network cable"],
-  //           },
-  //         ],
-  //         excludeMain: ["printer"],
-  //       },
-  //       {
-  //         match: ["monitor", "lcd", "led"],
-  //         suggestions: [
-  //           { label: "hdmi cable", keywords: ["hdmi"], searches: ["hdmi cable"] },
-  //           {
-  //             label: "displayport cable",
-  //             keywords: ["displayport", "dp"],
-  //             searches: ["displayport cable", "dp cable"],
-  //           },
-  //           {
-  //             label: "network cable",
-  //             keywords: ["ethernet", "lan", "network"],
-  //             searches: ["ethernet cable", "lan cable", "network cable"],
-  //           },
-  //           { label: "keyboard", keywords: ["keyboard"], searches: ["keyboard", "wireless keyboard"] },
-  //           { label: "mouse", keywords: ["mouse"], searches: ["mouse", "wireless mouse"] },
-  //         ],
-  //         excludeMain: ["monitor", "laptop", "desktop", "aio", "computer", "pc"],
-  //       },
-  //       {
-  //         match: ["desktop", "pc", "computer"],
-  //         suggestions: [
-  //           { label: "monitor", keywords: ["monitor", "display"], searches: ["monitor", "display"] },
-  //           { label: "keyboard", keywords: ["keyboard"], searches: ["keyboard", "mechanical keyboard"] },
-  //           { label: "mouse", keywords: ["mouse"], searches: ["mouse", "gaming mouse"] },
-  //           { label: "ram", keywords: ["ram", "memory", "ddr"], searches: ["ram", "ddr4", "ddr5 memory"] },
-  //           { label: "ssd", keywords: ["ssd", "nvme", "solid state"], searches: ["ssd", "nvme ssd"] },
-  //           { label: "hdmi cable", keywords: ["hdmi"], searches: ["hdmi cable"] },
-  //           { label: "network cable", keywords: ["ethernet", "lan", "network"], searches: ["ethernet cable"] },
-  //         ],
-  //         excludeMain: ["desktop", "laptop", "monitor", "computer", "pc"],
-  //       },
-  //     ]
-
-  //     // Determine which group applies
-  //     const activeGroup = GROUPS.find((g) => includesAny(name, g.match) || includesAny(catName, g.match)) || null
-
-  //     // If nothing matched, show a safe set of generic accessories
-  //     const fallbackSuggestions = [
-  //       { label: "mouse", keywords: ["mouse"], searches: ["mouse", "wireless mouse"] },
-  //       { label: "keyboard", keywords: ["keyboard"], searches: ["keyboard"] },
-  //       { label: "hdmi cable", keywords: ["hdmi"], searches: ["hdmi cable"] },
-  //       { label: "network cable", keywords: ["ethernet", "lan", "network"], searches: ["ethernet cable"] },
-  //     ]
-
-  //     const suggestions = activeGroup?.suggestions || fallbackSuggestions
-  //     const excludeWords = activeGroup?.excludeMain || []
-
-  //     const results = []
-  //     const seen = new Set()
-  //     const MAX_ITEMS = 8
-
-  //     // Helper: add product if unique and relevant
-  //     const tryAddProduct = (p) => {
-  //       if (!p || seen.has(p._id) || p._id === product._id) return
-  //       const pname = (p.name || "").toLowerCase()
-  //       const pcat = (p.category?.name || "").toLowerCase()
-  //       // Exclude main-category items
-  //       if (includesAny(pname, excludeWords) || includesAny(pcat, excludeWords)) return
-  //       seen.add(p._id)
-  //       results.push(p)
-  //     }
-
-  //     // For each suggestion, query with its search terms and filter by keywords to stay relevant
-  //     for (const s of suggestions) {
-  //       for (const term of s.searches) {
-  //         if (results.length >= MAX_ITEMS) break
-  //         try {
-  //           const { data } = await axios.get(
-  //             `${config.API_URL}/api/products?search=${encodeURIComponent(term)}&limit=20`,
-  //           )
-  //           data
-  //             .filter((p) => {
-  //               const pname = (p.name || "").toLowerCase()
-  //               const pcat = (p.category?.name || "").toLowerCase()
-  //               return s.keywords.some((kw) => pname.includes(kw) || pcat.includes(kw))
-  //             })
-  //             .forEach(tryAddProduct)
-  //         } catch {
-  //           // ignore individual search errors and continue
-  //         }
-  //         if (results.length >= MAX_ITEMS) break
-  //       }
-  //       if (results.length >= MAX_ITEMS) break
-  //     }
-
-  //     // If still empty, do a broad fallback scan
-  //     if (results.length === 0) {
-  //       try {
-  //         const { data } = await axios.get(`${config.API_URL}/api/products?limit=100`)
-  //         data
-  //           .filter((p) => {
-  //             const pname = (p.name || "").toLowerCase()
-  //             const pcat = (p.category?.name || "").toLowerCase()
-  //             return (
-  //               [
-  //                 "mouse",
-  //                 "keyboard",
-  //                 "headphone",
-  //                 "earbuds",
-  //                 "bag",
-  //                 "hdmi",
-  //                 "ethernet",
-  //                 "router",
-  //                 "switch",
-  //                 "ssd",
-  //                 "ram",
-  //               ].some((kw) => pname.includes(kw) || pcat.includes(kw)) &&
-  //               !includesAny(pname, excludeWords) &&
-  //               !includesAny(pcat, excludeWords)
-  //             )
-  //           })
-  //           .slice(0, MAX_ITEMS)
-  //           .forEach(tryAddProduct)
-  //       } catch {
-  //         // ignore
-  //       }
-  //     }
-
-  //     setFrequentlyBought(results)
-  //     // Pre-select up to 3 accessories plus the current product
-  //     const autoSelected = { [product._id]: true }
-  //     results.slice(0, 3).forEach((p) => (autoSelected[p._id] = true))
-  //     setSelectedBundleItems(autoSelected)
-  //   } catch (err) {
-  //     setFrequentlyBought([])
-  //     setSelectedBundleItems({})
-  //   } finally {
-  //     setFrequentlyBoughtLoading(false)
-  //   }
-  // }
-
-
-
-
-
   const fetchFrequentlyBought = async () => {
-  setFrequentlyBoughtLoading(true);
-  try {
-    if (!product) {
-      setFrequentlyBought([]);
-      setSelectedBundleItems({});
-      return;
-    }
-
-    const productName = (product.name || "").toLowerCase();
-    const categoryName = (product.category?.name || "").toLowerCase();
-    const brandName = (product.brand?.name || "").toLowerCase();
-
-    console.log("Finding accessories for:", { productName, categoryName, brandName });
-
-    // Enhanced accessory mapping with multiple options for each category
-    const ACCESSORY_MAPPING = {
-      laptop: [
-        // First combination set
-        [
-          {
-            category: "mouse",
-            searches: ["wireless mouse", "bluetooth mouse", "gaming mouse"],
-            keywords: ["mouse", "wireless", "bluetooth"],
-            exclude: ["laptop", "desktop", "computer", "monitor"],
-          },
-          {
-            category: "laptop bag",
-            searches: ["laptop bag", "laptop backpack", "laptop case"],
-            keywords: ["bag", "backpack", "case", "sleeve"],
-            exclude: ["laptop", "desktop", "monitor"],
-          }
-        ],
-        // Second combination set
-        [
-          {
-            category: "keyboard",
-            searches: ["wireless keyboard", "bluetooth keyboard"],
-            keywords: ["keyboard", "wireless", "bluetooth"],
-            exclude: ["laptop", "desktop", "monitor"],
-          },
-          {
-            category: "headphones",
-            searches: ["wireless headphones", "bluetooth headset"],
-            keywords: ["headphone", "headset", "wireless"],
-            exclude: ["laptop", "desktop", "monitor", "phone"],
-          }
-        ],
-        // Third combination set
-        [
-          {
-            category: "laptop stand",
-            searches: ["laptop stand", "laptop cooler"],
-            keywords: ["stand", "cooler", "cooling", "pad"],
-            exclude: ["laptop", "desktop", "monitor"],
-          },
-          {
-            category: "usb hub",
-            searches: ["usb hub", "type c hub", "docking station"],
-            keywords: ["hub", "adapter", "docking", "usb"],
-            exclude: ["laptop", "desktop", "monitor"],
-          }
-        ],
-        // Fourth combination set
-        [
-          {
-            category: "mouse",
-            searches: ["wireless mouse", "gaming mouse"],
-            keywords: ["mouse", "wireless", "gaming"],
-            exclude: ["laptop", "desktop", "computer", "monitor"],
-          },
-          {
-            category: "usb hub",
-            searches: ["usb hub", "type c hub"],
-            keywords: ["hub", "adapter", "usb"],
-            exclude: ["laptop", "desktop", "monitor"],
-          }
-        ]
-      ],
-
-      printer: [
-        // First combination set
-        [
-          {
-            category: "cables",
-            searches: ["usb cable", "printer cable", "usb type b cable"],
-            keywords: ["cable", "usb", "printer"],
-            exclude: ["laptop", "desktop", "monitor"],
-          },
-          {
-            category: "ink",
-            searches: ["printer ink", "ink cartridge"],
-            keywords: ["ink", "cartridge", "toner"],
-            exclude: ["laptop", "desktop", "monitor"],
-          }
-        ],
-        // Second combination set
-        [
-          {
-            category: "router",
-            searches: ["wifi router", "wireless router"],
-            keywords: ["router", "wifi", "wireless"],
-            exclude: ["laptop", "desktop", "monitor"],
-          },
-          {
-            category: "paper",
-            searches: ["a4 paper", "photo paper"],
-            keywords: ["paper", "a4", "photo"],
-            exclude: ["laptop", "desktop", "monitor"],
-          }
-        ],
-        // Third combination set
-        [
-          {
-            category: "switch",
-            searches: ["network switch", "ethernet switch"],
-            keywords: ["switch", "network", "ethernet"],
-            exclude: ["laptop", "desktop", "monitor"],
-          },
-          {
-            category: "cables",
-            searches: ["power cable", "extension cord"],
-            keywords: ["cable", "power", "extension"],
-            exclude: ["laptop", "desktop", "monitor"],
-          }
-        ]
-      ],
-
-      lcd: [
-        // First combination set
-        [
-          {
-            category: "hdmi cable",
-            searches: ["hdmi cable", "hdmi to hdmi"],
-            keywords: ["hdmi", "cable"],
-            exclude: ["laptop", "desktop", "monitor"],
-          },
-          {
-            category: "keyboard",
-            searches: ["wired keyboard", "usb keyboard"],
-            keywords: ["keyboard", "wired", "usb"],
-            exclude: ["laptop", "desktop", "monitor"],
-          }
-        ],
-        // Second combination set
-        [
-          {
-            category: "vga cable",
-            searches: ["vga cable", "vga to vga"],
-            keywords: ["vga", "cable"],
-            exclude: ["laptop", "desktop", "monitor"],
-          },
-          {
-            category: "mouse",
-            searches: ["wired mouse", "usb mouse"],
-            keywords: ["mouse", "wired", "usb"],
-            exclude: ["laptop", "desktop", "monitor"],
-          }
-        ],
-        // Third combination set
-        [
-          {
-            category: "network cable",
-            searches: ["ethernet cable", "lan cable"],
-            keywords: ["ethernet", "lan", "cable"],
-            exclude: ["laptop", "desktop", "monitor"],
-          },
-          {
-            category: "monitor stand",
-            searches: ["monitor stand", "vesa mount"],
-            keywords: ["stand", "mount", "vesa"],
-            exclude: ["laptop", "desktop", "monitor"],
-          }
-        ]
-      ],
-
-      desktop: [
-        // First combination set
-        [
-          {
-            category: "keyboard",
-            searches: ["gaming keyboard", "mechanical keyboard"],
-            keywords: ["keyboard", "gaming", "mechanical"],
-            exclude: ["laptop", "desktop", "monitor"],
-          },
-          {
-            category: "mouse",
-            searches: ["gaming mouse", "optical mouse"],
-            keywords: ["mouse", "gaming", "optical"],
-            exclude: ["laptop", "desktop", "monitor"],
-          }
-        ],
-        // Second combination set
-        [
-          {
-            category: "ram",
-            searches: ["ddr4 ram", "desktop ram"],
-            keywords: ["ram", "ddr4", "memory"],
-            exclude: ["laptop", "monitor"],
-          },
-          {
-            category: "ssd",
-            searches: ["ssd", "solid state drive"],
-            keywords: ["ssd", "solid state", "nvme"],
-            exclude: ["laptop", "monitor"],
-          }
-        ],
-        // Third combination set
-        [
-          {
-            category: "monitor",
-            searches: ["led monitor", "computer monitor"],
-            keywords: ["monitor", "led", "display"],
-            exclude: ["laptop", "desktop", "computer"],
-          },
-          {
-            category: "hdmi cable",
-            searches: ["hdmi cable", "hdmi 2.0"],
-            keywords: ["hdmi", "cable"],
-            exclude: ["laptop", "desktop", "monitor"],
-          }
-        ],
-        // Fourth combination set
-        [
-          {
-            category: "hard disk",
-            searches: ["hard disk", "internal hdd"],
-            keywords: ["hard disk", "hdd", "internal"],
-            exclude: ["laptop", "monitor", "external"],
-          },
-          {
-            category: "network cable",
-            searches: ["ethernet cable", "lan cable"],
-            keywords: ["ethernet", "lan", "cable"],
-            exclude: ["laptop", "desktop", "monitor"],
-          }
-        ]
-      ]
-    };
-
-    // Determine product type
-    const getProductType = () => {
-      if (productName.includes('laptop') || categoryName.includes('laptop')) {
-        return 'laptop';
-      } else if (productName.includes('printer') || categoryName.includes('printer')) {
-        return 'printer';
-      } else if (productName.includes('lcd') || productName.includes('led') || 
-                 productName.includes('monitor') || categoryName.includes('monitor')) {
-        return 'lcd';
-      } else if (productName.includes('desktop') || categoryName.includes('desktop') ||
-                 productName.includes('computer') && !productName.includes('laptop')) {
-        return 'desktop';
+    setFrequentlyBoughtLoading(true);
+    try {
+      if (!product) {
+        setFrequentlyBought([]);
+        setSelectedBundleItems({});
+        return;
       }
-      return 'laptop';
-    };
 
-    const productType = getProductType();
-    console.log(`Detected product type: ${productType}`);
+      const productName = (product.name || "").toLowerCase();
+      const categoryName = (product.category?.name || "").toLowerCase();
+      const brandName = (product.brand?.name || "").toLowerCase();
 
-    const complementaryProducts = [];
-    const seenProductIds = new Set([product._id]);
+      console.log("Finding accessories for:", { productName, categoryName, brandName });
 
-    // Get all combination sets for this product type
-    const combinationSets = ACCESSORY_MAPPING[productType] || ACCESSORY_MAPPING.laptop;
-    
-    // Rotate through different combinations (you can use timestamp, random, or store in state)
-    const rotationIndex = Math.floor(Date.now() / 60000) % combinationSets.length; // Changes every minute
-    // Alternative: const rotationIndex = Math.floor(Math.random() * combinationSets.length);
-    
-    const selectedCombination = combinationSets[rotationIndex];
-    console.log(`Using combination set ${rotationIndex + 1} of ${combinationSets.length}`);
+      // Enhanced accessory mapping with multiple options for each category
+      const ACCESSORY_MAPPING = {
+        laptop: [
+          // First combination set
+          [
+            {
+              category: "mouse",
+              searches: ["wireless mouse", "bluetooth mouse", "gaming mouse"],
+              keywords: ["mouse", "wireless", "bluetooth"],
+              exclude: ["laptop", "desktop", "computer", "monitor"],
+            },
+            {
+              category: "laptop bag",
+              searches: ["laptop bag", "laptop backpack", "laptop case"],
+              keywords: ["bag", "backpack", "case", "sleeve"],
+              exclude: ["laptop", "desktop", "monitor"],
+            }
+          ],
+          // Second combination set
+          [
+            {
+              category: "keyboard",
+              searches: ["wireless keyboard", "bluetooth keyboard"],
+              keywords: ["keyboard", "wireless", "bluetooth"],
+              exclude: ["laptop", "desktop", "monitor"],
+            },
+            {
+              category: "headphones",
+              searches: ["wireless headphones", "bluetooth headset"],
+              keywords: ["headphone", "headset", "wireless"],
+              exclude: ["laptop", "desktop", "monitor", "phone"],
+            }
+          ],
+          // Third combination set
+          [
+            {
+              category: "laptop stand",
+              searches: ["laptop stand", "laptop cooler"],
+              keywords: ["stand", "cooler", "cooling", "pad"],
+              exclude: ["laptop", "desktop", "monitor"],
+            },
+            {
+              category: "usb hub",
+              searches: ["usb hub", "type c hub", "docking station"],
+              keywords: ["hub", "adapter", "docking", "usb"],
+              exclude: ["laptop", "desktop", "monitor"],
+            }
+          ],
+          // Fourth combination set
+          [
+            {
+              category: "mouse",
+              searches: ["wireless mouse", "gaming mouse"],
+              keywords: ["mouse", "wireless", "gaming"],
+              exclude: ["laptop", "desktop", "computer", "monitor"],
+            },
+            {
+              category: "usb hub",
+              searches: ["usb hub", "type c hub"],
+              keywords: ["hub", "adapter", "usb"],
+              exclude: ["laptop", "desktop", "monitor"],
+            }
+          ]
+        ],
 
-    // Find products for the selected combination
-    for (const accessory of selectedCombination) {
-      if (complementaryProducts.length >= 2) break;
+        printer: [
+          // First combination set
+          [
+            {
+              category: "cables",
+              searches: ["usb cable", "printer cable", "usb type b cable"],
+              keywords: ["cable", "usb", "printer"],
+              exclude: ["laptop", "desktop", "monitor"],
+            },
+            {
+              category: "ink",
+              searches: ["printer ink", "ink cartridge"],
+              keywords: ["ink", "cartridge", "toner"],
+              exclude: ["laptop", "desktop", "monitor"],
+            }
+          ],
+          // Second combination set
+          [
+            {
+              category: "router",
+              searches: ["wifi router", "wireless router"],
+              keywords: ["router", "wifi", "wireless"],
+              exclude: ["laptop", "desktop", "monitor"],
+            },
+            {
+              category: "paper",
+              searches: ["a4 paper", "photo paper"],
+              keywords: ["paper", "a4", "photo"],
+              exclude: ["laptop", "desktop", "monitor"],
+            }
+          ],
+          // Third combination set
+          [
+            {
+              category: "switch",
+              searches: ["network switch", "ethernet switch"],
+              keywords: ["switch", "network", "ethernet"],
+              exclude: ["laptop", "desktop", "monitor"],
+            },
+            {
+              category: "cables",
+              searches: ["power cable", "extension cord"],
+              keywords: ["cable", "power", "extension"],
+              exclude: ["laptop", "desktop", "monitor"],
+            }
+          ]
+        ],
 
-      for (const searchTerm of accessory.searches) {
+        lcd: [
+          // First combination set
+          [
+            {
+              category: "hdmi cable",
+              searches: ["hdmi cable", "hdmi to hdmi"],
+              keywords: ["hdmi", "cable"],
+              exclude: ["laptop", "desktop", "monitor"],
+            },
+            {
+              category: "keyboard",
+              searches: ["wired keyboard", "usb keyboard"],
+              keywords: ["keyboard", "wired", "usb"],
+              exclude: ["laptop", "desktop", "monitor"],
+            }
+          ],
+          // Second combination set
+          [
+            {
+              category: "vga cable",
+              searches: ["vga cable", "vga to vga"],
+              keywords: ["vga", "cable"],
+              exclude: ["laptop", "desktop", "monitor"],
+            },
+            {
+              category: "mouse",
+              searches: ["wired mouse", "usb mouse"],
+              keywords: ["mouse", "wired", "usb"],
+              exclude: ["laptop", "desktop", "monitor"],
+            }
+          ],
+          // Third combination set
+          [
+            {
+              category: "network cable",
+              searches: ["ethernet cable", "lan cable"],
+              keywords: ["ethernet", "lan", "cable"],
+              exclude: ["laptop", "desktop", "monitor"],
+            },
+            {
+              category: "monitor stand",
+              searches: ["monitor stand", "vesa mount"],
+              keywords: ["stand", "mount", "vesa"],
+              exclude: ["laptop", "desktop", "monitor"],
+            }
+          ]
+        ],
+
+        desktop: [
+          // First combination set
+          [
+            {
+              category: "keyboard",
+              searches: ["gaming keyboard", "mechanical keyboard"],
+              keywords: ["keyboard", "gaming", "mechanical"],
+              exclude: ["laptop", "desktop", "monitor"],
+            },
+            {
+              category: "mouse",
+              searches: ["gaming mouse", "optical mouse"],
+              keywords: ["mouse", "gaming", "optical"],
+              exclude: ["laptop", "desktop", "monitor"],
+            }
+          ],
+          // Second combination set
+          [
+            {
+              category: "ram",
+              searches: ["ddr4 ram", "desktop ram"],
+              keywords: ["ram", "ddr4", "memory"],
+              exclude: ["laptop", "monitor"],
+            },
+            {
+              category: "ssd",
+              searches: ["ssd", "solid state drive"],
+              keywords: ["ssd", "solid state", "nvme"],
+              exclude: ["laptop", "monitor"],
+            }
+          ],
+          // Third combination set
+          [
+            {
+              category: "monitor",
+              searches: ["led monitor", "computer monitor"],
+              keywords: ["monitor", "led", "display"],
+              exclude: ["laptop", "desktop", "computer"],
+            },
+            {
+              category: "hdmi cable",
+              searches: ["hdmi cable", "hdmi 2.0"],
+              keywords: ["hdmi", "cable"],
+              exclude: ["laptop", "desktop", "monitor"],
+            }
+          ],
+          // Fourth combination set
+          [
+            {
+              category: "hard disk",
+              searches: ["hard disk", "internal hdd"],
+              keywords: ["hard disk", "hdd", "internal"],
+              exclude: ["laptop", "monitor", "external"],
+            },
+            {
+              category: "network cable",
+              searches: ["ethernet cable", "lan cable"],
+              keywords: ["ethernet", "lan", "cable"],
+              exclude: ["laptop", "desktop", "monitor"],
+            }
+          ]
+        ]
+      };
+
+      // Determine product type
+      const getProductType = () => {
+        if (productName.includes('laptop') || categoryName.includes('laptop')) {
+          return 'laptop';
+        } else if (productName.includes('printer') || categoryName.includes('printer')) {
+          return 'printer';
+        } else if (productName.includes('lcd') || productName.includes('led') ||
+          productName.includes('monitor') || categoryName.includes('monitor')) {
+          return 'lcd';
+        } else if (productName.includes('desktop') || categoryName.includes('desktop') ||
+          productName.includes('computer') && !productName.includes('laptop')) {
+          return 'desktop';
+        }
+        return 'laptop';
+      };
+
+      const productType = getProductType();
+      console.log(`Detected product type: ${productType}`);
+
+      const complementaryProducts = [];
+      const seenProductIds = new Set([product._id]);
+
+      // Get all combination sets for this product type
+      const combinationSets = ACCESSORY_MAPPING[productType] || ACCESSORY_MAPPING.laptop;
+
+      // Rotate through different combinations (you can use timestamp, random, or store in state)
+      const rotationIndex = Math.floor(Date.now() / 60000) % combinationSets.length; // Changes every minute
+      // Alternative: const rotationIndex = Math.floor(Math.random() * combinationSets.length);
+
+      const selectedCombination = combinationSets[rotationIndex];
+      console.log(`Using combination set ${rotationIndex + 1} of ${combinationSets.length}`);
+
+      // Find products for the selected combination
+      for (const accessory of selectedCombination) {
         if (complementaryProducts.length >= 2) break;
 
-        try {
-          const response = await axios.get(
-            `${config.API_URL}/api/products?search=${encodeURIComponent(searchTerm)}&limit=8`
-          );
-
-          // Find the most relevant product from this search
-          const relevantProduct = response.data.find(p => {
-            if (!p || seenProductIds.has(p._id)) return false;
-            
-            const pName = (p.name || "").toLowerCase();
-            const pCategory = (p.category?.name || "").toLowerCase();
-            
-            // Must match at least one keyword
-            const matchesKeywords = accessory.keywords.some(keyword => 
-              pName.includes(keyword) || pCategory.includes(keyword)
-            );
-            
-            // Must NOT contain any excluded words
-            const isExcluded = accessory.exclude.some(excludeWord =>
-              pName.includes(excludeWord) || pCategory.includes(excludeWord)
-            );
-
-            const isRelevantPrice = p.price > 0 && p.price < 2000;
-
-            return matchesKeywords && !isExcluded && isRelevantPrice;
-          });
-
-          if (relevantProduct) {
-            complementaryProducts.push({
-              ...relevantProduct,
-              accessoryType: accessory.category
-            });
-            seenProductIds.add(relevantProduct._id);
-            console.log(`Found ${accessory.category}: ${relevantProduct.name}`);
-            break;
-          }
-        } catch (error) {
-          console.log(`Search failed for: ${searchTerm}`, error);
-        }
-      }
-    }
-
-    // If we couldn't find both items from the selected combination, try other combinations
-    if (complementaryProducts.length < 2) {
-      console.log("Trying alternative combinations...");
-      
-      for (let i = 0; i < combinationSets.length && complementaryProducts.length < 2; i++) {
-        if (i === rotationIndex) continue; // Skip the already tried combination
-        
-        const altCombination = combinationSets[i];
-        
-        for (const accessory of altCombination) {
+        for (const searchTerm of accessory.searches) {
           if (complementaryProducts.length >= 2) break;
 
-          for (const searchTerm of accessory.searches) {
-            if (complementaryProducts.length >= 2) break;
+          try {
+            const response = await axios.get(
+              `${config.API_URL}/api/products?search=${encodeURIComponent(searchTerm)}&limit=8`
+            );
 
-            try {
-              const response = await axios.get(
-                `${config.API_URL}/api/products?search=${encodeURIComponent(searchTerm)}&limit=8`
+            // Find the most relevant product from this search
+            const relevantProduct = response.data.find(p => {
+              if (!p || seenProductIds.has(p._id)) return false;
+
+              const pName = (p.name || "").toLowerCase();
+              const pCategory = (p.category?.name || "").toLowerCase();
+
+              // Must match at least one keyword
+              const matchesKeywords = accessory.keywords.some(keyword =>
+                pName.includes(keyword) || pCategory.includes(keyword)
               );
 
-              const relevantProduct = response.data.find(p => {
-                if (!p || seenProductIds.has(p._id)) return false;
-                
-                const pName = (p.name || "").toLowerCase();
-                const pCategory = (p.category?.name || "").toLowerCase();
-                
-                const matchesKeywords = accessory.keywords.some(keyword => 
-                  pName.includes(keyword) || pCategory.includes(keyword)
-                );
-                
-                const isExcluded = accessory.exclude.some(excludeWord =>
-                  pName.includes(excludeWord) || pCategory.includes(excludeWord)
-                );
+              // Must NOT contain any excluded words
+              const isExcluded = accessory.exclude.some(excludeWord =>
+                pName.includes(excludeWord) || pCategory.includes(excludeWord)
+              );
 
-                const isRelevantPrice = p.price > 0 && p.price < 2000;
+              const isRelevantPrice = p.price > 0 && p.price < 2000;
 
-                return matchesKeywords && !isExcluded && isRelevantPrice;
+              return matchesKeywords && !isExcluded && isRelevantPrice;
+            });
+
+            if (relevantProduct) {
+              complementaryProducts.push({
+                ...relevantProduct,
+                accessoryType: accessory.category
               });
+              seenProductIds.add(relevantProduct._id);
+              console.log(`Found ${accessory.category}: ${relevantProduct.name}`);
+              break;
+            }
+          } catch (error) {
+            console.log(`Search failed for: ${searchTerm}`, error);
+          }
+        }
+      }
 
-              if (relevantProduct) {
-                complementaryProducts.push({
-                  ...relevantProduct,
-                  accessoryType: accessory.category
+      // If we couldn't find both items from the selected combination, try other combinations
+      if (complementaryProducts.length < 2) {
+        console.log("Trying alternative combinations...");
+
+        for (let i = 0; i < combinationSets.length && complementaryProducts.length < 2; i++) {
+          if (i === rotationIndex) continue; // Skip the already tried combination
+
+          const altCombination = combinationSets[i];
+
+          for (const accessory of altCombination) {
+            if (complementaryProducts.length >= 2) break;
+
+            for (const searchTerm of accessory.searches) {
+              if (complementaryProducts.length >= 2) break;
+
+              try {
+                const response = await axios.get(
+                  `${config.API_URL}/api/products?search=${encodeURIComponent(searchTerm)}&limit=8`
+                );
+
+                const relevantProduct = response.data.find(p => {
+                  if (!p || seenProductIds.has(p._id)) return false;
+
+                  const pName = (p.name || "").toLowerCase();
+                  const pCategory = (p.category?.name || "").toLowerCase();
+
+                  const matchesKeywords = accessory.keywords.some(keyword =>
+                    pName.includes(keyword) || pCategory.includes(keyword)
+                  );
+
+                  const isExcluded = accessory.exclude.some(excludeWord =>
+                    pName.includes(excludeWord) || pCategory.includes(excludeWord)
+                  );
+
+                  const isRelevantPrice = p.price > 0 && p.price < 2000;
+
+                  return matchesKeywords && !isExcluded && isRelevantPrice;
                 });
-                seenProductIds.add(relevantProduct._id);
-                console.log(`Found alternative ${accessory.category}: ${relevantProduct.name}`);
-                break;
+
+                if (relevantProduct) {
+                  complementaryProducts.push({
+                    ...relevantProduct,
+                    accessoryType: accessory.category
+                  });
+                  seenProductIds.add(relevantProduct._id);
+                  console.log(`Found alternative ${accessory.category}: ${relevantProduct.name}`);
+                  break;
+                }
+              } catch (error) {
+                console.log(`Alternative search failed for: ${searchTerm}`, error);
               }
-            } catch (error) {
-              console.log(`Alternative search failed for: ${searchTerm}`, error);
             }
           }
         }
       }
+
+      console.log("Final frequently bought together (1+2):", [
+        { name: product.name, type: 'main' },
+        ...complementaryProducts.map(p => ({
+          name: p.name,
+          accessoryType: p.accessoryType,
+          price: p.price
+        }))
+      ]);
+
+      setFrequentlyBought(complementaryProducts);
+
+      // Auto-select current product + found accessories
+      const autoSelectedItems = {
+        [product._id]: true,
+      };
+
+      complementaryProducts.forEach(item => {
+        autoSelectedItems[item._id] = true;
+      });
+
+      setSelectedBundleItems(autoSelectedItems);
+
+    } catch (error) {
+      console.error("Error fetching frequently bought products:", error);
+      setFrequentlyBought([]);
+    } finally {
+      setFrequentlyBoughtLoading(false);
     }
-
-    console.log("Final frequently bought together (1+2):", [
-      { name: product.name, type: 'main' },
-      ...complementaryProducts.map(p => ({
-        name: p.name,
-        accessoryType: p.accessoryType,
-        price: p.price
-      }))
-    ]);
-
-    setFrequentlyBought(complementaryProducts);
-
-    // Auto-select current product + found accessories
-    const autoSelectedItems = {
-      [product._id]: true,
-    };
-
-    complementaryProducts.forEach(item => {
-      autoSelectedItems[item._id] = true;
-    });
-
-    setSelectedBundleItems(autoSelectedItems);
-
-  } catch (error) {
-    console.error("Error fetching frequently bought products:", error);
-    setFrequentlyBought([]);
-  } finally {
-    setFrequentlyBoughtLoading(false);
-  }
-};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  };
 
   const handleAddBundleToCart = async () => {
     console.log("=== Add Bundle to Cart Started ===")
@@ -1850,22 +1240,22 @@ const ProductDetails = () => {
 
   const handleCallbackSubmit = async (e) => {
     e.preventDefault()
-    
+
     // Check if email verification is needed and completed
     if (emailChanged && !verificationVerified) {
       showToast("Please verify your email address", "error")
       return
     }
-    
+
     setCallbackLoading(true)
 
     try {
       // Get product link
       const productLink = `${window.location.origin}/product/${product.slug || product._id}`
-      
+
       // Extract country code from phone number (e.g., "+971501234567" -> "+971")
       const countryCode = phoneValue ? phoneValue.split(/\d/)[0] : ""
-      
+
       await axios.post(`${config.API_URL}/api/request-callback`, {
         name: callbackForm.name,
         email: callbackForm.email,
@@ -1880,9 +1270,9 @@ const ProductDetails = () => {
       setTimeout(() => {
         setShowCallbackModal(false)
         setCallbackSuccess(false)
-        setCallbackForm({ 
-          name: user?.name || "", 
-          email: user?.email || "", 
+        setCallbackForm({
+          name: user?.name || "",
+          email: user?.email || "",
           phone: "",
           customerNote: ""
         })
@@ -1902,12 +1292,12 @@ const ProductDetails = () => {
 
   const handleCallbackChange = (e) => {
     const { name, value } = e.target
-    
+
     // Check if email is being changed
     if (name === 'email') {
       // Get the logged-in user's email (if logged in)
       const loggedInEmail = user?.email || ""
-      
+
       // If user is logged in
       if (loggedInEmail !== "") {
         // Compare entered email with logged-in user's email ONLY
@@ -1937,13 +1327,13 @@ const ProductDetails = () => {
         }
       }
     }
-    
+
     setCallbackForm((prev) => ({
       ...prev,
       [name]: value,
     }))
   }
-  
+
   const handleSendVerificationCode = async () => {
     setVerificationLoading(true)
     try {
@@ -1959,7 +1349,7 @@ const ProductDetails = () => {
       setVerificationLoading(false)
     }
   }
-  
+
   const handleVerifyCode = async () => {
     setVerificationLoading(true)
     try {
@@ -2016,7 +1406,7 @@ const ProductDetails = () => {
     const shuffled = [...array]
     for (let i = shuffled.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1))
-      ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+        ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
     }
     return shuffled
   }
@@ -2098,7 +1488,7 @@ const ProductDetails = () => {
     switch (product.stockStatus) {
       case "Available Product":
         return (
-          <span className={baseClass + " bg-lime-500 text-white"}>In Stock</span>
+          <span className={baseClass + " bg-[#d9a82e] text-white"}>In Stock</span>
         );
       case "Out of Stock":
         return (
@@ -2140,11 +1530,11 @@ const ProductDetails = () => {
   } // end getDiscountBadge
 
   return (
-    <div className="bg-white min-h-screen">
+    <div className="bg-white min-h-screen ">
       <SEO title={pdTitle} description={pdDescription} canonicalPath={pdCanonicalPath} image={product.image} />
-      <div className="max-w-8xl mx-auto px-4 py-6">
+      <div className="max-w-8xl mx-auto  px-4 py-6">
         {/* Breadcrumb */}
-        <nav className="flex items-center space-x-2 text-sm text-gray-600 mb-6 overflow-x-auto">
+        <nav className="flex items-center p-4 rounded bg-white space-x-2 text-sm text-gray-600 overflow-x-auto">
           <Link to="/" className="hover:text-green-600 whitespace-nowrap">
             Home
           </Link>
@@ -2152,7 +1542,7 @@ const ProductDetails = () => {
           <Link to="/shop" className="hover:text-green-600 whitespace-nowrap">
             Shop
           </Link>
-          
+
           {/* Parent Category */}
           {product.parentCategory && (
             <>
@@ -2165,7 +1555,7 @@ const ProductDetails = () => {
               </Link>
             </>
           )}
-          
+
           {/* Subcategory Level 1 */}
           {product.category && (
             <>
@@ -2178,7 +1568,7 @@ const ProductDetails = () => {
               </Link>
             </>
           )}
-          
+
           {/* Subcategory Level 2 */}
           {product.subCategory2 && (
             <>
@@ -2191,7 +1581,7 @@ const ProductDetails = () => {
               </Link>
             </>
           )}
-          
+
           {/* Subcategory Level 3 */}
           {product.subCategory3 && (
             <>
@@ -2204,7 +1594,7 @@ const ProductDetails = () => {
               </Link>
             </>
           )}
-          
+
           {/* Subcategory Level 4 */}
           {product.subCategory4 && (
             <>
@@ -2217,15 +1607,586 @@ const ProductDetails = () => {
               </Link>
             </>
           )}
-          
+
           <span>/</span>
           <span className="text-black block truncate max-w-[120px] sm:max-w-none whitespace-nowrap">{product.name}</span>
         </nav>
 
         {/* Product Images and Info Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-3">
-          {/* Product Images - Left Side */}
-          <div className="lg:col-span-4">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 lg:p-5">
+
+          {/* Product Info - Left Half */}
+          <div className="lg:col-span-8 lg:p-5 order-2 lg:order-1">
+            <div className="bg-white rounded-lg p-2">
+              {/* Status Badges */}
+              <div className="flex items-center gap-2 mb-4">
+                <div className="flex items-center gap-2">
+                  {getStockBadge()}
+                  {getDiscountBadge()}
+                </div>
+              </div>
+              <h1 className="text-xl font-bold text-gray-900 mb-4">{product.name}</h1>
+
+              {/* Brand and Category */}
+              <div className="flex items-center gap-4 mb-4 text-sm">
+                <span className="text-gray-600">
+                  Brand:{" "}
+                  <span className="font-medium text-green-600">{product.brand?.name || product.brand || "N/A"}</span>
+                </span>
+                <span className="text-gray-600">
+                  Category:{" "}
+                  <span className="font-medium text-green-600">
+                    {product.category?.name || product.category || "N/A"}
+                  </span>
+                </span>
+                <span className="text-gray-600">
+                  SKU: <span className="font-medium text-green-600">{product.sku || "N/A"}</span>
+                </span>
+              </div>
+
+              {/* Rating */}
+              <div className="flex items-center space-x-2 mb-4">
+                <div
+                  ref={ratingDropdownRef}
+                  className={`flex items-center relative ${isMobile ? "cursor-pointer" : ""}`}
+                  onMouseEnter={() => !isMobile && setShowRatingDropdown(true)}
+                  onMouseLeave={() => !isMobile && setShowRatingDropdown(false)}
+                  onClick={handleRatingInteraction}
+                >
+                  {[...Array(5)].map((_, i) => (
+                    <Star
+                      key={i}
+                      size={24}
+                      className={`${i < Math.floor(reviewStats.averageRating || 0)
+                          ? "text-yellow-400 fill-current"
+                          : "text-gray-300"
+                        } cursor-pointer  hover:scale-110 transition-transform duration-200`}
+                      onClick={(e) => {
+                        e.stopPropagation() // Prevent triggering the parent div's onClick
+                        scrollToReviewSection()
+                      }}
+                    />
+                  ))}
+
+                  {/* Rating Breakdown Dropdown */}
+                  {showRatingDropdown && (
+                    <div className="absolute top-full left-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg p-4 z-50 min-w-[200px]">
+                      <div className="text-sm font-medium text-gray-700 mb-2">Rating Breakdown</div>
+                      {(() => {
+                        const distribution = getRatingDistribution()
+                        return [5, 4, 3, 2, 1].map((rating) => (
+                          <div
+                            key={rating}
+                            className="flex items-center justify-between py-1 cursor-pointer hover:bg-gray-50 rounded px-2 transition-colors"
+                            onClick={() => handleStarRatingClick(rating)}
+                          >
+                            <div className="flex items-center space-x-1">
+                              {[...Array(5)].map((_, i) => (
+                                <Star
+                                  key={i}
+                                  size={14}
+                                  className={i < rating ? "text-yellow-400 fill-current" : "text-gray-300"}
+                                />
+                              ))}
+                            </div>
+                            <span className="text-sm font-medium text-gray-700">({distribution[rating] || 0})</span>
+                          </div>
+                        ))
+                      })()}
+                      {isMobile && <div className="text-xs text-gray-500 mt-2 border-t pt-2">Tap outside to close</div>}
+                    </div>
+                  )}
+                </div>
+                <span
+                  className="text-sm text-gray-600 cursor-pointer hover:text-blue-600 transition-colors"
+                  onClick={scrollToReviewSection}
+                >
+                  ({reviewStats.totalReviews || 0} {reviewStats.totalReviews === 1 ? "review" : "reviews"})
+                </span>
+
+
+              </div>
+
+              {/* Price */}
+              <div className="mb-6">
+                {(() => {
+                  const currentColor = getCurrentColor()
+                  let basePrice = 0
+                  let offerPrice = 0
+
+                  if (currentColor) {
+                    basePrice = Number(currentColor.price) || 0
+                    offerPrice = Number(currentColor.offerPrice) || 0
+                  } else {
+                    basePrice = Number(product.price) || 0
+                    offerPrice = Number(product.offerPrice) || 0
+                  }
+
+                  const hasValidOffer = offerPrice > 0 && basePrice > 0 && offerPrice < basePrice
+                  const priceToShow = getEffectivePrice()
+                  const discount = hasValidOffer ? Math.round(((basePrice - offerPrice) / basePrice) * 100) : 0
+
+                  return (
+                    <>
+                      {/* First line: Prices */}
+                      <div className="flex items-center space-x-3 mb-2">
+                        <div className="text-3xl font-bold text-red-600">{formatPrice(priceToShow)}</div>
+                        {hasValidOffer && (
+                          <div className="text-xl text-gray-500 line-through font-medium">{formatPrice(basePrice)}</div>
+                        )}
+                      </div>
+
+                      {/* Second line: Including VAT, You Save, and Stock Status */}
+                      <div className="flex items-center flex-wrap gap-3">
+                        <div className="text-md text-black">Including VAT</div>
+                        {hasValidOffer && (
+                          <div className="text-md text-emerald-800 font-medium">
+                            You Save {formatPrice(basePrice - priceToShow)}
+                            {discount > 0 && ` (${discount}%)`}
+                          </div>
+                        )}
+                        <div
+                          className={`font-medium text-md ${product.stockStatus === "Available Product"
+                              ? "text-green-600"
+                              : product.stockStatus === "Out of Stock"
+                                ? "text-red-600"
+                                : "text-orange-600"
+                            }`}
+                        >
+                          {product.stockStatus === "Available Product" && "Available in stock"}
+                          {product.stockStatus === "Out of Stock" && "Currently out of stock"}
+                          {product.stockStatus === "PreOrder" && "Available for pre-order"}
+                        </div>
+                      </div>
+                    </>
+                  )
+                })()}
+              </div>
+
+
+
+              {/* Color Variations */}
+              {product.colorVariations && product.colorVariations.length > 0 && (
+                <div className="mb-6">
+                  <h3 className="font-bold text-gray-900 mb- flex items-center">
+                    <span className="text-purple-600 mr-2"></span>
+                    Color: {selectedColorIndex !== null && product.colorVariations[selectedColorIndex]?.color ? product.colorVariations[selectedColorIndex].color : "Select Color"}
+                  </h3>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+                    {product.colorVariations
+                      .filter(colorVar => colorVar.color)
+                      .map((colorVar, index) => {
+                        const isSelected = index === selectedColorIndex
+                        const colorPrice = colorVar.offerPrice > 0 ? colorVar.offerPrice : colorVar.price
+
+                        return (
+                          <button
+                            key={index}
+                            type="button"
+                            onClick={() => {
+                              // Toggle: if already selected, deselect to show original product
+                              setSelectedColorIndex(isSelected ? null : index)
+                              setSelectedImage(0)
+                            }}
+                            className={`relative border-2 rounded-lg p-3 transition-all duration-200 hover:shadow-lg ${isSelected
+                                ? 'border-purple-500 bg-purple-50'
+                                : 'border-gray-200 hover:border-purple-300'
+                              }`}
+                          >
+                            {/* Product Image */}
+                            <div className="aspect-square mb-2 bg-white rounded-md overflow-hidden">
+                              <img
+                                src={getFullImageUrl(colorVar.image) || "/placeholder.svg"}
+                                alt={colorVar.color}
+                                className="w-full h-full object-contain"
+                              />
+                            </div>
+
+                            {/* Color Name */}
+                            <p className={`text-xs font-semibold text-center mb-1 ${isSelected ? 'text-purple-700' : 'text-gray-700'
+                              }`}>
+                              {colorVar.color}
+                            </p>
+
+                            {/* Price */}
+                            <p className="text-sm font-bold text-center text-gray-900">
+                              {formatPrice(colorPrice)}
+                            </p>
+
+                            {/* Current Selection Indicator */}
+                            {isSelected && (
+                              <div className="absolute top-1 right-1 bg-purple-500 text-white rounded-full p-1">
+                                <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                </svg>
+                              </div>
+                            )}
+
+                            {/* Stock Badge */}
+                            {colorVar.countInStock <= 0 && (
+                              <div className="absolute bottom-2 left-2 right-2 bg-red-500 text-white text-xs py-1 px-2 rounded text-center">
+                                Out of Stock
+                              </div>
+                            )}
+                          </button>
+                        )
+                      })}
+                  </div>
+                  <p className="text-xs text-gray-600 mt-3">
+                    Select a color to view its image and price
+                  </p>
+                </div>
+              )}
+
+              {/* DOS/Windows Variations */}
+              {product.dosVariations && product.dosVariations.length > 0 && (
+                <div className="mb-6">
+                  <h3 className="font-bold text-gray-900 mb-3 flex items-center">
+                    <span className="text-blue-600 mr-2">💻</span>
+                    Windows: {selectedDosIndex !== null && product.dosVariations[selectedDosIndex]?.dosType ? product.dosVariations[selectedDosIndex].dosType : "Select Option"}
+                  </h3>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+                    {product.dosVariations
+                      .filter(dosVar => dosVar.dosType)
+                      .map((dosVar, index) => {
+                        const isSelected = index === selectedDosIndex
+                        const dosPrice = dosVar.offerPrice > 0 ? dosVar.offerPrice : dosVar.price
+
+                        return (
+                          <button
+                            key={index}
+                            type="button"
+                            onClick={() => {
+                              // Toggle: if already selected, deselect to show original product
+                              setSelectedDosIndex(isSelected ? null : index)
+                              setSelectedImage(0)
+                            }}
+                            className={`relative border-2 rounded-lg p-3 transition-all duration-200 hover:shadow-lg ${isSelected
+                                ? 'border-blue-500 bg-blue-50'
+                                : 'border-gray-200 hover:border-blue-300'
+                              }`}
+                          >
+                            {/* Product Image */}
+
+
+                            {/* OS Type Name */}
+                            <p className={`text-xs font-semibold text-center mb-1 ${isSelected ? 'text-blue-700' : 'text-gray-700'
+                              }`}>
+                              {dosVar.dosType}
+                            </p>
+
+                            {/* Price */}
+                            <p className="text-sm font-bold text-center text-gray-900">
+                              {formatPrice(dosPrice)}
+                            </p>
+
+                            {/* Current Selection Indicator */}
+                            {isSelected && (
+                              <div className="absolute top-1 right-1 bg-blue-500 text-white rounded-full p-1">
+                                <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                </svg>
+                              </div>
+                            )}
+
+                            {/* Stock Badge */}
+                            {dosVar.countInStock <= 0 && (
+                              <div className="absolute bottom-2 left-2 right-2 bg-red-500 text-white text-xs py-1 px-2 rounded text-center">
+                                Out of Stock
+                              </div>
+                            )}
+                          </button>
+                        )
+                      })}
+                  </div>
+                  <p className="text-xs text-gray-600 mt-3">
+                    Select an OS option to view its image and price
+                  </p>
+                </div>
+              )}
+
+              {/* Product Variations */}
+              {product.variations && product.variations.length > 0 && (
+                <div className="mb-6">
+                  <h3 className="font-bold text-gray-900 mb-3 flex items-center">
+                    <span className="text-blue-600 mr-2"></span>
+                    Available Options:
+                  </h3>
+                  <div className="flex flex-wrap gap-3 ">
+                    {/* Combine current product and all variations, then sort alphabetically */}
+                    {(() => {
+                      // Build array of all variations including current product
+                      const allVariations = []
+
+                      // Add current product if it has selfVariationText (or fallback to reverseVariationText)
+                      const currentProductText = product.selfVariationText || product.reverseVariationText
+                      if (currentProductText) {
+                        allVariations.push({
+                          id: product._id,
+                          text: currentProductText,
+                          slug: product.slug,
+                          isCurrent: true
+                        })
+                      }
+
+                      // Add other variations - use their selfVariationText, fallback to variationText
+                      product.variations
+                        .filter(variation => {
+                          const varProduct = variation.product
+                          if (!varProduct) return false
+                          // Get the text: prefer selfVariationText from the product, fallback to variationText
+                          const varText = (typeof varProduct === 'object' && (varProduct.selfVariationText || varProduct.reverseVariationText))
+                            || variation.variationText
+                            || ""
+                          return varText.trim() !== ""
+                        })
+                        .forEach(variation => {
+                          const varProduct = variation.product
+                          const varId = typeof varProduct === 'object' ? varProduct._id : varProduct
+                          const varSlug = typeof varProduct === 'object' ? varProduct.slug : null
+                          // Get the text: prefer selfVariationText from the product, fallback to variationText
+                          const varText = (typeof varProduct === 'object' && (varProduct.selfVariationText || varProduct.reverseVariationText))
+                            || variation.variationText
+                            || ""
+
+                          allVariations.push({
+                            id: varId,
+                            text: varText,
+                            slug: varSlug || varId,
+                            isCurrent: false
+                          })
+                        })
+
+                      // Sort alphabetically by text to maintain consistent order
+                      allVariations.sort((a, b) => a.text.localeCompare(b.text))
+
+                      return allVariations.map((variation) => (
+                        <div key={variation.id} className="relative">
+                          {variation.isCurrent ? (
+                            <div className="px-5 py-2 bg-blue-200 text-gray-700 rounded-lg font-medium text-sm border-2 border-blue-400 cursor-default">
+                              {variation.text}
+                            </div>
+                          ) : (
+                            <Link
+                              to={`/product/${encodeURIComponent(variation.slug)}`}
+                              className="block px-5 py-2 bg-white text-gray-700 rounded-lg font-medium text-sm border border-gray-400 hover:bg-blue-100 hover:border-blue-400 transition-all duration-200"
+                            >
+                              {variation.text}
+                            </Link>
+                          )}
+                        </div>
+                      ))
+                    })()}
+                  </div>
+                  <p className="text-xs text-gray-600 mt-3">
+                    Click on any variation to view its details
+                  </p>
+                </div>
+              )}
+
+
+              {/* Key Features */}
+              {product.shortDescription && (
+                <div className="mb-6">
+                  <h3 className="font-bold text-gray-900 mb-3">Key Features:</h3>
+                  <div className="max-h-48 overflow-y-auto pr-2 custom-scrollbar">
+                    <TipTapRenderer
+                      content={product.shortDescription}
+                      className="text-sm"
+                    />
+                  </div>
+                  <style jsx>{`
+                    .custom-scrollbar::-webkit-scrollbar {
+                      width: 6px;
+                    }
+                    .custom-scrollbar::-webkit-scrollbar-track {
+                      background: #f1f1f1;
+                      border-radius: 10px;
+                    }
+                    .custom-scrollbar::-webkit-scrollbar-thumb {
+                      background: #2377c1;
+                      border-radius: 10px;
+                    }
+                    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+                      background: #1a5a8f;
+                    }
+                  `}</style>
+                </div>
+              )}
+
+              {/* Tabby/Tamara info rows (triggers) */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+                {/* Tamara row */}
+                <button
+                  type="button"
+                  onClick={() => setShowTamaraModal(true)}
+                  className="w-full text-left hover:opacity-90 transition-opacity"
+                >
+                  <div className="border rounded-xl p-4 bg-gradient-to-r from-pink-50 to-purple-50 flex items-start gap-3">
+                    <div className="flex-shrink-0 w-10 h-10  rounded-lg flex items-center justify-center shadow-sm">
+                      <span className="text-4xl">💳</span>
+                    </div>
+                    <div className="flex-1">
+                      <div className="text-sm text-gray-800 leading-relaxed">
+                        Pay in 4 simple, interest free payments of{" "}
+                        <span className="font-bold text-gray-900">{formatPerMonth(getEffectivePrice() / 4)}</span>
+                        <br />
+                        <span className="text-blue-600 underline font-medium">Learn more</span>
+                      </div>
+                    </div>
+                    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold text-white bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400 shadow-sm">
+                      tamara
+                    </span>
+                  </div>
+                </button>
+
+                {/* Tabby row */}
+                <button
+                  type="button"
+                  onClick={() => setShowTabbyModal(true)}
+                  className="w-full text-left hover:opacity-90 transition-opacity"
+                >
+                  <div className="border rounded-xl p-4 bg-gradient-to-r from-emerald-50 to-teal-50 flex items-start gap-3">
+                    <div className="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center shadow-sm">
+                      <span className="text-4xl">💰</span>
+                    </div>
+                    <div className="flex-1">
+                      <div className="text-sm text-gray-800 leading-relaxed">
+                        As low as{" "}
+                        <span className="font-bold text-gray-900">{formatPerMonth(getEffectivePrice() / 12)}</span> or
+                        4 interest-free payments.
+                        <br />
+                        <span className="text-blue-600 underline font-medium">Learn more</span>
+                      </div>
+                    </div>
+                    <span className="inline-flex items-center px-3 py-1 rounded-md text-xs font-extrabold text-white bg-emerald-600 shadow-sm">
+                      tabby
+                    </span>
+                  </div>
+                </button>
+              </div>
+
+              {/* Quantity and Add to Cart */}
+              <div className="mb-6">
+                {/* Mobile: 2 rows, Desktop: 1 row */}
+                <div className="flex flex-col lg:flex-row items-center gap-2">
+                  {/* Quantity Selector */}
+                  <div className="w-full lg:w-auto flex items-center border-2 border-black rounded-lg bg-yellow-300">
+                    <button
+                      onClick={() => handleQuantityChange(-1)}
+                      className="flex-1 lg:flex-none lg:px-3 py-2 text-gray-600 hover:text-red-600 transition-colors flex items-center justify-center"
+                      disabled={quantity <= 1}
+                    >
+                      <Minus size={16} />
+                    </button>
+                    <span className="flex-1 lg:flex-none lg:px-4 py-2 border-l border-r border-black lg:min-w-[60px] text-center font-medium">
+                      {quantity}
+                    </span>
+                    <button
+                      onClick={() => handleQuantityChange(1)}
+                      className="flex-1 lg:flex-none lg:px-3 py-2 text-gray-600 hover:text-green-600 transition-colors flex items-center justify-center"
+                      disabled={quantity >= (product.maxPurchaseQty || 10)}
+                    >
+                      <Plus size={16} />
+                    </button>
+                  </div>
+
+                  {/* Add to Cart Button */}
+                  <button
+                    onClick={handleAddToCart}
+                    disabled={product.stockStatus === "Out of Stock"}
+                    className="w-full lg:flex-1 bg-[#d9a82e] hover:bg-[#1a5a8f] disabled:bg-gray-400 text-white py-3 px-4 rounded-lg font-medium transition-colors flex items-center justify-center"
+                  >
+                    <ShoppingCart size={22} className="mr-2" />
+                    <span className="hidden sm:inline">Add to Cart</span>
+                  </button>
+
+                  {/* Wishlist Button */}
+                  <button
+                    onClick={() =>
+                      isInWishlist(product._id) ? removeFromWishlist(product._id) : addToWishlist(product)
+                    }
+                    className={`w-full lg:w-auto flex items-center justify-center py-3 px-4 rounded-lg border transition-colors ${isInWishlist(product._id)
+                        ? "bg-red-500 border-red-500 hover:bg-red-600"
+                        : "bg-white border-red-500 hover:bg-gray-50"
+                      }`}
+                    aria-label={isInWishlist(product._id) ? "Remove from wishlist" : "Add to wishlist"}
+                  >
+                    <Heart
+                      size={20}
+                      className={isInWishlist(product._id) ? "text-red-500 fill-white" : "text-white fill-red-400"}
+                    />
+                  </button>
+
+                  {/* Buy Now Button */}
+                  <button
+                    disabled={product.stockStatus === "Out of Stock"}
+                    className="w-full lg:flex-1 bg-orange-600 hover:bg-orange-700 disabled:bg-gray-400 text-white py-3 px-4 rounded-lg font-medium transition-colors"
+                    onClick={handleBuyNow}
+                  >
+                    Buy Now
+                  </button>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-3 gap-4 py-4 text-center">
+                {/* WhatsApp Chat */}
+                <div className="border-2 border-gray-300 rounded-lg p-2 transition-transform duration-200 hover:scale-105 hover:shadow-md group overflow-hidden">
+                  <button
+                    className="flex flex-col items-center text-gray-600 hover:text-green-600 w-full"
+                    onClick={() =>
+                      window.open(
+                        `https://wa.me/${WHATSAPP_NUMBER}?text=Hi%2C%20I%20need%20help%20with%20this%20product%3A%20${encodeURIComponent(product.name)}`,
+                        "_blank",
+                      )
+                    }
+                  >
+                    <MessageCircle
+                      size={24}
+                      className="mb-2 text-[#2377c1] transform transition-transform duration-300 group-hover:-translate-y-1"
+                    />
+                    <span className="text-xs text-black font-medium group-hover:text-[#2377c1]">
+                      Chat With Specialist
+                    </span>
+                  </button>
+                </div>
+
+                {/* Callback Request */}
+                <div className="border-2 border-gray-300 rounded-lg p-2 transition-transform duration-200 hover:scale-105 hover:shadow-md group overflow-hidden">
+                  <button
+                    className="flex flex-col items-center text-gray-600 hover:text-blue-600 w-full"
+                    onClick={() => setShowCallbackModal(true)}
+                  >
+                    <Phone
+                      size={24}
+                      className="mb-2 text-[#2377c1] transform transition-transform duration-300 group-hover:-translate-y-1"
+                    />
+                    <span className="text-xs text-black font-medium group-hover:text-[#2377c1]">Request a Callback</span>
+                  </button>
+                </div>
+
+                {/* Bulk Purchase */}
+                <div className="border-2 border-gray-300 rounded-lg p-2 transition-transform duration-200 hover:scale-105 hover:shadow-md group overflow-hidden">
+                  <button
+                    type="button"
+                    className="flex flex-col items-center w-full focus:outline-none group"
+                    onClick={() => navigate("/bulk-purchase")}
+                  >
+                    <Shield
+                      className="mx-auto mb-2 text-[#2377c1] transform transition-transform duration-300 group-hover:-translate-y-1"
+                      size={24}
+                    />
+                    <span className="text-xs font-medium group-hover:text-[#2377c1] transition-colors">
+                      Request Bulk Purchase
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Product Images - Right Half */}
+          <div className="lg:col-span-4 lg:p-6 order-1 lg:order-2">
             <div className="rounded-lg ">
               {/* Main Image/Video */}
               <div className="relative rounded-lg p-4 group mb-4">
@@ -2284,7 +2245,6 @@ const ProductDetails = () => {
               </div>
 
 
-          
 
 
 
@@ -2297,8 +2257,9 @@ const ProductDetails = () => {
 
 
 
-          
-          
+
+
+
 
               {/* Thumbnail Images */}
               {productImages.length > 1 && (
@@ -2306,7 +2267,7 @@ const ProductDetails = () => {
                   {/* Left Arrow */}
                   {thumbScroll > 0 && (
                     <button
-                      className="absolute  left-0 top-1/2 -translate-y-1/2 z-10 bg-lime-500  shadow rounded-full p-1"
+                      className="absolute  left-0 top-1/2 -translate-y-1/2 z-10 bg-[#d9a82e]  shadow rounded-full p-1"
                       onClick={() => {
                         if (thumbnailRowRef.current) {
                           thumbnailRowRef.current.scrollBy({ left: -100, behavior: "smooth" })
@@ -2327,18 +2288,17 @@ const ProductDetails = () => {
                       <button
                         key={index}
                         onClick={() => setSelectedImage(index)}
-                        className={`relative flex-shrink-0 w-16 h-16 border-2 rounded-lg overflow-hidden transition-all  ${
-                          selectedImage === index
+                        className={`relative flex-shrink-0 w-16 h-16 border-2 rounded-lg overflow-hidden transition-all  ${selectedImage === index
                             ? "border-green-500 ring-2 ring-green-200"
                             : "border-gray-200 hover:border-gray-300"
-                        }`}
+                          }`}
                       >
                         {media?.type === 'video' ? (
                           <>
                             {isYouTubeUrl(media.url) ? (
                               <img
-                                src={`https://img.youtube.com/vi/${media.url.includes('youtu.be/') 
-                                  ? media.url.split('youtu.be/')[1]?.split('?')[0] 
+                                src={`https://img.youtube.com/vi/${media.url.includes('youtu.be/')
+                                  ? media.url.split('youtu.be/')[1]?.split('?')[0]
                                   : media.url.split('v=')[1]?.split('&')[0]}/mqdefault.jpg`}
                                 alt="YouTube video thumbnail"
                                 className="w-full h-full object-cover"
@@ -2368,9 +2328,9 @@ const ProductDetails = () => {
                   {/* Right Arrow */}
                   {thumbnailRowRef.current &&
                     thumbnailRowRef.current.scrollLeft + thumbnailRowRef.current.offsetWidth <
-                      thumbnailRowRef.current.scrollWidth && (
+                    thumbnailRowRef.current.scrollWidth && (
                       <button
-                        className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-lime-500 shadow rounded-full p-1"
+                        className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-[#d9a82e] shadow rounded-full p-1"
                         onClick={() => {
                           if (thumbnailRowRef.current) {
                             thumbnailRowRef.current.scrollBy({ left: 100, behavior: "smooth" })
@@ -2391,623 +2351,67 @@ const ProductDetails = () => {
 
 
             {/* Product Video Section - Only show if product has video */}
-              {product?.video && (
-                <div 
-                  className="mt-12 border border-gray-200 rounded-lg overflow-hidden cursor-pointer group"
-                  onClick={() => setShowVideoModal(true)}
-                >
-                  <div className="bg-gray-100 px-4 py-2 border-b border-gray-200 flex items-center justify-between">
-                    <h4 className="font-bold text-gray-900 text-sm flex items-center gap-2">
-                      <svg className="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
-                      </svg>
-                      Product Video
-                    </h4>
-                    <span className="text-xs text-gray-500 group-hover:text-blue-600">Click to expand</span>
-                  </div>
-                  <div className="aspect-video w-full bg-black relative">
-                    {isYouTubeUrl(product.video) ? (
-                      <iframe
-                        src={`${getYouTubeEmbedUrl(product.video)}?autoplay=1&mute=1`}
-                        title="Product Video"
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowFullScreen
-                        className="w-full h-full pointer-events-none"
-                      ></iframe>
-                    ) : (
-                      <video
-                        src={getFullImageUrl(product.video)}
-                        autoPlay
-                        muted
-                        loop
-                        className="w-full h-full object-contain pointer-events-none"
-                        poster={getFullImageUrl(product.image)}
-                      >
-                        Your browser does not support the video tag.
-                      </video>
-                    )}
-                    {/* Overlay for click */}
-                    <div className="absolute inset-0 bg-transparent group-hover:bg-black group-hover:bg-opacity-20 transition-all flex items-center justify-center">
-                      <div className="opacity-0 group-hover:opacity-100 transition-opacity bg-white bg-opacity-90 rounded-full p-3">
-                        <svg className="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
+            {product?.video && (
+              <div
+                className="mt-12 border border-gray-200 rounded-lg overflow-hidden cursor-pointer group"
+                onClick={() => setShowVideoModal(true)}
+              >
+                <div className="bg-gray-100 px-4 py-2 border-b border-gray-200 flex items-center justify-between">
+                  <h4 className="font-bold text-gray-900 text-sm flex items-center gap-2">
+                    <svg className="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
+                    </svg>
+                    Product Video
+                  </h4>
+                  <span className="text-xs text-gray-500 group-hover:text-blue-600">Click to expand</span>
                 </div>
-              )}
-
-
-
-
-
-          </div>
-          
-
-          {/* Product Info - Middle */}
-          <div className="lg:col-span-5">
-            <div className="bg-white rounded-lg p-2">
-              {/* Status Badges */}
-              <div className="flex items-center gap-2 mb-4">
-                <div className="flex items-center gap-2">
-                  {getStockBadge()}
-                  {getDiscountBadge()}
-                </div>
-              </div>
-              <h1 className="text-xl font-bold text-gray-900 mb-4">{product.name}</h1>
-
-              {/* Brand and Category */}
-              <div className="flex items-center gap-4 mb-4 text-sm">
-                <span className="text-gray-600">
-                  Brand:{" "}
-                  <span className="font-medium text-green-600">{product.brand?.name || product.brand || "N/A"}</span>
-                </span>
-                <span className="text-gray-600">
-                  Category:{" "}
-                  <span className="font-medium text-green-600">
-                    {product.category?.name || product.category || "N/A"}
-                  </span>
-                </span>
-                <span className="text-gray-600">
-                  SKU: <span className="font-medium text-green-600">{product.sku || "N/A"}</span>
-                </span>
-              </div>
-
-              {/* Rating */}
-              <div className="flex items-center space-x-2 mb-4">
-                <div
-                  ref={ratingDropdownRef}
-                  className={`flex items-center relative ${isMobile ? "cursor-pointer" : ""}`}
-                  onMouseEnter={() => !isMobile && setShowRatingDropdown(true)}
-                  onMouseLeave={() => !isMobile && setShowRatingDropdown(false)}
-                  onClick={handleRatingInteraction}
-                >
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      size={24}
-                      className={`${
-                        i < Math.floor(reviewStats.averageRating || 0)
-                          ? "text-yellow-400 fill-current"
-                          : "text-gray-300"
-                      } cursor-pointer  hover:scale-110 transition-transform duration-200`}
-                      onClick={(e) => {
-                        e.stopPropagation() // Prevent triggering the parent div's onClick
-                        scrollToReviewSection()
-                      }}
-                    />
-                  ))}
-
-                  {/* Rating Breakdown Dropdown */}
-                  {showRatingDropdown && (
-                    <div className="absolute top-full left-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg p-4 z-50 min-w-[200px]">
-                      <div className="text-sm font-medium text-gray-700 mb-2">Rating Breakdown</div>
-                      {(() => {
-                        const distribution = getRatingDistribution()
-                        return [5, 4, 3, 2, 1].map((rating) => (
-                          <div
-                            key={rating}
-                            className="flex items-center justify-between py-1 cursor-pointer hover:bg-gray-50 rounded px-2 transition-colors"
-                            onClick={() => handleStarRatingClick(rating)}
-                          >
-                            <div className="flex items-center space-x-1">
-                              {[...Array(5)].map((_, i) => (
-                                <Star
-                                  key={i}
-                                  size={14}
-                                  className={i < rating ? "text-yellow-400 fill-current" : "text-gray-300"}
-                                />
-                              ))}
-                            </div>
-                            <span className="text-sm font-medium text-gray-700">({distribution[rating] || 0})</span>
-                          </div>
-                        ))
-                      })()}
-                      {isMobile && <div className="text-xs text-gray-500 mt-2 border-t pt-2">Tap outside to close</div>}
-                    </div>
+                <div className="aspect-video w-full bg-black relative">
+                  {isYouTubeUrl(product.video) ? (
+                    <iframe
+                      src={`${getYouTubeEmbedUrl(product.video)}?autoplay=1&mute=1`}
+                      title="Product Video"
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                      className="w-full h-full pointer-events-none"
+                    ></iframe>
+                  ) : (
+                    <video
+                      src={getFullImageUrl(product.video)}
+                      autoPlay
+                      muted
+                      loop
+                      className="w-full h-full object-contain pointer-events-none"
+                      poster={getFullImageUrl(product.image)}
+                    >
+                      Your browser does not support the video tag.
+                    </video>
                   )}
-                </div>
-                <span
-                  className="text-sm text-gray-600 cursor-pointer hover:text-blue-600 transition-colors"
-                  onClick={scrollToReviewSection}
-                >
-                  ({reviewStats.totalReviews || 0} {reviewStats.totalReviews === 1 ? "review" : "reviews"})
-                </span>
-              </div>
-
-              {/* Price */}
-              <div className="mb-6">
-                {(() => {
-                  const currentColor = getCurrentColor()
-                  let basePrice = 0
-                  let offerPrice = 0
-                  
-                  if (currentColor) {
-                    basePrice = Number(currentColor.price) || 0
-                    offerPrice = Number(currentColor.offerPrice) || 0
-                  } else {
-                    basePrice = Number(product.price) || 0
-                    offerPrice = Number(product.offerPrice) || 0
-                  }
-                  
-                  const hasValidOffer = offerPrice > 0 && basePrice > 0 && offerPrice < basePrice
-                  const priceToShow = getEffectivePrice()
-                  const discount = hasValidOffer ? Math.round(((basePrice - offerPrice) / basePrice) * 100) : 0
-
-                  return (
-                    <>
-                      <div className="flex items-center space-x-3 mb-2">
-                        <div className="text-3xl font-bold text-red-600">{formatPrice(priceToShow)}</div>
-                        {hasValidOffer && (
-                          <div className="text-xl text-gray-500 line-through font-medium">{formatPrice(basePrice)}</div>
-                        )}
-                      </div>
-                      <div className="text-md text-black">Including VAT</div>
-                      {hasValidOffer && (
-                        <div className="text-lg text-emerald-800 font-medium">
-                          You Save {formatPrice(basePrice - priceToShow)}
-                          {discount > 0 && ` (${discount}%)`}
-                        </div>
-                      )}
-                    </>
-                  )
-                })()}
-              </div>
-
-              {/* Stock Status */}
-              <div className="mb-6">
-                <div
-                  className={`font-medium text-lg ${
-                    product.stockStatus === "Available Product"
-                      ? "text-green-600"
-                      : product.stockStatus === "Out of Stock"
-                        ? "text-red-600"
-                        : "text-orange-600"
-                  }`}
-                >
-                  {product.stockStatus === "Available Product" && "Available in stock"}
-                  {product.stockStatus === "Out of Stock" && "Currently out of stock"}
-                  {product.stockStatus === "PreOrder" && "Available for pre-order"}
-                </div>
-              </div>
-
-          
-
-              {/* Color Variations */}
-              {product.colorVariations && product.colorVariations.length > 0 && (
-                <div className="mb-6">
-                  <h3 className="font-bold text-gray-900 mb- flex items-center">
-                    <span className="text-purple-600 mr-2"></span>
-                    Color: {selectedColorIndex !== null && product.colorVariations[selectedColorIndex]?.color ? product.colorVariations[selectedColorIndex].color : "Select Color"}
-                  </h3>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
-                    {product.colorVariations
-                      .filter(colorVar => colorVar.color)
-                      .map((colorVar, index) => {
-                        const isSelected = index === selectedColorIndex
-                        const colorPrice = colorVar.offerPrice > 0 ? colorVar.offerPrice : colorVar.price
-                        
-                        return (
-                          <button
-                            key={index}
-                            type="button"
-                            onClick={() => {
-                              // Toggle: if already selected, deselect to show original product
-                              setSelectedColorIndex(isSelected ? null : index)
-                              setSelectedImage(0)
-                            }}
-                            className={`relative border-2 rounded-lg p-3 transition-all duration-200 hover:shadow-lg ${
-                              isSelected 
-                                ? 'border-purple-500 bg-purple-50' 
-                                : 'border-gray-200 hover:border-purple-300'
-                            }`}
-                          >
-                            {/* Product Image */}
-                            <div className="aspect-square mb-2 bg-white rounded-md overflow-hidden">
-                              <img
-                                src={getFullImageUrl(colorVar.image) || "/placeholder.svg"}
-                                alt={colorVar.color}
-                                className="w-full h-full object-contain"
-                              />
-                            </div>
-                            
-                            {/* Color Name */}
-                            <p className={`text-xs font-semibold text-center mb-1 ${
-                              isSelected ? 'text-purple-700' : 'text-gray-700'
-                            }`}>
-                              {colorVar.color}
-                            </p>
-                            
-                            {/* Price */}
-                            <p className="text-sm font-bold text-center text-gray-900">
-                              {formatPrice(colorPrice)}
-                            </p>
-                            
-                            {/* Current Selection Indicator */}
-                            {isSelected && (
-                              <div className="absolute top-1 right-1 bg-purple-500 text-white rounded-full p-1">
-                                <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                </svg>
-                              </div>
-                            )}
-                            
-                            {/* Stock Badge */}
-                            {colorVar.countInStock <= 0 && (
-                              <div className="absolute bottom-2 left-2 right-2 bg-red-500 text-white text-xs py-1 px-2 rounded text-center">
-                                Out of Stock
-                              </div>
-                            )}
-                          </button>
-                        )
-                      })}
-                  </div>
-                  <p className="text-xs text-gray-600 mt-3">
-                    Select a color to view its image and price
-                  </p>
-                </div>
-              )}
-
-              {/* DOS/Windows Variations */}
-              {product.dosVariations && product.dosVariations.length > 0 && (
-                <div className="mb-6">
-                  <h3 className="font-bold text-gray-900 mb-3 flex items-center">
-                    <span className="text-blue-600 mr-2">💻</span>
-                    Windows: {selectedDosIndex !== null && product.dosVariations[selectedDosIndex]?.dosType ? product.dosVariations[selectedDosIndex].dosType : "Select Option"}
-                  </h3>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
-                    {product.dosVariations
-                      .filter(dosVar => dosVar.dosType)
-                      .map((dosVar, index) => {
-                        const isSelected = index === selectedDosIndex
-                        const dosPrice = dosVar.offerPrice > 0 ? dosVar.offerPrice : dosVar.price
-                        
-                        return (
-                          <button
-                            key={index}
-                            type="button"
-                            onClick={() => {
-                              // Toggle: if already selected, deselect to show original product
-                              setSelectedDosIndex(isSelected ? null : index)
-                              setSelectedImage(0)
-                            }}
-                            className={`relative border-2 rounded-lg p-3 transition-all duration-200 hover:shadow-lg ${
-                              isSelected 
-                                ? 'border-blue-500 bg-blue-50' 
-                                : 'border-gray-200 hover:border-blue-300'
-                            }`}
-                          >
-                            {/* Product Image */}
-                           
-                            
-                            {/* OS Type Name */}
-                            <p className={`text-xs font-semibold text-center mb-1 ${
-                              isSelected ? 'text-blue-700' : 'text-gray-700'
-                            }`}>
-                              {dosVar.dosType}
-                            </p>
-                            
-                            {/* Price */}
-                            <p className="text-sm font-bold text-center text-gray-900">
-                              {formatPrice(dosPrice)}
-                            </p>
-                            
-                            {/* Current Selection Indicator */}
-                            {isSelected && (
-                              <div className="absolute top-1 right-1 bg-blue-500 text-white rounded-full p-1">
-                                <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                </svg>
-                              </div>
-                            )}
-                            
-                            {/* Stock Badge */}
-                            {dosVar.countInStock <= 0 && (
-                              <div className="absolute bottom-2 left-2 right-2 bg-red-500 text-white text-xs py-1 px-2 rounded text-center">
-                                Out of Stock
-                              </div>
-                            )}
-                          </button>
-                        )
-                      })}
-                  </div>
-                  <p className="text-xs text-gray-600 mt-3">
-                    Select an OS option to view its image and price
-                  </p>
-                </div>
-              )}
-
-              {/* Product Variations */}
-              {product.variations && product.variations.length > 0 && (
-                <div className="mb-6">
-                  <h3 className="font-bold text-gray-900 mb-3 flex items-center">
-                    <span className="text-blue-600 mr-2"></span>
-                   Available Options:
-                  </h3>
-                  <div className="flex flex-wrap gap-3 ">
-                    {/* Combine current product and all variations, then sort alphabetically */}
-                    {(() => {
-                      // Build array of all variations including current product
-                      const allVariations = []
-                      
-                      // Add current product if it has selfVariationText (or fallback to reverseVariationText)
-                      const currentProductText = product.selfVariationText || product.reverseVariationText
-                      if (currentProductText) {
-                        allVariations.push({
-                          id: product._id,
-                          text: currentProductText,
-                          slug: product.slug,
-                          isCurrent: true
-                        })
-                      }
-                      
-                      // Add other variations - use their selfVariationText, fallback to variationText
-                      product.variations
-                        .filter(variation => {
-                          const varProduct = variation.product
-                          if (!varProduct) return false
-                          // Get the text: prefer selfVariationText from the product, fallback to variationText
-                          const varText = (typeof varProduct === 'object' && (varProduct.selfVariationText || varProduct.reverseVariationText)) 
-                            || variation.variationText 
-                            || ""
-                          return varText.trim() !== ""
-                        })
-                        .forEach(variation => {
-                          const varProduct = variation.product
-                          const varId = typeof varProduct === 'object' ? varProduct._id : varProduct
-                          const varSlug = typeof varProduct === 'object' ? varProduct.slug : null
-                          // Get the text: prefer selfVariationText from the product, fallback to variationText
-                          const varText = (typeof varProduct === 'object' && (varProduct.selfVariationText || varProduct.reverseVariationText)) 
-                            || variation.variationText 
-                            || ""
-                          
-                          allVariations.push({
-                            id: varId,
-                            text: varText,
-                            slug: varSlug || varId,
-                            isCurrent: false
-                          })
-                        })
-                      
-                      // Sort alphabetically by text to maintain consistent order
-                      allVariations.sort((a, b) => a.text.localeCompare(b.text))
-                      
-                      return allVariations.map((variation) => (
-                        <div key={variation.id} className="relative">
-                          {variation.isCurrent ? (
-                            <div className="px-5 py-2 bg-blue-200 text-gray-700 rounded-lg font-medium text-sm border-2 border-blue-400 cursor-default">
-                              {variation.text}
-                            </div>
-                          ) : (
-                            <Link
-                              to={`/product/${encodeURIComponent(variation.slug)}`}
-                              className="block px-5 py-2 bg-white text-gray-700 rounded-lg font-medium text-sm border border-gray-400 hover:bg-blue-100 hover:border-blue-400 transition-all duration-200"
-                            >
-                              {variation.text}
-                            </Link>
-                          )}
-                        </div>
-                      ))
-                    })()}
-                  </div>
-                  <p className="text-xs text-gray-600 mt-3">
-                    Click on any variation to view its details
-                  </p>
-                </div>
-              )}
-
-
-                  {/* Key Features */}
-              {product.shortDescription && (
-                <div className="mb-6">
-                  <h3 className="font-bold text-gray-900 mb-3">Key Features:</h3>
-                  <TipTapRenderer 
-                    content={product.shortDescription} 
-                    className="text-sm line-clamp-5 sm:line-clamp-none"
-                  />
-                </div>
-              )}
-
-              {/* Tabby/Tamara info rows (triggers) */}
-              <div className="space-y-3 mb-4">
-                {/* Tamara row */}
-                <button
-                  type="button"
-                  onClick={() => setShowTamaraModal(true)}
-                  className="w-full text-left hover:opacity-90 transition-opacity"
-                >
-                  <div className="border rounded-xl p-4 bg-gradient-to-r from-pink-50 to-purple-50 flex items-start gap-3">
-                    <div className="flex-shrink-0 w-10 h-10  rounded-lg flex items-center justify-center shadow-sm">
-                      <span className="text-4xl">💳</span>
+                  {/* Overlay for click */}
+                  <div className="absolute inset-0 bg-transparent group-hover:bg-black group-hover:bg-opacity-20 transition-all flex items-center justify-center">
+                    <div className="opacity-0 group-hover:opacity-100 transition-opacity bg-white bg-opacity-90 rounded-full p-3">
+                      <svg className="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                      </svg>
                     </div>
-                    <div className="flex-1">
-                      <div className="text-sm text-gray-800 leading-relaxed">
-                        Pay in 4 simple, interest free payments of{" "}
-                        <span className="font-bold text-gray-900">{formatPerMonth(getEffectivePrice() / 4)}</span>
-                        <br />
-                        <span className="text-blue-600 underline font-medium">Learn more</span>
-                      </div>
-                    </div>
-                    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold text-white bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400 shadow-sm">
-                      tamara
-                    </span>
                   </div>
-                </button>
-
-                {/* Tabby row */}
-                <button
-                  type="button"
-                  onClick={() => setShowTabbyModal(true)}
-                  className="w-full text-left hover:opacity-90 transition-opacity"
-                >
-                  <div className="border rounded-xl p-4 bg-gradient-to-r from-emerald-50 to-teal-50 flex items-start gap-3">
-                    <div className="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center shadow-sm">
-                      <span className="text-4xl">💰</span>
-                    </div>
-                    <div className="flex-1">
-                      <div className="text-sm text-gray-800 leading-relaxed">
-                        As low as{" "}
-                        <span className="font-bold text-gray-900">{formatPerMonth(getEffectivePrice() / 12)}</span> or
-                        4 interest-free payments.
-                        <br />
-                        <span className="text-blue-600 underline font-medium">Learn more</span>
-                      </div>
-                    </div>
-                    <span className="inline-flex items-center px-3 py-1 rounded-md text-xs font-extrabold text-white bg-emerald-600 shadow-sm">
-                      tabby
-                    </span>
-                  </div>
-                </button>
-              </div>
-
-              {/* Quantity and Add to Cart */}
-              <div className="space-y-4 mb-6">
-                <div className="flex items-center space-x-2 ">
-                  <div className="flex items-center border-2 border-black  rounded-lg bg-yellow-300">
-                    <button
-                      onClick={() => handleQuantityChange(-1)}
-                      className="px-3 py-2 text-gray-600 hover:text-red-600 transition-colors"
-                      disabled={quantity <= 1}
-                    >
-                      <Minus size={16} />
-                    </button>
-                    <span className="px-4 py-2 border-l border-r border-black min-w-[60px] text-center font-medium">
-                      {quantity}
-                    </span>
-                    <button
-                      onClick={() => handleQuantityChange(1)}
-                      className="px-3 py-2 text-gray-600 hover:text-green-600  transition-colors"
-                      disabled={quantity >= (product.maxPurchaseQty || 10)}
-                    >
-                      <Plus size={16} />
-                    </button>
-                  </div>
-
-                  <div className="flex items-center  w-full ">
-                    <button
-                      onClick={handleAddToCart}
-                      disabled={product.stockStatus === "Out of Stock"}
-                      className=" bg-lime-500 hover:bg-lime-600 disabled:bg-gray-400 text-white py-3 px-9 rounded-lg font-medium transition-colors"
-                    >
-                      <ShoppingCart size={22} className="mr-2" />
-                    </button>
-                    {/* Heart btn */}
-                    <button
-                      onClick={() =>
-                        isInWishlist(product._id) ? removeFromWishlist(product._id) : addToWishlist(product)
-                      }
-                      className={`ml-1 flex items-center px-9 py-3 rounded-lg border transition-colors ${
-                        isInWishlist(product._id)
-                          ? "bg-red-500 border-red-500 hover:bg-red-600"
-                          : "bg-white border-red-500 hover:bg-gray-50"
-                      }`}
-                      aria-label={isInWishlist(product._id) ? "Remove from wishlist" : "Add to wishlist"}
-                    >
-                      <Heart
-                        size={20}
-                        className={isInWishlist(product._id) ? "text-red-500 fill-white" : "text-white fill-red-400"}
-                      />
-                      <span className="">{isInWishlist(product._id) ? "" : ""}</span>
-                    </button>
-                    <button
-                      disabled={product.stockStatus === "Out of Stock"}
-                      className="hidden sm:block w-full ml-1 bg-orange-600 hover:bg-orange-700 disabled:bg-gray-400 text-white px-3 py-3 rounded-lg font-medium transition-colors"
-                      onClick={handleBuyNow}
-                    >
-                      Buy Now
-                    </button>
-                  </div>
-                </div>
-
-                <button
-                  disabled={product.stockStatus === "Out of Stock"}
-                  className=" md:hidden lg:hidden w-full ml-1 bg-orange-600 hover:bg-orange-700 disabled:bg-gray-400 text-white px-3 py-3 rounded-lg font-medium transition-colors"
-                  onClick={handleBuyNow}
-                >
-                  Buy Now
-                </button>
-              </div>
-
-              <div className="grid grid-cols-3 gap-4 py-4 text-center">
-                {/* WhatsApp Chat */}
-                <div className="border-2 border-gray-300 rounded-lg p-2 transition-transform duration-200 hover:scale-105 hover:shadow-md group overflow-hidden">
-                  <button
-                    className="flex flex-col items-center text-gray-600 hover:text-green-600 w-full"
-                    onClick={() =>
-                      window.open(
-                        `https://wa.me/${WHATSAPP_NUMBER}?text=Hi%2C%20I%20need%20help%20with%20this%20product%3A%20${encodeURIComponent(product.name)}`,
-                        "_blank",
-                      )
-                    }
-                  >
-                    <MessageCircle
-                      size={24}
-                      className="mb-2 text-lime-500 transform transition-transform duration-300 group-hover:-translate-y-1"
-                    />
-                    <span className="text-xs text-black font-medium group-hover:text-lime-500">
-                      Chat With Specialist
-                    </span>
-                  </button>
-                </div>
-
-                {/* Callback Request */}
-                <div className="border-2 border-gray-300 rounded-lg p-2 transition-transform duration-200 hover:scale-105 hover:shadow-md group overflow-hidden">
-                  <button
-                    className="flex flex-col items-center text-gray-600 hover:text-blue-600 w-full"
-                    onClick={() => setShowCallbackModal(true)}
-                  >
-                    <Phone
-                      size={24}
-                      className="mb-2 text-lime-500 transform transition-transform duration-300 group-hover:-translate-y-1"
-                    />
-                    <span className="text-xs text-black font-medium group-hover:text-lime-500">Request a Callback</span>
-                  </button>
-                </div>
-
-                {/* Bulk Purchase */}
-                <div className="border-2 border-gray-300 rounded-lg p-2 transition-transform duration-200 hover:scale-105 hover:shadow-md group overflow-hidden">
-                  <button
-                    type="button"
-                    className="flex flex-col items-center w-full focus:outline-none group"
-                    onClick={() => navigate("/bulk-purchase")}
-                  >
-                    <Shield
-                      className="mx-auto mb-2 text-lime-500 transform transition-transform duration-300 group-hover:-translate-y-1"
-                      size={24}
-                    />
-                    <span className="text-xs font-medium group-hover:text-lime-500 transition-colors">
-                      Request Bulk Purchase
-                    </span>
-                  </button>
                 </div>
               </div>
-            </div>
+            )}
+
+
+
+
+
           </div>
 
-          {/* Service Features - Right Side */}
-          <div className="lg:col-span-3">
+        </div>
+
+        {/* Service Features & Frequently Bought Together - Inline Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mt-8">
+
+          {/* Get My Coupon section */}
+          <div className="lg:col-span-4">
             <div className="bg-white rounded-lg p-3 space-y-6">
               {/* Get My Coupon */}
               <div className="bg-yellow-50 rounded-lg p-4">
@@ -3025,8 +2429,8 @@ const ProductDetails = () => {
 
               {/* Delivery Info */}
               <div className="space-y-4">
-                <div 
-                  className="flex items-start space-x-3 cursor-pointer  border-2 border-yellow-400 hover:bg-lime-100 p-2 rounded-lg transition-colors"
+                <div
+                  className="flex items-start space-x-3 cursor-pointer  border-2 border-yellow-400 hover:bg-[#e2edf4] p-2 rounded-lg transition-colors"
                   onClick={() => navigate('/delivery-terms')}
                 >
                   <Truck className="text-green-600 mt-1" size={60} />
@@ -3038,8 +2442,8 @@ const ProductDetails = () => {
                   </div>
                 </div>
 
-                <div 
-                  className="flex items-start space-x-3 cursor-pointer border-2 border-yellow-400 hover:bg-lime-100 p-2 rounded-lg transition-colors"
+                <div
+                  className="flex items-start space-x-3 cursor-pointer border-2 border-yellow-400 hover:bg-[#e2edf4] p-2 rounded-lg transition-colors"
                   onClick={() => navigate('/refund-return')}
                 >
                   <RotateCcw className="text-green-600 mt-1" size={60} />
@@ -3052,8 +2456,8 @@ const ProductDetails = () => {
                   </div>
                 </div>
 
-                <div 
-                  className="flex items-start space-x-3 cursor-pointer border-2 border-yellow-400 hover:bg-lime-100 p-2 rounded-lg transition-colors"
+                <div
+                  className="flex items-start space-x-3 cursor-pointer border-2 border-yellow-400 hover:bg-[#e2edf4] p-2 rounded-lg transition-colors"
                   onClick={() => navigate('/terms-conditions')}
                 >
                   <Award className="text-green-600 mt-1" size={33} />
@@ -3066,398 +2470,214 @@ const ProductDetails = () => {
                 </div>
               </div>
 
-  
-
-
-
-{/* Protect Your Purchase - Only show if protection plans are available */}
-{hasProtectionPlans && (
-<div className="lg:col-span-3 mt-8 border border-black rounded">
-            <div className="bg-white rounded-lg p-4 border border-gray-200">
-              <h3 className="font-bold text-gray-900 text-lg mb-4 flex items-center gap-2">
-                <Shield className="text-blue-600" size={24} />
-                Protect Your Purchase
-              </h3>
-              <BuyerProtectionSection
-                productId={product._id}
-                productPrice={product.salePrice || product.price}
-                onSelectProtection={setSelectedProtections}
-                selectedProtections={selectedProtections}
-              />
-            </div>
-          </div>
-)}
-
-{/* Hidden loader to check for protection plans availability */}
-{!hasProtectionPlans && (
-  <BuyerProtectionSection
-    productId={product._id}
-    productPrice={product.salePrice || product.price}
-    onSelectProtection={setSelectedProtections}
-    selectedProtections={selectedProtections}
-    onProtectionsLoaded={setHasProtectionPlans}
-  />
-)}
 
 
 
 
+              {/* Protect Your Purchase - Only show if protection plans are available */}
+              {hasProtectionPlans && (
+                <div className="lg:col-span-3 mt-8 border border-black rounded">
+                  <div className="bg-white rounded-lg p-4 border border-gray-200">
+                    <h3 className="font-bold text-gray-900 text-lg mb-4 flex items-center gap-2">
+                      <Shield className="text-blue-600" size={24} />
+                      Protect Your Purchase
+                    </h3>
+                    <BuyerProtectionSection
+                      productId={product._id}
+                      productPrice={product.salePrice || product.price}
+                      onSelectProtection={setSelectedProtections}
+                      selectedProtections={selectedProtections}
+                    />
+                  </div>
+                </div>
+              )}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+              {/* Hidden loader to check for protection plans availability */}
+              {!hasProtectionPlans && (
+                <BuyerProtectionSection
+                  productId={product._id}
+                  productPrice={product.salePrice || product.price}
+                  onSelectProtection={setSelectedProtections}
+                  selectedProtections={selectedProtections}
+                  onProtectionsLoaded={setHasProtectionPlans}
+                />
+              )}
 
 
               {/* Payment Methods */}
               <div className="border-t pt-4">
                 <h4 className="font-bold text-white p-2 rounded-lg bg-red-600 text-center text-md mb-3">
-                  Payment Methods :{" "}
+                  Payment Methods
                 </h4>
-                <div className=" ml-8 items-center space-x-2 flex-wrap gap-2">
-                  <div className="px-2 py-1 rounded flex items-center ">
+                <div className="grid grid-cols-3 gap-3">
+                  {/* First Row */}
+                  <div className="flex items-center justify-center p-3 rounded bg-white border border-gray-200 h-16">
                     <img
-                      src="https://res.cloudinary.com/dyfhsu5v6/image/upload/v1757919726/1st_logo_v8x2hc.webp"
-                      alt="master"
-                      className="w-auto"
+                      src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg"
+                      alt="Visa"
+                      className="max-w-full max-h-full object-contain"
                     />
                   </div>
-                  <div className="px-2 py-1 rounded flex items-center ">
+                  <div className="flex items-center justify-center p-3 rounded bg-white border border-gray-200 h-16">
+                    <span className="text-xl font-bold text-emerald-600">tabby</span>
+                  </div>
+                  <div className="flex items-center justify-center p-3 rounded bg-white border border-gray-200 h-16">
+                    <span className="text-xl font-bold text-pink-500">tamara</span>
+                  </div>
+
+                  {/* Second Row */}
+                  <div className="flex items-center justify-center p-3 rounded bg-white border border-gray-200 h-16">
                     <img
-                      src="https://res.cloudinary.com/dyfhsu5v6/image/upload/v1757937381/2nd_logo_x6jzhz.webp"
-                      alt="visa"
-                      className="w-auto"
+                      src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_Logo.svg"
+                      alt="Google Pay"
+                      className="max-w-full max-h-full object-contain"
                     />
                   </div>
-                  <div className="px-2 py-1 rounded flex items-center ">
+                  <div className="flex items-center justify-center p-3 rounded bg-white border border-gray-200 h-16">
                     <img
-                      src="https://res.cloudinary.com/dyfhsu5v6/image/upload/v1757937401/3rd_logo_fmwdkp.webp"
-                      alt="tamara"
-                      className="w-auto"
+                      src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg"
+                      alt="PayPal"
+                      className="max-w-full max-h-full object-contain"
                     />
+                  </div>
+                  <div className="flex items-center justify-center p-3 rounded bg-white border border-gray-200 h-16">
+                    <img
+                      src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg"
+                      alt="Mastercard"
+                      className="max-w-full max-h-full object-contain"
+                    />
+                  </div>
+
+                  {/* Third Row */}
+                  <div className="flex items-center justify-center p-3 rounded bg-white border border-gray-200 h-16">
+                    <span className="text-xl font-bold text-teal-700">COD</span>
+                  </div>
+                  <div className="flex items-center justify-center p-3 rounded bg-white border border-gray-200 h-16">
+                    <img
+                      src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Apple_Pay_logo.svg"
+                      alt="Apple Pay"
+                      className="max-w-full max-h-full object-contain"
+                    />
+                  </div>
+                  <div className="flex items-center justify-center p-3 rounded bg-white border border-gray-200 h-16">
+                    {/* Empty placeholder */}
                   </div>
                 </div>
-
-                
               </div>
             </div>
-            
+
+          </div>
+
+          {/* Frequently Bought Together Section */}
+          <div className="lg:col-span-8">
+            <FrequentlyBoughtTogether />
           </div>
         </div>
 
-        {/* Add Frequently Bought Together Section Here */}
-        <FrequentlyBoughtTogether />
 
-        {/* Tabs Section */}
-        {/* <div className="bg-white rounded-lg shadow-sm mt-8">
-          <div className="border-b bg-lime-500">
-            <div className="flex  space-x-8 px-6">
-              <button
-                onClick={() => setActiveTab("description")}
-                className={`py-4 px-2 border-b-2 font-bold text-md transition-colors ${
-                  activeTab === "description"
-                    ? "border-white text-white"
-                    : "border-transparent text-black hover:text-gray-700"
-                }`}
-              >
-                Product Description
-              </button>
-              <button
-                onClick={() => setActiveTab("information")}
-                className={`py-4 px-2 border-b-2 font-bold text-md transition-colors ${
-                  activeTab === "information"
-                    ? "border-white text-white"
-                    : "border-transparent text-black hover:text-gray-700"
-                }`}
-              >
-                More Information
-              </button>
-              <button
-                onClick={() => setActiveTab("reviews")}
-                className={`py-4 px-2 border-b-2 font-bold text-md transition-colors ${
-                  activeTab === "reviews"
-                    ? "border-white text-white"
-                    : "border-transparent text-black hover:text-gray-700"
-                }`}
-              >
-                Reviews ({reviewStats.totalReviews || 0})
-              </button>
-            </div>
-          </div>
 
-          <div className="p-6">
-            {activeTab === "description" && (
-              <div>
-                <h3 className="text-lg font-bold mb-4">Product Description</h3>
-                <TipTapRenderer content={product.description} />
-              </div>
-            )}
 
-            {activeTab === "information" && (
-              <div>
-                <h3 className="text-lg font-bold mb-4">More Information</h3>
-                <div className="overflow-x-auto">
-                  <table className="w-full border-collapse">
-                    <tbody>
-                      <tr className="bg-gray-50">
-                        <td className="border border-gray-200 px-4 py-3 font-medium text-gray-900 w-1/4">Brand</td>
-                        <td className="border border-gray-200 px-4 py-3 text-gray-700">
-                          {product.brand?.name || product.brand || "N/A"}
-                        </td>
-                      </tr>
-                      <tr className="bg-white">
-                        <td className="border border-gray-200 px-4 py-3 font-medium text-gray-900 w-1/4">
-                          Model Number
-                        </td>
-                        <td className="border border-gray-200 px-4 py-3 text-gray-700">{product.sku || "N/A"}</td>
-                      </tr>
-                      <tr className="bg-white">
-                        <td className="border border-gray-200 px-4 py-3 font-medium text-gray-900 w-1/4">Category</td>
-                        <td className="border border-gray-200 px-4 py-3 text-gray-700">
-                          {product.category?.name || product.category || "N/A"}
-                        </td>
-                      </tr>
-                      {product.warranty && (
-                        <tr className="bg-white">
-                          <td className="border border-gray-200 px-4 py-3 font-medium text-gray-900 w-1/4">Warranty</td>
-                          <td className="border border-gray-200 px-4 py-3 text-gray-700">{product.warranty}</td>
-                        </tr>
-                      )}
+        <div className="bg-white  mt-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            {/* Content Area - Left Side */}
+            <div className="lg:col-span-9 order-2 lg:order-1">
+              <div className="p-6">
+                {activeTab === "description" && (
+                  <div>
+                    <h3 className="text-lg font-bold mb-4">Product Description</h3>
+                    <TipTapRenderer content={product.description} />
+                  </div>
+                )}
 
-                      {product.specifications &&
-                        product.specifications.length > 0 &&
-                        product.specifications.map((spec, index) => (
-                          <tr key={index} className={index % 2 === 0 ? "bg-gray-50" : "bg-white"}>
-                            <td className="border border-gray-200 px-4 py-3 font-medium text-gray-900 w-1/4">
-                              {spec.key}
+                {activeTab === "information" && (
+                  <div>
+                    <h3 className="text-lg font-bold mb-4">More Information</h3>
+                    <div className="overflow-x-auto">
+                      <table className="w-full border-collapse">
+                        <tbody>
+                          <tr className="bg-gray-50">
+                            <td className="border border-gray-200 px-4 py-3 font-medium text-gray-900 w-1/4">Brand</td>
+                            <td className="border border-gray-200 px-4 py-3 text-gray-700">
+                              {product.brand?.name || product.brand || "N/A"}
                             </td>
-                            <td className="border border-gray-200 px-4 py-3 text-gray-700">{spec.value}</td>
                           </tr>
-                        ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            )}
+                          <tr className="bg-white">
+                            <td className="border border-gray-200 px-4 py-3 font-medium text-gray-900 w-1/4">
+                              Model Number
+                            </td>
+                            <td className="border border-gray-200 px-4 py-3 text-gray-700">{product.sku || "N/A"}</td>
+                          </tr>
+                          <tr className="bg-white">
+                            <td className="border border-gray-200 px-4 py-3 font-medium text-gray-900 w-1/4">Category</td>
+                            <td className="border border-gray-200 px-4 py-3 text-gray-700">
+                              {product.category?.name || product.category || "N/A"}
+                            </td>
+                          </tr>
+                          {product.warranty && (
+                            <tr className="bg-white">
+                              <td className="border border-gray-200 px-4 py-3 font-medium text-gray-900 w-1/4">Warranty</td>
+                              <td className="border border-gray-200 px-4 py-3 text-gray-700">{product.warranty}</td>
+                            </tr>
+                          )}
 
-            {activeTab === "reviews" && (
-              <div data-review-section>
-                <ReviewSection productId={product._id} onStatsUpdate={setReviewStats} />
+                          {product.specifications &&
+                            product.specifications.length > 0 &&
+                            product.specifications.map((spec, index) => (
+                              <tr key={index} className={index % 2 === 0 ? "bg-gray-50" : "bg-white"}>
+                                <td className="border border-gray-200 px-4 py-3 font-medium text-gray-900 w-1/4">
+                                  {spec.key}
+                                </td>
+                                <td className="border border-gray-200 px-4 py-3 text-gray-700">{spec.value}</td>
+                              </tr>
+                            ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                )}
+
+                {activeTab === "reviews" && (
+                  <div data-review-section>
+                    <ReviewSection productId={product._id} onStatsUpdate={setReviewStats} />
+                  </div>
+                )}
               </div>
-            )}
+            </div>
+
+            {/* Navigation Buttons - Right Side */}
+            <div className="lg:col-span-3 order-1 lg:order-2">
+              <div className="bg-[#d9a82e] rounded-lg p-4 space-y-3">
+                <button
+                  onClick={() => setActiveTab("description")}
+                  className={`w-full py-3 px-4 rounded-lg font-bold text-sm transition-all ${activeTab === "description"
+                      ? "bg-white text-[#2377c1] shadow-md"
+                      : "bg-[#2377c1] text-white hover:bg-[#1a5a8f]"
+                    }`}
+                >
+                  Product Description
+                </button>
+                <button
+                  onClick={() => setActiveTab("information")}
+                  className={`w-full py-3 px-4 rounded-lg font-bold text-sm transition-all ${activeTab === "information"
+                      ? "bg-white text-[#2377c1] shadow-md"
+                      : "bg-[#2377c1] text-white hover:bg-[#1a5a8f]"
+                    }`}
+                >
+                  More Information
+                </button>
+                <button
+                  onClick={() => setActiveTab("reviews")}
+                  className={`w-full py-3 px-4 rounded-lg font-bold text-sm transition-all ${activeTab === "reviews"
+                      ? "bg-white text-[#2377c1] shadow-md"
+                      : "bg-[#2377c1] text-white hover:bg-[#1a5a8f]"
+                    }`}
+                >
+                  Reviews ({reviewStats.totalReviews || 0})
+                </button>
+              </div>
+            </div>
           </div>
-        </div> */}
-
-
-
-
-
-
-
-
-
-<div className="bg-white rounded-lg shadow-sm mt-8">
-  <div className="border-b bg-lime-500">
-    <div className="flex px-2 py-2">
-      <button
-        onClick={() => setActiveTab("description")}
-        className={`flex-1 py-3 px-2 mx-1 rounded-lg font-bold text-sm sm:text-md transition-all whitespace-nowrap ${
-          activeTab === "description"
-            ? "bg-white text-lime-700 shadow-md"
-            : "bg-lime-700 text-white hover:bg-lime-800"
-        }`}
-      >
-        <span className="hidden sm:inline">Product </span>Description
-      </button>
-      <button
-        onClick={() => setActiveTab("information")}
-        className={`flex-1 py-3 px-2 mx-1 rounded-lg font-bold text-sm sm:text-md transition-all whitespace-nowrap ${
-          activeTab === "information"
-            ? "bg-white text-lime-700 shadow-md"
-            : "bg-lime-700 text-white hover:bg-lime-800"
-        }`}
-      >
-        <span className="hidden sm:inline">More </span>Information
-      </button>
-      <button
-        onClick={() => setActiveTab("reviews")}
-        className={`flex-1 py-3 px-2 mx-1  rounded-lg font-bold text-sm sm:text-md transition-all whitespace-nowrap ${
-          activeTab === "reviews"
-            ? "bg-white text-lime-700 shadow-md"
-            : "bg-lime-700 text-white hover:bg-lime-800"
-        }`}
-      >
-        Reviews ({reviewStats.totalReviews || 0})
-      </button>
-    </div>
-  </div>
-  <div className="p-6">
-    {activeTab === "description" && (
-      <div>
-        <h3 className="text-lg font-bold mb-4">Product Description</h3>
-        <TipTapRenderer content={product.description} />
-      </div>
-    )}
-
-    {activeTab === "information" && (
-      <div>
-        <h3 className="text-lg font-bold mb-4">More Information</h3>
-        <div className="overflow-x-auto">
-          <table className="w-full border-collapse">
-            <tbody>
-              <tr className="bg-gray-50">
-                <td className="border border-gray-200 px-4 py-3 font-medium text-gray-900 w-1/4">Brand</td>
-                <td className="border border-gray-200 px-4 py-3 text-gray-700">
-                  {product.brand?.name || product.brand || "N/A"}
-                </td>
-              </tr>
-              <tr className="bg-white">
-                <td className="border border-gray-200 px-4 py-3 font-medium text-gray-900 w-1/4">
-                  Model Number
-                </td>
-                <td className="border border-gray-200 px-4 py-3 text-gray-700">{product.sku || "N/A"}</td>
-              </tr>
-              <tr className="bg-white">
-                <td className="border border-gray-200 px-4 py-3 font-medium text-gray-900 w-1/4">Category</td>
-                <td className="border border-gray-200 px-4 py-3 text-gray-700">
-                  {product.category?.name || product.category || "N/A"}
-                </td>
-              </tr>
-              {product.warranty && (
-                <tr className="bg-white">
-                  <td className="border border-gray-200 px-4 py-3 font-medium text-gray-900 w-1/4">Warranty</td>
-                  <td className="border border-gray-200 px-4 py-3 text-gray-700">{product.warranty}</td>
-                </tr>
-              )}
-
-              {product.specifications &&
-                product.specifications.length > 0 &&
-                product.specifications.map((spec, index) => (
-                  <tr key={index} className={index % 2 === 0 ? "bg-gray-50" : "bg-white"}>
-                    <td className="border border-gray-200 px-4 py-3 font-medium text-gray-900 w-1/4">
-                      {spec.key}
-                    </td>
-                    <td className="border border-gray-200 px-4 py-3 text-gray-700">{spec.value}</td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
         </div>
-      </div>
-    )}
-
-    {activeTab === "reviews" && (
-      <div data-review-section>
-        <ReviewSection productId={product._id} onStatsUpdate={setReviewStats} />
-      </div>
-    )}
-  </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         {/* Related Products */}
         <div className="mt-12">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">Related Products</h2>
@@ -3522,7 +2742,7 @@ const ProductDetails = () => {
             >
               <X size={28} />
             </button>
-            
+
             {/* Video Container */}
             <div className="aspect-video w-full bg-black rounded-lg overflow-hidden shadow-2xl">
               {isYouTubeUrl(product.video) ? (
@@ -3546,7 +2766,7 @@ const ProductDetails = () => {
                 </video>
               )}
             </div>
-            
+
             {/* Product Name */}
             <div className="mt-3 text-center">
               <h3 className="text-white text-base font-medium">{product.name}</h3>
@@ -3574,9 +2794,8 @@ const ProductDetails = () => {
                 {productImages.map((media, index) => (
                   <div
                     key={index}
-                    className={`relative cursor-pointer border-2 rounded-lg overflow-hidden ${
-                      index === modalImageIndex ? "border-lime-500" : "border-gray-300"
-                    }`}
+                    className={`relative cursor-pointer border-2 rounded-lg overflow-hidden ${index === modalImageIndex ? "border-lime-500" : "border-gray-300"
+                      }`}
                     onClick={() => {
                       setModalImageIndex(index)
                       setIsImageZoomed(false)
@@ -3586,8 +2805,8 @@ const ProductDetails = () => {
                       <>
                         {isYouTubeUrl(media.url) ? (
                           <img
-                            src={`https://img.youtube.com/vi/${media.url.includes('youtu.be/') 
-                              ? media.url.split('youtu.be/')[1]?.split('?')[0] 
+                            src={`https://img.youtube.com/vi/${media.url.includes('youtu.be/')
+                              ? media.url.split('youtu.be/')[1]?.split('?')[0]
                               : media.url.split('v=')[1]?.split('&')[0]}/mqdefault.jpg`}
                             alt="YouTube video thumbnail"
                             className="w-full h-24 object-cover"
@@ -3620,9 +2839,8 @@ const ProductDetails = () => {
               {productImages.map((media, index) => (
                 <div
                   key={index}
-                  className={`relative flex-shrink-0 w-16 h-16 border-2 rounded-lg overflow-hidden ${
-                    index === modalImageIndex ? "border-lime-500" : "border-gray-300"
-                  }`}
+                  className={`relative flex-shrink-0 w-16 h-16 border-2 rounded-lg overflow-hidden ${index === modalImageIndex ? "border-lime-500" : "border-gray-300"
+                    }`}
                   onClick={() => {
                     setModalImageIndex(index)
                     setIsImageZoomed(false)
@@ -3632,8 +2850,8 @@ const ProductDetails = () => {
                     <>
                       {isYouTubeUrl(media.url) ? (
                         <img
-                          src={`https://img.youtube.com/vi/${media.url.includes('youtu.be/') 
-                            ? media.url.split('youtu.be/')[1]?.split('?')[0] 
+                          src={`https://img.youtube.com/vi/${media.url.includes('youtu.be/')
+                            ? media.url.split('youtu.be/')[1]?.split('?')[0]
                             : media.url.split('v=')[1]?.split('&')[0]}/mqdefault.jpg`}
                           alt="YouTube video thumbnail"
                           className="w-full h-full object-cover"
@@ -3690,9 +2908,8 @@ const ProductDetails = () => {
                 <img
                   src={getFullImageUrl(productImages[modalImageIndex]?.url) || "/placeholder.svg?height=600&width=600"}
                   alt={product.name}
-                  className={`object-contain bg-white cursor-pointer transition-transform duration-300 ${
-                    isImageZoomed ? "max-h-none max-w-none scale-150" : "max-h-full max-w-full"
-                  }`}
+                  className={`object-contain bg-white cursor-pointer transition-transform duration-300 ${isImageZoomed ? "max-h-none max-w-none scale-150" : "max-h-full max-w-full"
+                    }`}
                   style={{
                     transformOrigin: isImageZoomed ? `${mousePosition.x}% ${mousePosition.y}%` : "center",
                   }}
@@ -3818,7 +3035,7 @@ const ProductDetails = () => {
                         <CheckCircle size={24} className="text-green-500" />
                       )}
                     </div>
-                    
+
                     {/* Email Verification Section */}
                     {emailChanged && !verificationVerified && (
                       <div className="mt-3 ml-9 space-y-3">
@@ -3847,7 +3064,7 @@ const ProductDetails = () => {
                                 type="button"
                                 onClick={handleVerifyCode}
                                 disabled={verificationLoading || verificationCode.length !== 6}
-                                className="bg-lime-500 text-white px-4 py-2 rounded-md hover:bg-lime-600 disabled:opacity-50"
+                                className="bg-[#d9a82e] text-white px-4 py-2 rounded-md hover:bg-[#1a5a8f] disabled:opacity-50"
                               >
                                 {verificationLoading ? "..." : "Verify"}
                               </button>
@@ -3870,9 +3087,9 @@ const ProductDetails = () => {
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
                     <div className="flex items-center gap-3">
-                      <div className="text-lime-600">
+                      {/* <div className="text-lime-600">
                         <Phone size={24} />
-                      </div>
+                      </div> */}
                       <PhoneInput
                         international
                         defaultCountry="AE"
@@ -3900,12 +3117,12 @@ const ProductDetails = () => {
 
                   <button
                     type="submit"
-                    className="w-full bg-lime-500 text-white py-3 rounded-md font-medium hover:bg-lime-600 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full bg-[#d9a82e] text-white py-3 rounded-md font-medium hover:bg-[#1a5a8f] disabled:opacity-50 disabled:cursor-not-allowed"
                     disabled={callbackLoading || (emailChanged && !verificationVerified)}
                   >
                     {callbackLoading ? "Submitting..." : "Submit Request"}
                   </button>
-                  
+
                   {emailChanged && !verificationVerified && (
                     <p className="text-sm text-red-500 text-center">
                       Please verify your email before submitting
@@ -4059,3 +3276,4 @@ const ProductDetails = () => {
 }
 
 export default ProductDetails
+
