@@ -875,7 +875,11 @@ const Home = () => {
       await axios.post(`${API_BASE_URL}/api/newsletter/subscribe`, { email: notifEmail, preferences: notifPrefs })
       setNotifSuccess(true)
       localStorage.setItem(NOTIF_POPUP_KEY, "1")
-      setTimeout(() => setShowNotifPopup(false), 2000)
+      setTimeout(() => {
+        setShowNotifPopup(false)
+        setNotifEmail('')
+        setNotifPrefs([])
+      }, 2000)
     } catch (err) {
       setNotifError("Failed to subscribe. Please try again.")
     }
@@ -884,8 +888,17 @@ const Home = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-96">
-        <img src="/load.gif" alt="Loading..." style={{ width: 300, height: 175, ...bounceStyle }} />
+      <div className="flex justify-center items-center h-screen">
+        <div className="flex flex-col items-center space-y-4">
+          <div className="relative">
+            <div className="animate-spin rounded-full h-20 w-20 border-4 border-[#2377c1]/30 border-t-[#2377c1]"></div>
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              <div className="h-10 w-10 bg-gradient-to-br from-[#2377c1] to-blue-600 rounded-full animate-pulse"></div>
+            </div>
+          </div>
+          <p className="text-gray-700 font-semibold text-lg">Loading...</p>
+          <p className="text-gray-500 text-sm">Please wait while we fetch your data</p>
+        </div>
       </div>
     )
   }
@@ -914,21 +927,23 @@ const Home = () => {
             {notifStep === "ask" && (
               <>
                 <div className="flex items-center mb-4">
-                  <img src="/g.png" alt="Logo" className="w-16 h-18 rounded-full mr-4" />
+                  <div className="w-16 h-16 rounded-full mr-4 flex items-center justify-center" style={{background: 'linear-gradient(to bottom right, #2377c1, #1a5a8f)'}}>
+                    <Bell className="w-8 h-8 text-white" />
+                  </div>
                   <div>
                     <h2 className="text-lg font-bold text-black mb-1">
-                      This website would like to send you awesome updates and offers!
+                      Stay Updated with Baytal Protien!
                     </h2>
                     <p className="text-gray-600 text-sm">
-                      Notifications can be turned off anytime from browser settings.
+                      Get exclusive offers and product updates delivered to your inbox.
                     </p>
                   </div>
                 </div>
                 <div className="flex justify-end gap-2 mt-4">
-                  <button className="px-4 py-2 rounded bg-gray-200 text-black font-semibold" onClick={handleNotifDeny}>
+                  <button className="px-4 py-2 rounded bg-gray-200 text-black font-semibold hover:bg-gray-300 transition-colors" onClick={handleNotifDeny}>
                     Don't Allow
                   </button>
-                  <button className="px-4 py-2 rounded bg-lime-500 text-white font-semibold" onClick={handleNotifAllow}>
+                  <button className="px-4 py-2 rounded text-white font-semibold shadow-lg hover:shadow-xl transition-all" style={{background: 'linear-gradient(to right, #2377c1, #1a5a8f)'}} onClick={handleNotifAllow}>
                     Allow
                   </button>
                 </div>
@@ -937,16 +952,19 @@ const Home = () => {
             {notifStep === "email" && !notifSuccess && (
               <form onSubmit={handleNotifEmailSubmit}>
                 <div className="flex items-center  mb-4">
-                  <img src="/g.png" alt="Logo" className="w-14 h-14 rounded-full mr-4" />
+                  <div className="w-14 h-14 rounded-full mr-4 flex items-center justify-center" style={{background: 'linear-gradient(to bottom right, #2377c1, #1a5a8f)'}}>
+                    <ShoppingBag className="w-7 h-7 text-white" />
+                  </div>
                   <div>
-                    <h2 className="text-lg font-bold text-black mb-1">Subscribe to our newsletter</h2>
-                    <p className="text-gray-600 text-sm">Enter your email to get the best offers and updates!</p>
+                    <h2 className="text-lg font-bold text-black mb-1">Subscribe to Baytal Protien</h2>
+                    <p className="text-gray-600 text-sm">Get exclusive deals on premium supplements!</p>
                   </div>
                 </div>
                 <div className="flex gap-2 mb-2">
                   <input
                     type="email"
-                    className="flex-1 px-3 py-2 border border-gray-300 rounded"
+                    className="flex-1 px-3 py-2 border-2 rounded focus:outline-none focus:border-transparent focus:ring-2"
+                    style={{'--tw-ring-color': '#2377c1'}}
                     placeholder="Enter your email"
                     value={notifEmail}
                     onChange={handleNotifEmailChange}
@@ -954,22 +972,35 @@ const Home = () => {
                   />
                   <button
                     type="submit"
-                    className="px-4 py-2 rounded bg-lime-500 text-white font-semibold"
+                    className="px-4 py-2 rounded text-white font-semibold shadow-md hover:shadow-lg transition-all"
+                    style={{background: notifLoading ? '#cbd5e0' : 'linear-gradient(to right, #2377c1, #1a5a8f)'}}
                     disabled={notifLoading}
                   >
                     {notifLoading ? "Subscribing..." : "Subscribe"}
                   </button>
                 </div>
                 {/* Preferences checkboxes */}
-                <div className="flex flex-col md:flex-row gap-6 mb-2">
+                <div className="flex flex-wrap gap-3 mb-3">
                   {NEWSLETTER_OPTIONS.map((opt) => (
-                    <label key={opt.value} className="flex items-center text-black font-normal cursor-pointer">
+                    <label 
+                      key={opt.value} 
+                      className="flex items-center px-4 py-2 rounded-full cursor-pointer transition-all"
+                      style={{
+                        background: notifPrefs.includes(opt.value) 
+                          ? 'linear-gradient(to right, #2377c1, #1a5a8f)' 
+                          : '#f3f4f6',
+                        color: notifPrefs.includes(opt.value) ? '#ffffff' : '#374151',
+                        border: notifPrefs.includes(opt.value) ? 'none' : '2px solid #e5e7eb',
+                        fontWeight: '500',
+                        boxShadow: notifPrefs.includes(opt.value) ? '0 2px 8px rgba(35, 119, 193, 0.3)' : 'none'
+                      }}
+                    >
                       <input
                         type="checkbox"
                         value={opt.value}
                         checked={notifPrefs.includes(opt.value)}
                         onChange={() => handleNotifPrefChange(opt.value)}
-                        className="mr-2"
+                        className="hidden"
                       />
                       {opt.icon}
                       {opt.label}
@@ -977,8 +1008,13 @@ const Home = () => {
                   ))}
                 </div>
                 {notifError && <div className="text-red-500 text-sm mb-2">{notifError}</div>}
-                <div className="flex justify-end">
-                  <button type="button" className="px-3 py-1 text-xs text-gray-500 underline" onClick={handleNotifDeny}>
+                <div className="flex justify-end mt-2">
+                  <button 
+                    type="button" 
+                    className="px-5 py-2 rounded-lg text-sm font-medium transition-all hover:bg-gray-100"
+                    style={{color: '#6b7280', border: '1.5px solid #e5e7eb'}}
+                    onClick={handleNotifDeny}
+                  >
                     Cancel
                   </button>
                 </div>

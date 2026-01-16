@@ -1386,7 +1386,16 @@ const Shop = () => {
   if (loading && products.length === 0) {
     return (
       <div className="flex justify-center items-center h-screen">
-        <img src="/g.png" alt="Loading..." style={{ width: 180, height: 180, animation: "bounce 1s infinite" }} />
+        <div className="flex flex-col items-center space-y-4">
+          <div className="relative">
+            <div className="animate-spin rounded-full h-20 w-20 border-4 border-[#2377c1]/30 border-t-[#2377c1]"></div>
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              <div className="h-10 w-10 bg-gradient-to-br from-[#2377c1] to-blue-600 rounded-full animate-pulse"></div>
+            </div>
+          </div>
+          <p className="text-gray-700 font-semibold text-lg">Loading Products...</p>
+          <p className="text-gray-500 text-sm">Please wait while we fetch your data</p>
+        </div>
       </div>
     )
   }

@@ -2,7 +2,7 @@
 
 import { Link } from "react-router-dom"
 import { useCart } from "../context/CartContext"
-import { Trash2, Minus, Plus, ShoppingBag, Package, X, Percent, Gift, Shield } from "lucide-react"
+import { Trash2, Minus, Plus, ShoppingBag, Package, X, Percent, Gift, Shield, ChevronRight, Truck, CheckCircle, Award } from "lucide-react"
 import { useEffect, useState, useMemo } from "react"
 import axios from "axios"
 import { getFullImageUrl } from "../utils/imageUtils"
@@ -515,30 +515,52 @@ const Cart = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div className="flex items-center justify-between mb-8">
-        <h1 className="text-2xl font-bold text-gray-900">Shopping Cart</h1>
-        <div className="flex space-x-3">
-          <button
-            onClick={handleOpenCouponsModal}
-            className="px-2 py-2 lg:px-5 lg:py-2 text-sm font-medium text-black bg-yellow-400 hover:bg-yellow-500 rounded-md transition-colors flex items-center"
-          >
-            <Gift size={16} className="mr-2" />
-            Available Coupons
-          </button>
-          <Link to="/" className="px-2 py-2 lg:px-5 lg:py-2 text-sm font-medium text-white bg-lime-600 rounded-md">
-            Continue Shopping
-          </Link>
+    <div className="min-h-screen" style={{background: 'linear-gradient(to bottom right, #f8f9fa, #ffffff, #e2edf4)'}}>
+      {/* Header Section with Gradient */}
+      <div className="text-white py-6 sm:py-8 shadow-lg" style={{background: 'linear-gradient(to right, #2377c1, #1a5a8f)'}}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <h1 className="text-2xl sm:text-3xl font-bold mb-1 flex items-center">
+                <ShoppingBag className="mr-2 sm:mr-3" size={28} />
+                Shopping Cart
+              </h1>
+              <p className="text-xs sm:text-sm" style={{color: '#e2edf4'}}>
+                {cartItems.length} {cartItems.length === 1 ? 'item' : 'items'} in your cart
+              </p>
+            </div>
+            <div className="flex space-x-2 sm:space-x-3">
+              <button
+                onClick={handleOpenCouponsModal}
+                className="px-3 py-2 lg:px-5 lg:py-2.5 text-xs sm:text-sm font-semibold bg-white rounded-lg transition-all shadow-md hover:shadow-lg flex items-center"
+                style={{color: '#d9a82e', '--hover-bg': '#fef8e7'}}
+                onMouseEnter={(e) => e.currentTarget.style.background = '#fef8e7'}
+                onMouseLeave={(e) => e.currentTarget.style.background = 'white'}
+              >
+                <Gift size={16} className="mr-1 sm:mr-2" />
+                <span className="hidden sm:inline">Available</span> Coupons
+              </button>
+              <Link to="/" className="bg-white  px-3 py-2 lg:px-5 lg:py-2.5 text-xs sm:text-sm font-semibold text-gray-900 rounded-lg transition-all shadow-md hover:shadow-lg flex items-center">
+                <ChevronRight size={16} className="mr-1" />
+                <span className="hidden sm:inline">Continue</span> Shopping
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
       
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      
       {cartItems.length === 0 ? (
-        <div className="text-center py-12">
-          <ShoppingBag size={64} className="mx-auto text-gray-300 mb-4" />
-          <h2 className="text-xl font-medium text-gray-900 mb-2">Your cart is empty</h2>
-          <p className="text-gray-600 mb-6">Looks like you haven't added any items to your cart yet.</p>
-          <Link to="/" className="btn-primary">
-            Continue Shopping
+        <div className="text-center py-20 bg-white rounded-2xl shadow-lg">
+          <div className="rounded-full w-32 h-32 flex items-center justify-center mx-auto mb-6" style={{background: 'linear-gradient(to bottom right, #e2edf4, #d0e3f0)'}}>
+            <ShoppingBag size={64} style={{color: '#2377c1'}} />
+          </div>
+          <h2 className="text-2xl font-bold text-gray-900 mb-3">Your cart is empty</h2>
+          <p className="text-gray-600 mb-8 max-w-md mx-auto">Looks like you haven't added any items to your cart yet. Start shopping now!</p>
+          <Link to="/" className="inline-flex items-center px-8 py-3 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all" style={{background: 'linear-gradient(to right, #2377c1, #1a5a8f)'}}>
+            <ShoppingBag size={18} className="mr-2" />
+            Start Shopping
           </Link>
         </div>
       ) : (
@@ -550,28 +572,35 @@ const Cart = () => {
               const bundleTotals = calculateBundleTotals(bundle.items)
               
               return (
-                <div key={bundle.bundleId} className="bg-white rounded-lg shadow-sm border-2 border-lime-200 mb-6">
+                <div key={bundle.bundleId} className="bg-white rounded-xl shadow-lg mb-6 overflow-hidden hover:shadow-xl transition-shadow" style={{borderWidth: '2px', borderColor: '#2377c1'}}>
                   {/* Bundle Header */}
-                  <div className="bg-lime-50 px-6 py-3 border-b border-lime-200">
+                  <div className="px-6 py-4" style={{background: 'linear-gradient(to right, #2377c1, #1a5a8f)'}}>
                     <div className="flex justify-between items-center">
                       <div className="flex items-center">
-                        <Package className="text-lime-600 mr-2" size={20} />
-                        <h3 className="text-lg font-semibold text-lime-800">Frequently Bought Together</h3>
+                        <div className="bg-white/20 p-2 rounded-lg mr-3">
+                          <Package className="text-white" size={22} />
+                        </div>
+                        <div>
+                          <h3 className="text-lg font-bold text-white">Frequently Bought Together</h3>
+                          <p className="text-lime-100 text-xs mt-0.5">Special bundle discount applied</p>
+                        </div>
                       </div>
                       <button
                         onClick={() => removeBundleFromCart(bundle.bundleId)}
-                        className="text-red-500 hover:text-red-700 text-sm flex items-center"
+                        className="text-white hover:text-red-200 text-sm flex items-center bg-white/10 hover:bg-white/20 px-3 py-2 rounded-lg transition-all"
                         title="Remove entire bundle"
                       >
                         <Trash2 size={16} className="mr-1" />
-                        Remove Bundle
+                        <span className="hidden sm:inline">Remove</span>
                       </button>
                     </div>
-                    <div className="text-sm text-lime-600 mt-1">
-                      Bundle Total: {formatPrice(bundleTotals.total)} | You Save: {formatPrice(bundleTotals.savings)}
-                    </div>
-                    <div className="text-xs text-lime-700 mt-1">
-                      ⓘ Removing any item will remove the entire bundle
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 mt-3 pt-3" style={{borderTop: '1px solid rgba(255,255,255,0.3)'}}>
+                      <div className="bg-white/20 px-3 py-1.5 rounded-lg text-white font-semibold text-sm">
+                        Bundle Total: {formatPrice(bundleTotals.total)}
+                      </div>
+                      <div className="px-3 py-1.5 rounded-lg text-white font-semibold text-sm" style={{background: '#28a745'}}>
+                        💰 You Save: {formatPrice(bundleTotals.savings)}
+                      </div>
                     </div>
                   </div>
 
@@ -585,10 +614,13 @@ const Cart = () => {
 
             {/* Render Standalone Items (excluding protections) */}
             {filteredStandaloneItems.length > 0 && (
-              <div className="bg-white rounded-lg shadow-sm overflow-hidden">
+              <div className="bg-white rounded-xl shadow-lg overflow-hidden">
                 {Object.keys(grouped).length > 0 && (
-                  <div className="bg-gray-50 px-6 py-3 border-b">
-                    <h3 className="text-lg font-semibold text-gray-800">Individual Items</h3>
+                  <div className="px-6 py-4 border-b border-gray-200" style={{background: 'linear-gradient(to right, #e2edf4, #f5f5f5)'}}>
+                    <h3 className="text-lg font-bold text-gray-800 flex items-center">
+                      <div className="w-1 h-6 rounded-full mr-3" style={{background: '#2377c1'}}></div>
+                      Individual Items
+                    </h3>
                   </div>
                 )}
                 <ul className="divide-y divide-gray-200">
@@ -600,30 +632,39 @@ const Cart = () => {
 
           {/* Order Summary */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-lg shadow-md shadow-lime-500 p-6">
-              <h2 className="text-lg font-medium text-gray-900 mb-4">Order Summary</h2>
+            <div className="bg-white rounded-xl shadow-xl overflow-hidden sticky top-4" style={{borderWidth: '1px', borderColor: '#2377c1'}}>
+              <div className="px-6 py-4" style={{background: 'linear-gradient(to right, #2377c1, #1a5a8f)'}}>
+                <h2 className="text-xl font-bold text-white flex items-center">
+                  <Package className="mr-2" size={22} />
+                  Order Summary
+                </h2>
+              </div>
+              <div className="p-6">
 
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {/* Detailed Price Breakdown */}
                 {cartTotals.totalSavings > 0 && (
                   <>
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Original Price</span>
-                      <span className="text-gray-500 line-through">{formatPrice(cartTotals.totalBasePrice)}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Discounted Price</span>
-                      <span className="text-red-600 font-medium">{formatPrice(cartTotals.totalCurrentPrice)}</span>
-                    </div>
-                    <div className="flex justify-between text-green-600">
-                      <span className="font-medium">Total Savings</span>
-                      <span className="font-medium">- {formatPrice(cartTotals.totalSavings)}</span>
-                    </div>
-                    <div className="border-t pt-2">
-                      <div className="flex justify-between">
-                        <span className="text-gray-600">Subtotal</span>
-                        <span className="text-black font-medium">{formatPrice(cartTotals.totalCurrentPrice)}</span>
+                    <div className="bg-gray-50 rounded-lg p-3">
+                      <div className="flex justify-between mb-2">
+                        <span className="text-gray-600 text-sm">Original Price</span>
+                        <span className="text-gray-500 line-through text-sm">{formatPrice(cartTotals.totalBasePrice)}</span>
                       </div>
+                      <div className="flex justify-between mb-2">
+                        <span className="text-gray-700 font-medium">Discounted Price</span>
+                        <span className="text-red-600 font-bold">{formatPrice(cartTotals.totalCurrentPrice)}</span>
+                      </div>
+                      <div className="flex justify-between pt-2 border-t border-gray-200">
+                        <span className="font-semibold text-green-600 flex items-center">
+                          <Award size={16} className="mr-1" />
+                          Total Savings
+                        </span>
+                        <span className="font-bold text-green-600">- {formatPrice(cartTotals.totalSavings)}</span>
+                      </div>
+                    </div>
+                    <div className="flex justify-between pt-2">
+                      <span className="text-gray-700 font-medium">Subtotal</span>
+                      <span className="text-gray-900 font-bold text-lg">{formatPrice(cartTotals.totalCurrentPrice)}</span>
                     </div>
                   </>
                 )}
@@ -638,11 +679,15 @@ const Cart = () => {
 
                 {/* Delivery Options */}
                 {cartTotals.totalCurrentPrice <= 500 && (
-                  <div className="mb-2">
-                    <span className="text-gray-600 block mb-1">Delivery Options</span>
+                  <div className="rounded-lg p-3" style={{background: '#e2edf4', borderWidth: '1px', borderColor: '#2377c1'}}>
+                    <span className="text-gray-700 font-medium block mb-2 flex items-center">
+                      <Truck size={16} className="mr-2" style={{color: '#2377c1'}} />
+                      Delivery Options
+                    </span>
                     {deliveryOptions.length > 0 ? (
                       <select
-                        className="w-full border rounded px-2 py-1"
+                        className="w-full rounded-lg px-3 py-2 transition-all"
+                        style={{borderWidth: '2px', borderColor: '#2377c1'}}
                         value={selectedDelivery?._id || ""}
                         onChange={e => {
                           const found = deliveryOptions.find(opt => opt._id === e.target.value)
@@ -660,9 +705,12 @@ const Cart = () => {
                     )}
                   </div>
                 )}
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Shipping</span>
-                  <span className="text-gray-900">{deliveryCharge === 0 ? 'Free' : formatPrice(deliveryCharge)}</span>
+                <div className="flex justify-between items-center bg-gray-50 rounded-lg px-3 py-2">
+                  <span className="text-gray-700 font-medium flex items-center">
+                    <Truck size={16} className="mr-2" style={{color: '#2377c1'}} />
+                    Shipping
+                  </span>
+                  <span className="font-semibold text-gray-900">{deliveryCharge === 0 ? <span className="text-green-600">Free</span> : formatPrice(deliveryCharge)}</span>
                 </div>
 
                 {/* Protection Plans Section */}
@@ -704,83 +752,110 @@ const Cart = () => {
                 </div>
 
                 {/* Coupon */}
-                <div className="flex items-center gap-2 mt-2">
-                  <input
-                    type="text"
-                    className="border rounded px-2 py-1 flex-1"
-                    placeholder="Enter coupon code"
-                    value={coupon ? coupon.code : couponInput}
-                    onChange={e => setCouponInput(e.target.value)}
-                    disabled={!!coupon}
-                  />
-                  {!coupon ? (
-                    <button
-                      className="bg-lime-500 text-white px-3 py-1 rounded disabled:opacity-50"
-                      onClick={handleApplyCoupon}
-                      disabled={couponLoading || !couponInput}
-                    >
-                      {couponLoading ? "Applying..." : "Apply"}
-                    </button>
-                  ) : (
-                    <button
-                      className="bg-red-500 text-white px-3 py-1 rounded"
-                      onClick={() => {
-                        setCoupon(null);
-                        setCouponDiscount(0);
-                        setCouponInput("");
-                      }}
-                    >
-                      Remove
-                    </button>
+                <div className="rounded-lg p-4" style={{background: 'linear-gradient(to bottom right, #fef9e7, #fef3d9)', borderWidth: '2px', borderStyle: 'dashed', borderColor: '#d9a82e'}}>
+                  <div className="flex items-center mb-2">
+                    <Percent size={18} className="mr-2" style={{color: '#d9a82e'}} />
+                    <span className="text-gray-700 font-semibold text-sm">Have a coupon code?</span>
+                  </div>
+                  <div className="flex items-stretch gap-2">
+                    <input
+                      type="text"
+                      className="rounded-lg px-3 py-2 transition-all"
+                      style={{borderWidth: '2px', borderColor: '#d9a82e', flex: '1 1 auto', minWidth: '0'}}
+                      placeholder="Enter code"
+                      value={coupon ? coupon.code : couponInput}
+                      onChange={e => setCouponInput(e.target.value)}
+                      disabled={!!coupon}
+                    />
+                    {!coupon ? (
+                      <button
+                        className="text-white px-3 sm:px-4 py-2 rounded-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-md hover:shadow-lg whitespace-nowrap"
+                        style={{background: 'linear-gradient(to right, #2377c1, #1a5a8f)', flexShrink: 0}}
+                        onClick={handleApplyCoupon}
+                        disabled={couponLoading || !couponInput}
+                      >
+                        {couponLoading ? "Applying..." : "Apply"}
+                      </button>
+                    ) : (
+                      <button
+                        className="bg-red-500 hover:bg-red-600 text-white px-3 sm:px-4 py-2 rounded-lg font-semibold transition-all shadow-md whitespace-nowrap"
+                        style={{flexShrink: 0}}
+                        onClick={() => {
+                          setCoupon(null);
+                          setCouponDiscount(0);
+                          setCouponInput("");
+                        }}
+                      >
+                        Remove
+                      </button>
+                    )}
+                  </div>
+                  {couponError && <div className="text-red-600 text-xs mt-2 font-medium">{couponError}</div>}
+                  {coupon && (
+                    <div className="flex justify-between bg-green-100 rounded-lg px-3 py-2 mt-2 border border-green-300">
+                      <span className="text-green-700 font-semibold text-sm flex items-center">
+                        <CheckCircle size={16} className="mr-1" />
+                        {coupon.code}
+                      </span>
+                      <span className="text-green-700 font-bold">-{formatPrice(couponDiscount)}</span>
+                    </div>
                   )}
                 </div>
-                {couponError && <div className="text-red-500 text-xs mt-1">{couponError}</div>}
-                {coupon && (
-                  <div className="flex justify-between text-green-600 text-sm">
-                    <span>Coupon: {coupon.code}</span>
-                    <span>-{formatPrice(couponDiscount)}</span>
-                  </div>
-                )}
 
-                <div className="border-t pt-4 flex justify-between font-medium">
-                  <span className="text-gray-900">Total Amount</span>
-                  <span className="text-black hover:text-lime-500">{formatPrice(totalWithDeliveryTaxCoupon)}</span>
+                <div className="rounded-lg p-4 mt-4" style={{background: 'linear-gradient(to right, #2377c1, #1a5a8f)'}}>
+                  <div className="flex justify-between items-center">
+                    <span className="text-white font-bold text-lg">Total Amount</span>
+                    <span className="text-white font-bold text-2xl">{formatPrice(totalWithDeliveryTaxCoupon)}</span>
+                  </div>
                 </div>
+              </div>
               </div>
 
               {/* Free shipping message */}
               {cartTotals.totalCurrentPrice < 500 && cartTotals.totalCurrentPrice > 0 && (
-                <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
-                  <p className="text-sm text-blue-700">
-                  You are just {formatPrice(500 - cartTotals.totalCurrentPrice)} away from free shipping. Shop more to get free and express delivery.
-                  </p>
+                <div className="mx-6 mb-4 p-4 rounded-xl" style={{background: 'linear-gradient(to right, #e2edf4, #d0e3f0)', borderWidth: '2px', borderColor: '#2377c1'}}>
+                  <div className="flex items-start">
+                    <Truck className="mr-3 mt-0.5" size={20} style={{color: '#2377c1'}} />
+                    <div>
+                      <p className="text-sm font-semibold mb-1" style={{color: '#1a5a8f'}}>
+                        Almost there! Free shipping at AED 500
+                      </p>
+                      <p className="text-xs" style={{color: '#2377c1'}}>
+                        Add {formatPrice(500 - cartTotals.totalCurrentPrice)} more to unlock free delivery!
+                      </p>
+                    </div>
+                  </div>
                 </div>
               )}
 
               {cartTotals.totalCurrentPrice >= 500 && (
-                <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg">
-                  <p className="text-sm text-green-700 font-medium">
-                    🎉 You qualify for free shipping!
-                  </p>
+                <div className="mx-6 mb-4 p-4 bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-300 rounded-xl">
+                  <div className="flex items-center">
+                    <CheckCircle className="text-green-600 mr-3" size={24} />
+                    <p className="text-sm font-bold text-green-800">
+                      🎉 Congratulations! You qualify for FREE shipping!
+                    </p>
+                  </div>
                 </div>
               )}
 
-              <div className="mt-6">
+              <div className="px-6 pb-6">
                 {/* Terms and Privacy Policy */}
-                <div className="mb-4">
-                  <label className="flex items-start space-x-2 text-sm text-gray-600">
+                <div className="mb-4 bg-gray-50 rounded-lg p-3 border border-gray-200">
+                  <label className="flex items-start space-x-2 text-xs text-gray-600 cursor-pointer">
                     <input 
                       type="checkbox" 
-                      className="mt-1 rounded border-gray-300 text-lime-500 focus:ring-lime-500" 
+                      className="mt-0.5 rounded border-gray-300"
+                      style={{accentColor: '#2377c1'}}
                       defaultChecked 
                     />
                     <span>
-                      I agree to our{' '}
-                      <Link to="/terms" className="text-lime-600 hover:text-lime-700 underline">
+                      I agree to the{' '}
+                      <Link to="/terms" className="underline font-medium" style={{color: '#2377c1'}}>
                         Terms of use
                       </Link>
-                      {' '}&{' '}
-                      <Link to="/privacy" className="text-lime-600 hover:text-lime-700 underline">
+                      {' '}and{' '}
+                      <Link to="/privacy" className="underline font-medium" style={{color: '#2377c1'}}>
                         Privacy Policy
                       </Link>
                     </span>
@@ -789,35 +864,62 @@ const Cart = () => {
 
                 <Link
                   to="/checkout"
-                  className="w-full bg-lime-500 hover:bg-lime-600 text-white font-medium py-3 px-4 rounded-md flex items-center justify-center transition-colors"
+                  className="w-full text-white font-bold py-4 px-6 rounded-xl flex items-center justify-center transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                  style={{background: 'linear-gradient(to right, #2377c1, #1a5a8f)'}}
                 >
-                  Checkout
+                  <ShoppingBag size={20} className="mr-2" />
+                  Proceed to Checkout
                 </Link>
               </div>
             </div>
           </div>
         </div>
       )}
+      </div>
 
       {/* Coupons Modal */}
       {showCouponsModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white rounded-lg p-6 w-full max-w-3xl max-h-[80vh] overflow-y-auto shadow-lg relative">
-            <button
-              className="absolute top-2 right-2 text-gray-400 hover:text-gray-600"
-              onClick={handleCloseCouponsModal}
-            >
-              <X size={24} />
-            </button>
-            <h2 className="text-2xl font-bold mb-4 text-center">Available Coupons</h2>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 backdrop-blur-sm p-4">
+          <div className="bg-white rounded-2xl w-full max-w-3xl max-h-[85vh] overflow-hidden shadow-2xl relative animate-fadeIn">
+            {/* Modal Header */}
+            <div className="px-6 py-5 flex items-center justify-between" style={{background: 'linear-gradient(to right, #d9a82e, #c99625)'}}>
+              <div className="flex items-center">
+                <div className="bg-white/20 p-2 rounded-lg mr-3">
+                  <Gift className="text-white" size={28} />
+                </div>
+                <div>
+                  <h2 className="text-2xl font-bold text-white">Available Coupons</h2>
+                  <p className="text-sm" style={{color: 'rgba(255,255,255,0.9)'}}>Save more on your purchase</p>
+                </div>
+              </div>
+              <button
+                className="text-white hover:text-yellow-200 bg-white/10 hover:bg-white/20 p-2 rounded-lg transition-all"
+                onClick={handleCloseCouponsModal}
+              >
+                <X size={24} />
+              </button>
+            </div>
+            
+            {/* Modal Content */}
+            <div className="p-6 overflow-y-auto" style={{maxHeight: 'calc(85vh - 100px)'}}>
             {loadingCoupons ? (
-              <div className="flex justify-center items-center h-32">
-                <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-yellow-500"></div>
+              <div className="flex flex-col justify-center items-center h-48">
+                <div className="animate-spin rounded-full h-12 w-12 border-4 mb-4" style={{borderColor: '#e2edf4', borderTopColor: '#2377c1'}}></div>
+                <p className="text-gray-600 font-medium">Loading amazing deals...</p>
               </div>
             ) : couponModalError ? (
-              <div className="text-red-500 text-center">{couponModalError}</div>
+              <div className="text-center py-12">
+                <div className="bg-red-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                  <X className="text-red-500" size={32} />
+                </div>
+                <p className="text-red-600 font-medium">{couponModalError}</p>
+              </div>
             ) : publicCoupons.length === 0 ? (
-              <div className="text-gray-500 text-center">No coupons available at the moment.</div>
+              <div className="text-center py-12">
+                <Gift className="mx-auto text-gray-300 mb-4" size={64} />
+                <p className="text-gray-500 font-medium">No coupons available at the moment.</p>
+                <p className="text-gray-400 text-sm mt-2">Check back soon for great deals!</p>
+              </div>
             ) : (
               <div className="space-y-4">
                 {publicCoupons.map((coupon, idx) => {
@@ -921,6 +1023,7 @@ const Cart = () => {
                 })}
               </div>
             )}
+            </div>
           </div>
         </div>
       )}

@@ -506,7 +506,16 @@ const GamingZonePage = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
-        <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-green-600"></div>
+        <div
+          style={{
+            width: 64,
+            height: 64,
+            border: '5px solid #e2edf4',
+            borderTop: '5px solid #2377c1',
+            borderRadius: '50%',
+            animation: 'spin 0.8s linear infinite'
+          }}
+        />
       </div>
     )
   }

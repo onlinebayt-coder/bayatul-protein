@@ -6,7 +6,20 @@ import { getFullImageUrl } from "../utils/imageUtils"
 const Wishlist = () => {
   const { wishlist, removeFromWishlist, loading } = useWishlist()
 
-  if (loading) return <div className="max-w-3xl mx-auto py-12 text-center">Loading...</div>
+  if (loading) return (
+    <div className="flex justify-center items-center h-96">
+      <div
+        style={{
+          width: 64,
+          height: 64,
+          border: '5px solid #e2edf4',
+          borderTop: '5px solid #2377c1',
+          borderRadius: '50%',
+          animation: 'spin 0.8s linear infinite'
+        }}
+      />
+    </div>
+  )
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">

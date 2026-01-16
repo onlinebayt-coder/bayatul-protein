@@ -309,6 +309,7 @@ const Footer = ({ className = "" }) => {
                     <NewsletterModal
                       email={newsletterEmail}
                       onClose={() => setShowNewsletterModal(false)}
+                      onSuccess={() => setNewsletterEmail('')}
                     />
                   )}
                 </div>

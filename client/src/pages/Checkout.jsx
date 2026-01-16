@@ -21,51 +21,36 @@ const UAE_STATES = ["Abu Dhabi", "Ajman", "Al Ain", "Dubai", "Fujairah", "Ras Al
 const STORES = [
   {
     storeId: "1",
-    name: "CROWN EXCEL (Experience Center)",
+    name: "Sharjah Muwailah",
     address:
-      "Admiral Plaza Hotel Building - 37C Street - Shop 5 - Khalid Bin Al Waleed Rd - Bur Dubai - Dubai - United Arab Emirates",
-    phone: "+97143540566",
+      "Muwaileh Commercial or Muwaileh Sharjah (Arabic: تجارية مويلح) is a city, suburb and residential area in the emirate of Sharjah, UAE.",
+    phone: "+97165508161",
     img: "/placeholder.svg?height=200&width=300",
     mapEmbedUrl:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3608.7234567890123!2d55.28877!3d25.2603139!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f43ba6913e913%3A0x904de2fef7d413ec!2sCROWN%20EXCEL%20(Experience%20Center)!5e0!3m2!1sen!2sae!4v1640995200000!5m2!1sen!2sae",
-    coordinates: { lat: 25.2603093, lng: 55.2912192 },
-    visible: true,
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14400.380753786823!2d55.44307644999999!3d25.3096921!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5f1ab69d4249%3A0x127fa82fc0a859b4!2sMuwaileh%20Commercial%20-%20Sharjah!5e0!3m2!1sen!2sae!4v1640000000000!5m2!1sen!2sae",
+    coordinates: { lat: 25.3096921, lng: 55.4626017 },
   },
   {
     storeId: "2",
-    name: "Crown Excel Head Office",
+    name: "Ajman Hamdiya",
     address:
-      "Al Jahra Building, 2nd floor, office 204, 18th st- Al Raffa - Khalid Bin Al Waleed Rd - Bur Dubai - Dubai - United Arab Emirates",
-    phone: "+97143540566",
+      "Al Hamidiyah (Arabic: الحمیدیة) is the suburb in Ajman. Al Hamidiyah. Al Hamidiyah is located in United Arab Emirates. Al Hamidiyah.",
+    phone: "+97165508161",
     img: "/placeholder.svg?height=200&width=300",
     mapEmbedUrl:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3608.7234567890123!2d55.28877!3d25.2603139!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f43ba6913e913%3A0x904de2fef7d413ec!2sCrown%20Excel%20Head%20Office!5e0!3m2!1sen!2sae!4v1640995200001!5m2!1sen!2sae",
-    coordinates: { lat: 25.2603093, lng: 55.2912192 },
-    visible: false,
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14334.823456789012!2d55.5279772!3d25.39372!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ef5f700d06b7f61%3A0x3dd77a1d102d0cae!2sHamidiya%20-%20Ajman!5e0!3m2!1sen!2sae!4v1640000000001!5m2!1sen!2sae",
+    coordinates: { lat: 25.39372, lng: 55.5385871 },
   },
   {
     storeId: "3",
-    name: "CROWN EXCEL (branch 2)",
+    name: "Ajman Rashidiya",
     address:
-      "Shop No. 2 - Building 716 Khalid Bin Al Waleed Rd - opposite Main Entrance of Admiral Plaza Hotel - Bur Dubai - Al Souq Al Kabeer - Dubai - United Arab Emirates",
-    phone: "+97143281653",
+      "Ajman Rashidiya is a residential area in Ajman, United Arab Emirates, located in the Downtown area near the Sharjah border",
+    phone: "+97165508161",
     img: "/placeholder.svg?height=200&width=300",
     mapEmbedUrl:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3608.7456789012345!2d55.2889495!3d25.2601883!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f43326d8e4cc9%3A0x4d452917e7a19b6!2sCROWN%20EXCEL%20(branch%202)!5e0!3m2!1sen!2sae!4v1640995200002!5m2!1sen!2sae",
-    coordinates: { lat: 25.2601835, lng: 55.2915244 },
-    visible: true,
-  },
-  {
-    storeId: "4",
-    name: "GrabAtoZ",
-    address:
-      "Al Jahra Building, 2nd floor, 18th st - Khalid Bin Al Waleed Rd - Al Raffa - Dubai - United Arab Emirates",
-    phone: "+97143395794",
-    img: "/placeholder.svg?height=200&width=300",
-    mapEmbedUrl:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3608.8901234567890!2d55.2880084!3d25.2589614!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f43591325fc3b%3A0x62b01661f2a6cdb7!2sGrabAtoZ!5e0!3m2!1sen!2sae!4v1640995200003!5m2!1sen!2sae",
-    coordinates: { lat: 25.2589566, lng: 55.2905833 },
-    visible: false,
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14334.567890123456!2d55.4292221!3d25.3961921!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5832d4f71ec3%3A0x479f3b58e443717f!2sAl%20Rashidiya%202%20-%20Ajman!5e0!3m2!1sen!2sae!4v1640000000002!5m2!1sen!2sae",
+    coordinates: { lat: 25.3961921, lng: 55.4457768 },
   },
 ]
 
@@ -104,7 +89,7 @@ const PAYMENT_METHODS = [
     id: "cod",
     name: "",
     description: "",
-    iconUrls: [{ src: "https://res.cloudinary.com/dyfhsu5v6/image/upload/v1757764221/cash_qk1cws.webp", size: "big" }],
+    iconUrls: [{ src: "/baytalcod.png", size: "big" }],
     color: "", // Remove background color
   },
 ]
@@ -1221,7 +1206,7 @@ const Checkout = () => {
       <div className="max-w-5xl mx-auto px-4 py-10 text-center">
         <h2 className="text-2xl font-bold mb-4">Your cart is empty</h2>
         <p className="text-gray-600 mb-6">Add some items to your cart before checkout.</p>
-        <button onClick={() => navigate("/")} className="bg-lime-500 hover:bg-lime-600 text-white rounded-lg px-8 py-3">
+        <button onClick={() => navigate("/")} className="text-white rounded-lg px-8 py-3 shadow-lg hover:shadow-xl transition-all" style={{background: 'linear-gradient(to right, #2377c1, #1a5a8f)'}}>
           Continue Shopping
         </button>
       </div>
@@ -1233,11 +1218,15 @@ const Checkout = () => {
   const remainingItemsCount = regularCartItems.length - 2
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <div className="mb-8 px-6">
-        <nav className="text-sm text-gray-500 mb-4">
-          Home <span className="mx-2">›</span> <span className="font-semibold text-black">Checkout</span>
-        </nav>
+    <div className="min-h-screen" style={{background: 'linear-gradient(to bottom right, #f8f9fa, #ffffff, #e2edf4)'}}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="mb-8">
+        <div className="text-white py-4 px-6 rounded-lg shadow-lg mb-6" style={{background: 'linear-gradient(to right, #2377c1, #1a5a8f)'}}>
+          <nav className="text-sm mb-2" style={{color: '#e2edf4'}}>
+            Home <span className="mx-2">›</span> <span className="font-semibold text-white">Checkout</span>
+          </nav>
+          <h1 className="text-2xl font-bold">Secure Checkout</h1>
+        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-5">
           <div className="lg:col-span-3 p-2 ">
@@ -1245,7 +1234,8 @@ const Checkout = () => {
             <div className="flex flex-row items-center gap-2 sm:gap-4 md:gap-8 w-full overflow-x-auto mb-8">
               <div className="flex items-center gap-1 sm:gap-2">
                 <span
-                  className={`w-8 h-8 flex items-center justify-center rounded-full text-white font-bold ${step >= 1 ? "bg-lime-500" : "bg-gray-300"}`}
+                  className="w-8 h-8 flex items-center justify-center rounded-full text-white font-bold"
+                  style={{background: step >= 1 ? '#2377c1' : '#cbd5e0'}}
                 >
                   01
                 </span>
@@ -1254,7 +1244,8 @@ const Checkout = () => {
               <div className="h-0.5 w-4 sm:w-8 bg-gray-300" />
               <div className="flex items-center gap-1 sm:gap-2">
                 <span
-                  className={`w-8 h-8 flex items-center justify-center rounded-full text-white font-bold ${step >= 2 ? "bg-lime-500" : "bg-gray-300"}`}
+                  className="w-8 h-8 flex items-center justify-center rounded-full text-white font-bold"
+                  style={{background: step >= 2 ? '#2377c1' : '#cbd5e0'}}
                 >
                   02
                 </span>
@@ -1271,7 +1262,8 @@ const Checkout = () => {
               <div className="h-0.5 w-4 sm:w-8 bg-gray-300" />
               <div className="flex items-center gap-1 sm:gap-2">
                 <span
-                  className={`w-8 h-8 flex items-center justify-center rounded-full text-white font-bold ${step >= 3 ? "bg-lime-500" : "bg-gray-300"}`}
+                  className="w-8 h-8 flex items-center justify-center rounded-full text-white font-bold"
+                  style={{background: step >= 3 ? '#2377c1' : '#cbd5e0'}}
                 >
                   03
                 </span>
@@ -1293,37 +1285,45 @@ const Checkout = () => {
 
             {/* Delivery type selection: Only show on step 1 */}
             {step === 1 && (
-              <div className="flex gap-8 mb-6">
-                <label className="flex items-center cursor-pointer">
+              <div className="flex gap-4 mb-6">
+                <label className="flex items-center cursor-pointer px-6 py-3 rounded-lg border-2 transition-all flex-1" style={{
+                  borderColor: deliveryType === "home" ? '#2377c1' : '#e2edf4',
+                  background: deliveryType === "home" ? '#e2edf4' : 'white'
+                }}>
                   <input
                     type="radio"
                     name="deliveryType"
                     value="home"
                     checked={deliveryType === "home"}
                     onChange={() => setDeliveryType("home")}
-                    className="accent-lime-500 mr-2"
+                    className="mr-3"
+                    style={{accentColor: '#2377c1'}}
                   />
-                  <span className="font-semibold text-lg">Home Delivery</span>
+                  <span className="font-semibold text-lg" style={{color: deliveryType === "home" ? '#2377c1' : '#4a5568'}}>Home Delivery</span>
                 </label>
-                <label className="flex items-center cursor-pointer">
+                <label className="flex items-center cursor-pointer px-6 py-3 rounded-lg border-2 transition-all flex-1" style={{
+                  borderColor: deliveryType === "pickup" ? '#2377c1' : '#e2edf4',
+                  background: deliveryType === "pickup" ? '#e2edf4' : 'white'
+                }}>
                   <input
                     type="radio"
                     name="deliveryType"
                     value="pickup"
                     checked={deliveryType === "pickup"}
                     onChange={() => setDeliveryType("pickup")}
-                    className="accent-lime-500 mr-2"
+                    className="mr-3"
+                    style={{accentColor: '#2377c1'}}
                   />
-                  <span className="font-semibold text-lg">Pickup From Store</span>
+                  <span className="font-semibold text-lg" style={{color: deliveryType === "pickup" ? '#2377c1' : '#4a5568'}}>Pickup From Store</span>
                 </label>
               </div>
             )}
-            <div className="rounded-2xl">
+            <div className="bg-white rounded-xl shadow-lg p-6" style={{borderWidth: '1px', borderColor: '#2377c1'}}>
               {step === 1 && (
                 <>
                   {deliveryType === "home" && (
                     <form onSubmit={handleContinueToSummary}>
-                      <h3 className="font-bold text-lg mb-4">Contact Details</h3>
+                      <h3 className="font-bold text-xl mb-4" style={{color: '#2377c1'}}>Contact Details</h3>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                         <div>
                           <label className="block text-sm font-medium mb-1">E-mail *</label>
@@ -1359,7 +1359,8 @@ const Checkout = () => {
                           <button
                             type="button"
                             onClick={() => setShowAddressModal(true)}
-                            className="text-lime-500 text-sm mt-2 mr-4"
+                            className="text-sm mt-2 mr-4 font-semibold"
+                            style={{color: '#2377c1'}}
                           >
                             Edit Address
                           </button>
@@ -1386,13 +1387,14 @@ const Checkout = () => {
                         <button
                           type="button"
                           onClick={() => navigate("/cart")}
-                          className="flex-1 border border-gray-300 hover:bg-gray-100 text-gray-700 bg-red-500 font-semibold lg:py-3 lg:px-6 py-2 px-3 rounded-lg transition duration-300"
+                          className="flex-1 border border-gray-300 hover:bg-gray-100 text-gray-700 bg-gray-100 font-semibold lg:py-3 lg:px-6 py-2 px-3 rounded-lg transition duration-300"
                         >
                           Back to Cart
                         </button>
                         <button
                           type="submit"
-                          className="flex-1 bg-lime-500 hover:bg-lime-600 text-white font-semibold lg:py-3 lg:px-6 py-2 px-3 rounded-lg transition duration-300"
+                          className="flex-1 text-white font-semibold lg:py-3 lg:px-6 py-2 px-3 rounded-lg shadow-lg hover:shadow-xl transition-all"
+                          style={{background: 'linear-gradient(to right, #2377c1, #1a5a8f)'}}
                         >
                           <span className="block lg:hidden">Continue Summary</span> {/* Mobile */}
                           <span className="hidden lg:block">Continue to Summary</span> {/* Desktop */}
@@ -1403,7 +1405,7 @@ const Checkout = () => {
 
                   {deliveryType === "pickup" && (
                     <form onSubmit={handleContinueToSummary}>
-                      <h3 className="font-bold text-lg mb-4">Where do you want to pick up?</h3>
+                      <h3 className="font-bold text-xl mb-4" style={{color: '#2377c1'}}>Where do you want to pick up?</h3>
 
                       <div className="mb-6">
                         <label className="block text-sm font-medium mb-1">Phone number *</label>
@@ -1421,7 +1423,7 @@ const Checkout = () => {
 
                       <div className="mb-6">
                         <h4 className="font-semibold mb-4 flex items-center gap-2">
-                          <MapPin className="h-5 w-5 text-lime-500" />
+                          <MapPin className="h-5 w-5" style={{color: '#2377c1'}} />
                           Select Store *
                         </h4>
 
@@ -1431,10 +1433,11 @@ const Checkout = () => {
                             {STORES.filter(store => store.visible !== false).map((store) => (
                               <div
                                 key={store.storeId}
-                                className={`border rounded-lg p-4 cursor-pointer transition-all ${pickupDetails.storeId === store.storeId
-                                    ? "border-lime-500 bg-lime-50"
-                                    : "border-gray-200 hover:border-gray-300"
-                                  }`}
+                                className="border-2 rounded-lg p-4 cursor-pointer transition-all"
+                                style={{
+                                  borderColor: pickupDetails.storeId === store.storeId ? '#2377c1' : '#e2edf4',
+                                  background: pickupDetails.storeId === store.storeId ? '#e2edf4' : 'white'
+                                }}
                               >
                                 <label className="flex items-start gap-3 cursor-pointer">
                                   <input
@@ -1442,12 +1445,13 @@ const Checkout = () => {
                                     name="store"
                                     checked={pickupDetails.storeId === store.storeId}
                                     onChange={() => handleStoreSelection(store)}
-                                    className="mt-1 accent-lime-500"
+                                    className="mt-1"
+                                    style={{accentColor: '#2377c1'}}
                                   />
                                   <div className="flex-1">
                                     <div className="font-semibold text-gray-900">{store.name}</div>
                                     <div className="text-sm text-gray-600 mt-1 leading-relaxed">{store.address}</div>
-                                    <div className="text-sm text-lime-600 mt-2 font-medium">{store.phone}</div>
+                                    <div className="text-sm mt-2 font-medium" style={{color: '#2377c1'}}>{store.phone}</div>
                                   </div>
                                 </label>
                               </div>
@@ -1488,7 +1492,8 @@ const Checkout = () => {
 
                       <button
                         type="submit"
-                        className="bg-lime-500 hover:bg-lime-600 text-white rounded-lg px-8 py-3 disabled:opacity-50"
+                        className="text-white rounded-lg px-8 py-3 disabled:opacity-50 shadow-lg hover:shadow-xl transition-all"
+                        style={{background: 'linear-gradient(to right, #2377c1, #1a5a8f)'}}
                         disabled={!pickupDetails.phone || !pickupDetails.storeId}
                       >
                         Continue
@@ -1500,7 +1505,7 @@ const Checkout = () => {
 
               {step === 2 && (
                 <div>
-                  <h3 className="font-bold text-lg mb-4">Order Summary</h3>
+                  <h3 className="font-bold text-xl mb-4" style={{color: '#2377c1'}}>Order Summary</h3>
                   <div className="mb-6">
                     <h4 className="font-semibold mb-2">Delivery Details</h4>
                     {deliveryType === "home" ? (
@@ -1534,13 +1539,14 @@ const Checkout = () => {
                   </div>
 
                   <div className="mb-6">
-                    <h4 className="font-semibold mb-2">Order Notes (Optional)</h4>
+                    <h4 className="font-semibold mb-2" style={{color: '#2377c1'}}>Order Notes (Optional)</h4>
                     <div className="bg-gray-50 p-4 rounded-lg">
                       <label className="block text-sm font-medium mb-2">Add a note to your order:</label>
                       <textarea
                         value={customerNotes}
                         onChange={(e) => setCustomerNotes(e.target.value)}
-                        className="w-full border rounded-lg px-4 py-3 resize-none focus:outline-none focus:ring-2 focus:ring-lime-500 focus:border-transparent"
+                        className="w-full border rounded-lg px-4 py-3 resize-none focus:outline-none focus:ring-2 focus:border-transparent"
+                        style={{'--tw-ring-color': '#2377c1'}}
                         rows="3"
                         placeholder="Special delivery instructions, gift message, or any other notes..."
                         maxLength="500"
@@ -1558,7 +1564,8 @@ const Checkout = () => {
                     </button>
                     <button
                       onClick={handleContinueToPayment}
-                      className="bg-lime-500 hover:bg-lime-600 text-white rounded-lg px-8 py-3"
+                      className="text-white rounded-lg px-8 py-3 shadow-lg hover:shadow-xl transition-all"
+                      style={{background: 'linear-gradient(to right, #2377c1, #1a5a8f)'}}
                     >
                       Continue to Payment
                     </button>
@@ -1568,16 +1575,17 @@ const Checkout = () => {
 
               {step === 3 && (
                 <div>
-                  <h3 className="font-bold text-lg mb-6">Payment Method</h3>
+                  <h3 className="font-bold text-xl mb-6" style={{color: '#2377c1'}}>Payment Method</h3>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-6">
                     {PAYMENT_METHODS.map((method) => (
                       <div
                         key={method.id}
-                        className={` rounded-lg p-4 cursor-pointer transition-all relative ${selectedPaymentMethod === method.id
-                            ? "border-lime-500 bg-lime-50"
-                            : "border-gray-200 hover:border-gray-300 bg-white"
-                          }`}
+                        className="rounded-lg p-4 cursor-pointer transition-all relative border-2"
+                        style={{
+                          borderColor: selectedPaymentMethod === method.id ? '#2377c1' : '#e2edf4',
+                          background: selectedPaymentMethod === method.id ? '#e2edf4' : 'white'
+                        }}
                         onClick={() => handlePaymentMethodSelect(method.id)}
                       >
                         {/* Radio button positioned at top-left corner */}
@@ -1587,7 +1595,8 @@ const Checkout = () => {
                           value={method.id}
                           checked={selectedPaymentMethod === method.id}
                           onChange={() => setSelectedPaymentMethod(method.id)}
-                          className="absolute top-20 left-16 accent-lime-500 w-4 h-4"
+                          className="absolute top-20 left-16 w-4 h-4"
+                          style={{accentColor: '#2377c1'}}
                         />
 
                         {/* Image container centered */}
@@ -1598,8 +1607,7 @@ const Checkout = () => {
                                 key={idx}
                                 src={icon.src || "/placeholder.svg"}
                                 alt={method.name}
-                                className={`w-60 h-48 md:w-60 md:h-36 object-contain rounded-lg transition-all ${selectedPaymentMethod === method.id ? " border-lime-500" : " border-gray-200"
-                                  }`}
+                                className="w-60 h-48 md:w-60 md:h-36 object-contain rounded-lg transition-all"
                               />
                             ))}
                           </div>
@@ -1671,14 +1679,20 @@ const Checkout = () => {
                           : handleSubmit
                       }
                       disabled={loading || !selectedPaymentMethod}
-                      className="bg-lime-500 hover:bg-lime-600 text-white rounded-lg px-6 py-3 disabled:opacity-50 flex items-center gap-2"
+                      className="text-white rounded-lg px-6 py-3 disabled:opacity-50 flex items-center gap-2 shadow-lg hover:shadow-xl transition-all"
+                      style={{background: loading || !selectedPaymentMethod ? '#cbd5e0' : 'linear-gradient(to right, #2377c1, #1a5a8f)'}}
                     >
                       {loading ? (
                         <>
-                          <img
-                            src="/g.png"
-                            alt="Loading..."
-                            style={{ width: 24, height: 24, animation: "bounce 1s infinite" }}
+                          <div
+                            style={{
+                              width: 20,
+                              height: 20,
+                              border: '3px solid #e2edf4',
+                              borderTop: '3px solid #ffffff',
+                              borderRadius: '50%',
+                              animation: 'spin 0.8s linear infinite'
+                            }}
                           />
                           Processing...
                         </>
@@ -1694,14 +1708,14 @@ const Checkout = () => {
 
           {/* Order Summary Sidebar */}
           <div className="lg:col-span-2 mt-4">
-            <div className="rounded-lg shadow-md shadow-lime-500 p-4 lg:mx-9 sticky top-4">
-              <div className="flex items-center mb-6">
-                <div className="bg-lime-100 p-2 rounded-full">
-                  <Truck className="h-8 w-8 text-lime-600" />
-                </div>
-                <div className="ml-3">
-                  <h2 className="text-lg font-bold text-black">Order Summary</h2>
-                  <p className="text-sm text-black">Review your order</p>
+            <div className="bg-white rounded-xl shadow-xl p-6 lg:mx-9 sticky top-4" style={{borderWidth: '1px', borderColor: '#2377c1'}}>
+              <div className="px-4 py-3 rounded-lg mb-6" style={{background: 'linear-gradient(to right, #2377c1, #1a5a8f)'}}>
+                <div className="flex items-center">
+                  <Truck className="h-6 w-6 text-white mr-3" />
+                  <div>
+                    <h2 className="text-lg font-bold text-white">Order Summary</h2>
+                    <p className="text-xs" style={{color: '#e2edf4'}}>Review your order</p>
+                  </div>
                 </div>
               </div>
 
@@ -1834,7 +1848,7 @@ const Checkout = () => {
                 </div>
 
                 {/* Coupon Section */}
-                <div className="space-y-2">
+                <div className="rounded-lg p-3" style={{background: 'linear-gradient(to bottom right, #fef9e7, #fef3d9)', borderWidth: '2px', borderStyle: 'dashed', borderColor: '#d9a82e'}}>
                   <div className="flex items-center gap-2">
                     <input
                       type="text"
@@ -1846,7 +1860,8 @@ const Checkout = () => {
                     />
                     {!coupon ? (
                       <button
-                        className="bg-lime-500 text-white px-4 py-2 rounded-lg text-sm disabled:opacity-50"
+                        className="text-white px-4 py-2 rounded-lg text-sm disabled:opacity-50 shadow-md hover:shadow-lg transition-all"
+                        style={{background: couponLoading || !couponInput ? '#cbd5e0' : 'linear-gradient(to right, #2377c1, #1a5a8f)'}}
                         onClick={handleApplyCoupon}
                         disabled={couponLoading || !couponInput}
                       >
@@ -1868,7 +1883,7 @@ const Checkout = () => {
                   </div>
                   {couponError && <div className="text-red-500 text-xs">{couponError}</div>}
                   {coupon && (
-                    <div className="flex justify-between text-sm text-green-600">
+                    <div className="flex justify-between text-sm font-semibold" style={{color: '#d9a82e'}}>
                       <span>Coupon: {coupon.code}</span>
                       <span>- {formatPrice(couponDiscount)}</span>
                     </div>
@@ -1897,10 +1912,10 @@ const Checkout = () => {
                 )}
               </div>
 
-              <div className="mt-6 bg-gray-50 p-4 rounded-lg">
+              <div className="mt-6 p-4 rounded-lg" style={{background: '#e2edf4'}}>
                 <div className="flex items-start">
                   <div className="flex-shrink-0">
-                    <Shield className="h-7 w-7 text-lime-500" />
+                    <Shield className="h-7 w-7" style={{color: '#2377c1'}} />
                   </div>
                   <div className="ml-2">
                     <p className="text-xs text-gray-700">
@@ -1936,7 +1951,7 @@ const Checkout = () => {
                       value="home"
                       checked={addressType === "home"}
                       onChange={() => setAddressType("home")}
-                      className="accent-lime-500"
+                      style={{accentColor: '#2377c1'}}
                     />
                     Home
                   </label>
@@ -1947,7 +1962,7 @@ const Checkout = () => {
                       value="office"
                       checked={addressType === "office"}
                       onChange={() => setAddressType("office")}
-                      className="accent-lime-500"
+                      style={{accentColor: '#2377c1'}}
                     />
                     Office
                   </label>
@@ -2023,7 +2038,7 @@ const Checkout = () => {
                     type="checkbox"
                     checked={addressDetails.isDefault}
                     onChange={(e) => setAddressDetails({ ...addressDetails, isDefault: e.target.checked })}
-                    className="accent-lime-500"
+                    style={{accentColor: '#2377c1'}}
                   />
                   <span>Default Address</span>
                 </div>
@@ -2036,7 +2051,7 @@ const Checkout = () => {
                   >
                     Cancel
                   </button>
-                  <button type="submit" className="bg-lime-500 hover:bg-lime-600 text-white rounded-lg px-8 py-3">
+                  <button type="submit" className="text-white rounded-lg px-8 py-3 shadow-lg hover:shadow-xl transition-all" style={{background: 'linear-gradient(to right, #2377c1, #1a5a8f)'}}>
                     Save Address
                   </button>
                 </div>
@@ -2044,6 +2059,7 @@ const Checkout = () => {
             </div>
           </div>
         </Dialog>
+      </div>
       </div>
     </div>
   )

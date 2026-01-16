@@ -168,9 +168,23 @@ const TrackOrder = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="bg-lime-500 text-white px-8 py-3 rounded-md hover:bg-green-700 disabled:opacity-50 flex items-center space-x-2"
+                className="text-white px-8 py-3 rounded-md disabled:opacity-50 flex items-center space-x-2 shadow-lg hover:shadow-xl transition-all"
+                style={{background: loading ? '#cbd5e0' : 'linear-gradient(to right, #2377c1, #1a5a8f)'}}
               >
-                <Search size={20} />
+                {loading ? (
+                  <div
+                    style={{
+                      width: 20,
+                      height: 20,
+                      border: '3px solid #e2edf4',
+                      borderTop: '3px solid #ffffff',
+                      borderRadius: '50%',
+                      animation: 'spin 0.8s linear infinite'
+                    }}
+                  />
+                ) : (
+                  <Search size={20} />
+                )}
                 <span>{loading ? "Tracking..." : "Track Order"}</span>
               </button>
             </div>

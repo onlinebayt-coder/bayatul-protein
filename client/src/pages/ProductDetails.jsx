@@ -1447,8 +1447,17 @@ const ProductDetails = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-96">
-        <img src="/g.png" alt="Loading" className="w-24 h-24 animate-bounce" style={{ animationDuration: "1.5s" }} />
+      <div className="flex justify-center items-center h-screen">
+        <div className="flex flex-col items-center space-y-4">
+          <div className="relative">
+            <div className="animate-spin rounded-full h-20 w-20 border-4 border-[#2377c1]/30 border-t-[#2377c1]"></div>
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              <div className="h-10 w-10 bg-gradient-to-br from-[#2377c1] to-blue-600 rounded-full animate-pulse"></div>
+            </div>
+          </div>
+          <p className="text-gray-700 font-semibold text-lg">Loading Product...</p>
+          <p className="text-gray-500 text-sm">Please wait while we fetch your data</p>
+        </div>
       </div>
     )
   }
@@ -2095,7 +2104,7 @@ const ProductDetails = () => {
                   <button
                     onClick={handleAddToCart}
                     disabled={product.stockStatus === "Out of Stock"}
-                    className="w-full lg:flex-1 bg-[#d9a82e] hover:bg-[#1a5a8f] disabled:bg-gray-400 text-white py-3 px-4 rounded-lg font-medium transition-colors flex items-center justify-center"
+                    className="w-full lg:flex-1 bg-[#1a5a8f] hover:bg-[#1a5a8f] disabled:bg-gray-400 text-white py-3 px-4 rounded-lg font-medium transition-colors flex items-center justify-center"
                   >
                     <ShoppingCart size={22} className="mr-2" />
                     <span className="hidden sm:inline">Add to Cart</span>
@@ -3117,7 +3126,7 @@ const ProductDetails = () => {
 
                   <button
                     type="submit"
-                    className="w-full bg-[#d9a82e] text-white py-3 rounded-md font-medium hover:bg-[#1a5a8f] disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full bg-[#1a5a8f] text-white py-3 rounded-md font-medium hover:bg-[#1a5a8f] disabled:opacity-50 disabled:cursor-not-allowed"
                     disabled={callbackLoading || (emailChanged && !verificationVerified)}
                   >
                     {callbackLoading ? "Submitting..." : "Submit Request"}

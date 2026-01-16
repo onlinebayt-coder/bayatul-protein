@@ -109,7 +109,16 @@ const BlogList = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-96">
-        <img src="/g.png" alt="Loading..." style={{ width: 80, height: 80, ...bounceStyle }} />
+        <div
+          style={{
+            width: 80,
+            height: 80,
+            border: '6px solid #e2edf4',
+            borderTop: '6px solid #2377c1',
+            borderRadius: '50%',
+            animation: 'spin 0.8s linear infinite'
+          }}
+        />
       </div>
     )
   }
