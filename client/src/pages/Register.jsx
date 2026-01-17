@@ -101,26 +101,36 @@ const Register = () => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-1 px-4 sm:px-6 lg:px-8">
-      <div className="w-full max-w-4xl flex flex-col md:flex-row bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50 via-sky-50 to-indigo-50 relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-blue-200/30 to-sky-300/30 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-gradient-to-tr from-indigo-200/30 to-blue-300/30 rounded-full blur-3xl animate-pulse delay-1000"></div>
+      </div>
+
+      <div className="w-full max-w-5xl flex flex-col md:flex-row bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 overflow-hidden relative z-10">
         {/* Left: Image */}
-        <div className="hidden justify-center lg:flex items-center md:block md:w-1/2 ">
+        <div className="hidden md:flex md:w-1/2 bg-white items-center justify-center relative overflow-hidden">
           <img
-            src="/signup.jpg"
+            src="/signup.png"
             alt="Register Visual"
-            className=" h-[450px]  cover object-center"
+            className="w-full h-full object-cover object-center"
           />
         </div>
         {/* Right: Register Form */}
-        <div className="w-full md:w-1/2 flex items-center justify-center p-6 md:p-10">
-          <div className="max-w-md w-full min-h-[500px] space-y-8">
-            <div>
-              
-              <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Create your account</h2>
-              <p className="mt-2 text-center text-sm text-gray-600">
-                Or{" "}
-                <Link to="/login" className="font-medium text-green-600 hover:text-green-500">
-                  sign in to your existing account
+        <div className="w-full md:w-1/2 flex items-center justify-center p-6 md:p-8">
+          <div className="max-w-md w-full space-y-6">
+            <div className="text-center">
+              <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl shadow-lg mb-3 transform hover:scale-110 transition-transform duration-300" style={{background: 'linear-gradient(to bottom right, #2377c1, #1a5a8f)'}}>
+                <svg className="h-7 w-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                </svg>
+              </div>
+              <h2 className="text-3xl font-extrabold bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent tracking-tight">Create your account</h2>
+              <p className="mt-1.5 text-sm text-gray-600">
+                Already have an account?{" "}
+                <Link to="/login" className="font-semibold transition-colors relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 hover:after:w-full after:transition-all after:duration-300" style={{color: '#2377c1'}} onMouseEnter={(e) => e.target.style.color = '#1a5a8f'} onMouseLeave={(e) => e.target.style.color = '#2377c1'}>
+                  Sign in here
                 </Link>
               </p>
             </div>
@@ -145,12 +155,12 @@ const Register = () => {
                 </div>
               )}
 
-              <div className="space-y-4 ">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+              <div className="space-y-4">
+                <div className="group">
+                  <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-1.5">
                     Full Name
                   </label>
-                  <div className="mt-1">
+                  <div>
                     <input
                       id="name"
                       name="name"
@@ -159,20 +169,21 @@ const Register = () => {
                       required
                       value={formData.name}
                       onChange={handleChange}
-                      className={`appearance-none relative block w-full px-3 py-2 border ${
-                        errors.name ? "border-red-300" : "border-gray-300"
-                      } placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm`}
+                      className={`appearance-none block w-full px-4 py-2.5 border-2 ${
+                        errors.name ? "border-red-300" : "border-gray-200"
+                      } placeholder-gray-400 text-gray-900 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-200 bg-white/50 hover:bg-white sm:text-sm`}
+                      style={{'--tw-ring-color': '#2377c1'}}
                       placeholder="Enter your full name"
                     />
                     {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name}</p>}
                   </div>
                 </div>
 
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                <div className="group">
+                  <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-1.5">
                     Email Address
                   </label>
-                  <div className="mt-1">
+                  <div>
                     <input
                       id="email"
                       name="email"
@@ -181,20 +192,21 @@ const Register = () => {
                       required
                       value={formData.email}
                       onChange={handleChange}
-                      className={`appearance-none relative block w-full px-3 py-2 border ${
-                        errors.email ? "border-red-300" : "border-gray-300"
-                      } placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm`}
-                      placeholder="Enter your email address"
+                      className={`appearance-none block w-full px-4 py-2.5 border-2 ${
+                        errors.email ? "border-red-300" : "border-gray-200"
+                      } placeholder-gray-400 text-gray-900 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-200 bg-white/50 hover:bg-white sm:text-sm`}
+                      style={{'--tw-ring-color': '#2377c1'}}
+                      placeholder="you@example.com"
                     />
                     {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email}</p>}
                   </div>
                 </div>
 
-                <div>
-                  <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                <div className="group">
+                  <label htmlFor="password" className="block text-sm font-semibold text-gray-700 mb-1.5">
                     Password
                   </label>
-                  <div className="mt-1 relative">
+                  <div className="relative">
                     <input
                       id="password"
                       name="password"
@@ -203,10 +215,11 @@ const Register = () => {
                       required
                       value={formData.password}
                       onChange={handleChange}
-                      className={`appearance-none relative block w-full px-3 py-2 pr-10 border ${
-                        errors.password ? "border-red-300" : "border-gray-300"
-                      } placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm`}
-                      placeholder="Enter your password"
+                      className={`appearance-none block w-full px-4 py-2.5 pr-12 border-2 ${
+                        errors.password ? "border-red-300" : "border-gray-200"
+                      } placeholder-gray-400 text-gray-900 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-200 bg-white/50 hover:bg-white sm:text-sm`}
+                      style={{'--tw-ring-color': '#2377c1'}}
+                      placeholder="Create a strong password"
                     />
                     <button
                       type="button"
@@ -243,11 +256,11 @@ const Register = () => {
                   </div>
                 </div>
 
-                <div>
-                  <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
+                <div className="group">
+                  <label htmlFor="confirmPassword" className="block text-sm font-semibold text-gray-700 mb-1.5">
                     Confirm Password
                   </label>
-                  <div className="mt-1 relative">
+                  <div className="relative">
                     <input
                       id="confirmPassword"
                       name="confirmPassword"
@@ -256,9 +269,10 @@ const Register = () => {
                       required
                       value={formData.confirmPassword}
                       onChange={handleChange}
-                      className={`appearance-none relative block w-full px-3 py-2 pr-10 border ${
-                        errors.confirmPassword ? "border-red-300" : "border-gray-300"
-                      } placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm`}
+                      className={`appearance-none block w-full px-4 py-2.5 pr-12 border-2 ${
+                        errors.confirmPassword ? "border-red-300" : "border-gray-200"
+                      } placeholder-gray-400 text-gray-900 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-200 bg-white/50 hover:bg-white sm:text-sm`}
+                      style={{'--tw-ring-color': '#2377c1'}}
                       placeholder="Confirm your password"
                     />
                     <button
@@ -301,7 +315,10 @@ const Register = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-lime-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-semibold rounded-xl shadow-lg text-white focus:outline-none focus:ring-2 focus:ring-offset-2 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-[1.02] active:scale-[0.98]"
+                  style={{background: loading ? '#cbd5e0' : 'linear-gradient(to right, #2377c1, #1a5a8f)', '--tw-ring-color': '#2377c1'}}
+                  onMouseEnter={(e) => !loading && (e.currentTarget.style.background = 'linear-gradient(to right, #1a5a8f, #15476b)')}
+                  onMouseLeave={(e) => !loading && (e.currentTarget.style.background = 'linear-gradient(to right, #2377c1, #1a5a8f)')}
                 >
                   {loading ? (
                     <div className="flex items-center">
@@ -316,7 +333,12 @@ const Register = () => {
                       Creating Account...
                     </div>
                   ) : (
-                    "Create Account"
+                    <span className="flex items-center">
+                      Create Account
+                      <svg className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                      </svg>
+                    </span>
                   )}
                 </button>
               </div>
@@ -324,11 +346,11 @@ const Register = () => {
               <div className="text-center">
                 <p className="text-xs text-gray-500">
                   By creating an account, you agree to our{" "}
-                  <Link to="/terms" className="text-green-600 hover:text-green-500">
+                  <Link to="/terms" className="font-medium transition-colors" style={{color: '#2377c1'}} onMouseEnter={(e) => e.target.style.color = '#1a5a8f'} onMouseLeave={(e) => e.target.style.color = '#2377c1'}>
                     Terms of Service
                   </Link>{" "}
                   and{" "}
-                  <Link to="/privacy" className="text-green-600 hover:text-green-500">
+                  <Link to="/privacy" className="font-medium transition-colors" style={{color: '#2377c1'}} onMouseEnter={(e) => e.target.style.color = '#1a5a8f'} onMouseLeave={(e) => e.target.style.color = '#2377c1'}>
                     Privacy Policy
                   </Link>
                 </p>

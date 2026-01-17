@@ -1185,6 +1185,8 @@ router.put(
   admin,
   asyncHandler(async (req, res) => {
     const order = await Order.findById(req.params.id)
+      .populate("user", "name email")
+      .populate("orderItems.product", "name image")
 
     if (order) {
       const previousStatus = order.status

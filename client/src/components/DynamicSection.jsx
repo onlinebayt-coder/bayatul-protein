@@ -591,7 +591,7 @@ function CardsRightImageLeftSection({ section, cards, settings }) {
      )}
     
     {/* Mobile Layout */}
-    <section className="md:hidden py-6" style={{ backgroundColor }}>
+    <section className="md:hidden py-4" style={{ backgroundColor }}>
       <div className="max-w-[1920px] mx-auto px-4">
         {/* Side Image on Top */}
         {sideImage && (
@@ -608,20 +608,20 @@ function CardsRightImageLeftSection({ section, cards, settings }) {
           onScroll={handleMobileScroll}
           className="overflow-x-auto scrollbar-hide snap-x snap-mandatory -mx-4"
         >
-          <div className="flex gap-3 px-4" style={{ width: 'max-content' }}>
+          <div className="flex gap-2.5 px-4" style={{ width: 'max-content' }}>
             {cards.map((card, index) => {
               // Group cards in pairs for mobile slider
               if (index % 2 === 0) {
                 const nextCard = cards[index + 1]
                 return (
-                  <div key={`group-${index}`} className="flex gap-3 snap-center flex-shrink-0" style={{ width: 'calc(100vw - 2rem)' }}>
+                  <div key={`group-${index}`} className="flex gap-2.5 snap-center flex-shrink-0" style={{ width: 'calc(100vw - 2rem)' }}>
                     {/* First card in pair */}
                     <Link
                       to={card.linkUrl || '#'}
-                      className="rounded-xl transition-all duration-300 group overflow-hidden relative flex-shrink-0 flex-1"
+                      className="rounded-lg transition-all duration-300 group overflow-hidden relative flex-shrink-0 flex-1"
                       style={{ 
-                        minHeight: '280px',
-                        maxHeight: '280px',
+                        minHeight: '200px',
+                        maxHeight: '200px',
                       }}
                     >
                       {/* Background Image */}
@@ -634,12 +634,12 @@ function CardsRightImageLeftSection({ section, cards, settings }) {
                       )}
                       
                       {/* Content Container */}
-                      <div className="relative z-10 h-full flex flex-col justify-between p-4">
+                      <div className="relative z-10 h-full flex flex-col justify-between p-3">
                         <div></div>
                         {/* Shop Now Button at Bottom-Left */}
-                        <span className="inline-flex items-center text-sm font-semibold text-gray-800 bg-[#e2edf4] hover:bg-[#d0dde6] px-4 py-2 rounded-lg transition-colors self-start">
+                        <span className="inline-flex items-center text-xs font-semibold text-gray-800 bg-[#e2edf4] hover:bg-[#d0dde6] px-3 py-1.5 rounded-md transition-colors self-start">
                           Shop Now
-                          <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-3.5 h-3.5 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                           </svg>
                         </span>
@@ -650,10 +650,10 @@ function CardsRightImageLeftSection({ section, cards, settings }) {
                     {nextCard && (
                       <Link
                         to={nextCard.linkUrl || '#'}
-                        className="rounded-xl transition-all duration-300 group overflow-hidden relative flex-shrink-0 flex-1"
+                        className="rounded-lg transition-all duration-300 group overflow-hidden relative flex-shrink-0 flex-1"
                         style={{ 
-                          minHeight: '280px',
-                          maxHeight: '280px',
+                          minHeight: '200px',
+                          maxHeight: '200px',
                         }}
                       >
                         {/* Background Image */}
@@ -666,12 +666,12 @@ function CardsRightImageLeftSection({ section, cards, settings }) {
                         )}
                         
                         {/* Content Container */}
-                        <div className="relative z-10 h-full flex flex-col justify-between p-4">
+                        <div className="relative z-10 h-full flex flex-col justify-between p-3">
                           <div></div>
                           {/* Shop Now Button at Bottom-Left */}
-                          <span className="inline-flex items-center text-sm font-semibold text-gray-800 bg-[#e2edf4] hover:bg-[#d0dde6] px-4 py-2 rounded-lg transition-colors self-start">
+                          <span className="inline-flex items-center text-xs font-semibold text-gray-800 bg-[#e2edf4] hover:bg-[#d0dde6] px-3 py-1.5 rounded-md transition-colors self-start">
                             Shop Now
-                            <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-3.5 h-3.5 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                             </svg>
                           </span>
