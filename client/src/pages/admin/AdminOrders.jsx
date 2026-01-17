@@ -212,23 +212,6 @@ const AdminOrders = () => {
     return () => document.removeEventListener("click", handleClickOutside)
   }, [])
 
-  const bounceStyle = {
-    animation: 'bounce 1s infinite',
-  }
-
-  const bounceKeyframes = `
-  @keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-30px); }
-  }
-  `
-  if (typeof document !== 'undefined' && !document.getElementById('bounce-keyframes')) {
-    const style = document.createElement('style')
-    style.id = 'bounce-keyframes'
-    style.innerHTML = bounceKeyframes
-    document.head.appendChild(style)
-  }
-
   return (
     <div className="min-h-screen bg-gray-100">
       <AdminSidebar />
@@ -294,7 +277,16 @@ const AdminOrders = () => {
 
         {loading ? (
           <div className="flex justify-center items-center h-64">
-            <img src="/g.png" alt="Loading..." style={{ width: 48, height: 48, ...bounceStyle }} />
+            <div className="flex flex-col items-center space-y-4">
+              <div className="relative">
+                <div className="animate-spin rounded-full h-20 w-20 border-4 border-[#2377c1]/30 border-t-[#2377c1]"></div>
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                  <div className="h-10 w-10 bg-gradient-to-br from-[#2377c1] to-blue-600 rounded-full animate-pulse"></div>
+                </div>
+              </div>
+              <p className="text-gray-700 font-semibold text-lg">Loading Orders...</p>
+              <p className="text-gray-500 text-sm">Please wait while we fetch your data</p>
+            </div>
           </div>
         ) : (
           <div className="bg-white rounded-lg shadow-sm" style={{ overflow: 'visible' }}>
