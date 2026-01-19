@@ -18,7 +18,7 @@ export default function TermsAndConditions() {
       <div className="bg-white">
         <div className="max-w-4xl mx-auto px-6 py-12 text-center">
           <div className="flex justify-center mb-6">
-            <div className="bg-lime-500 rounded-full p-4">
+            <div className="rounded-full p-4" style={{ backgroundColor: '#d9a82e' }}>
               <Shield className="w-12 h-12 text-white" />
             </div>
           </div>
@@ -26,14 +26,15 @@ export default function TermsAndConditions() {
             Terms & Conditions
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Welcome to Grabatoz.ae, a service by Crown Excel General Trading LLC. Understanding our terms and your rights when using our services.
+            Welcome to Baytal Protein. Understanding our terms and your rights when using our services.
           </p>
           
           {/* Language Switch Button - Commented out until Arabic version is created */}
           {/* <div className="flex justify-center mt-6">
             <button
               onClick={handleArabicClick}
-              className="bg-lime-500 hover:bg-lime-600 text-white font-medium py-2 px-6 rounded-lg transition-colors"
+              className="text-white font-medium py-2 px-6 rounded-lg transition-colors"
+              style={{ backgroundColor: '#d9a82e' }}
             >
               العربية Arabic
             </button>
@@ -48,7 +49,7 @@ export default function TermsAndConditions() {
         <div className="bg-white rounded-xl p-8 mb-8">
           <div className="flex flex-col md:flex-row md:items-start gap-6">
             <div className="flex justify-center md:justify-start">
-              <div className="bg-lime-500 rounded-full p-3">
+              <div className="rounded-full p-3" style={{ backgroundColor: '#d9a82e' }}>
                 <FileText className="w-8 h-8 text-white flex-shrink-0" />
               </div>
             </div>
@@ -56,10 +57,10 @@ export default function TermsAndConditions() {
               <h2 className="text-2xl font-bold text-gray-900 mb-4">Introduction</h2>
               <div className="text-gray-700 leading-relaxed space-y-4">
                 <p>
-                  Welcome to Grabatoz.ae, a service provided by Crown Excel General Trading LLC, United Arab Emirates. By accessing or using Grabatoz.ae or any associated services, you acknowledge and agree to the terms and conditions outlined below. These terms apply to all users of the site, including without limitation vendors, customers, merchants, and/or contributors of content.
+                  Welcome to Baytal Protein., a service provided in the United Arab Emirates. By accessing or using Baytal Protein. or any associated services, you acknowledge and agree to the terms and conditions outlined below. These terms apply to all users of the site, including without limitation vendors, customers, merchants, and/or contributors of content.
                 </p>
                 <p>
-                  All products and services displayed on Grabatoz.ae constitute an "invitation to offer." Your order represents an "offer," which is subject to acceptance by Grabatoz. Upon placing an order, you will receive an email confirming receipt of your order. This confirmation does not signify our acceptance. Our acceptance takes place only upon dispatch of the product(s) ordered.
+                  All products and services displayed on Baytal Protein. constitute an "invitation to offer." Your order represents an "offer," which is subject to acceptance by Baytal Protein.. Upon placing an order, you will receive an email confirming receipt of your order. This confirmation does not signify our acceptance. Our acceptance takes place only upon dispatch of the product(s) ordered.
                 </p>
               </div>
             </div>
@@ -73,17 +74,17 @@ export default function TermsAndConditions() {
           <section className="bg-white rounded-xl p-8">
             <div className="flex flex-col md:flex-row md:items-start gap-6">
               <div className="flex justify-center md:justify-start">
-                <div className="bg-lime-500 rounded-full p-3">
+                <div className="rounded-full p-3" style={{ backgroundColor: '#d9a82e' }}>
                   <Users className="w-8 h-8 text-white" />
                 </div>
               </div>
               <div className="flex-1 text-center md:text-left">
                 <h2 className="text-2xl font-bold text-gray-900 mb-4">1. Membership Eligibility</h2>
                 <div className="space-y-4 text-gray-700 leading-relaxed">
-                  <p>The services of Grabatoz.ae are only available to individuals who are legally eligible to enter into contracts as per UAE laws.</p>
+                  <p>The services of Baytal Protein. are only available to individuals who are legally eligible to enter into contracts as per UAE laws.</p>
                   <ul className="list-disc list-inside space-y-2 ml-4">
                     <li>Users below 18 years of age must use the site under supervision of a parent or legal guardian who agrees to be bound by these terms.</li>
-                    <li>Grabatoz.ae reserves the right to terminate access to users found to be in violation of these terms or providing false information.</li>
+                    <li>Baytal Protein. reserves the right to terminate access to users found to be in violation of these terms or providing false information.</li>
                     <li>Users accessing the website from outside the UAE are responsible for compliance with their local laws.</li>
                   </ul>
                 </div>
@@ -95,14 +96,14 @@ export default function TermsAndConditions() {
           <section className="bg-white rounded-xl p-8">
             <div className="flex flex-col md:flex-row md:items-start gap-6">
               <div className="flex justify-center md:justify-start">
-                <div className="bg-lime-500 rounded-full p-3">
+                <div className="rounded-full p-3" style={{ backgroundColor: '#d9a82e' }}>
                   <FileText className="w-8 h-8 text-white" />
                 </div>
               </div>
               <div className="flex-1 text-center md:text-left">
                 <h2 className="text-2xl font-bold text-gray-900 mb-4">2. Account & Registration</h2>
                 <div className="space-y-4 text-gray-700 leading-relaxed">
-                  <p>When using Grabatoz.ae, you are responsible for maintaining the confidentiality of your account and password and for restricting access to your device. You agree to accept responsibility for all activities under your account.</p>
+                  <p>When using Baytal Protein., you are responsible for maintaining the confidentiality of your account and password and for restricting access to your device. You agree to accept responsibility for all activities under your account.</p>
                   <div>
                     <p className="font-medium mb-2">You agree to:</p>
                     <ul className="list-disc list-inside space-y-2 ml-4">
@@ -111,7 +112,7 @@ export default function TermsAndConditions() {
                       <li>Inform us immediately in case of any unauthorized access or breach.</li>
                     </ul>
                   </div>
-                  <p>Grabatoz reserves the right to suspend or terminate accounts for providing false, outdated, or misleading information.</p>
+                  <p>Baytal Protein. reserves the right to suspend or terminate accounts for providing false, outdated, or misleading information.</p>
                 </div>
               </div>
             </div>
@@ -121,14 +122,14 @@ export default function TermsAndConditions() {
           <section className="bg-white rounded-xl p-8">
             <div className="flex flex-col md:flex-row md:items-start gap-6">
               <div className="flex justify-center md:justify-start">
-                <div className="bg-lime-500 rounded-full p-3">
+                <div className="rounded-full p-3" style={{ backgroundColor: '#d9a82e' }}>
                   <CreditCard className="w-8 h-8 text-white" />
                 </div>
               </div>
               <div className="flex-1 text-center md:text-left">
                 <h2 className="text-2xl font-bold text-gray-900 mb-4">3. Pricing & Orders</h2>
                 <div className="space-y-4 text-gray-700 leading-relaxed">
-                  <p>Grabatoz.ae strives to provide accurate product descriptions and pricing. However, errors may occur.</p>
+                  <p>Baytal Protein. strives to provide accurate product descriptions and pricing. However, errors may occur.</p>
                   <ul className="list-disc list-inside space-y-2 ml-4">
                     <li>In case of incorrect price or information, we reserve the right to cancel the order.</li>
                     <li>We will notify you via email before dispatch if there's a discrepancy in price or availability.</li>
@@ -144,7 +145,7 @@ export default function TermsAndConditions() {
           <section className="bg-white rounded-xl p-8">
             <div className="flex flex-col md:flex-row md:items-start gap-6">
               <div className="flex justify-center md:justify-start">
-                <div className="bg-lime-500 rounded-full p-3">
+                <div className="rounded-full p-3" style={{ backgroundColor: '#d9a82e' }}>
                   <Globe className="w-8 h-8 text-white" />
                 </div>
               </div>
@@ -157,7 +158,7 @@ export default function TermsAndConditions() {
                   <p>
                     <strong>By Customer:</strong> You may cancel an order before it is processed. Once shipped, cancellations are not permitted.
                   </p>
-                  <p>Refunds for canceled orders (by either party) will be credited to your original payment method. Or grabatoz will make a credit voucher.</p>
+                  <p>Refunds for canceled orders (by either party) will be credited to your original payment method. Or Baytal Protein. will make a credit voucher.</p>
                 </div>
               </div>
             </div>
@@ -167,7 +168,7 @@ export default function TermsAndConditions() {
           <section className="bg-white rounded-xl p-8">
             <div className="flex flex-col md:flex-row md:items-start gap-6">
               <div className="flex justify-center md:justify-start">
-                <div className="bg-lime-500 rounded-full p-3">
+                  <div className="rounded-full p-3" style={{ backgroundColor: '#d9a82e' }}>
                   <Globe className="w-8 h-8 text-white" />
                 </div>
               </div>
@@ -175,11 +176,11 @@ export default function TermsAndConditions() {
                 <h2 className="text-2xl font-bold text-gray-900 mb-4">5. Third-Party & Branded Product Disclaimer</h2>
                 <div className="space-y-4 text-gray-700 leading-relaxed">
                   <p>
-                    Grabatoz.ae offers a variety of products, including items listed by third-party vendors, marketplace partners, and branded products supplied via external platforms. While some of these branded products may have originally been sourced through Grabatoz or Crown Excel General Trading LLC, we are not responsible for products sold directly by third-party sellers, vendors, or external platforms.
+                    Baytal Protein. offers a variety of products, including items listed by third-party vendors, marketplace partners, and branded products supplied via external platforms. While some of these branded products may have originally been sourced through Baytal Protein., we are not responsible for products sold directly by third-party sellers, vendors, or external platforms.
                   </p>
-                  <p>Grabatoz assumes responsibility only for products sold directly by the official Grabatoz store or Crown Excel store. Any product listed by a third-party, even if originally supplied by Grabatoz, falls under the responsibility of the respective vendor or seller.</p>
-                  <p>In the case of branded items, Grabatoz does not guarantee the performance, durability, or quality of such products. These aspects are solely determined by the original manufacturer. However, Grabatoz can assist in processing returns, warranty claims, or maintenance requests on behalf of the customer, strictly in accordance with the brand's or manufacturer's warranty, return, and exchange policy.</p>
-                  <p>Customers are advised to read all seller and manufacturer policies carefully before making a purchase. Grabatoz is not liable for discrepancies in performance or service standards for third-party or branded items not directly sold by us.</p>
+                  <p>Baytal Protein. assumes responsibility only for products sold directly by the official Baytal Protein. store. Any product listed by a third-party, even if originally supplied by Baytal Protein., falls under the responsibility of the respective vendor or seller.</p>
+                  <p>In the case of branded items, Baytal Protein. does not guarantee the performance, durability, or quality of such products. These aspects are solely determined by the original manufacturer. However, Baytal Protein. can assist in processing returns, warranty claims, or maintenance requests on behalf of the customer, strictly in accordance with the brand's or manufacturer's warranty, return, and exchange policy.</p>
+                  <p>Customers are advised to read all seller and manufacturer policies carefully before making a purchase. Baytal Protein. is not liable for discrepancies in performance or service standards for third-party or branded items not directly sold by us.</p>
                 </div>
               </div>
             </div>
@@ -189,7 +190,7 @@ export default function TermsAndConditions() {
           <section className="bg-white rounded-xl p-8">
             <div className="flex flex-col md:flex-row md:items-start gap-6">
               <div className="flex justify-center md:justify-start">
-                <div className="bg-lime-500 rounded-full p-3">
+                <div className="rounded-full p-3" style={{ backgroundColor: '#d9a82e' }}>
                   <CreditCard className="w-8 h-8 text-white" />
                 </div>
               </div>
@@ -198,8 +199,8 @@ export default function TermsAndConditions() {
                 <div className="space-y-4 text-gray-700 leading-relaxed">
                   <ul className="list-disc list-inside space-y-2">
                     <li>Payments must be made using valid credit/debit cards owned by the customer.</li>
-                    <li>Grabatoz will not share payment information with third parties except in case of fraud investigation or as required by law.</li>
-                    <li>Fraudulent transactions will be reported, and Grabatoz reserves the right to take legal action.</li>
+                    <li>Baytal Protein. will not share payment information with third parties except in case of fraud investigation or as required by law.</li>
+                    <li>Fraudulent transactions will be reported, and Baytal Protein. reserves the right to take legal action.</li>
                   </ul>
                 </div>
               </div>
@@ -210,14 +211,14 @@ export default function TermsAndConditions() {
           <section className="bg-white rounded-xl p-8">
             <div className="flex flex-col md:flex-row md:items-start gap-6">
               <div className="flex justify-center md:justify-start">
-                <div className="bg-lime-500 rounded-full p-3">
+                <div className="rounded-full p-3" style={{ backgroundColor: '#d9a82e' }}>
                   <Shield className="w-8 h-8 text-white" />
                 </div>
               </div>
               <div className="flex-1 text-center md:text-left">
                 <h2 className="text-2xl font-bold text-gray-900 mb-4">7. Declined or Fraudulent Transactions</h2>
                 <div className="space-y-4 text-gray-700 leading-relaxed">
-                  <p>Grabatoz reserves the right to recover the cost of goods, collection charges, and legal fees from users involved in fraudulent transactions.</p>
+                  <p>Baytal Protein. reserves the right to recover the cost of goods, collection charges, and legal fees from users involved in fraudulent transactions.</p>
                 </div>
               </div>
             </div>
@@ -227,14 +228,14 @@ export default function TermsAndConditions() {
           <section className="bg-white rounded-xl p-8">
             <div className="flex flex-col md:flex-row md:items-start gap-6">
               <div className="flex justify-center md:justify-start">
-                <div className="bg-lime-500 rounded-full p-3">
+                <div className="rounded-full p-3" style={{ backgroundColor: '#d9a82e' }}>
                   <Mail className="w-8 h-8 text-white" />
                 </div>
               </div>
               <div className="flex-1 text-center md:text-left">
                 <h2 className="text-2xl font-bold text-gray-900 mb-4">8. Electronic Communications</h2>
                 <div className="space-y-4 text-gray-700 leading-relaxed">
-                  <p>By visiting Grabatoz.ae or communicating with us electronically, you consent to receive communications from us electronically, including emails, notices, and updates.</p>
+                  <p>By visiting Baytal Protein. or communicating with us electronically, you consent to receive communications from us electronically, including emails, notices, and updates.</p>
                 </div>
               </div>
             </div>
@@ -244,7 +245,7 @@ export default function TermsAndConditions() {
           <section className="bg-white rounded-xl p-8">
             <div className="flex flex-col md:flex-row md:items-start gap-6">
               <div className="flex justify-center md:justify-start">
-                <div className="bg-lime-500 rounded-full p-3">
+                <div className="rounded-full p-3" style={{ backgroundColor: '#d9a82e' }}>
                   <CreditCard className="w-8 h-8 text-white" />
                 </div>
               </div>
@@ -264,7 +265,7 @@ export default function TermsAndConditions() {
           <section className="bg-white rounded-xl p-8">
             <div className="flex flex-col md:flex-row md:items-start gap-6">
               <div className="flex justify-center md:justify-start">
-                <div className="bg-lime-500 rounded-full p-3">
+                <div className="rounded-full p-3" style={{ backgroundColor: '#d9a82e' }}>
                   <Globe className="w-8 h-8 text-white" />
                 </div>
               </div>
@@ -284,7 +285,7 @@ export default function TermsAndConditions() {
           <section className="bg-white rounded-xl p-8">
             <div className="flex flex-col md:flex-row md:items-start gap-6">
               <div className="flex justify-center md:justify-start">
-                <div className="bg-lime-500 rounded-full p-3">
+                <div className="rounded-full p-3" style={{ backgroundColor: '#d9a82e' }}>
                   <Shield className="w-8 h-8 text-white" />
                 </div>
               </div>
@@ -307,14 +308,14 @@ export default function TermsAndConditions() {
           <section className="bg-white rounded-xl p-8">
             <div className="flex flex-col md:flex-row md:items-start gap-6">
               <div className="flex justify-center md:justify-start">
-                <div className="bg-lime-500 rounded-full p-3">
+                <div className="rounded-full p-3" style={{ backgroundColor: '#d9a82e' }}>
                   <Globe className="w-8 h-8 text-white" />
                 </div>
               </div>
               <div className="flex-1 text-center md:text-left">
                 <h2 className="text-2xl font-bold text-gray-900 mb-4">12. Colors & Product Display</h2>
                 <div className="space-y-4 text-gray-700 leading-relaxed">
-                  <p>We strive to display the colors and images of all products available on Grabatoz.ae as accurately as possible. However, the actual colors you see may vary depending on your screen resolution, device settings, or lighting conditions. Therefore, we cannot guarantee that your device's display will reflect the true color or appearance of the product.</p>
+                  <p>We strive to display the colors and images of all products available on Baytal Protein. as accurately as possible. However, the actual colors you see may vary depending on your screen resolution, device settings, or lighting conditions. Therefore, we cannot guarantee that your device's display will reflect the true color or appearance of the product.</p>
                   <p>To avoid misunderstandings, we strongly encourage customers to carefully review the complete product descriptions, specifications, and additional details provided on each product page. If you require further clarification or specific information about any product, our dedicated support team is always available to assist you.</p>
                   <p>For quick assistance, you may use the following available channels:</p>
                   <ul className="list-disc list-inside space-y-2 ml-4">
@@ -331,14 +332,14 @@ export default function TermsAndConditions() {
           <section className="bg-white rounded-xl p-8">
             <div className="flex flex-col md:flex-row md:items-start gap-6">
               <div className="flex justify-center md:justify-start">
-                <div className="bg-lime-500 rounded-full p-3">
+                <div className="rounded-full p-3" style={{ backgroundColor: '#d9a82e' }}>
                   <Shield className="w-8 h-8 text-white" />
                 </div>
               </div>
               <div className="flex-1 text-center md:text-left">
                 <h2 className="text-2xl font-bold text-gray-900 mb-4">13. Intellectual Property Rights</h2>
                 <div className="space-y-4 text-gray-700 leading-relaxed">
-                  <p>All content, design, layout, graphics, and logos on Grabatoz.ae are the property of Crown Excel General Trading LLC or its licensors. You may not reproduce, distribute, or create derivative works without express written permission.</p>
+                  <p>All content, design, layout, graphics, and logos on Baytal Protein. are the property of its licensors. You may not reproduce, distribute, or create derivative works without express written permission.</p>
                 </div>
               </div>
             </div>
@@ -348,14 +349,14 @@ export default function TermsAndConditions() {
           <section className="bg-white rounded-xl p-8">
             <div className="flex flex-col md:flex-row md:items-start gap-6">
               <div className="flex justify-center md:justify-start">
-                <div className="bg-lime-500 rounded-full p-3">
+                <div className="rounded-full p-3" style={{ backgroundColor: '#d9a82e' }}>
                   <FileText className="w-8 h-8 text-white" />
                 </div>
               </div>
               <div className="flex-1 text-center md:text-left">
                 <h2 className="text-2xl font-bold text-gray-900 mb-4">14. Reviews & Submissions</h2>
                 <div className="space-y-4 text-gray-700 leading-relaxed">
-                  <p>All content submitted to Grabatoz.ae (reviews, comments, suggestions) becomes the property of Grabatoz. We reserve the right to use, publish, or remove content at our discretion.</p>
+                  <p>All content submitted to Baytal Protein. (reviews, comments, suggestions) becomes the property of Baytal Protein.. We reserve the right to use, publish, or remove content at our discretion.</p>
                   <p>You agree not to post:</p>
                   <ul className="list-disc list-inside space-y-2 ml-4">
                     <li>Obscene, illegal, or defamatory content.</li>
@@ -371,14 +372,14 @@ export default function TermsAndConditions() {
           <section className="bg-white rounded-xl p-8">
             <div className="flex flex-col md:flex-row md:items-start gap-6">
               <div className="flex justify-center md:justify-start">
-                <div className="bg-lime-500 rounded-full p-3">
+                <div className="rounded-full p-3" style={{ backgroundColor: '#d9a82e' }}>
                   <Shield className="w-8 h-8 text-white" />
                 </div>
               </div>
               <div className="flex-1 text-center md:text-left">
                 <h2 className="text-2xl font-bold text-gray-900 mb-4">15. Indemnification</h2>
                 <div className="space-y-4 text-gray-700 leading-relaxed">
-                  <p>You agree to indemnify and hold Grabatoz, its affiliates, employees, directors, and agents harmless from any claims, liabilities, or losses arising out of your violation of these terms, use of the site, or breach of laws.</p>
+                  <p>You agree to indemnify and hold Baytal Protein., its affiliates, employees, directors, and agents harmless from any claims, liabilities, or losses arising out of your violation of these terms, use of the site, or breach of laws.</p>
                 </div>
               </div>
             </div>
@@ -388,14 +389,14 @@ export default function TermsAndConditions() {
           <section className="bg-white rounded-xl p-8">
             <div className="flex flex-col md:flex-row md:items-start gap-6">
               <div className="flex justify-center md:justify-start">
-                <div className="bg-lime-500 rounded-full p-3">
+                <div className="rounded-full p-3" style={{ backgroundColor: '#d9a82e' }}>
                   <Shield className="w-8 h-8 text-white" />
                 </div>
               </div>
               <div className="flex-1 text-center md:text-left">
                 <h2 className="text-2xl font-bold text-gray-900 mb-4">16. Termination</h2>
                 <div className="space-y-4 text-gray-700 leading-relaxed">
-                  <p>Grabatoz reserves the right to suspend or terminate your access to the site at any time without notice, including for breach of terms or unlawful activity.</p>
+                  <p>Baytal Protein. reserves the right to suspend or terminate your access to the site at any time without notice, including for breach of terms or unlawful activity.</p>
                 </div>
               </div>
             </div>
@@ -405,7 +406,7 @@ export default function TermsAndConditions() {
           <section className="bg-white rounded-xl p-8">
             <div className="flex flex-col md:flex-row md:items-start gap-6">
               <div className="flex justify-center md:justify-start">
-                <div className="bg-lime-500 rounded-full p-3">
+                <div className="rounded-full p-3" style={{ backgroundColor: '#d9a82e' }}>
                   <Globe className="w-8 h-8 text-white" />
                 </div>
               </div>
@@ -422,14 +423,14 @@ export default function TermsAndConditions() {
           <section className="bg-white rounded-xl p-8">
             <div className="flex flex-col md:flex-row md:items-start gap-6">
               <div className="flex justify-center md:justify-start">
-                <div className="bg-lime-500 rounded-full p-3">
+                <div className="rounded-full p-3" style={{ backgroundColor: '#d9a82e' }}>
                   <Shield className="w-8 h-8 text-white" />
                 </div>
               </div>
               <div className="flex-1 text-center md:text-left">
                 <h2 className="text-2xl font-bold text-gray-900 mb-4">18. OFAC Compliance</h2>
                 <div className="space-y-4 text-gray-700 leading-relaxed">
-                  <p>Grabatoz will not process or ship any orders to OFAC-sanctioned countries, as per UAE regulations.</p>
+                  <p>Baytal Protein. will not process or ship any orders to OFAC-sanctioned countries, as per UAE regulations.</p>
                 </div>
               </div>
             </div>
@@ -439,14 +440,14 @@ export default function TermsAndConditions() {
           <section className="bg-white rounded-xl p-8">
             <div className="flex flex-col md:flex-row md:items-start gap-6">
               <div className="flex justify-center md:justify-start">
-                <div className="bg-lime-500 rounded-full p-3">
+                <div className="rounded-full p-3" style={{ backgroundColor: '#d9a82e' }}>
                   <Shield className="w-8 h-8 text-white" />
                 </div>
               </div>
               <div className="flex-1 text-center md:text-left">
                 <h2 className="text-2xl font-bold text-gray-900 mb-4">19. Privacy Policy</h2>
                 <div className="space-y-4 text-gray-700 leading-relaxed">
-                  <p>Your use of Grabatoz.ae is subject to our Privacy Policy, which outlines how we collect, use, and protect your personal data. We do not sell or rent your data without your consent. See our full <Link to="/privacy-policy" className="text-lime-600 hover:underline font-medium">Privacy Policy</Link> for more details.</p>
+                  <p>Your use of Baytal Protein. is subject to our Privacy Policy, which outlines how we collect, use, and protect your personal data. We do not sell or rent your data without your consent. See our full <Link to="/privacy-policy" className="hover:underline font-medium" style={{ color: '#d9a82e' }}>Privacy Policy</Link> for more details.</p>
                 </div>
               </div>
             </div>
@@ -456,14 +457,14 @@ export default function TermsAndConditions() {
           <section className="bg-white rounded-xl p-8">
             <div className="flex flex-col md:flex-row md:items-start gap-6">
               <div className="flex justify-center md:justify-start">
-                <div className="bg-lime-500 rounded-full p-3">
+                <div className="rounded-full p-3" style={{ backgroundColor: '#d9a82e' }}>
                   <FileText className="w-8 h-8 text-white" />
                 </div>
               </div>
               <div className="flex-1 text-center md:text-left">
                 <h2 className="text-2xl font-bold text-gray-900 mb-4">20. Changes to Terms</h2>
                 <div className="space-y-4 text-gray-700 leading-relaxed">
-                  <p>Grabatoz may update these Terms & Conditions at any time without prior notice. Continued use of the site after updates constitutes your acceptance of the revised terms.</p>
+                  <p>Baytal Protein. may update these Terms & Conditions at any time without prior notice. Continued use of the site after updates constitutes your acceptance of the revised terms.</p>
                 </div>
               </div>
             </div>
@@ -473,7 +474,7 @@ export default function TermsAndConditions() {
       </div>
 
       {/* Contact Information */}
-      <section className="bg-gray-50 text-black p-4">
+      {/* <section className="bg-gray-50 text-black p-4">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-8">
             <h2 className="text-2xl font-semibold mb-2">Contact Information</h2>
@@ -483,7 +484,7 @@ export default function TermsAndConditions() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
             <div className="text-center">
               <div className="flex justify-center mb-2">
-                <Phone className="w-5 h-5 text-lime-500" />
+                <Phone className="w-5 h-5" style={{ color: '#d9a82e' }} />
               </div>
               <h3 className="font-medium mb-1">Phone</h3>
               <a href="tel:+97143540566" className="text-black">
@@ -493,17 +494,17 @@ export default function TermsAndConditions() {
             
             <div className="text-center">
               <div className="flex justify-center mb-2">
-                <Mail className="w-5 h-5 text-lime-500" />
+                <Mail className="w-5 h-5" style={{ color: '#d9a82e' }} />
               </div>
               <h3 className="font-medium mb-1">Email</h3>
-              <a href="mailto:customercare@grabatoz.ae" className="text-black">
-                customercare@grabatoz.ae
+              <a href="mailto:customercare@baytalprotein.com" className="text-black">
+                customercare@baytalprotein.com
               </a>
             </div>
             
             <div className="text-center">
               <div className="flex justify-center mb-2">
-                <Clock className="w-5 h-5 text-lime-500" />
+                <Clock className="w-5 h-5" style={{ color: '#d9a82e' }} />
               </div>
               <h3 className="font-medium mb-1">Hours</h3>
               <p className="text-black">Daily 9:00 AM - 7:00 PM</p>
@@ -511,7 +512,7 @@ export default function TermsAndConditions() {
             
             <div className="text-center">
               <div className="flex justify-center mb-2">
-                <MapPin className="w-5 h-5 text-lime-500" />
+                <MapPin className="w-5 h-5" style={{ color: '#d9a82e' }} />
               </div>
               <h3 className="font-medium mb-1">Address</h3>
               <p className="text-black">P.O. Box 241975, Dubai, UAE</p>
@@ -520,12 +521,12 @@ export default function TermsAndConditions() {
           
           <div className="text-center pt-4 border-t border-gray-700">
             <p className="text-black">
-              <strong>Grabatoz.ae</strong><br />
-              <b>Powered by Crown Excel General Trading LLC</b>
+              <strong>Baytal Protein.</strong><br />
+             
             </p>
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 }

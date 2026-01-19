@@ -18,7 +18,7 @@ export default function CookiesAndPolicy() {
       <div className="bg-white ">
         <div className="max-w-4xl mx-auto px-6 py-12 text-center">
           <div className="flex justify-center mb-6">
-            <div className="bg-lime-500 rounded-full p-4">
+            <div className="rounded-full p-4" style={{ backgroundColor: '#d9a82e' }}>
               <Shield className="w-12 h-12 text-white" />
             </div>
           </div>
@@ -26,14 +26,17 @@ export default function CookiesAndPolicy() {
             Cookies & Tracking Technologies
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Understanding how we use cookies and tracking technologies to improve your experience at Grabatoz.ae
+            Understanding how we use cookies and tracking technologies to improve your experience at Baytal Protein’s
           </p>
 
           {/* Language Switch Button - Commented out until Arabic version is created */}
           {/* <div className="flex justify-center mt-6">
             <button
               onClick={handleArabicClick}
-              className="bg-lime-500 hover:bg-lime-600 text-white font-medium py-2 px-6 rounded-lg transition-colors"
+              className="text-white font-medium py-2 px-6 rounded-lg transition-colors"
+              style={{ backgroundColor: '#d9a82e' }}
+              onMouseEnter={(e) => e.target.style.backgroundColor = '#c69426'}
+              onMouseLeave={(e) => e.target.style.backgroundColor = '#d9a82e'}
             >
               العربية Arabic
             </button>
@@ -48,7 +51,7 @@ export default function CookiesAndPolicy() {
         <div className="bg-white rounded-lg p-1">
           <div className="flex flex-col md:flex-row md:items-start gap-4">
             <div className="flex justify-center md:justify-start">
-              <FileText className="w-8 h-8 text-lime-500 mt-1 flex-shrink-0" />
+              <FileText className="w-8 h-8 mt-1 flex-shrink-0" style={{ color: '#d9a82e' }} />
             </div>
             <div className="text-center md:text-left">
               <h2 className="text-xl font-semibold text-gray-900 mb-3">Important Notice</h2>
@@ -65,7 +68,7 @@ export default function CookiesAndPolicy() {
         <section className="bg-white rounded-lg mt-5 p-1">
           <div className="flex flex-col md:flex-row md:items-center gap-3 mb-6">
             <div className="flex justify-center md:justify-start">
-              <Eye className="w-8 h-8 text-lime-500" />
+              <Eye className="w-8 h-8" style={{ color: '#d9a82e' }} />
             </div>
             <h2 className="text-xl font-semibold text-gray-900 text-center md:text-left">Disclosure to Third Parties</h2>
           </div>
@@ -83,7 +86,7 @@ We use necessary cookies for app navigation, basic functions, and security purpo
         <section className="bg-white rounded-lg mt-5 p-1">
           <div className="flex flex-col md:flex-row md:items-center gap-3 mb-6">
             <div className="flex justify-center md:justify-start">
-              <Cookie className="w-8 h-8 text-lime-500" />
+              <Cookie className="w-8 h-8" style={{ color: '#d9a82e' }} />
             </div>
             <h2 className="text-xl font-semibold text-gray-900 text-center md:text-left">Analysis Services</h2>
           </div>
@@ -101,13 +104,13 @@ We use necessary cookies for app navigation, basic functions, and security purpo
 
             <div className="flex flex-col justify-center items-center md:flex-row md:justify-center gap-14">
 
-            <div className="rounded-lg mt-6">
+            {/* <div className="rounded-lg mt-6">
               <img
                 src="https://www.nokia.com/sites/default/files/2022-01/cybersecurity4_0.jpg?height=600&width=1920&resize=1"
                 alt="Cookies Inside App"
                 className="hidden md:block w-[900px] h-[300px] rounded-lg bg-cover"
               />
-            </div>
+            </div> */}
             
 
 
@@ -116,7 +119,7 @@ We use necessary cookies for app navigation, basic functions, and security purpo
 
           <div className="flex flex-col md:flex-row md:items-center gap-3 mb-6">
             <div className="flex justify-center md:justify-start">
-              <Database className="w-8 h-8 text-lime-500" />
+              <Database className="w-8 h-8" style={{ color: '#d9a82e' }} />
             </div>
             <h2 className="text-xl font-semibold text-gray-900 text-center md:text-left">Google Analytics</h2>
           </div>
@@ -126,13 +129,10 @@ We use necessary cookies for app navigation, basic functions, and security purpo
              
           </div>
 
-
-
-          
         <section className="bg-white rounded-lg mt-5 p-1">
           <div className="flex flex-col md:flex-row md:items-center gap-3 mb-6">
             <div className="flex justify-center md:justify-start">
-              <Database className="w-8 h-8 text-lime-500" />
+              <Database className="w-8 h-8" style={{ color: '#d9a82e' }} />
             </div>
             <h2 className="text-xl font-semibold text-gray-900 text-center md:text-left">Sentry</h2>
           </div>
@@ -152,7 +152,7 @@ We use necessary cookies for app navigation, basic functions, and security purpo
         <section className="bg-white rounded-lg mt-5 p-1">
           <div className="flex flex-col md:flex-row md:items-center gap-3 mb-6">
             <div className="flex justify-center md:justify-start">
-              <Shield className="w-8 h-8 text-lime-500" />
+              <Shield className="w-8 h-8" style={{ color: '#d9a82e' }} />
             </div>
             <h2 className="text-xl font-semibold text-gray-900 text-center md:text-left">Your Users' Rights</h2>
           </div>
@@ -167,7 +167,7 @@ We use necessary cookies for app navigation, basic functions, and security purpo
               <li>Right to data portability</li>
             </ul>
             <p className="mt-4">
-              For data protection inquiries, contact: <strong>customercare@grabatoz.ae</strong>
+              For data protection inquiries, contact: <strong>customercare@baytalprotein.com</strong>
             </p>
           </div>
         </section>
@@ -176,7 +176,7 @@ We use necessary cookies for app navigation, basic functions, and security purpo
         <section className="bg-white rounded-lg mt-5 p-1">
           <div className="flex flex-col md:flex-row md:items-center gap-3 mb-6">
             <div className="flex justify-center md:justify-start">
-              <Mail className="w-8 h-8 text-lime-500" />
+              <Mail className="w-8 h-8" style={{ color: '#d9a82e' }} />
             </div>
             <h2 className="text-xl font-semibold text-gray-900 text-center md:text-left">Email & Postal Communication</h2>
           </div>
@@ -191,7 +191,7 @@ We use necessary cookies for app navigation, basic functions, and security purpo
         <section className="bg-white rounded-lg mt-5 p-1">
           <div className="flex flex-col md:flex-row md:items-center gap-3 mb-6">
             <div className="flex justify-center md:justify-start">
-              <Globe className="w-8 h-8 text-lime-500" />
+              <Globe className="w-8 h-8" style={{ color: '#d9a82e' }} />
             </div>
             <h2 className="text-xl font-semibold text-gray-900 text-center md:text-left">Links to External Websites</h2>
           </div>
@@ -206,7 +206,7 @@ We use necessary cookies for app navigation, basic functions, and security purpo
         <section className="bg-white rounded-lg mt-5 p-1">
           <div className="flex flex-col md:flex-row md:items-center gap-3 mb-6">
             <div className="flex justify-center md:justify-start">
-              <Lock className="w-8 h-8 text-lime-500" />
+              <Lock className="w-8 h-8" style={{ color: '#d9a82e' }} />
             </div>
             <h2 className="text-xl font-semibold text-gray-900 text-center md:text-left">Data Security</h2>
           </div>
@@ -225,7 +225,7 @@ We use necessary cookies for app navigation, basic functions, and security purpo
         <section className="bg-white rounded-lg mt-5 p-1">
           <div className="flex flex-col md:flex-row md:items-center gap-3 mb-6">
             <div className="flex justify-center md:justify-start">
-              <FileText className="w-8 h-8 text-lime-500" />
+              <FileText className="w-8 h-8" style={{ color: '#d9a82e' }} />
             </div>
             <h2 className="text-xl font-semibold text-gray-900 text-center md:text-left">Updates to Privacy Notice</h2>
           </div>
@@ -239,34 +239,32 @@ We use necessary cookies for app navigation, basic functions, and security purpo
 
 
           {/* Image Section */}
-          <div className="rounded-lg overflow-hidden shadow mt-6">
+          {/* <div className="rounded-lg overflow-hidden shadow mt-6">
               <img
                 src="https://humanfocus.co.uk/wp-content/uploads/what-is-cyber-security.jpg"
                 alt="Data Security Measures"
                 className="w-[700px] h-48 bg-cover"
               />
-            </div>
-
+            </div> */}
             </div>
 
         {/* Your Consent */}
         <section className="bg-white rounded-lg mt-5 p-1">
           <div className="flex flex-col md:flex-row md:items-center gap-3 mb-6">
             <div className="flex justify-center md:justify-start">
-              <Shield className="w-8 h-8 text-lime-500" />
+              <Shield className="w-8 h-8" style={{ color: '#d9a82e' }} />
             </div>
             <h2 className="text-xl font-semibold text-gray-900 text-center md:text-left">Your Consent</h2>
           </div>
 
           <div className="space-y-4 text-gray-700">
-          <p>By using the Site, you consent to the collection and use of the information you disclose on the website grabatoz.ae by Crown Excel General Trading LLC. If we decide to change our Privacy Policy, we will post those changes on this page so that you are always aware of what information we collect, how we use it, and under what circumstances we disclose it</p>
+          <p>By using the Site, you consent to the collection and use of the information you disclose on the website Baytal Protein’s by Crown Excel General Trading LLC. If we decide to change our Privacy Policy, we will post those changes on this page so that you are always aware of what information we collect, how we use it, and under what circumstances we disclose it</p>
           </div>
         </section>
-
       </div>
 
       {/* Contact Information */}
-      <section className="bg-gray-50 text-black p-4">
+      {/* <section className="bg-gray-50 text-black p-4">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-8">
             <h2 className="text-2xl font-semibold mb-2">Contact Information</h2>
@@ -276,7 +274,7 @@ We use necessary cookies for app navigation, basic functions, and security purpo
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
             <div className="text-center">
               <div className="flex justify-center mb-2">
-                <Phone className="w-5 h-5 text-lime-500" />
+                <Phone className="w-5 h-5" style={{ color: '#d9a82e' }} />
               </div>
               <h3 className="font-medium mb-1">Phone</h3>
               <a href="tel:+97143540566" className="text-black">
@@ -286,7 +284,7 @@ We use necessary cookies for app navigation, basic functions, and security purpo
 
             <div className="text-center">
               <div className="flex justify-center mb-2">
-                <Mail className="w-5 h-5 text-lime-500" />
+                <Mail className="w-5 h-5" style={{ color: '#d9a82e' }} />
               </div>
               <h3 className="font-medium mb-1">Email</h3>
               <a href="mailto:customercare@grabatoz.ae" className="text-black">
@@ -296,7 +294,7 @@ We use necessary cookies for app navigation, basic functions, and security purpo
 
             <div className="text-center">
               <div className="flex justify-center mb-2">
-                <Clock className="w-5 h-5 text-lime-500" />
+                <Clock className="w-5 h-5" style={{ color: '#d9a82e' }} />
               </div>
               <h3 className="font-medium mb-1">Hours</h3>
               <p className="text-black">Daily 9:00 AM - 7:00 PM</p>
@@ -304,7 +302,7 @@ We use necessary cookies for app navigation, basic functions, and security purpo
 
             <div className="text-center">
               <div className="flex justify-center mb-2">
-                <MapPin className="w-5 h-5 text-lime-500" />
+                <MapPin className="w-5 h-5" style={{ color: '#d9a82e' }} />
               </div>
               <h3 className="font-medium mb-1">Address</h3>
               <p className="text-black">P.O. Box 241975, Dubai, UAE</p>
@@ -318,7 +316,7 @@ We use necessary cookies for app navigation, basic functions, and security purpo
             </p>
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 }

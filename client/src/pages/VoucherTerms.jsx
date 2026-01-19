@@ -36,10 +36,10 @@ import {
 
 export default function VoucherTermsConditions() {
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4">
-      <div className="max-w-4xl mx-auto">
-        <Card className="shadow-lg">
-          <CardHeader className="text-center bg-gradient-to-r from-lime-500 to-lime-600 text-white rounded-t-lg">
+    <div className="min-h-screen  py-8 px-4">
+      <div className="max-w-6xl mx-auto">
+        <Card className="">
+          <CardHeader className="text-center bg-gradient-to-r text-white rounded-t-lg" style={{ background: 'linear-gradient(to right, #d9a82e, #b88a1a)' }}>
             <div className="flex items-center justify-center gap-3 mb-2">
               <FileText className="h-8 w-8" />
               <CardTitle className="text-3xl font-bold">Voucher Terms & Conditions</CardTitle>
@@ -50,30 +50,30 @@ export default function VoucherTermsConditions() {
             {/* General Conditions */}
             <section>
               <div className="flex items-center gap-3 mb-6">
-                <Shield className="h-6 w-6 text-lime-500" />
+                <Shield className="h-6 w-6" style={{ color: '#d9a82e' }} />
                 <h2 className="text-2xl font-semibold text-gray-800">General Conditions</h2>
               </div>
 
               <div className="space-y-4 text-gray-700 leading-relaxed">
-                <div className="flex items-start gap-3 p-3 bg-lime-50 rounded-lg">
-                  <Clock className="h-5 w-5 text-lime-500 mt-0.5 flex-shrink-0" />
+                <div className="flex items-start gap-3 p-3 rounded-lg" style={{ backgroundColor: '#fff9ec' }}>
+                  <Clock className="h-5 w-5 mt-0.5 flex-shrink-0" style={{ color: '#d9a82e' }} />
                   <p>
-                    <span className="font-medium">1.</span> Each voucher or promo code issued by Grabatoz.ae is valid
+                    <span className="font-medium">1.</span> Each voucher or promo code issued by Baytal Protein’s is valid
                     for a limited time, date or event only. The expiry date and applicable terms will be communicated
-                    via email, SMS, or any official channel used by Grabatoz.
+                    via email, SMS, or any official channel used by Baytal Protein’s.
                   </p>
                 </div>
 
                 <div className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
-                  <Users className="h-5 w-5 text-lime-500 mt-0.5 flex-shrink-0" />
+                  <Users className="h-5 w-5 mt-0.5 flex-shrink-0" style={{ color: '#d9a82e' }} />
                   <p>
                     <span className="font-medium">2.</span> Only one voucher can apply on each purchase made by customer
-                    on grabatoz.ae store.
+                    on Baytal Protein’s store.
                   </p>
                 </div>
 
-                <div className="flex items-start gap-3 p-3 bg-lime-50 rounded-lg">
-                  <Ban className="h-5 w-5 text-lime-500 mt-0.5 flex-shrink-0" />
+                <div className="flex items-start gap-3 p-3 rounded-lg" style={{ backgroundColor: '#fff9ec' }}>
+                  <Ban className="h-5 w-5 mt-0.5 flex-shrink-0" style={{ color: '#d9a82e' }} />
                   <p>
                     <span className="font-medium">3.</span> Voucher codes cannot be used during sale periods or combined
                     with other promotions, campaigns, or discount offers unless explicitly stated.
@@ -81,30 +81,30 @@ export default function VoucherTermsConditions() {
                 </div>
 
                 <div className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
-                  <Users className="h-5 w-5 text-lime-500 mt-0.5 flex-shrink-0" />
+                  <Users className="h-5 w-5 mt-0.5 flex-shrink-0" style={{ color: '#d9a82e' }} />
                   <p>
                     <span className="font-medium">4.</span> Each voucher code is limited to one use per customer and per
                     account only.
                   </p>
                 </div>
 
-                <div className="flex items-start gap-3 p-3 bg-lime-50 rounded-lg">
-                  <Ban className="h-5 w-5 text-lime-500 mt-0.5 flex-shrink-0" />
+                <div className="flex items-start gap-3 p-3 rounded-lg" style={{ backgroundColor: '#fff9ec' }}>
+                  <Ban className="h-5 w-5 mt-0.5 flex-shrink-0" style={{ color: '#d9a82e' }} />
                   <p>
                     <span className="font-medium">5.</span> Voucher codes cannot be applied to previously placed orders.
                   </p>
                 </div>
 
                 <div className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
-                  <Gift className="h-5 w-5 text-lime-500 mt-0.5 flex-shrink-0" />
+                  <Gift className="h-5 w-5 mt-0.5 flex-shrink-0" style={{ color: '#d9a82e' }} />
                   <p>
                     <span className="font-medium">6.</span> Only specific products may be eligible for voucher
                     discounts; restrictions may apply based on product category or vendor.
                   </p>
                 </div>
 
-                <div className="flex items-start gap-3 p-3 bg-lime-50 rounded-lg">
-                  <DollarSign className="h-5 w-5 text-lime-500 mt-0.5 flex-shrink-0" />
+                <div className="flex items-start gap-3 p-3 rounded-lg" style={{ backgroundColor: '#fff9ec' }}>
+                  <DollarSign className="h-5 w-5 mt-0.5 flex-shrink-0" style={{ color: '#d9a82e' }} />
                   <p>
                     <span className="font-medium">7.</span> Vouchers are non-transferable and cannot be exchanged for
                     cash, store credit, or other alternatives.
@@ -112,15 +112,15 @@ export default function VoucherTermsConditions() {
                 </div>
 
                 <div className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
-                  <Clock className="h-5 w-5 text-lime-500 mt-0.5 flex-shrink-0" />
+                  <Clock className="h-5 w-5 mt-0.5 flex-shrink-0" style={{ color: '#d9a82e' }} />
                   <p>
                     <span className="font-medium">8.</span> The voucher code must be entered before completing the
                     checkout process. Late entries will not be honored.
                   </p>
                 </div>
 
-                <div className="flex items-start gap-3 p-3 bg-lime-50 rounded-lg">
-                  <DollarSign className="h-5 w-5 text-lime-500 mt-0.5 flex-shrink-0" />
+                <div className="flex items-start gap-3 p-3 rounded-lg" style={{ backgroundColor: '#fff9ec' }}>
+                  <DollarSign className="h-5 w-5 mt-0.5 flex-shrink-0" style={{ color: '#d9a82e' }} />
                   <p>
                     <span className="font-medium">9.</span> In the case of a return or cancellation, the refund will
                     reflect the amount paid after the voucher discount. The discounted amount is non-refundable.
@@ -128,23 +128,23 @@ export default function VoucherTermsConditions() {
                 </div>
 
                 <div className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
-                  <Ban className="h-5 w-5 text-lime-500 mt-0.5 flex-shrink-0" />
+                  <Ban className="h-5 w-5 mt-0.5 flex-shrink-0" style={{ color: '#d9a82e' }} />
                   <p>
                     <span className="font-medium">10.</span> Each voucher code can only be used once. If the order is
                     canceled or items are returned, the voucher cannot be reissued or reused.
                   </p>
                 </div>
 
-                <div className="flex items-start gap-3 p-3 bg-lime-50 rounded-lg">
-                  <Shield className="h-5 w-5 text-lime-500 mt-0.5 flex-shrink-0" />
+                <div className="flex items-start gap-3 p-3 rounded-lg" style={{ backgroundColor: '#fff9ec' }}>
+                  <Shield className="h-5 w-5 mt-0.5 flex-shrink-0" style={{ color: '#d9a82e' }} />
                   <p>
-                    <span className="font-medium">11.</span> Grabatoz reserves the right to modify or terminate any
+                    <span className="font-medium">11.</span> Baytal Protein’s reserves the right to modify or terminate any
                     voucher or promotional offer at its discretion, without prior notice.
                   </p>
                 </div>
 
                 <div className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
-                  <AlertTriangle className="h-5 w-5 text-lime-500 mt-0.5 flex-shrink-0" />
+                  <AlertTriangle className="h-5 w-5 mt-0.5 flex-shrink-0" style={{ color: '#d9a82e' }} />
                   <p>
                     <span className="font-medium">12.</span> Any violation of the above terms may result in the voucher
                     becoming void.
@@ -158,7 +158,7 @@ export default function VoucherTermsConditions() {
             {/* How to Apply */}
             <section>
               <div className="flex items-center gap-3 mb-6">
-                <Gift className="h-6 w-6 text-lime-500" />
+                <Gift className="h-6 w-6" style={{ color: '#d9a82e' }} />
                 <h2 className="text-2xl font-semibold text-gray-800">How to Apply a Voucher or Discount Code</h2>
               </div>
 
@@ -167,18 +167,18 @@ export default function VoucherTermsConditions() {
               </p>
 
               <div className="space-y-4 text-gray-700 leading-relaxed">
-                <div className="bg-lime-50 p-4 rounded-lg border-l-4 border-lime-500">
+                <div className="p-4 rounded-lg border-l-4" style={{ backgroundColor: '#fff9ec', borderColor: '#d9a82e' }}>
                   <div className="flex items-center gap-3 mb-2">
-                    <ShoppingCart className="h-5 w-5 text-lime-600" />
-                    <h3 className="font-semibold text-lime-800">1. Add Products to Your Cart</h3>
+                    <ShoppingCart className="h-5 w-5" style={{ color: '#b88a1a' }} />
+                    <h3 className="font-semibold" style={{ color: '#b88a1a' }}>1. Add Products to Your Cart</h3>
                   </div>
                   <p>Browse and add the desired items to your Shopping Cart.</p>
                 </div>
 
-                <div className="bg-lime-50 p-4 rounded-lg border-l-4 border-lime-500">
+                <div className="p-4 rounded-lg border-l-4" style={{ backgroundColor: '#fff9ec', borderColor: '#d9a82e' }}>
                   <div className="flex items-center gap-3 mb-2">
-                    <ShoppingCart className="h-5 w-5 text-lime-600" />
-                    <h3 className="font-semibold text-lime-800">2. Proceed to Shopping Cart</h3>
+                    <ShoppingCart className="h-5 w-5" style={{ color: '#b88a1a' }} />
+                    <h3 className="font-semibold" style={{ color: '#b88a1a' }}>2. Proceed to Shopping Cart</h3>
                   </div>
                   <p>
                     Click the "Shopping Cart" button once you're ready to place your order insert your voucher or coupon
@@ -186,36 +186,36 @@ export default function VoucherTermsConditions() {
                   </p>
                 </div>
 
-                <div className="bg-lime-50 p-4 rounded-lg border-l-4 border-lime-500">
+                <div className="p-4 rounded-lg border-l-4" style={{ backgroundColor: '#fff9ec', borderColor: '#d9a82e' }}>
                   <div className="flex items-center gap-3 mb-2">
-                    <Gift className="h-5 w-5 text-lime-600" />
-                    <h3 className="font-semibold text-lime-800">
+                    <Gift className="h-5 w-5" style={{ color: '#b88a1a' }} />
+                    <h3 className="font-semibold" style={{ color: '#b88a1a' }}>
                       3. Enter your voucher or promo code, then click "Apply" to activate the discount.
                     </h3>
                   </div>
                 </div>
 
-                <div className="bg-lime-50 p-4 rounded-lg border-l-4 border-lime-500">
+                <div className="p-4 rounded-lg border-l-4" style={{ backgroundColor: '#fff9ec', borderColor: '#d9a82e' }}>
                   <div className="flex items-center gap-3 mb-2">
-                    <AlertTriangle className="h-5 w-5 text-lime-600" />
-                    <h3 className="font-semibold text-lime-800">
+                    <AlertTriangle className="h-5 w-5" style={{ color: '#b88a1a' }} />
+                    <h3 className="font-semibold" style={{ color: '#b88a1a' }}>
                       4. This is the only place you can add or apply your valid voucher / coupon or discount code.
                     </h3>
                   </div>
                 </div>
 
-                <div className="bg-lime-50 p-4 rounded-lg border-l-4 border-lime-500">
+                <div className="p-4 rounded-lg border-l-4" style={{ backgroundColor: '#fff9ec', borderColor: '#d9a82e' }}>
                   <div className="flex items-center gap-3 mb-2">
-                    <CreditCard className="h-5 w-5 text-lime-600" />
-                    <h3 className="font-semibold text-lime-800">5. Next enter Delivery & Payment Details</h3>
+                    <CreditCard className="h-5 w-5" style={{ color: '#b88a1a' }} />
+                    <h3 className="font-semibold" style={{ color: '#b88a1a' }}>5. Next enter Delivery & Payment Details</h3>
                   </div>
                   <p>moving forward to fill in your shipping information and select your preferred payment method.</p>
                 </div>
 
-                <div className="bg-lime-50 p-4 rounded-lg border-l-4 border-lime-500">
+                <div className="p-4 rounded-lg border-l-4" style={{ backgroundColor: '#fff9ec', borderColor: '#d9a82e' }}>
                   <div className="flex items-center gap-3 mb-2">
-                    <CheckCircle className="h-5 w-5 text-lime-600" />
-                    <h3 className="font-semibold text-lime-800">6. Confirm your all details</h3>
+                    <CheckCircle className="h-5 w-5" style={{ color: '#b88a1a' }} />
+                    <h3 className="font-semibold" style={{ color: '#b88a1a' }}>6. Confirm your all details</h3>
                   </div>
                   <p>
                     once insert all your delivery information next you will find review your order summary page to
@@ -223,10 +223,10 @@ export default function VoucherTermsConditions() {
                   </p>
                 </div>
 
-                <div className="bg-lime-50 p-4 rounded-lg border-l-4 border-lime-500">
+                <div className="p-4 rounded-lg border-l-4" style={{ backgroundColor: '#fff9ec', borderColor: '#d9a82e' }}>
                   <div className="flex items-center gap-3 mb-2">
-                    <CheckCircle className="h-5 w-5 text-lime-600" />
-                    <h3 className="font-semibold text-lime-800">7. Place Your Order</h3>
+                    <CheckCircle className="h-5 w-5" style={{ color: '#b88a1a' }} />
+                    <h3 className="font-semibold" style={{ color: '#b88a1a' }}>7. Place Your Order</h3>
                   </div>
                   <p>
                     done reeview your order summary, and if everything looks correct, click "Place Order" to complete
@@ -251,16 +251,16 @@ export default function VoucherTermsConditions() {
             {/* In-Store Voucher Codes */}
             <section>
               <div className="flex items-center gap-3 mb-6">
-                <Smartphone className="h-6 w-6 text-lime-500" />
+                <Smartphone className="h-6 w-6" style={{ color: '#d9a82e' }} />
                 <h2 className="text-2xl font-semibold text-gray-800">
                   In-Store Voucher Codes (for Mobile App Use Only)
                 </h2>
               </div>
 
-              <div className="bg-gradient-to-r from-lime-50 to-lime-100 p-6 rounded-lg border border-lime-200">
+              <div className="p-6 rounded-lg border" style={{ background: 'linear-gradient(to right, #fff9ec, #f7e7c2)', borderColor: '#e7c97a' }}>
                 <div className="space-y-4 text-gray-700 leading-relaxed">
                   <div className="flex items-start gap-3">
-                    <DollarSign className="h-5 w-5 text-lime-500 mt-0.5 flex-shrink-0" />
+                    <DollarSign className="h-5 w-5 mt-0.5 flex-shrink-0" style={{ color: '#d9a82e' }} />
                     <p>
                       Customers making an in-store purchase of AED 500 or more may receive an exclusive voucher code and
                       QR code, printed on a separate receipt or token card along with their purchase invoice.
@@ -268,20 +268,20 @@ export default function VoucherTermsConditions() {
                   </div>
 
                   <div className="flex items-start gap-3">
-                    <Smartphone className="h-5 w-5 text-lime-500 mt-0.5 flex-shrink-0" />
+                    <Smartphone className="h-5 w-5 mt-0.5 flex-shrink-0" style={{ color: '#d9a82e' }} />
                     <p>
-                      This voucher is redeemable only through the Grabatoz mobile app. App installation is required to
+                      This voucher is redeemable only through the Baytal Protein’s mobile app. App installation is required to
                       use the code.
                     </p>
                   </div>
 
                   <div className="flex items-start gap-3">
-                    <Gift className="h-5 w-5 text-lime-500 mt-0.5 flex-shrink-0" />
+                    <Gift className="h-5 w-5 mt-0.5 flex-shrink-0" style={{ color: '#d9a82e' }} />
                     <p>The in-store voucher provides a 5% discount, with a maximum cap of AED 100.</p>
                   </div>
 
                   <div className="flex items-start gap-3">
-                    <Clock className="h-5 w-5 text-lime-500 mt-0.5 flex-shrink-0" />
+                    <Clock className="h-5 w-5 mt-0.5 flex-shrink-0" style={{ color: '#d9a82e' }} />
                     <p>
                       The voucher is valid for one order only per user/account and will expire in one month or 30 days
                       after the invoice date.
@@ -289,12 +289,12 @@ export default function VoucherTermsConditions() {
                   </div>
 
                   <div className="flex items-start gap-3">
-                    <AlertTriangle className="h-5 w-5 text-lime-500 mt-0.5 flex-shrink-0" />
+                    <AlertTriangle className="h-5 w-5 mt-0.5 flex-shrink-0" style={{ color: '#d9a82e' }} />
                     <p>Lost, damaged, or stolen vouchers will not be replaced or extended under any circumstances.</p>
                   </div>
 
                   <div className="flex items-start gap-3">
-                    <Ban className="h-5 w-5 text-lime-500 mt-0.5 flex-shrink-0" />
+                    <Ban className="h-5 w-5 mt-0.5 flex-shrink-0" style={{ color: '#d9a82e' }} />
                     <p>This voucher cannot be combined with other vouchers or promotional codes.</p>
                   </div>
                 </div>

@@ -176,7 +176,7 @@ app.use('/', sitemapRoutes)
 // Health check route
 app.get("/", (req, res) => {
   res.json({
-    message: "GrabA2Z API is running!",
+    message: "Baytal Protien API is running!",
     version: "1.0.0",
     environment: config.NODE_ENV,
   })
