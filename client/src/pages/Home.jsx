@@ -35,6 +35,7 @@ import DynamicSection from "../components/DynamicSection"
 import RandomProducts from "../components/RandomProducts"
 import config from "../config/config"
 import LegalSection from "../components/LegalSection"
+import FeaturedProductShowcase from "../components/FeaturedProductShowcase"
 
 const API_BASE_URL = `${config.API_URL}`
 
@@ -1101,6 +1102,10 @@ const Home = () => {
       
       {/* Big Sale Section - Handles both mobile and desktop views */}
       <BigSaleSection products={featuredProducts} />
+      
+    
+      
+  
        {/* Dynamic Section Position 1 */}
       {renderDynamicSection(1)}
       <div className="mx-8 my-4">
@@ -1678,6 +1683,11 @@ const Home = () => {
         />
       )}
 
+
+
+  {/* Featured Product Showcase Section */}
+      <FeaturedProductShowcase products={featuredProducts.slice(0, 6)} />
+      
       {/* Dynamic Section Position 10 */}
       {/* {renderDynamicSection(10)} */}
 
