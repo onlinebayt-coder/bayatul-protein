@@ -916,8 +916,8 @@ const Home = () => {
     <div className="bg-white mt-1">
       {/* SEO Meta Tags for Home Page */}
       <SEO
-        title="Buy Laptops, Mobiles & Electronics Online in UAE | Grabatoz"
-        description="Discover the best deals on laptops, desktops, mobiles, and gaming products in UAE. Grabatoz is your trusted electronics shop in Dubai."
+        title="Baytal Protein - Premium Supplements & Nutrition"
+        description="Shop premium protein supplements, nutrition products, and fitness essentials. Quality products for your health and fitness journey."
         canonicalPath="/"
       />
       
@@ -1687,7 +1687,7 @@ const Home = () => {
 
   {/* Featured Product Showcase Section */}
       <FeaturedProductShowcase products={featuredProducts.slice(0, 6)} />
-      
+
       {/* Dynamic Section Position 10 */}
       {/* {renderDynamicSection(10)} */}
 
