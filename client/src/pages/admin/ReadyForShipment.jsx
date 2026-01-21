@@ -56,24 +56,26 @@ const InvoiceComponent = forwardRef(({ order }, ref) => {
       {/* Invoice content - same as NewOrders */}
       <div className=" text-black rounded-t-lg relative overflow-hidden">
         <div className="absolute inset-0" />
-        <div className="relative z-10 flex justify-between items-start w-full">
-          <div className="flex-shrink-0">
-            <img src="/BLACK.png" alt="Logo" className="w-50 h-20 object-contain" onError={(e) => { e.target.style.display = "none" }} />
-            <p className="ml-7"> TRN: 100349772200003</p>
-          </div>
-          <div className="flex-shrink-0">
-            <img src="/admin-logo.svg" alt="Brand Logo" className="w-40 h-20 object-contain" onError={(e) => { e.target.style.display = "none" }} />
-            A Brand By Crown Excel
-          </div>
+        {/* Centered Logo */}
+        <div className="relative z-10 flex flex-col items-center justify-center w-full mb-4">
+          <img
+            src="/baytal-protien-logo.webp"
+            alt="Baytal Protein Logo"
+            className="w-60 h-24 object-contain"
+            onError={(e) => {
+              e.target.style.display = "none"
+            }}
+          />
         </div>
+
         <div className="flex justify-between items-start gap-6 ml-2">
           <div className="w-1/2 p-5 ">
             <h2 className="text-2xl font-bold mb-1">CONTACT DETAILS</h2>
             <p className="text-black text-sm italic mb-2"><strong>We Are Here For You</strong></p>
             <div className="text-sm text-black space-y-1">
-              <p>✉️ Email: orders@grabatoz.com</p>
-              <p>🌐 Website: www.grabatoz.com</p>
-              <p>📞 Phone: +971 50 860 4360</p>
+              <p>✉️ Email: info@baytalprotein.net</p>
+              <p>🌐 Website: baytalprotein.com</p>
+              <p>📞 Phone: +971 6550 81 61</p>
             </div>
           </div>
           <div className="w-1/2 text-end p-5 rounded-xl backdrop-blur-sm max-w-xs ml-auto">
