@@ -136,7 +136,7 @@ const ProductCard = ({ product }) => {
         <span className="ml-1 text-xs text-gray-600">({reviewCount})</span>
       </div>
 
-      <div className="mt-2 text-[13px] md:px-10 md:text-sm font-semibold text-black leading-snug line-clamp-2 min-h-[40px] text-left md:text-center">
+      <div className="mt-2 text-[13px] md:px-10 md:text-sm font-semibold text-black leading-snug line-clamp-2 min-h-[20px] text-left md:text-center">
         {product?.name || "Product"}
       </div>
 
@@ -165,11 +165,29 @@ function RandomProducts() {
   const [displayedProducts, setDisplayedProducts] = useState([])
   const [loading, setLoading] = useState(true)
   const [showingAll, setShowingAll] = useState(false)
-  const initialCount = 12
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768)
+
+  // Detect mobile screen size
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
+  const initialCount = isMobile ? 6 : 12
 
   useEffect(() => {
     fetchRandomProducts()
   }, [])
+
+  // Update displayed products when screen size changes
+  useEffect(() => {
+    if (allProducts.length > 0 && !showingAll) {
+      setDisplayedProducts(allProducts.slice(0, initialCount))
+    }
+  }, [isMobile])
 
   const fetchRandomProducts = async () => {
     try {
@@ -195,11 +213,11 @@ function RandomProducts() {
       const selected = []
       const seen = new Set()
 
-      // For each parent category group, take up to 3 random products
+      // For each parent category group, take up to 5 random products
       parentGroups.forEach(list => {
         if (!list?.length) return
         const shuffled = [...list].sort(() => Math.random() - 0.5)
-        const take = Math.min(3, shuffled.length)
+        const take = Math.min(5, shuffled.length)
         for (let i = 0; i < take; i++) {
           const prod = shuffled[i]
           if (prod && !seen.has(prod._id)) {
@@ -229,8 +247,16 @@ function RandomProducts() {
   }
 
   const handleLoadMore = () => {
-    setDisplayedProducts(allProducts)
-    setShowingAll(true)
+    const nextCount = displayedProducts.length + initialCount
+    setDisplayedProducts(allProducts.slice(0, nextCount))
+    if (nextCount >= allProducts.length) {
+      setShowingAll(true)
+    }
+  }
+
+  const handleShowLess = () => {
+    setDisplayedProducts(allProducts.slice(0, initialCount))
+    setShowingAll(false)
   }
 
   if (loading) {
@@ -280,14 +306,24 @@ function RandomProducts() {
           ))}
         </div>
 
-        {/* Load More Button */}
-        {!showingAll && allProducts.length > initialCount && (
+        {/* Load More / Show Less Button */}
+        {!showingAll && allProducts.length > displayedProducts.length && (
           <div className="mt-8 flex justify-center">
             <button
               onClick={handleLoadMore}
               className="inline-flex items-center justify-center rounded-full bg-[#d4af37] text-black px-8 py-3 text-base font-semibold shadow-lg hover:brightness-95 transition"
             >
-              Load More Products ({allProducts.length - displayedProducts.length} remaining)
+              Load More
+            </button>
+          </div>
+        )}
+        {showingAll && allProducts.length > initialCount && (
+          <div className="mt-8 flex justify-center">
+            <button
+              onClick={handleShowLess}
+              className="inline-flex items-center justify-center rounded-full bg-[#d4af37] text-black px-8 py-3 text-base font-semibold shadow-lg hover:brightness-95 transition"
+            >
+              Show Less
             </button>
           </div>
         )}
